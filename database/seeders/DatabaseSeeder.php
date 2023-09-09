@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\TemplateConfigs\TemplateConfigsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,5 +22,7 @@ class DatabaseSeeder extends Seeder
 
         //Roles
         $this->call(RoleSeeder::class);
+        //TemplateConfigs
+        $this->call(TemplateConfigsSeeder::class);
     }
 }
