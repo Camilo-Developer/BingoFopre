@@ -18,13 +18,14 @@ class RoleSeeder extends Seeder
         $role1 = Role::create(['name' => 'Admin']);
         $role2 = Role::create(['name' => 'Sub-Admin']);
         $role3 = Role::create(['name' => 'Estudiante']);
+        $role4 = Role::create(['name' => 'Usuario']);
 
 
         //Permiso admin Dashboard
         Permission::create([
-            'name' => 'admin.dashboard',
+            'name' => 'dashboard',
             'description'=> 'Ver panel administrativo'
-        ])->syncRoles([$role1, $role2,$role3]);
+        ])->syncRoles([$role1, $role2,$role3,$role4]);
 
 
     }

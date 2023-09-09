@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Socialite\Facades\Socialite;
+
+use App\Http\Controllers\Admin\Redirect\RedirectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/redirect',[RedirectController::class, 'dashboard']);
+
+Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth.azure');
+Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
 Route::middleware([
     'auth:sanctum',

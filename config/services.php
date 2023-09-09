@@ -31,4 +31,23 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    //login con azure
+    'azure' => [
+
+        'client_id' => env('AZURE_AD_CLIENT_ID'),
+
+        'client_secret' => env('AZURE_AD_CLIENT_SECRET'),
+
+        'redirect' => env('AZURE_AD_REDIRECT_URI'),
+
+        'tenant' => env('AZURE_AD_TENANT_ID'),
+
+        'authority' => 'https://login.microsoftonline.com/common',
+
+        'scope' => ['openid', 'profile', 'email'],
+
+        'proxy' => env('PROXY')  // optionally
+
+    ],
+
 ];
