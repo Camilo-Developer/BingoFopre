@@ -23,9 +23,16 @@ class RoleSeeder extends Seeder
 
         //Permiso admin Dashboard
         Permission::create([
+            'name' => 'admin.dashboard',
+            'description'=> 'Ver panel administrativo'
+        ])->syncRoles([$role1, $role2,$role3]);
+
+        //Permiso User Dashboard
+        Permission::create([
             'name' => 'dashboard',
             'description'=> 'Ver panel administrativo'
-        ])->syncRoles([$role1, $role2,$role3,$role4]);
+        ])->syncRoles([$role4]);
+
 
 
     }

@@ -18,12 +18,12 @@ class TemplateConfigsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'logo' => 'required',
-            'img_main' => 'required',
-            'url_carton' => 'required',
+            'logo' => 'required', //
+            'img_main' => 'required', //
+            'url_carton' => 'required', //
             'description_carton' => 'required',
-            'price_carton' => 'required',
-            'url_live' => 'required',
+            'price_carton' => 'required',//
+            'url_live' => 'required', //
             'description_live' => 'required',
             'area' => 'required',
             'email' => 'required',
@@ -52,24 +52,68 @@ class TemplateConfigsController extends Controller
 
     }
 
-    public function show(TemplateConfig $templateConfig)
+    public function edit(TemplateConfig $templateconfig)
     {
-        //
+        return view('admin.templateconfigs.index',compact('templateconfig'));
     }
 
-
-    public function edit(TemplateConfig $templateConfig)
+    public function update(Request $request, TemplateConfig $templateconfig)
     {
-        //
+        $request->validate([
+            'logo' => 'nullable',
+            'img_main' => 'nullable',
+            'url_carton' => 'required',
+            'description_carton' => 'required',
+            'price_carton' => 'required',
+            'url_live' => 'required',
+            'description_live' => 'required',
+            'area' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+        $data = $request->all();
+
+        if ($request->hasFile('logo')){
+            $logo = $request->file('logo');
+            $rutaGuardarLogo = public_path('storage/templateconfing');
+            $imagenLogo = date('YmdHis') . '.' . $logo->getClientOriginalExtension();
+            $logo->move($rutaGuardarLogo, $imagenLogo);
+            $data['logo'] = 'templateconfing/' . $imagenLogo;
+
+            if ($templateconfig->logo) {
+                $imagenAnterior = public_path('storage/' . $templateconfig->logo);
+                if (file_exists($imagenAnterior)) {
+                    unlink($imagenAnterior);
+                }
+            }
+        } else {
+            unset($data['logo']);
+        }
+
+        if ($request->hasFile('img_main')){
+            $img_main = $request->file('img_main');
+            $rutaGuardarImgMain = public_path('storage/templateconfing');
+            $imagenImgMian = date('YmdHis') . '.' . $img_main->getClientOriginalExtension();
+            $img_main->move($rutaGuardarImgMain, $imagenImgMian);
+            $data['img_main'] = 'templateconfing/' . $imagenImgMian;
+
+            if ($templateconfig->img_main) {
+                $imagenAnterior2 = public_path('storage/' . $templateconfig->img_main);
+                if (file_exists($imagenAnterior2)) {
+                    unlink($imagenAnterior2);
+                }
+            }
+        } else {
+            unset($data['img_main']);
+        }
+
+        $templateconfig->update($data);
+        return redirect()->route('admin.templateconfigs.index')->with('edit', 'La configuración del aplicativo se edito correctamente.');
     }
 
-    public function update(Request $request, TemplateConfig $templateConfig)
+    public function destroy(TemplateConfig $templateconfig)
     {
-        //
-    }
-
-    public function destroy(TemplateConfig $templateConfig)
-    {
-        //
+        $templateconfig->delete();
+        return redirect()->route('admin.templateconfigs.index')->with('delete', 'La configuración del aplicativo se elimino correctamente.');
     }
 }

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\Http\Controllers\Admin\Redirect\RedirectController;
+
+use App\Http\Controllers\Admin\Cardboards\CardboardsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +27,17 @@ Route::get('/redirect',[RedirectController::class, 'dashboard']);
 Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth.azure');
 Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
+
+Route::get('/cartones/create', [CardboardsController::class,'createForm'])->name('cartones.createForm');
+Route::post('/cartones/create', [CardboardsController::class,'create'])->name('cartones.create');
+
+
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->name('dashboard');
 });

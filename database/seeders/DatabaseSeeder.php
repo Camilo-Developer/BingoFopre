@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\CardMains\CardmainsSeeder;
+use Database\Seeders\Instructions\InstructionsSeeder;
 use Database\Seeders\TemplateConfigs\TemplateConfigsSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,5 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         //TemplateConfigs
         $this->call(TemplateConfigsSeeder::class);
+        //CardmainsSeeder
+        $this->call(CardmainsSeeder::class);
+        //InstructionsSeeder
+        $this->call(InstructionsSeeder::class);
     }
 }

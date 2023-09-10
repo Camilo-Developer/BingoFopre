@@ -13,14 +13,21 @@ use App\Models\User;
 class RedirectController extends Controller
 {
     public function dashboard(){
-        if (auth()->user()->can('dashboard')){
-            return redirect()->route('dashboard');
+        if (auth()->user()->can('admin.dashboard')){
+            return redirect()->route('admin.dashboard');
         }elseif (auth()->user()->hasRole('Usuario')){
-            return redirect('/');
+            return redirect()->route('dashboard');
         }else{
             Auth::logout();
             return redirect()->route('login');
         }
+    }
+
+    public function dashboardAdmin(){
+        return view('admin.dashboard.index');
+    }
+    public function dashboardUser(){
+        return view('user.dashboard.index');
     }
 
     public function azureLogin(Request $request)    {

@@ -116,26 +116,67 @@
                             </p>
                         </a>
                     </li>
-                    @if(auth()->user()->hasRole('Admin'))
-                        <li class="nav-item">
-                            <a href="/" class="nav-link">
-                                <i class="fa fa-home nav-icon " aria-hidden="true"></i>
-                                <p>
-                                    Inicio Fopre
-                                </p>
-                            </a>
-                        </li>
-                    @elseif(auth()->user()->can('admin.dashboard'))
-                        <li class="nav-item">
-                            <a href="/" class="nav-link">
-                                <i class="fa fa-home nav-icon " aria-hidden="true"></i>
-                                <p>
-                                    Inicio Fopre
-                                </p>
-                            </a>
-                        </li>
-                    @endif
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">
+                            <i class="fa fa-home nav-icon " aria-hidden="true"></i>
+                            <p>
+                                Inicio Bingo
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-header">Accesos</li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.templateconfigs.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/templateconfigs" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Administración de la aplición">
+                                Adm. Aplicación
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.cardmains.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cardmains" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Noticias Generales">
+                                Noticias Generales
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.sponsors.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/sponsors" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Patrocinadores">
+                                Patrocinadores
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.instructions.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/instructions" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Instrucciones">
+                                Instrucciones
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.dynamicgames.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/dynamicgames" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Dinámica del Juego">
+                                Dinámica del Juego
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.prizes.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/prizes" ) active @endif">
+                            <i class="nav-icon fa fa-users-cog"></i>
+                            <p title="Dinámica del Juego">
+                                Premios
+                            </p>
+                        </a>
+                    </li>
+
+
+
+
                     <li class="nav-item">
                             <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states" || $_SERVER['REQUEST_URI'] === "/admin/states/create") active @endif">
                                 <i class="nav-icon fab fa-usps"></i>
@@ -182,29 +223,7 @@
                                 </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles" || $_SERVER['REQUEST_URI'] === "/admin/roles/create" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Administración de la aplición">
-                                Adm. Aplicación
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles/create") active  @endif">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Crear Roles</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Listar Roles</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item">
                             <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles" || $_SERVER['REQUEST_URI'] === "/admin/roles/create" ) active @endif">
                                 <i class="nav-icon fa fa-users-cog"></i>
@@ -343,7 +362,6 @@
                                 </li>
                         </ul>
                     </li>
-
                     <li class="nav-header ">Configuraciones</li>
                     <li class="nav-item" title="{{auth()->user()->email}}">
                         <a   class="nav-link disabled">

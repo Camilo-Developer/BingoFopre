@@ -1,0 +1,115 @@
+@extends('layouts.app')
+@section('title', 'Instrucciones')
+@section('content')
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Intrucciones Bingo</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Inicio</a></li>
+                        <li class="breadcrumb-item active">Intrucciones Bingo</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid" >
+            <div class="card card-default color-palette-box">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label> Instrucciones:</label><br>
+                                    @foreach($instructions as $instruction)
+                                        {!! $instruction->description_one !!}
+                                    @endforeach
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <label> Cómo cantar ¡BINGO FOPRE!:</label><br>
+                                    @foreach($instructions as $instruction)
+                                        {!! $instruction->description_two !!}
+                                    @endforeach
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-default"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar Instrucciones</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="{{route('admin.instructions.update', $instruction)}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                <div class="d-flex justify-content-end">
+                                    <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-instrucciones"><span class="text-danger">*</span> Instrucciones:</label>
+                                    <textarea id="edit-instrucciones" name="description_one" required class="form-control" style="height: 500px!important;">
+                                        {{$instruction->description_one}}
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit-cantarbingo"><span class="text-danger">*</span> Cómo cantar ¡BINGO FOPRE!:</label>
+                                    <textarea id="edit-cantarbingo" name="description_two" required class="form-control" style="height: 500px!important;">
+                                        {{$instruction->description_two}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+@section('js')
+    <script>
+        $(function () {
+            //Add text editor
+            $('#edit-instrucciones').summernote(
+                {
+                    tabsize: 2,
+                    height: 200
+                }
+            );
+        });
+        $(function () {
+            //Add text editor
+            $('#edit-cantarbingo').summernote(
+                {
+                    tabsize: 2,
+                    height: 200
+                }
+            );
+        });
+    </script>
+@endsection

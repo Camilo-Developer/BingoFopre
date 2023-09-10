@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models\Sponsor;
+namespace App\Models\Instruction;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sponsor extends Model
+class Instruction extends Model
 {
     use HasFactory;
-    protected $table = 'sponsors';
+    protected $table = 'instructions';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'logo',
-        'name'
+        'description_one',
+        'description_two',
     ];
 }
