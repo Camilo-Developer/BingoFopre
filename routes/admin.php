@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Sponsors\SponsorsController;
 use App\Http\Controllers\Admin\Instructions\InstructionsController;
 use App\Http\Controllers\Admin\DynamicGames\DynamicGamesController;
 use App\Http\Controllers\Admin\Prizes\PrizesController;
+use App\Http\Controllers\Admin\States\StatesController;
+use App\Http\Controllers\Admin\Roles\RolesController;
 
 
 
@@ -20,3 +22,5 @@ Route::resource('/sponsors', SponsorsController::class)->names('admin.sponsors')
 Route::resource('/instructions', InstructionsController::class)->names('admin.instructions');
 Route::resource('/dynamicgames', DynamicGamesController::class)->names('admin.dynamicgames');
 Route::resource('/prizes', PrizesController::class)->names('admin.prizes');
+Route::resource('/states', StatesController::class)->names('admin.states');
+Route::resource('/roles', RolesController::class)->names('admin.roles');

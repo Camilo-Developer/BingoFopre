@@ -173,102 +173,22 @@
                             </p>
                         </a>
                     </li>
-
-
-
-
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states" || $_SERVER['REQUEST_URI'] === "/admin/states/create") active @endif">
+                            <a href="{{route('admin.states.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
                                 <i class="nav-icon fab fa-usps"></i>
                                 <p>
                                     Estados
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                        <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states/create") active  @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Estados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Estados</p>
-                                    </a>
-                                </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states" || $_SERVER['REQUEST_URI'] === "/admin/states/create") active @endif">
-                                <i class="nav-icon fab fa-usps"></i>
-                                <p>
-                                    Roles
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states/create") active  @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Estados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Estados</p>
-                                    </a>
-                                </li>
-                        </ul>
                     </li>
 
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles" || $_SERVER['REQUEST_URI'] === "/admin/roles/create" ) active @endif">
-                                <i class="nav-icon fa fa-users-cog"></i>
-                                <p title="Administración de la aplición">
-                                    Noticias Generales
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles/create") active  @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Roles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Roles</p>
-                                    </a>
-                                </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
                                 <i class="nav-icon fab fa-product-hunt"></i>
                                 <p>
-                                    Informe ventas
-                                    <i class="fas fa-angle-left right"></i>
+                                    Roles
                                 </p>
                             </a>
-                        <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Productos</p>
-                                    </a>
-                                </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                             <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
