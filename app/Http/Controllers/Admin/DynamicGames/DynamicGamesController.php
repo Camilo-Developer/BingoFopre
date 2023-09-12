@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Admin\DynamicGames;
 use App\Http\Controllers\Controller;
 use App\Models\DynamicGame\DynamicGame;
 use Illuminate\Http\Request;
-
+use App\Models\State\State;
 class DynamicGamesController extends Controller
 {
 
     public function index()
     {
         $dynamicgames = DynamicGame::all();
-        return view('admin.dynamicgames.index',compact('dynamicgames'));
+        $states = State::all();
+        return view('admin.dynamicgames.index',compact('dynamicgames','states'));
     }
 
 

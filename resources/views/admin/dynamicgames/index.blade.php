@@ -49,6 +49,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Logo</th>
                                         <th scope="col">Title</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Letra</th>
                                         <th scope="col">Accion</th>
                                     </tr>
@@ -59,6 +60,7 @@
                                             <th scope="row" style="width: 50px;">{{$dynamicgame->id}}</th>
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $dynamicgame->logo)}}" alt="{{$dynamicgame->title}}"></td>
                                             <td>{{$dynamicgame->title}}</td>
+                                            <td>{{$dynamicgame->state->name}}</td>
                                             <td>{{$dynamicgame->letra}}</td>
                                             <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
                                         </tr>
