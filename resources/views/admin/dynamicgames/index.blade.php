@@ -97,6 +97,19 @@
                                     <label for="title"><span class="text-danger">*</span> Título:</label>
                                     <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
                                 </div>
+
+                                <div class="col-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="state_id">Estado:</label>
+                                        <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                            @foreach($states as $state)
+                                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">

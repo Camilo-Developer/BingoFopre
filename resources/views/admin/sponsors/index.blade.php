@@ -104,6 +104,18 @@
                                             <input type="text" required name="name" class="form-control form-control-border" id="name" placeholder="Escriba el nombre">
                                         </div>
                                     </div>
+                                
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="state_id">Estado:</label>
+                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                @foreach($states as $state)
+                                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
