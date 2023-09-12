@@ -76,7 +76,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\State\State', 'state_id');
     }
+    /*Lista con relacion directa e inversa revisada*/
+    public function cardboard()
+    {
+        return $this->hasMany('App\Models\Cardboard\Cardboard', 'user_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function cartongroup()
+    {
+        return $this->hasMany('App\Models\CartonGroup\CartonGroup', 'group_id');
+    }
 
-    
 
 }

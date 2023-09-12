@@ -15,10 +15,22 @@ class Cardboard extends Model
       'name',
       'date_finish',
       'state_id',
+      'group_id',
+      'user_id',
     ];
     /*Lista con relacion directa e inversa revisada*/
     public function state()
     {
         return $this->belongsTo('App\Models\State\State', 'state_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function cartongroup()
+    {
+        return $this->belongsTo('App\Models\CartonGroup\CartonGroup', 'group_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }
