@@ -16,7 +16,13 @@ class BingoFopreController extends Controller
     public function index(){
 
         $sponsors = Sponsor::all();
-        $cardmains = CardMain::all();
+
+
+        $cardmains = CardMain::whereHas('state', function ($query) {
+            $query->where('check', '=', 1); // Filtra los estados con check = 1
+        })->get();
+
+
         $templateconfigs = TemplateConfig::all();
         $instructions = Instruction::all();
         return view('bingofopre.index',

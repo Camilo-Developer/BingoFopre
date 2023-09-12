@@ -12,7 +12,7 @@
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link id="pagestyle" href="{{asset('assets/css/material-kit.css')}}" rel="stylesheet" />
+    <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
     <style>
         .async-hide {
             opacity: 0 !important
@@ -258,23 +258,25 @@
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
 
 <script src="{{asset('assets/js/plugins/typedjs.js')}}"></script>
+<script src="{{asset('assets/js/plugins/choices.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/flatpickr.min.js')}}"></script>
 
+<script src="{{asset('assets/js/plugins/parallax.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
+
+
+
+<script src="{{asset('assets/js/plugins/glide.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/countup.min.js')}}"></script>
 
 <script src="{{asset('assets/js/plugins/rellax.min.js')}}"></script>
 
 <script src="{{asset('assets/js/plugins/tilt.min.js')}}"></script>
 
-<script src="{{asset('assets/js/plugins/choices.min.js')}}"></script>
 
-<script src="{{asset('assets/js/plugins/parallax.min.js')}}"></script>
-
-<script src="{{asset('assets/js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
-
-<script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
 <script>
 </script>
 <script type="text/javascript">
