@@ -34,6 +34,7 @@ class User extends Authenticatable
         'external_id',
         'external_auth',
         'avatar',
+        'state_id',
 
     ];
 

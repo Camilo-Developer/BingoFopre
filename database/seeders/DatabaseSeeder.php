@@ -7,6 +7,7 @@ use Database\Seeders\CardMains\CardmainsSeeder;
 use Database\Seeders\Instructions\InstructionsSeeder;
 use Database\Seeders\State\StateSeeder;
 use Database\Seeders\TemplateConfigs\TemplateConfigsSeeder;
+use Database\Seeders\User\UsersSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         //Roles
         $this->call(RoleSeeder::class);
+        //UsersSeeder
+        $this->call(UsersSeeder::class);
         //TemplateConfigs
         $this->call(TemplateConfigsSeeder::class);
         //CardmainsSeeder
