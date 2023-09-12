@@ -88,6 +88,14 @@
                         @csrf
                         @method('POST')
                         <div class="modal-body">
+                            <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
+
+
+
+
+
+
+
                             <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
                                 <div class="d-flex justify-content-end">
                                     <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
@@ -120,7 +128,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
                                 </div>
                                 <div class="form-group">
@@ -189,7 +197,7 @@
                                                 </select>
                                             </div>
                                         </div>
-    
+
                                     </div>
                                     <div class="form-group">
                                         <label for="description"><span class="text-danger">*</span> Descripción</label>
@@ -244,5 +252,16 @@
                 );
             });
         @endforeach
+    </script>
+    <script>
+        $(document).ready(function (e) {
+            $('#imagen').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#imagenSeleccionada').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
     </script>
 @endsection
