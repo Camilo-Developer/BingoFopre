@@ -50,6 +50,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Imagen</th>
                                         <th scope="col">Nombre</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -59,6 +60,7 @@
                                                 <th scope="row" style="width: 50px;">{{$cardmain->id}}</th>
                                                 <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $cardmain->imagen)}}" alt="{{$cardmain->title}}"></td>
                                                 <td>{{$cardmain->title}}</td>
+                                                <td>{{$cardmain->state->name}}</td>
                                                 <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
                                             </tr>
                                     @endforeach
