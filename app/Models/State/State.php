@@ -20,4 +20,10 @@ class State extends Model
     {
         return $this->hasMany('App\Models\User', 'state_id');
     }
+
+     /*Lista con relacion directa e inversa revisada*/
+     public function cardmains()
+     {
+         return $this->hasMany('App\Models\CardMain\CardMain', 'state_id');
+     }
 }

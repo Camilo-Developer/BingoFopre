@@ -77,4 +77,6 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\State\State', 'state_id');
     }
 
+    
+
 }

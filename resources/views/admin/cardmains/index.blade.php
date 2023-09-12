@@ -107,6 +107,19 @@
                                             <input type="url" name="mas_info" class="form-control form-control-border" id="mas_info" placeholder="Escriba la URL">
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="state_id">Más información:</label>
+                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                @foreach($states as $state)
+                                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="description"><span class="text-danger">*</span> Descripción</label>
@@ -164,6 +177,17 @@
                                                 <input type="url" value="{{$cardmain->mas_info}}" name="mas_info" class="form-control form-control-border" id="mas_info" placeholder="Escriba la URL">
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="state_id">Más información:</label>
+                                                <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                    @foreach($states as $state)
+                                                        <option value="{{$state->id}}" {{ $state->id == $cardmain->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+    
                                     </div>
                                     <div class="form-group">
                                         <label for="description"><span class="text-danger">*</span> Descripción</label>

@@ -17,5 +17,9 @@ class StateSeeder extends Seeder
             'name'=> 'Disponible',
             'check'=> '1',
         ]);
+        State::create([
+            'name'=> 'No disponible',
+            'check'=> '2',
+        ]);
     }
 }

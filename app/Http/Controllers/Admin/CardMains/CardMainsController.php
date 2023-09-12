@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin\CardMains;
 use App\Http\Controllers\Controller;
 use App\Models\CardMain\CardMain;
 use Illuminate\Http\Request;
+use App\Models\State\State;
 
 class CardMainsController extends Controller
 {
     public function index()
     {
         $cardmains = CardMain::all();
-        return view('admin.cardmains.index',compact('cardmains'));
+        $states = State::all();
+
+        return view('admin.cardmains.index',compact('cardmains', 'states'));
     }
     public function store(Request $request)
     {

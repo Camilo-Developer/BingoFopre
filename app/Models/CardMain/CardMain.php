@@ -20,6 +20,13 @@ class CardMain extends Model
         'title',
         'description',
         'mas_info',
+        'state_id',
     ];
     protected $dates = ['deleted_at'];
+
+    /*Lista con relacion directa e inversa revisada*/
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State\State', 'state_id');
+    }
 }
