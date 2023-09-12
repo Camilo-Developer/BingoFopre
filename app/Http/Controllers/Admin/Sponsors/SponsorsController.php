@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Admin\Sponsors;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsor\Sponsor;
 use Illuminate\Http\Request;
-
+use App\Models\State\State;
 class SponsorsController extends Controller
 {
 
     public function index()
     {
         $sponsors = Sponsor::all();
-        return view('admin.sponsors.index',compact('sponsors'));
+        $states = State::all();
+        return view('admin.sponsors.index',compact('sponsors', 'states'));
     }
 
     public function store(Request $request)
