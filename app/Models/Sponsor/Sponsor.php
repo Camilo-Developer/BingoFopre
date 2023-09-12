@@ -12,6 +12,12 @@ class Sponsor extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'logo',
-        'name'
+        'name',
+        'state_id',
     ];
+    /*Lista con relacion directa e inversa revisada*/
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State\State', 'state_id');
+    }
 }

@@ -26,4 +26,24 @@ class State extends Model
      {
          return $this->hasMany('App\Models\CardMain\CardMain', 'state_id');
      }
+    /*Lista con relacion directa e inversa revisada*/
+    public function sponsors()
+    {
+        return $this->hasMany('App\Models\Sponsor\Sponsor', 'state_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function dynamicgames()
+    {
+        return $this->hasMany('App\Models\DynamicGame\DynamicGame', 'state_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function prizes()
+    {
+        return $this->hasMany('App\Models\Prize\Prize', 'state_id');
+    }
+    /*Lista con relacion directa e inversa revisada*/
+    public function cardboard()
+    {
+        return $this->hasMany('App\Models\Cardboard\Cardboard', 'state_id');
+    }
 }
