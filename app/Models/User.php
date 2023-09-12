@@ -67,4 +67,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    //de usarios a estados
+
+    /*Lista con relacion directa e inversa revisada*/
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State\State', 'state_id');
+    }
+
 }

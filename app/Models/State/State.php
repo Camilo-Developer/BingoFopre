@@ -14,4 +14,10 @@ class State extends Model
       'name',
       'check',
     ];
+
+    /*Lista con relacion directa e inversa revisada*/
+    public function users()
+    {
+        return $this->hasMany('App\Models\User', 'state_id');
+    }
 }
