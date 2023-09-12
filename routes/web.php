@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Laravel\Socialite\Facades\Socialite;
 
+use App\Http\Controllers\BingoFopre\BingoFopreController;
 use App\Http\Controllers\Admin\Redirect\RedirectController;
 
 use App\Http\Controllers\Admin\Cardboards\CardboardsController;
@@ -18,9 +19,9 @@ use App\Http\Controllers\Admin\Cardboards\CardboardsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[BingoFopreController::class,'index'])->name('bingofopre.index');
+Route::get('/instructions',[BingoFopreController::class,'Instructions'])->name('bingofopre.instructions');
+Route::get('/prizes',[BingoFopreController::class,'prizes'])->name('bingofopre.prizes');
 
 Route::get('/redirect',[RedirectController::class, 'dashboard']);
 

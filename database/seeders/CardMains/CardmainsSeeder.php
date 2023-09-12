@@ -18,6 +18,7 @@ class CardmainsSeeder extends Seeder
             'title'=> 'sasad',
             'description'=> 'sdd',
             'mas_info'=> 'ddd',
+            'state_id'=> '1',
         ]);
     }
 }

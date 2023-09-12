@@ -17,6 +17,8 @@ return new class extends Migration
             $table->longText('title')->nullable();
             $table->longText('description')->nullable();
             $table->longText('mas_info')->nullable();
+
+            $table->bigInteger('state_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

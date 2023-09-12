@@ -16,14 +16,14 @@ class TemplateConfigsSeeder extends Seeder
         TemplateConfig::create([
             'logo'=> '',
             'img_main'=> '',
-            'url_carton'=> 'https://portafolio.lckm-innovaty.com/',
-            'description_carton'=> 'Lorem ipsum dolor sit amet consectetur adipiscing elit dignissim proin euismod venenatis tincidunt, commodo quam phasellus morbi egestas sociosqu neque diam lobortis urna ante. Parturient dictumst primis nec cum nulla fames cursus ligula sed, nisl per senectus nibh taciti lectus fringilla penatibus justo,',
-            'price_carton'=> '',
-            'url_live'=> 'https://portafolio.lckm-innovaty.com/',
-            'description_live'=> 'Lorem ipsum dolor sit amet consectetur adipiscing elit dignissim proin euismod venenatis tincidunt, commodo quam phasellus morbi egestas sociosqu neque diam lobortis urna ante. Parturient dictumst primis nec cum nulla fames cursus ligula sed, nisl per senectus nibh taciti lectus fringilla penatibus justo,',
-            'area'=> 'Dirección de relacionamiento',
+            'url_carton'=> 'https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones',
+            'description_carton'=> 'Adquierelo en el campus con nuestros voluntarios o',
+            'price_carton'=> '10000',
+            'url_live'=> 'https://www.youtube.com/watch?v=6ffOWmMESLY&ab_channel=UniversidaddelosAndes',
+            'description_live'=> 'El evento iniciará el 11 de noviembre de 2022 a las 2:00 p.m.',
+            'area'=> 'Dirección de Relacionamiento',
             'email'=> 'bingofopre@uniandes.edu.co',
-            'phone'=> '2222222222',
+            'phone'=> '332 4090',
         ]);
     }
 }

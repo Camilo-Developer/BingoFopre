@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('imagen');
             $table->longText('description');
+            $table->bigInteger('state_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

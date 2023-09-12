@@ -26,6 +26,7 @@ class CardboardsController extends Controller
         $fechaFinalizacion = $request->input('date_finish');
 
         for ($i = $startNumber; $i <= $endNumber; $i++) {
+            // es decir los hp ceros no los debe llevar se especifica es el numero es de decir si quiero comenzar desde el 0001 al 1000
             Cardboard::create([
                 'name' => str_pad($i, 9, '0', STR_PAD_LEFT), // Formato 001, 002, ..., 1000
                 'date_finish' => $fechaFinalizacion,

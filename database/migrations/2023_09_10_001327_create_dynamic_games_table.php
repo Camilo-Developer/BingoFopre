@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('letra');
             $table->text('fila')->nullable();
             $table->text('colum')->nullable();
+            $table->bigInteger('state_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

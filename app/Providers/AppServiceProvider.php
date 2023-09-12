@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\TemplateConfig\TemplateConfig;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('layouts.guest',function ($view) {
+            $templateconfigs = TemplateConfig::all();
+            $view->with('templateconfigs', $templateconfigs);
+        });
     }
 }
