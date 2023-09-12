@@ -49,6 +49,7 @@ class RedirectController extends Controller
                 'external_id' => $user->id,
                 'external_auth' => 'azure',
                 'avatar' => $user->avatar,
+                'state_id' => '1',
             ])->assignRole('Usuario');
             Auth::login($userNew);
 
