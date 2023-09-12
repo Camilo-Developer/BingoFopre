@@ -2,6 +2,7 @@
 
 namespace App\Models\Cardboard;
 
+use App\Models\CartonGroup\CartonGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,22 @@ class Cardboard extends Model
       'group_id',
       'user_id',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($cardboard) {
+            // Obtén el último grupo existente o crea uno nuevo
+            $latestGroup = CartonGroup::latest()->first();
+            if (!$latestGroup) {
+                $latestGroup = new CartonGroup();
+                $latestGroup->save();
+            }
+
+            // Asigna el group_id al cartón
+            $cardboard->group_id = $latestGroup->id;
+        });
+    }
     /*Lista con relacion directa e inversa revisada*/
     public function state()
     {

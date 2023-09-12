@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\CardBoard\CardboardsSeeder;
 use Database\Seeders\CardMains\CardmainsSeeder;
 use Database\Seeders\Instructions\InstructionsSeeder;
 use Database\Seeders\State\StateSeeder;
@@ -36,6 +37,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CardmainsSeeder::class);
         //InstructionsSeeder
         $this->call(InstructionsSeeder::class);
+        //CardboardsSeeder
+        //$this->call(CardboardsSeeder::class);
+
 
     }
 }

@@ -11,7 +11,6 @@ class CartonGroup extends Model
     protected $table ='carton_groups';
     protected $primaryKey = 'id';
     protected $fillable = [
-      'state_id',
       'user_id',
     ];
 

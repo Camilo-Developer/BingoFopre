@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('date_finish');
-            $table->bigInteger('state_id')->unsigned();
-            $table->bigInteger('group_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('state_id')->unsigned()->default(1);
+            $table->bigInteger('group_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
