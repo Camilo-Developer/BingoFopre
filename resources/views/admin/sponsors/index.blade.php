@@ -156,6 +156,18 @@
                                                 <input type="file" value="{{$sponsor->logo}}" name="logo"  class="form-control form-control-border" id="logo">
                                             </div>
                                         </div>
+
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="state_id">Estado:</label>
+                                                <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                    @foreach($states as $state)
+                                                        <option value="{{$state->id}}" {{ $state->id == $sponsor->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

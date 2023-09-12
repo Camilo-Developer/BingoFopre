@@ -175,13 +175,13 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="mas_info">Más infromación:</label>
+                                                <label for="mas_info">Más información:</label>
                                                 <input type="url" value="{{$cardmain->mas_info}}" name="mas_info" class="form-control form-control-border" id="mas_info" placeholder="Escriba la URL">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
-                                                <label for="state_id">Más información:</label>
+                                                <label for="state_id">Estado:</label>
                                                 <select class="custom-select form-control-border" name="state_id" id="state_id">
                                                     @foreach($states as $state)
                                                         <option value="{{$state->id}}" {{ $state->id == $cardmain->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
