@@ -331,6 +331,51 @@
 <script src="{{url('recursos/admin/dist/js/demo.js')}}"></script>
 <script src="{{url('recursos/admin/plugins/select2/js/select2.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    if (document.getElementsByClassName('glide')) {
+      const glider = new Glide('.gliderrr', {
+        autoplay: 10000,
+        type: 'carousel',
+        perView: 4,
+        breakpoints: {
+          800: {
+            perView: 2
+          }
+        }
+      });
+      // The classname for the element that gets transformed
+      const tiltableElement = '.glide__container';
+      glider.mount();
+    };
+
+    if (document.getElementById('choice-button')) {
+      var element = document.getElementById('choice-button');
+      const example = new Choices(element, {
+        searchEnabled: false
+      });
+
+    }
+    if (document.getElementById('choice-remove-button')) {
+      var element = document.getElementById('choice-remove-button');
+      const example = new Choices(element, {
+        searchEnabled: false
+      });
+    }
+
+    if (document.getElementById('language-button')) {
+      var element = document.getElementById('language-button');
+      const example = new Choices(element, {
+        searchEnabled: false
+      });
+
+    }
+    if (document.getElementById('currency-button')) {
+      var element = document.getElementById('currency-button');
+      const example = new Choices(element, {
+        searchEnabled: false
+      });
+    }
+  </script>
 @yield('js')
 </body>
 </html>

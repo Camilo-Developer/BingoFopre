@@ -10,6 +10,9 @@
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
+
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
@@ -19,7 +22,7 @@
         }
     </style>
 </head>
-<body class="presentation-page bg-gray-200">
+<body class="automotive ">
 <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
         <div class="col-12">
@@ -270,6 +273,7 @@
 
 
 <script src="{{asset('assets/js/plugins/glide.min.js')}}"></script>
+
 <script src="{{asset('assets/js/plugins/countup.min.js')}}"></script>
 
 <script src="{{asset('assets/js/plugins/rellax.min.js')}}"></script>

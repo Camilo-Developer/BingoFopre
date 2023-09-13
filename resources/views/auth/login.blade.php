@@ -1,63 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" itemscope>
+<html lang="en" >
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        Iniciar Sesión | Bingo Fopre
+        Inicar Sesión | Bingo Fopre
     </title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link id="pagestyle" href="{{asset('assets/css/material-kit.css')}}" rel="stylesheet" />
+    <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
+    <style>
+        .async-hide {
+            opacity: 0 !important
+        }
+    </style>
 </head>
 <body class="sign-in-basic">
-<nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent ">
+<nav
+    class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3  navbar-transparent mt-4 ">
     <div class="container">
-        <a class="navbar-brand  text-white " href="{{route('bingofopre.index')}}" rel="tooltip" title="Bingo Fopre" data-placement="bottom">
+        <a class="navbar-brand  text-white  d-none d-md-block"
+           href=" {{route('bingofopre.index')}} " rel="tooltip"
+           title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
             Bingo Fopre
-        </a>
-        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon mt-2">
-          <span class="navbar-toggler-bar bar1"></span>
-          <span class="navbar-toggler-bar bar2"></span>
-          <span class="navbar-toggler-bar bar3"></span>
-        </span>
-        </button>
-        <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5" id="navigation">
-            <ul class="navbar-nav navbar-nav-hover ms-auto">
-                <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-6">
-                    <a href="{{route('bingofopre.index')}}" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" >
-                        <i class="material-icons opacity-6 me-2 text-md">home</i>
-                        Inicio
-                    </a>
-                </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a href="#" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
-                        <i class="material-icons opacity-6 me-2 text-md">assignment</i>
-                        Instrucciones
-                    </a>
-                </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a href="#" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
-                        <i class="material-icons opacity-6 me-2 text-md">whatshot</i>
-                        Premios
-                    </a>
-                </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a href="#" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
-                        <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
-                        Compra tus Cartones
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <a class="navbar-brand  text-white  d-block d-md-none"
+               href=" {{route('bingofopre.index')}} " rel="tooltip"
+               title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+                Bingo Fopre
+            </a>
+            <a href="https://www.creative-tim.com/product/material-design-system-pro#pricingCard"
+               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block">add</a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mt-2">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+                <ul class="navbar-nav navbar-nav-hover ms-auto">
+                    <li class="nav-item dropdown dropdown-hover mx-2">
+                        <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" role="button" id="dropdownMenuPages10"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
+                            Pages
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-lg-block d-none">
+                    <li class="nav-item">
+                        <a href class="btn btn-sm  bg-gradient-primary  mb-0 me-1">Buy Now</a>
+                    </li>
+                </ul>
+            </div>
     </div>
 </nav>
-<!-- End Navbar -->
-<div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');" loading="lazy">
+
+
+<div class="page-header align-items-start min-vh-100"
+     style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');"
+     loading="lazy">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
         <div class="row">
@@ -71,23 +78,22 @@
                     <div class="card-body">
                         <form role="form" class="text-start">
                             <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Correo electrónico</label>
+                                <label class="form-label">Email</label>
                                 <input type="email" class="form-control">
                             </div>
                             <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Contraseña</label>
+                                <label class="form-label">Password</label>
                                 <input type="password" class="form-control">
                             </div>
                             <div class="form-check form-switch d-flex align-items-center mb-3">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
+                                <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                                <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-1">Iniciar Sesión</button>
+                                <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                             </div>
-                            <hr>
                             <div class="text-center">
-                                <a href="{{route('auth.azure')}}" class="btn bg-gradient-primary w-100  mb-2">Inicio Uniandes</a>
+                                <a href="{{route('auth.azure')}}" class="btn bg-gradient-primary w-100 my-4 mb-2">Azure</a>
                             </div>
                         </form>
                     </div>
@@ -100,11 +106,13 @@
             <div class="row align-items-center justify-content-lg-between">
                 <div class="col-12 col-md-6 my-auto">
                     <div class="copyright text-center text-sm text-white text-lg-start">
-                        © <script>
+                        ©
+                        <script>
                             document.write(new Date().getFullYear())
                         </script>,
                         made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                        <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a>
+                        <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative
+                            Tim</a>
                         for a better web.
                     </div>
                 </div>
@@ -114,13 +122,15 @@
                             <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative Tim</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About Us</a>
+                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About
+                                Us</a>
                         </li>
                         <li class="nav-item">
                             <a href="https://www.creative-tim.com/blog" class="nav-link text-white" target="_blank">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">License</a>
+                            <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white"
+                               target="_blank">License</a>
                         </li>
                     </ul>
                 </div>
@@ -128,11 +138,15 @@
         </div>
     </footer>
 </div>
+
 <script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/typedjs.js')}}"></script>
 <script src="{{asset('assets/js/plugins/parallax.min.js')}}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-<script src="{{asset('assets/js/material-kit.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
 </body>
 </html>

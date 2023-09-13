@@ -29,10 +29,14 @@ Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth
 Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
 
+
 Route::get('/cartones/create', [CardboardsController::class,'createForm'])->name('cartones.createForm');
 Route::post('/cartones/create', [CardboardsController::class,'create'])->name('cartones.create');
 
-
+Route::get('add-to-cart/{name}',[CardboardsController::class,'addToCart']);
+Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('cartones.cart');
+Route::post('cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->name('cartones.finishPurchase');
+Route::delete('cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('cartones.removeFromCart');
 
 
 Route::middleware([

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BingoFopre;
 
 use App\Http\Controllers\Controller;
 use App\Models\CardMain\CardMain;
+use App\Models\DynamicGame\DynamicGame;
 use App\Models\Instruction\Instruction;
 use App\Models\Prize\Prize;
 use App\Models\Sponsor\Sponsor;
@@ -35,9 +36,13 @@ class BingoFopreController extends Controller
     }
     public function instructions(){
         $instructions = Instruction::all();
+        $dynamicgames = DynamicGame::all();
+        $dynamicgamescount = DynamicGame::count();
         return view('bingofopre.instructions',
             compact(
-                'instructions'
+                'instructions',
+                'dynamicgames',
+                'dynamicgamescount',
             ));
     }
     public function prizes(){
