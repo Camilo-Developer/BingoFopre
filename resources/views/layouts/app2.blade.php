@@ -12,10 +12,10 @@
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 
-    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-    <link href="assets/css/style.min.css" rel="stylesheet" />
-    <link href="assets/css/style2.css" rel="stylesheet" />
+    <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
@@ -123,29 +123,29 @@
 </div>
 
 
-<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
 
-<script src="assets/js/plugins/typedjs.js"></script>
-<script src="assets/js/plugins/choices.min.js"></script>
-<script src="assets/js/plugins/flatpickr.min.js"></script>
+<script src="{{asset('assets/js/plugins/typedjs.js')}}"></script>
+<script src="{{asset('assets/js/plugins/choices.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/flatpickr.min.js')}}"></script>
 
-<script src="assets/js/plugins/parallax.min.js"></script>
+<script src="{{asset('assets/js/plugins/parallax.min.js')}}"></script>
 
-<script src="assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
 
-<script src="assets/js/plugins/anime.min.js" type="text/javascript"></script>
+<script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
 
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script src="assets/js/material-kit-pro.min.js" type="text/javascript"></script>
+<script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
 <script>
 </script>
-<script src="assets/js/plugins/glide.min.js"></script>
+<script src="{{asset('assets/js/plugins/glide.min.js')}}"></script>
 <script>
     if (document.getElementsByClassName('glide')) {
         const glider = new Glide('.gliderrr', {
-            autoplay: 10000,
+            autoplay: 2000,
             type: 'carousel',
             perView: 4,
             breakpoints: {
