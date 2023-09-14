@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\Prizes\PrizesController;
 use App\Http\Controllers\Admin\States\StatesController;
 use App\Http\Controllers\Admin\Roles\RolesController;
 
+use App\Http\Controllers\Admin\Cardboards\CardboardsController;
+
 
 
 Route::get('/dashboard', [RedirectController::class, 'dashboardAdmin'])->name('admin.dashboard');
@@ -24,3 +26,13 @@ Route::resource('/dynamicgames', DynamicGamesController::class)->names('admin.dy
 Route::resource('/prizes', PrizesController::class)->names('admin.prizes');
 Route::resource('/states', StatesController::class)->names('admin.states');
 Route::resource('/roles', RolesController::class)->names('admin.roles');
+
+
+Route::get('/cartones/create', [CardboardsController::class,'createForm'])->name('admin.cartones.createForm');
+Route::post('/cartones/create', [CardboardsController::class,'create'])->name('admin.cartones.create');
+
+Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart']);
+Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('admin.cartones.cart');
+Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->name('admin.cartones.finishPurchase');
+Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('admin.cartones.removeFromCart');
+

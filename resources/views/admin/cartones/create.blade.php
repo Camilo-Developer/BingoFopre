@@ -1,14 +1,13 @@
-@extends('layouts.app') <!-- Asegúrate de que esta línea coincida con tu diseño de plantilla -->
-
+@extends('layouts.app')
+@section('title','Cartones')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Crear Cartones y Grupos de Forma Masiva</div>
-
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cartones.create') }}">
+                        <form method="POST" action="{{ route('admin.cartones.create') }}">
                             @csrf
 
                             <div class="form-group">
@@ -32,20 +31,17 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="price">Precio</label>
+                                <input type="number" id="price" name="price" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Crear Cartones y Grupos</button>
                             </div>
                         </form>
 
                         <div class="row">
-                            @if(session('cart'))
-                                {{-- Obtener el número de productos en el carrito --}}
-                                @php $cartCount = count(session('cart')); @endphp
 
-                                {{-- Mostrar la cantidad de productos en el carrito --}}
-                                <p>Tienes {{ $cartCount }} producto(s) en tu carrito.</p>
-                            @else
-                                <p>Tu carrito está vacío.</p>
-                            @endif
 
                                 <br><br>
 
@@ -56,17 +52,15 @@
                                             <p>Carton</p>
                                             <p>Nombre:{{$carton->name}}</p>
                                             <p>estado:{{$carton->state->name}}</p>
+                                            <p>Precio:{{$carton->price}}</p>
                                             <p>gurpo:{{$carton->group_id}}</p>
-                                            <a href="{{url('add-to-cart/'.$carton->id)}}" class="btn btn-primary">Agregar carro</a>
+                                            <a href="{{url('admin/add-to-cart/'.$carton->id)}}" class="btn btn-primary">Agregar carro</a>
                                         </div>
                                     </div>
                                 </div>
                         @endforeach
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>

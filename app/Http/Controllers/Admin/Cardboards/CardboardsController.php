@@ -18,7 +18,7 @@ class CardboardsController extends Controller
     public function createForm()
     {
         $cartones = Cardboard::all();
-        return view('cartones.create',compact('cartones'));
+        return view('admin.cartones.create',compact('cartones'));
     }
 
 
@@ -28,6 +28,7 @@ class CardboardsController extends Controller
         $endNumber = strval($request->input('end_number')); // Convierte a cadena
         $groupSize = $request->input('group_size');
         $date = $request->input('date');
+        $price = $request->input('price');
 
         $user_id = auth()->user()->id; // Obtener el ID del usuario autenticado
 
@@ -45,6 +46,7 @@ class CardboardsController extends Controller
             $cardboard = Cardboard::create([
                 'name' => $formattedName,
                 'date_finish' => $date,
+                'price' => $price,
                 'state_id' => 1, // Reemplaza con el estado correcto
                 'group_id' => $group ? $group->id : null,
                 'user_id' => null,
@@ -56,7 +58,7 @@ class CardboardsController extends Controller
             $cardboard->save();
         }
 
-        return redirect()->route('cartones.createForm')->with('success', 'Cartones y grupos creados exitosamente.');
+        return redirect()->route('admin.cartones.createForm')->with('success', 'Cartones y grupos creados exitosamente.');
     }
 
 
@@ -68,7 +70,7 @@ class CardboardsController extends Controller
 
         // Verificar si se encontró el cartón
         if (!$carton) {
-            return redirect()->route('cartones.createForm')->with('error', 'El cartón no fue encontrado.');
+            return redirect()->route('admin.cartones.createForm')->with('error', 'El cartón no fue encontrado.');
         }
 
         $cart = session()->get('cart');
@@ -77,19 +79,20 @@ class CardboardsController extends Controller
             'name' => $carton->name,
             'quantity' => 1,
             'date_finish' => $carton->date_finish,
+            'price' => $carton->price,
             'state_id' => $carton->state_id,
             'user_id' => $carton->user_id,
         ];
 
         session()->put('cart', $cart);
-        return redirect()->route('cartones.createForm')->with('success', 'Se añadió al carrito con éxito.');
+        return redirect()->route('admin.cartones.createForm')->with('success', 'Se añadió al carrito con éxito.');
     }
     public function showCart()
     {
         // Obtener el carrito desde la sesión
         $cart = Session::get('cart', []);
 
-        return view('cartones.cart', compact('cart'));
+        return view('admin.cartones.cart', compact('cart'));
     }
 
 
@@ -117,7 +120,7 @@ class CardboardsController extends Controller
         // Limpia el carrito en la sesión
         Session::forget('cart');
 
-        return redirect()->route('cartones.cart')->with('success', 'Compra finalizada con éxito.');
+        return redirect()->route('admin.cartones.cart')->with('success', 'Compra finalizada con éxito.');
     }
 
 
@@ -135,10 +138,10 @@ class CardboardsController extends Controller
             // Actualiza el carrito en la sesión
             Session::put('cart', $cart);
 
-            return redirect()->route('cartones.cart')->with('success', 'Cartón eliminado del carrito con éxito.');
+            return redirect()->route('admin.cartones.cart')->with('success', 'Cartón eliminado del carrito con éxito.');
         }
 
-        return redirect()->route('cartones.cart')->with('error', 'El cartón no se encontró en el carrito.');
+        return redirect()->route('admin.cartones.cart')->with('error', 'El cartón no se encontró en el carrito.');
     }
 
 

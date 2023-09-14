@@ -15,6 +15,8 @@ class Cardboard extends Model
     protected  $fillable = [
       'name',
       'date_finish',
+      'document_number',
+      'price',
       'state_id',
       'group_id',
       'user_id',
