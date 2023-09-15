@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Prizes;
 
 use App\Http\Controllers\Controller;
 use App\Models\Prize\Prize;
+use App\Models\State\State;
 use Illuminate\Http\Request;
 
 class PrizesController extends Controller
@@ -12,7 +13,8 @@ class PrizesController extends Controller
     public function index()
     {
         $prizes = Prize::all();
-        return view('admin.prizes.index',compact('prizes'));
+        $states = State::all();
+        return view('admin.prizes.index',compact('prizes', 'states'));
     }
 
     public function store(Request $request)

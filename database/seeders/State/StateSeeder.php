@@ -21,5 +21,21 @@ class StateSeeder extends Seeder
             'name'=> 'No disponible',
             'check'=> '2',
         ]);
+        State::create([
+            'name'=> 'Circulación',
+            'check'=> '3',
+        ]);
+        State::create([
+            'name'=> 'Anulado',
+            'check'=> '4',
+        ]);
+        State::create([
+            'name'=> 'Vendido',
+            'check'=> '5',
+        ]);
+        State::create([
+            'name'=> 'Obsequio',
+            'check'=> '6',
+        ]);
     }
 }

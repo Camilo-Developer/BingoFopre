@@ -61,16 +61,13 @@ class CardboardsController extends Controller
         return redirect()->route('admin.cartones.createForm')->with('success', 'Cartones y grupos creados exitosamente.');
     }
 
-
-
-
     public function addToCart($name) {
         // Buscar el cartón por el nombre en lugar del ID
         $carton = Cardboard::where('name', $name)->first();
 
         // Verificar si se encontró el cartón
         if (!$carton) {
-            return redirect()->route('admin.cartones.createForm')->with('error', 'El cartón no fue encontrado.');
+            return redirect()->route('dashboard')->with('error', 'El cartón no fue encontrado.');
         }
 
         $cart = session()->get('cart');
@@ -82,17 +79,18 @@ class CardboardsController extends Controller
             'price' => $carton->price,
             'state_id' => $carton->state_id,
             'user_id' => $carton->user_id,
+            'document_number' => $carton->document_number,
         ];
 
         session()->put('cart', $cart);
-        return redirect()->route('admin.cartones.createForm')->with('success', 'Se añadió al carrito con éxito.');
+        return redirect()->route('dashboard')->with('success', 'Se añadió al carrito con éxito.');
     }
     public function showCart()
     {
         // Obtener el carrito desde la sesión
         $cart = Session::get('cart', []);
 
-        return view('admin.cartones.cart', compact('cart'));
+        return view('user.cart.index', compact('cart'));
     }
 
 
@@ -103,6 +101,7 @@ class CardboardsController extends Controller
 
         // Obtener datos de estado y usuario de cada cartón desde el formulario
         $cartonData = $request->input('cartons');
+        $documentoComprador = $request->input('document_number');
 
         // Iterar a través de los elementos del carrito y actualizar la base de datos
         foreach ($cart as $cartonId => $carton) {
@@ -112,7 +111,7 @@ class CardboardsController extends Controller
             if ($cartonDB) {
                 // Actualiza el estado y el campo user_id del cartón en la base de datos
                 $cartonDB->state_id = $cartonData[$cartonId]['state_id'];
-                $cartonDB->user_id = $cartonData[$cartonId]['user_id'];
+                $cartonDB->document_number = $documentoComprador;
                 $cartonDB->save();
             }
         }
@@ -120,7 +119,7 @@ class CardboardsController extends Controller
         // Limpia el carrito en la sesión
         Session::forget('cart');
 
-        return redirect()->route('admin.cartones.cart')->with('success', 'Compra finalizada con éxito.');
+        return redirect()->route('user.cart.index')->with('success', 'Compra finalizada con éxito.');
     }
 
 
@@ -138,10 +137,10 @@ class CardboardsController extends Controller
             // Actualiza el carrito en la sesión
             Session::put('cart', $cart);
 
-            return redirect()->route('admin.cartones.cart')->with('success', 'Cartón eliminado del carrito con éxito.');
+            return redirect()->route('user.cart.index')->with('success', 'Cartón eliminado del carrito con éxito.');
         }
 
-        return redirect()->route('admin.cartones.cart')->with('error', 'El cartón no se encontró en el carrito.');
+        return redirect()->route('user.cart.index')->with('error', 'El cartón no se encontró en el carrito.');
     }
 
 

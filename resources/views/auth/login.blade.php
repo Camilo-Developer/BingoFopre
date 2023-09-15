@@ -28,13 +28,12 @@
            href=" {{route('bingofopre.index')}} " rel="tooltip"
            title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
             Bingo Fopre
+        </a>
             <a class="navbar-brand  text-white  d-block d-md-none"
                href=" {{route('bingofopre.index')}} " rel="tooltip"
                title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
                 Bingo Fopre
             </a>
-            <a href="https://www.creative-tim.com/product/material-design-system-pro#pricingCard"
-               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block">add</a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">
@@ -46,18 +45,33 @@
             <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
                 <ul class="navbar-nav navbar-nav-hover ms-auto">
                     <li class="nav-item dropdown dropdown-hover mx-2">
-                        <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" role="button" id="dropdownMenuPages10"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
-                            Pages
+                        <a href="{{route('dashboard')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                            <i class="material-icons opacity-6 me-2 text-md">home</i>
+                            Inicio
+
                         </a>
                     </li>
-                </ul>
-                <ul class="navbar-nav d-lg-block d-none">
-                    <li class="nav-item">
-                        <a href class="btn btn-sm  bg-gradient-primary  mb-0 me-1">Buy Now</a>
+                    <li class="nav-item dropdown dropdown-hover mx-2">
+                        <a href="{{route('bingofopre.instructions')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                            <i class="material-icons opacity-6 me-2 text-md">assignment</i>
+                            Instrucciones
+                        </a>
                     </li>
+                    <li class="nav-item dropdown dropdown-hover mx-2">
+                        <a href="{{route('bingofopre.prizes')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                            <i class="material-icons opacity-6 me-2 text-md">whatshot</i>
+                            Premios
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-hover mx-2">
+                        <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                            <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
+                            Compra Online
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
     </div>
 </nav>
@@ -77,24 +91,24 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form role="form" class="text-start">
+                        <form action="{{route('login')}}" method="post" class="text-start">
+                            @csrf
                             <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input name="email" type="email" class="form-control">
                             </div>
                             <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control">
+                                <label class="form-label">Contraseña</label>
+                                <input name="password" type="password" class="form-control">
                             </div>
-                            <div class="form-check form-switch d-flex align-items-center mb-3">
-                                <input class="form-check-input" type="checkbox" id="rememberMe" checked>
-                                <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
+                            @error('email')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar Sesión</button>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
-                            </div>
-                            <div class="text-center">
-                                <a href="{{route('auth.azure')}}" class="btn bg-gradient-primary w-100 my-4 mb-2">Azure</a>
+                                <a href="{{route('auth.azure')}}" class="btn bg-gradient-primary w-100 my-4 mb-2">Inicio Cuentas Uniandes</a>
                             </div>
                         </form>
                     </div>
@@ -111,27 +125,37 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>,
-                        made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                        <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative
-                            Tim</a>
-                        for a better web.
+                        Universidad de los Andes | Colombia.
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+
+                    <ul class="nav nav-footer justify-content-center justify-content-lg-end text-white">
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative Tim</a>
+                            <a class="nav-link text-white pe-1" href="https://www.facebook.com/UniandesCol/" target="_blank">
+                                <i class="fab fa-facebook text-lg opacity-8"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About
-                                Us</a>
+                            <a class="nav-link text-white pe-1" href="https://twitter.com/Uniandes" target="_blank">
+                                <i class="fab fa-twitter text-lg opacity-8"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/blog" class="nav-link text-white" target="_blank">Blog</a>
+                            <a class="nav-link text-white pe-1" href="https://www.linkedin.com/company/universidad-de-los-andes" target="_blank">
+                                <i class="fab fa-linkedin-in text-lg opacity-8"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white"
-                               target="_blank">License</a>
+                            <a class="nav-link text-white pe-1" href="https://www.instagram.com/uniandes/" target="_blank">
+                                <i class="fab fa-instagram text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white pe-1" href="https://www.youtube.com/user/uniandes"
+                               target="_blank">
+                                <i class="fab fa-youtube text-lg opacity-8"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>

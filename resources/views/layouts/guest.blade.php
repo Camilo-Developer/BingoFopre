@@ -23,8 +23,12 @@
     </style>
 </head>
 <body class="automotive ">
+<form action="{{route('logout')}}" method="post" id="cerrar">
+    @csrf
+</form>
 <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
+
         <div class="col-12">
             <nav
                 class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
@@ -39,8 +43,31 @@
                        title="Bingo Fopre" data-placement="bottom">
                         Bingo Fopre
                     </a>
-                    <a href="https://www.creative-tim.com/product/material-kit-pro#pricingCard"
-                       class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" title="Iniciar Sesión"><i class="material-icons  text-md">person</i></a>
+                    @if(auth()->check())
+
+
+                        @if(session('cart'))
+                            @php $cartCount = count(session('cart')); @endphp
+                            <a href="{{route('user.cart.index')}}"
+                               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" title="Ver Carrito">
+                                <i class="material-icons  text-md">shopping_cart</i> {{ $cartCount }}
+                            </a>
+                        @else
+                            <a href="{{route('user.cart.index')}}"
+                               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" title="Ver Carrito">
+                                <i class="material-icons  text-md">shopping_cart</i> 0
+                            </a>
+                        @endif
+
+                    @else
+                        <a href="{{route('login')}}"
+                           class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Iniciar Sesión">
+                            <i class="material-icons  text-md">person</i>
+                        </a>
+                    @endif
+
+
+
                     <button class="navbar-toggler shadow-none ms-md-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -51,39 +78,103 @@
               </span>
                     </button>
                     <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-                        <ul class="navbar-nav navbar-nav-hover ms-auto">
-                            <li class="nav-item dropdown dropdown-hover mx-2">
-                                <a href="{{route('bingofopre.index')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                                    <i class="material-icons opacity-6 me-2 text-md">home</i>
-                                    Inicio
 
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown dropdown-hover mx-2">
-                                <a href="{{route('bingofopre.instructions')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                                    <i class="material-icons opacity-6 me-2 text-md">assignment</i>
-                                    Instrucciones
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown dropdown-hover mx-2">
-                                <a href="{{route('bingofopre.prizes')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                                    <i class="material-icons opacity-6 me-2 text-md">whatshot</i>
-                                    Premios
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown dropdown-hover mx-2">
-                                <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                                    <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
-                                    Compra tus Cartones
-                                </a>
-                            </li>
-                        </ul>
+                        @if(auth()->check())
+                            <ul class="navbar-nav navbar-nav-hover ms-auto">
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('dashboard')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">home</i>
+                                        Inicio
+
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('bingofopre.instructions')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">assignment</i>
+                                        Instrucciones
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('bingofopre.prizes')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">whatshot</i>
+                                        Premios
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
+                                        Compra Online
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a onclick="document.getElementById('cerrar').submit()"
+                                       class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar Sesión">
+                                        <i class="material-icons  text-md">power_settings_new</i> Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                            @if(session('cart'))
+                                @php $cartCount = count(session('cart')); @endphp
+                                <ul class="navbar-nav d-lg-block d-none">
+                                    <li class="nav-item">
+                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            @else
+                                <ul class="navbar-nav d-lg-block d-none">
+                                    <li class="nav-item">
+                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> 0
+                                        </a>
+                                    </li>
+                                </ul>
+                            @endif
+
+                            <ul class="navbar-nav mx-2 d-lg-block d-none">
+                                <li class="nav-item">
+                                    <a  onclick="document.getElementById('cerrar').submit()" class="btn btn-sm   bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar Sesión">
+                                        <i class="material-icons opacity-6  text-md">power_settings_new</i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        @else
+                            <ul class="navbar-nav navbar-nav-hover ms-auto">
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('bingofopre.index')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">home</i>
+                                        Inicio
+
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('bingofopre.instructions')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">assignment</i>
+                                        Instrucciones
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="{{route('bingofopre.prizes')}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">whatshot</i>
+                                        Premios
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                        <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
+                                        Compra Online
+                                    </a>
+                                </li>
+                            </ul>
                         <ul class="navbar-nav d-lg-block d-none">
                             <li class="nav-item">
                                 <a href="{{route('login')}}" class="btn btn-sm  bg-gradient-primary  mb-0"
-                                   onclick="smoothToPricing('pricing-soft-ui')">Iniciar Sesión</a>
+                                   >Iniciar Sesión</a>
                             </li>
                         </ul>
+                        @endif
                     </div>
                 </div>
             </nav>
@@ -104,152 +195,57 @@
 <footer class="footer pt-5 mt-5">
     <div class="container">
         <div class=" row">
-            <div class="col-md-3 mb-4 ms-auto">
-                <div>
-                    <a href="https://www.creative-tim.com/product/material-kit-pro">
-                        <img src="./assets/img/logo-ct-dark.png" class="mb-3 footer-logo" alt="main_logo">
-                    </a>
-                    <h6 class="font-weight-bolder mb-4">Material Kit 2 PRO</h6>
-                </div>
-                <div>
-                    <ul class="d-flex flex-row ms-n3 nav">
-                        <li class="nav-item">
-                            <a class="nav-link pe-1" href="https://www.facebook.com/CreativeTim/" target="_blank">
-                                <i class="fab fa-facebook text-lg opacity-8"></i>
+            <div class="col-md-12 mb-4 ms-auto">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <div class="d-flex">
+                            <a href="{{route('bingofopre.index')}}">
+                                @foreach($templateconfigs as $templateconfig)
+                                <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
+                                @endforeach
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-1" href="https://twitter.com/creativetim" target="_blank">
-                                <i class="fab fa-twitter text-lg opacity-8"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-1" href="https://dribbble.com/creativetim" target="_blank">
-                                <i class="fab fa-dribbble text-lg opacity-8"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-1" href="https://github.com/creativetimofficial" target="_blank">
-                                <i class="fab fa-github text-lg opacity-8"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pe-1" href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w"
-                               target="_blank">
-                                <i class="fab fa-youtube text-lg opacity-8"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-6 mb-4">
-                <div>
-                    <h6 class="text-sm">Company</h6>
-                    <ul class="flex-column ms-n3 nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/presentation" target="_blank">
-                                About Us
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/templates/free" target="_blank">
-                                Freebies
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/templates/premium" target="_blank">
-                                Premium Tools
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/blog" target="_blank">
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-6 mb-4">
-                <div>
-                    <h6 class="text-sm">Resources</h6>
-                    <ul class="flex-column ms-n3 nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://iradesign.io/" target="_blank">
-                                Illustrations
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/bits" target="_blank">
-                                Bits & Snippets
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/affiliates/new" target="_blank">
-                                Affiliate Program
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-6 mb-4">
-                <div>
-                    <h6 class="text-sm">Help & Support</h6>
-                    <ul class="flex-column ms-n3 nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/contact-us" target="_blank">
-                                Contact Us
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center" target="_blank">
-                                Knowledge Center
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://services.creative-tim.com/?ref=ct-material-kit-pro-footer"
-                               target="_blank">
-                                Custom Development
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/sponsorships" target="_blank">
-                                Sponsorships
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 col-6 mb-4 me-auto">
-                <div>
-                    <h6 class="text-sm">Legal</h6>
-                    <ul class="flex-column ms-n3 nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center/terms-of-service/"
-                               target="_blank">
-                                Terms & Conditions
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center/privacy-policy/"
-                               target="_blank">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.creative-tim.com/license" target="_blank">
-                                Licenses (EULA)
-                            </a>
-                        </li>
-                    </ul>
+                            <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
+                        </div>
+                        <div >
+                            <ul class="d-flex flex-row ms-n3 nav">
+                                <li class="nav-item">
+                                    <a class="nav-link pe-1" href="https://www.facebook.com/UniandesCol/" target="_blank">
+                                        <i class="fab fa-facebook text-lg opacity-8"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pe-1" href="https://twitter.com/Uniandes" target="_blank">
+                                        <i class="fab fa-twitter text-lg opacity-8"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pe-1" href="https://www.linkedin.com/company/universidad-de-los-andes" target="_blank">
+                                        <i class="fab fa-linkedin-in text-lg opacity-8"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pe-1" href="https://www.instagram.com/uniandes/" target="_blank">
+                                        <i class="fab fa-instagram text-lg opacity-8"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pe-1" href="https://www.youtube.com/user/uniandes"
+                                       target="_blank">
+                                        <i class="fab fa-youtube text-lg opacity-8"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="text-center">
                     <p class="text-dark my-4 text-sm font-weight-normal">
-                        Puto. Copyright ©
+                        Copyright ©
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Material Kit by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                        </script>  Universidad de los Andes | Colombia
                     </p>
                 </div>
             </div>
@@ -279,6 +275,8 @@
 <script src="{{asset('assets/js/plugins/rellax.min.js')}}"></script>
 
 <script src="{{asset('assets/js/plugins/tilt.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/chartjs.min.js')}}" type="text/javascript"></script>
+
 
 
 <script>

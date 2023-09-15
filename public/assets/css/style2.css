@@ -248,7 +248,7 @@
 .show>.btn-primary.dropdown-toggle,
 .show>.btn.bg-gradient-primary.dropdown-toggle {
     color: color-yiq(#e91e63);
-    background-color: #e91e63
+    background-color: #e91e63;
 }
 .btn-primary.focus,
 .btn-primary:focus,

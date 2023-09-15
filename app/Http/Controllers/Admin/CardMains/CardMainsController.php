@@ -9,6 +9,13 @@ use App\Models\State\State;
 
 class CardMainsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.cardmains.index')->only('index');
+        $this->middleware('can:admin.cardmains.edit')->only('edit', 'update');
+        $this->middleware('can:admin.cardmains.create')->only('create', 'store');
+        $this->middleware('can:admin.cardmains.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $cardmains = CardMain::all();

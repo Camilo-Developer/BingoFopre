@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 class TemplateConfigsController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('can:admin.templateconfigs.index')->only('index');
+        $this->middleware('can:admin.templateconfigs.edit')->only('edit', 'update');
+        $this->middleware('can:admin.templateconfigs.create')->only('create', 'store');
+        $this->middleware('can:admin.templateconfigs.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $templateconfigs = TemplateConfig::all();

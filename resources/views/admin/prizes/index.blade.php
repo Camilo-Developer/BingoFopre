@@ -36,6 +36,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Imagen</th>
                                         <th scope="col">Color</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -44,7 +45,8 @@
                                         <tr class="text-center">
                                             <th scope="row" style="width: 50px;">{{$prize->id}}</th>
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $prize->imagen)}}" alt="{{$prize->color}}"></td>
-                                            <td>{{$prize->color}}</td>
+                                            <td><div style="width: 100%; display: flex; justify-content: center"> <div style="background: {{$prize->color}}; width: 30px; height: 30px; border-radius: 5px;"></div></div></td>
+                                            <td>{{$prize->state->name}}</td>
                                             <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
                                         </tr>
                                     @endforeach
@@ -84,9 +86,16 @@
                                     <input type="file" name="imagen" required class="form-control form-control-border" id="imagen">
                                 </div>
                                 <div class="form-group">
+                                    <label for="state_id">Estado:</label>
+                                    <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                        @foreach($states as $state)
+                                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="description"><span class="text-danger">*</span> Descripción</label>
                                     <textarea id="compose-textarea" name="description" required class="form-control" style="height: 500px!important;">
-
                                     </textarea>
                                 </div>
                             </div>
@@ -127,6 +136,14 @@
                                     <div class="form-group">
                                         <label for="imagen"><span class="text-danger">*</span> Imagen:</label>
                                         <input type="file" value="{{$prize->imagen}}" name="imagen"  class="form-control form-control-border" id="imagen">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state_id">Estado:</label>
+                                        <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                            @foreach($states as $state)
+                                                <option value="{{$state->id}}" {{ $state->id == $prize->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="description"><span class="text-danger">*</span> Descripción</label>

@@ -15,7 +15,7 @@ class RedirectController extends Controller
     public function dashboard(){
         if (auth()->user()->can('admin.dashboard')){
             return redirect()->route('admin.dashboard');
-        }elseif (auth()->user()->hasRole('Usuario')){
+        }elseif (auth()->user()->hasRole('Estudiante')){
             return redirect()->route('dashboard');
         }else{
             Auth::logout();
@@ -50,7 +50,7 @@ class RedirectController extends Controller
                 'external_auth' => 'azure',
                 'avatar' => $user->avatar,
                 'state_id' => '1',
-            ])->assignRole('Usuario');
+            ])->assignRole('Estudiante');
             Auth::login($userNew);
 
 

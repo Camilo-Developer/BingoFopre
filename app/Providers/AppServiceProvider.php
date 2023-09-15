@@ -25,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
             $templateconfigs = TemplateConfig::all();
             $view->with('templateconfigs', $templateconfigs);
         });
+        View::composer('layouts.app2',function ($view) {
+            $templateconfigs = TemplateConfig::all();
+            $view->with('templateconfigs', $templateconfigs);
+        });
     }
 }

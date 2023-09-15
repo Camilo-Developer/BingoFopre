@@ -7,6 +7,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\BingoFopre\BingoFopreController;
 use App\Http\Controllers\Admin\Redirect\RedirectController;
 
+use App\Http\Controllers\Admin\Cardboards\CardboardsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +29,7 @@ Route::get('/redirect',[RedirectController::class, 'dashboard']);
 Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth.azure');
 Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
+Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('user.cart.index');
 
 
 
@@ -35,5 +38,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->name('dashboard');
+    Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->middleware('can:dashboard')->name('dashboard');
+    Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->name('dashboard');
+
 });

@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\Cardboards\CardboardsController;
 
 
 
-Route::get('/dashboard', [RedirectController::class, 'dashboardAdmin'])->name('admin.dashboard');
+Route::get('/dashboard', [RedirectController::class, 'dashboardAdmin'])->middleware('can:admin.dashboard')->name('admin.dashboard');
 
 Route::resource('/templateconfigs', TemplateConfigsController::class)->names('admin.templateconfigs');
 Route::resource('/cardmains', CardMainsController::class)->names('admin.cardmains');
@@ -28,11 +28,10 @@ Route::resource('/states', StatesController::class)->names('admin.states');
 Route::resource('/roles', RolesController::class)->names('admin.roles');
 
 
-Route::get('/cartones/create', [CardboardsController::class,'createForm'])->name('admin.cartones.createForm');
-Route::post('/cartones/create', [CardboardsController::class,'create'])->name('admin.cartones.create');
+Route::get('/cartones/create', [CardboardsController::class,'createForm'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.createForm');
+Route::post('/cartones/create', [CardboardsController::class,'create'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.create');
 
 Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart']);
-Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('admin.cartones.cart');
 Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->name('admin.cartones.finishPurchase');
 Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('admin.cartones.removeFromCart');
 

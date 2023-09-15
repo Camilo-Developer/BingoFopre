@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class StatesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.states.index')->only('index');
+        $this->middleware('can:admin.states.edit')->only('edit', 'update');
+        $this->middleware('can:admin.states.create')->only('create', 'store');
+        $this->middleware('can:admin.states.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $states = State::all();

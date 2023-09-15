@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('check',[1,2,3,4]);//por analisar
+            $table->enum('check',[1,2,3,4,5,6]);
             $table->timestamps();
         });
     }
