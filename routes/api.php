@@ -10,6 +10,9 @@ use App\Http\Controllers\Api\Sponsors\SponsorsController;
 use App\Http\Controllers\Api\Instructions\InstructionsController;
 use App\Http\Controllers\Api\DynamicGames\DynamicGamesController;
 use App\Http\Controllers\Api\Prizes\PrizesController;
+use App\Http\Controllers\Api\CardBoards\CardBoardsController;
+use App\Http\Controllers\Api\CartonGroups\CartonGroupsController;
+use App\Http\Controllers\Api\Users\UsersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,3 +36,12 @@ Route::resource('sponsors',SponsorsController::class);
 Route::resource('instructions',InstructionsController::class);
 Route::resource('dynamicgames',DynamicGamesController::class);
 Route::resource('prizes',PrizesController::class);
+Route::resource('cardboards',CardBoardsController::class);
+
+Route::post('admin/cartones/create', [CardboardsController::class, 'create'])->name('admin.cartones.create');
+Route::post('admin/cartones/addToCart/{name}', [CardboardsController::class, 'addToCart'])->name('admin.cartones.addToCart');
+Route::post('admin/cartones/finishPurchase', [CardboardsController::class, 'finishPurchase'])->name('admin.cartones.finishPurchase');
+Route::post('admin/cartones/removeFromCart/{cartonId}', [CardboardsController::class, 'removeFromCart'])->name('admin.cartones.removeFromCart');
+
+Route::resource('cartongroups',CartonGroupsController::class);
+Route::resource('users',UsersController::class);
