@@ -29,7 +29,11 @@ return new class extends Migration
         Schema::table('cardboards', function ($table) {
             $table->foreign('state_id')->references('id')->on('states')->onUpdate('cascade');
             $table->foreign('group_id')->references('id')->on('carton_groups')->onUpdate('cascade');
+            //$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+        });
+        Schema::table('carton_groups', function ($table) {
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('state_id')->references('id')->on('states')->onUpdate('cascade');
         });
 
     }

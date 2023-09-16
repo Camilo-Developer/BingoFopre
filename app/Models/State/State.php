@@ -46,4 +46,8 @@ class State extends Model
     {
         return $this->hasMany('App\Models\Cardboard\Cardboard', 'state_id');
     }
+    public function cartongrups()
+    {
+        return $this->hasMany('App\Models\CartonGroup\CartonGroup', 'state_id');
+    }
 }

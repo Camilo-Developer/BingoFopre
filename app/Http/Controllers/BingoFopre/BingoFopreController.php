@@ -80,7 +80,6 @@ class BingoFopreController extends Controller
         foreach ($card_groups as $group) {
             // Calcular el total de cartones asignados para el estado 3 (cursante) en cada grupo y para el usuario actual
             $totalCartones = Cardboard::where('group_id', $group->id)
-
                 ->count();
 
             $totalCartonesVen = Cardboard::where('group_id', $group->id)
@@ -97,7 +96,7 @@ class BingoFopreController extends Controller
             $totalCartonesObsequios += $totalCartonesObse;
 
         }
-        $totalCartonesPendientes = $totalCartonesAsignados - $totalCartonesVendidos;
+        $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
          //dd($totalCartonesVendidos); // Puedes usar dd para verificar el total en este punto
 
         return view('user.dashboard.index', compact('card_groups', 'totalCartonesAsignados', 'totalCartonesVendidos', 'totalCartonesPendientes','totalCartonesObsequios'));

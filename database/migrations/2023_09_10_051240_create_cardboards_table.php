@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('document_number')->nullable();
             $table->bigInteger('state_id')->unsigned()->default(1);
             $table->bigInteger('group_id')->unsigned()->nullable();
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            //$table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

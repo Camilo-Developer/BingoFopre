@@ -84,7 +84,7 @@ class User extends Authenticatable
     /*Lista con relacion directa e inversa revisada*/
     public function cartongroup()
     {
-        return $this->hasMany('App\Models\CartonGroup\CartonGroup', 'group_id');
+        return $this->hasMany('App\Models\CartonGroup\CartonGroup', 'user_id');
     }
 
 

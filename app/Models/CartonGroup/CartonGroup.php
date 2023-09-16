@@ -20,6 +20,11 @@ class CartonGroup extends Model
         return $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State\State', 'state_id');
+    }
+
     /*Lista con relacion directa e inversa revisada*/
     public function cardboard()
     {

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('carton_groups', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('state_id')->unsigned()->nullable()->default(1);
+
             $table->timestamps();
         });
     }

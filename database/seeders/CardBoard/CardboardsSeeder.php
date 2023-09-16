@@ -18,7 +18,6 @@ class CardboardsSeeder extends Seeder
             'date_finish' => now(),
             'price' => '12000',
             'state_id' => 1, // Reemplaza con el estado correcto
-            'user_id' => null, // Puede ser nulo si es necesario
         ]);
 
         $carton->save();
