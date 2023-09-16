@@ -96,16 +96,6 @@ class BingoFopreController extends Controller
             $totalCartonesAsignados += $totalCartones;
             $totalCartonesVendidos += $totalCartonesVen;
             $totalCartonesObsequios += $totalCartonesObse;
-
-            $allCartonesState5 = Cardboard::where('group_id', $group->id)
-                    ->where('state_id', 5)
-                    ->count() == Cardboard::where('group_id', $group->id)->count();
-
-            if ($allCartonesState5) {
-                // Actualizar el state_id en la tabla cartongroups
-                $group->update(['state_id' => 5]);
-            }
-
         }
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
          //dd($totalCartonesVendidos); // Puedes usar dd para verificar el total en este punto

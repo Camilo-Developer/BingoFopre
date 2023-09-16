@@ -30,4 +30,11 @@ class CartonGroup extends Model
     {
         return $this->hasMany('App\Models\Cardboard\Cardboard', 'group_id');
     }
+
+    public function areAllCardboardsSold()
+    {
+        return $this->cardboard->every(function ($carton) {
+            return $carton->state_id === 5;
+        });
+    }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('dynamic_games', function (Blueprint $table) {
             $table->id();
-            $table->string('logo');
-            $table->string('title');
-            $table->longText('letra');
+            $table->string('logo')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('letra')->nullable();
             $table->text('fila')->nullable();
             $table->text('colum')->nullable();
             $table->bigInteger('state_id')->unsigned();

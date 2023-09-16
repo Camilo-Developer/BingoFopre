@@ -47,7 +47,7 @@ class CardboardsController extends Controller
                 'name' => $formattedName,
                 'date_finish' => $date,
                 'price' => $price,
-                'state_id' => 1, // Reemplaza con el estado correcto
+                'state_id' => 3, // Reemplaza con el estado correcto
                 'group_id' => $group ? $group->id : null,
             ]);
 
@@ -120,6 +120,8 @@ class CardboardsController extends Controller
 
         return redirect()->route('user.cart.index')->with('success', 'Compra finalizada con éxito.');
     }
+
+
 
 
 

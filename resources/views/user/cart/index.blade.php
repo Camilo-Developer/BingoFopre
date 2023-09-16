@@ -30,11 +30,11 @@
                         <td>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="5" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 1 ? 'checked' : '' }}>
+                                    <input class="form-check-input" value="5" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 3 ? 'checked' : '' }}>
                                     <label class="form-check-label">Vendido</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" value="6" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 2 ? 'checked' : '' }}>
+                                    <input class="form-check-input" value="6" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 6 ? 'checked' : '' }}>
                                     <label class="form-check-label">Obsequio</label>
                                 </div>
                             </div>
