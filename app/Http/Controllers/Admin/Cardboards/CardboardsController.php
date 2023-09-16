@@ -30,7 +30,7 @@ class CardboardsController extends Controller
         $date = $request->input('date');
         $price = $request->input('price');
 
-        $user_id = auth()->user()->id; // Obtener el ID del usuario autenticado
+        //$user_id = auth()->user()->id; // Obtener el ID del usuario autenticado
 
         $group = null;
         $groupCount = 0;
@@ -49,7 +49,6 @@ class CardboardsController extends Controller
                 'price' => $price,
                 'state_id' => 1, // Reemplaza con el estado correcto
                 'group_id' => $group ? $group->id : null,
-                'user_id' => null,
             ]);
 
             $groupCount++;
