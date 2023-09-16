@@ -69,7 +69,9 @@ class BingoFopreController extends Controller
         $userId = $user->id;
 
         // Obtener todos los grupos de cartones
-        $card_groups = CartonGroup::where('user_id', $userId)->get();
+        $card_groups = CartonGroup::where('user_id', $userId)
+            ->where('state_id', 3)
+            ->get();
 
         // Inicializar una variable para almacenar la suma total
         $totalCartonesAsignados = 0;
@@ -94,6 +96,15 @@ class BingoFopreController extends Controller
             $totalCartonesAsignados += $totalCartones;
             $totalCartonesVendidos += $totalCartonesVen;
             $totalCartonesObsequios += $totalCartonesObse;
+
+            $allCartonesState5 = Cardboard::where('group_id', $group->id)
+                    ->where('state_id', 5)
+                    ->count() == Cardboard::where('group_id', $group->id)->count();
+
+            if ($allCartonesState5) {
+                // Actualizar el state_id en la tabla cartongroups
+                $group->update(['state_id' => 5]);
+            }
 
         }
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
