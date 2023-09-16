@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <!-- Modal para crear una noticia -->
+        <!-- Modal para crear un Patrocinador  -->
         <div class="modal fade" id="modal-new-patrocinio"  aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -87,35 +87,42 @@
                         @csrf
                         @method('POST')
                         <div class="modal-body">
-                            <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
                                 </div>
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="logo"><span class="text-danger">*</span> Logo:</label>
-                                            <input type="file" name="logo" required class="form-control form-control-border" id="logo">
+                                <div class="col-9">
+                                    <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="logo"><span class="text-danger">*</span> Logo:</label>
+                                                    <input type="file" name="logo" required class="form-control form-control-border" id="logo">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Nombre:</label>
+                                                    <input type="text" required name="name" class="form-control form-control-border" id="name" placeholder="Escriba el nombre">
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="state_id">Estado:</label>
+                                                    <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                        @foreach($states as $state)
+                                                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Nombre:</label>
-                                            <input type="text" required name="name" class="form-control form-control-border" id="name" placeholder="Escriba el nombre">
-                                        </div>
-                                    </div>
-                                
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="state_id">Estado:</label>
-                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                                @foreach($states as $state)
-                                                    <option value="{{$state->id}}">{{$state->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -127,6 +134,8 @@
                 </div>
             </div>
         </div>
+ <!-- Modal para editar un Patrocinador  -->
+
         @foreach($sponsors as $sponsor)
             <div class="modal fade" id="modal-edit-noticia_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog">
@@ -141,35 +150,46 @@
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
-                                <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                    <div class="d-flex justify-content-end">
-                                        <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="{{asset('storage/' . $sponsor->logo)}}" id="imagenSeleccionadas_{{$loop->iteration}}" class="card-img-top img-fluid" width="17px" height="27px">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name"><span class="text-danger">*</span> Nombre:</label>
-                                        <input type="text" value="{{$sponsor->name}}" name="name" required class="form-control form-control-border" id="name" placeholder="Nombre">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6">
+
+                                    <div class="col-9">
+
+                                        <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                            <div class="d-flex justify-content-end">
+                                                <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                            </div>
                                             <div class="form-group">
-                                                <label for="logo"><span class="text-danger">*</span> Logo:</label>
-                                                <input type="file" value="{{$sponsor->logo}}" name="logo"  class="form-control form-control-border" id="logo">
+                                                <label for="name"><span class="text-danger">*</span> Nombre:</label>
+                                                <input type="text" value="{{$sponsor->name}}" name="name" required class="form-control form-control-border" id="name" placeholder="Nombre">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logos_{{$loop->iteration}}"><span class="text-danger">*</span> Logo:</label>
+                                                        <input type="file" value="{{$sponsor->logo}}" name="logo"  class="form-control form-control-border" id="logos_{{$loop->iteration}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="state_id">Estado:</label>
+                                                        <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                            @foreach($states as $state)
+                                                                <option value="{{$state->id}}" {{ $state->id == $sponsor->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-md-12">
-                                            <div class="form-group">
-                                                <label for="state_id">Estado:</label>
-                                                <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                                    @foreach($states as $state)
-                                                        <option value="{{$state->id}}" {{ $state->id == $sponsor->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
                                     </div>
-                                </div>
+
+                                </div>    
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -192,5 +212,29 @@
     </section>
 @endsection
 @section('js')
+<script>
+    $(document).ready(function (e) {
+        $('#logo').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#imagenSeleccionada').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
 
+</script>
+<script>
+    @foreach($sponsors as $sponsor)
+    $(document).ready(function (e) {
+        $('#logos_{{$loop->iteration}}').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#imagenSeleccionadas_{{$loop->iteration}}').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+    @endforeach
+</script>
 @endsection

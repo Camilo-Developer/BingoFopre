@@ -89,92 +89,101 @@
                         @csrf
                         @method('POST')
                         <div class="modal-body">
-                            <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="title"><span class="text-danger">*</span> Título:</label>
-                                    <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
                                 </div>
 
-                                <div class="col-12 col-md-12">
+                            <div class="col-9">
+                                <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                    <div class="d-flex justify-content-end">
+                                        <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                    </div>
                                     <div class="form-group">
-                                        <label for="state_id">Estado:</label>
-                                        <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                            @foreach($states as $state)
-                                                <option value="{{$state->id}}">{{$state->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="title"><span class="text-danger">*</span> Título:</label>
+                                        <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
                                     </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
+    
+                                    <div class="col-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="logo"><span class="text-danger">*</span> Imagen:</label>
-                                            <input type="file" name="logo" required class="form-control form-control-border" id="logo">
+                                            <label for="state_id">Estado:</label>
+                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                @foreach($states as $state)
+                                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="letra">Letra:</label>
-                                            <input type="text" name="letra" class="form-control form-control-border" id="letra" placeholder="Escriba la letra.">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label><span class="text-danger">*</span> Filas:</label>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="fila1" name="fila[]" value="1">
-                                                <label for="fila1" class="custom-control-label">Primera Fila</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="fila2" name="fila[]" value="2">
-                                                <label for="fila2" class="custom-control-label">Segunda Fila</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="fila3" name="fila[]" value="3">
-                                                <label for="fila3" class="custom-control-label">Tercera Fila</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="fila4" name="fila[]" value="4">
-                                                <label for="fila4" class="custom-control-label">Cuarta Fila</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="fila5" name="fila[]" value="5">
-                                                <label for="fila5" class="custom-control-label">Quinta Fila</label>
+    
+    
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="logo"><span class="text-danger">*</span> Imagen:</label>
+                                                <input type="file" name="logo" required class="form-control form-control-border" id="logo">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label><span class="text-danger">*</span> Columnas:</label>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="columna1" name="colum[]" value="1">
-                                                <label for="columna1" class="custom-control-label">Primera Columnas</label>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="letra">Letra:</label>
+                                                <input type="text" name="letra" class="form-control form-control-border" id="letra" placeholder="Escriba la letra.">
                                             </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="columna2" name="colum[]" value="2">
-                                                <label for="columna2" class="custom-control-label">Segunda Columnas</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label><span class="text-danger">*</span> Filas:</label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila1" name="fila[]" value="1">
+                                                    <label for="fila1" class="custom-control-label">Primera Fila</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila2" name="fila[]" value="2">
+                                                    <label for="fila2" class="custom-control-label">Segunda Fila</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila3" name="fila[]" value="3">
+                                                    <label for="fila3" class="custom-control-label">Tercera Fila</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila4" name="fila[]" value="4">
+                                                    <label for="fila4" class="custom-control-label">Cuarta Fila</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila5" name="fila[]" value="5">
+                                                    <label for="fila5" class="custom-control-label">Quinta Fila</label>
+                                                </div>
                                             </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="columna3" name="colum[]" value="3">
-                                                <label for="columna3" class="custom-control-label">Tercera Columnas</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="columna4" name="colum[]" value="4">
-                                                <label for="columna4" class="custom-control-label">Cuarta Columnas</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" type="checkbox" id="columna5" name="colum[]" value="5">
-                                                <label for="columna5" class="custom-control-label">Quinta Columnas</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label><span class="text-danger">*</span> Columnas:</label>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna1" name="colum[]" value="1">
+                                                    <label for="columna1" class="custom-control-label">Primera Columnas</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna2" name="colum[]" value="2">
+                                                    <label for="columna2" class="custom-control-label">Segunda Columnas</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna3" name="colum[]" value="3">
+                                                    <label for="columna3" class="custom-control-label">Tercera Columnas</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna4" name="colum[]" value="4">
+                                                    <label for="columna4" class="custom-control-label">Cuarta Columnas</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna5" name="colum[]" value="5">
+                                                    <label for="columna5" class="custom-control-label">Quinta Columnas</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                            
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -345,6 +354,18 @@
             });
         @endforeach
     </script>
+
+<script>
+    $(document).ready(function (e) {
+        $('#logo').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#imagenSeleccionada').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+</script>
 
 <script>
     @foreach($dynamicgames as $dynamicgame)
