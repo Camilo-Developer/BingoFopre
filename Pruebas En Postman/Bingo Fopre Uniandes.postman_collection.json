@@ -1,0 +1,1686 @@
+{
+	"info": {
+		"_postman_id": "915bf6aa-68f7-48ae-8e32-1a440a409988",
+		"name": "Bingo Fopre Uniandes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Estado",
+			"item": [
+				{
+					"name": "Listado Estados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/states",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Estados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/states?name=Prueba&check=2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"states"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Prueba",
+									"description": "Nombre del Estado"
+								},
+								{
+									"key": "check",
+									"value": "2",
+									"description": "Tipo del Estado [1,2,3,4,5,6]"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listado estado por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/states/7",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"states",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando Estado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/states/7?name=Prueba 10",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"states",
+								"7"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Prueba 10",
+									"description": "Nombre del estado"
+								},
+								{
+									"key": "check",
+									"value": null,
+									"description": "Tipo del estado",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Estado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/states/7",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"states",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Listando Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/users",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/users?name=Usuario&lastname=apellido&email=usuario@gmail.com&password=$2y$10$tVgd147Pjx82oggFQzc1kem7G00zf.mfSe4xpPcpEOn.cfqMdFUpe&state_id=1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Usuario"
+								},
+								{
+									"key": "lastname",
+									"value": "apellido"
+								},
+								{
+									"key": "email",
+									"value": "usuario@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "$2y$10$tVgd147Pjx82oggFQzc1kem7G00zf.mfSe4xpPcpEOn.cfqMdFUpe",
+									"description": "Contraseña 1234"
+								},
+								{
+									"key": "state_id",
+									"value": "1"
+								},
+								{
+									"key": "avatar",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "external_id",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "external_auth",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "profile_photo_url",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando Usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/users/3",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando Usuario por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/users/3?name=Usuario Pruebas&lastname=dsasd&email=Usuario@gmail.com&state_id=2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"3"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Usuario Pruebas"
+								},
+								{
+									"key": "lastname",
+									"value": "dsasd"
+								},
+								{
+									"key": "email",
+									"value": "Usuario@gmail.com"
+								},
+								{
+									"key": "state_id",
+									"value": "2"
+								},
+								{
+									"key": "password",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "external_id",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "external_auth",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminado Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/users/3",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuración del Sitio Web principal",
+			"item": [
+				{
+					"name": "Listado Componentes del sitio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/templateconfigs",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"templateconfigs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Componentes del sitio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/templateconfigs?logo&img_main&url_carton=https://prueba.com&description_carton=asdasd&price_carton=2232&url_live=https://prueba.live.com&description_live=asddasd&area=assad&email=email.email.com&phone=121221",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"templateconfigs"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": null,
+									"description": "Logo de la pagina"
+								},
+								{
+									"key": "img_main",
+									"value": null,
+									"description": "Imagen principal de la pagina"
+								},
+								{
+									"key": "url_carton",
+									"value": "https://prueba.com",
+									"description": "Url de compra del carton"
+								},
+								{
+									"key": "description_carton",
+									"value": "asdasd",
+									"description": "Descripcion pequeña del carton"
+								},
+								{
+									"key": "price_carton",
+									"value": "2232",
+									"description": "Precio del carton"
+								},
+								{
+									"key": "url_live",
+									"value": "https://prueba.live.com",
+									"description": "Url de trasmición"
+								},
+								{
+									"key": "description_live",
+									"value": "asddasd",
+									"description": "Descripción corta de la trasmición"
+								},
+								{
+									"key": "area",
+									"value": "assad",
+									"description": "Area de la universidad"
+								},
+								{
+									"key": "email",
+									"value": "email.email.com",
+									"description": "Correo institucional"
+								},
+								{
+									"key": "phone",
+									"value": "121221",
+									"description": "Telefono institucional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando por id componentes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/templateconfigs/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"templateconfigs",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando Componestes por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/templateconfigs/2?logo=prueba.png",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"templateconfigs",
+								"2"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": "prueba.png",
+									"description": "Logo de la pagina"
+								},
+								{
+									"key": "img_main",
+									"value": null,
+									"description": "Imagen principal de la pagina",
+									"disabled": true
+								},
+								{
+									"key": "url_carton",
+									"value": null,
+									"description": "Url de compra del carton",
+									"disabled": true
+								},
+								{
+									"key": "description_carton",
+									"value": null,
+									"description": "Descripcion pequeña del carton",
+									"disabled": true
+								},
+								{
+									"key": "price_carton",
+									"value": null,
+									"description": "Precio del carton",
+									"disabled": true
+								},
+								{
+									"key": "url_live",
+									"value": null,
+									"description": "Url de trasmición",
+									"disabled": true
+								},
+								{
+									"key": "description_live",
+									"value": null,
+									"description": "Descripción corta de la trasmición",
+									"disabled": true
+								},
+								{
+									"key": "area",
+									"value": null,
+									"description": "Area de la universidad",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": null,
+									"description": "Correo institucional",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": null,
+									"description": "Telefono institucional",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminando Componente por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/templateconfigs/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"templateconfigs",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Noticias Generales",
+			"item": [
+				{
+					"name": "Listando noticias generales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardmains",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardmains"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Noticia General",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardmains?imagen&title=Prueba&description=Descripcion&mas_info=https://prueba.com&state_id=2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardmains"
+							],
+							"query": [
+								{
+									"key": "imagen",
+									"value": null,
+									"description": "Imagen Princial de la noticia"
+								},
+								{
+									"key": "title",
+									"value": "Prueba",
+									"description": "Titulo de la noticia"
+								},
+								{
+									"key": "description",
+									"value": "Descripcion",
+									"description": "Descripcion de la noticia"
+								},
+								{
+									"key": "mas_info",
+									"value": "https://prueba.com",
+									"description": "Url para mas informacion"
+								},
+								{
+									"key": "state_id",
+									"value": "2",
+									"description": "Estado para la noticia"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando Noticia por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardmains/3",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardmains",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando Noticia por Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardmains/3?imagen=prueba.png&title=asdas&description=asasd&mas_info=&state_id=1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardmains",
+								"3"
+							],
+							"query": [
+								{
+									"key": "imagen",
+									"value": "prueba.png",
+									"description": "Imagen Princial de la noticia"
+								},
+								{
+									"key": "title",
+									"value": "asdas",
+									"description": "Titulo de la noticia"
+								},
+								{
+									"key": "description",
+									"value": "asasd",
+									"description": "Descripcion de la noticia"
+								},
+								{
+									"key": "mas_info",
+									"value": "",
+									"description": "Url para mas informacion"
+								},
+								{
+									"key": "state_id",
+									"value": "1",
+									"description": "Estado para la noticia"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Noticia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardmains/3",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardmains",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patrocinadores",
+			"item": [
+				{
+					"name": "Listando patrocinadores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/sponsors",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creación del patrocinador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/sponsors?logo=prueba.png&name=Nombre del patrocinador&state_id=1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": "prueba.png",
+									"description": "Logo del patrocinador"
+								},
+								{
+									"key": "name",
+									"value": "Nombre del patrocinador",
+									"description": "Nombre del patrocinador"
+								},
+								{
+									"key": "state_id",
+									"value": "1",
+									"description": "Estado del patrocinador [1,2,3,4,5,6]"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualización por Id del patrocinador",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/sponsors/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edición del patrocinador por Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/sponsors/1?logo=img.png",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"1"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": "img.png",
+									"description": "Logo del patrocinador"
+								},
+								{
+									"key": "name",
+									"value": null,
+									"description": "Nombre del patrocinador",
+									"disabled": true
+								},
+								{
+									"key": "state_id",
+									"value": null,
+									"description": "Estado del patrocinador [1,2,3,4,5,6]",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Patrocinador",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/sponsors/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instrucciones",
+			"item": [
+				{
+					"name": "Listar Instrucciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/instructions",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"instructions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Instruccion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/instructions?description_one=Prueba 1&description_two=prueba 2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"instructions"
+							],
+							"query": [
+								{
+									"key": "description_one",
+									"value": "Prueba 1",
+									"description": "Texto para la instrucción"
+								},
+								{
+									"key": "description_two",
+									"value": "prueba 2",
+									"description": "Texto para cantar Bingo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizacion por ID de la instrucción",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/instructions/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"instructions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edición de la instrucción por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/instructions/2?description_one=prueba 36",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"instructions",
+								"2"
+							],
+							"query": [
+								{
+									"key": "description_one",
+									"value": "prueba 36",
+									"description": "Texto para la instrucción"
+								},
+								{
+									"key": "description_two",
+									"value": null,
+									"description": "Texto para cantar Bingo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar la Instrucción",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/instructions/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"instructions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dinamicas del juego",
+			"item": [
+				{
+					"name": "Listando las dinamicas del juego",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/dynamicgames/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"dynamicgames",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando las dinamicas del Juego",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/dynamicgames?logo=logo.png&title=Prueba&letra=a&fila=1&colum=2&state_id=1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"dynamicgames"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": "logo.png",
+									"description": "Logo para las dinamicas"
+								},
+								{
+									"key": "title",
+									"value": "Prueba",
+									"description": "Titulo para la dinamica"
+								},
+								{
+									"key": "letra",
+									"value": "a",
+									"description": "Letra para la dinamica"
+								},
+								{
+									"key": "fila",
+									"value": "1",
+									"description": "Fila para la dinamica"
+								},
+								{
+									"key": "colum",
+									"value": "2",
+									"description": "Columnas para las dinamicas"
+								},
+								{
+									"key": "state_id",
+									"value": "1",
+									"description": "Estado para las dinamicas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando dimamicas por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/dynamicgames",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"dynamicgames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando dinamica por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/dynamicgames/1?logo=123.png",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"dynamicgames",
+								"1"
+							],
+							"query": [
+								{
+									"key": "logo",
+									"value": "123.png",
+									"description": "Logo para las dinamicas"
+								},
+								{
+									"key": "title",
+									"value": null,
+									"description": "Titulo para la dinamica",
+									"disabled": true
+								},
+								{
+									"key": "letra",
+									"value": null,
+									"description": "Letra para la dinamica",
+									"disabled": true
+								},
+								{
+									"key": "fila",
+									"value": null,
+									"description": "Fila para la dinamica",
+									"disabled": true
+								},
+								{
+									"key": "colum",
+									"value": null,
+									"description": "Columnas para las dinamicas",
+									"disabled": true
+								},
+								{
+									"key": "state_id",
+									"value": null,
+									"description": "Estado para las dinamicas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminación de la dinamica",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/dynamicgames/2",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"dynamicgames",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Premios",
+			"item": [
+				{
+					"name": "Listando los premios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/prizes",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"prizes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creacion de los premios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/prizes?color=123&imagen=img.png&description=prueba&state_id=1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"prizes"
+							],
+							"query": [
+								{
+									"key": "color",
+									"value": "123",
+									"description": "Color para el premio"
+								},
+								{
+									"key": "imagen",
+									"value": "img.png",
+									"description": "Imagen del premio"
+								},
+								{
+									"key": "description",
+									"value": "prueba",
+									"description": "Descripcion del premio"
+								},
+								{
+									"key": "state_id",
+									"value": "1",
+									"description": "Estado para el premio [1,2,3,4,5,6]"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando los premios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/prizes/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"prizes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando premios por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/prizes/1?color=456",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"prizes",
+								"1"
+							],
+							"query": [
+								{
+									"key": "color",
+									"value": "456",
+									"description": "Color para el premio"
+								},
+								{
+									"key": "imagen",
+									"value": null,
+									"description": "Imagen del premio",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": null,
+									"description": "Descripcion del premio",
+									"disabled": true
+								},
+								{
+									"key": "state_id",
+									"value": null,
+									"description": "Estado del premio",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Premio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/prizes/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"prizes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cartones",
+			"item": [
+				{
+					"name": "Listando cartones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardboards",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardboards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Cartones Masivamente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/admin/cartones/create?start_number=0001&end_number=&group_size=&date=2023-09-16&price=12000",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"admin",
+								"cartones",
+								"create"
+							],
+							"query": [
+								{
+									"key": "start_number",
+									"value": "0001"
+								},
+								{
+									"key": "end_number",
+									"value": ""
+								},
+								{
+									"key": "group_size",
+									"value": ""
+								},
+								{
+									"key": "date",
+									"value": "2023-09-16"
+								},
+								{
+									"key": "price",
+									"value": "12000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando Cartones por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardboards/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardboards",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadiendo cartones al carrito de compra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/admin/cartones/addToCart/001",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"admin",
+								"cartones",
+								"addToCart",
+								"001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizando Compra del carton",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/admin/cartones/finishPurchase",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"admin",
+								"cartones",
+								"finishPurchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar carton del carrito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/admin/cartones/removeFromCart/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"admin",
+								"cartones",
+								"removeFromCart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando carton po ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardboards/1?document_number=1222&state_id=5",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardboards",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "date_finish",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "document_number",
+									"value": "1222"
+								},
+								{
+									"key": "state_id",
+									"value": "5"
+								},
+								{
+									"key": "group_id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimiando carton por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cardboards/1",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cardboards",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grupo de cartones",
+			"item": [
+				{
+					"name": "Listando Grupos de cartones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cartongroups",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cartongroups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creando Grupo de cartones",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cartongroups?user_id=1&state_id=3",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cartongroups"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								},
+								{
+									"key": "state_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualizando grupo de cartones por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cartongroups/5",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cartongroups",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando grupo de cartones por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cartongroups/5?user_id=2&state_id=5",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cartongroups",
+								"5"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "2"
+								},
+								{
+									"key": "state_id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminado Grupo de cartones",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://bingofopre.test/api/cartongroups/5",
+							"protocol": "http",
+							"host": [
+								"bingofopre",
+								"test"
+							],
+							"path": [
+								"api",
+								"cartongroups",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
