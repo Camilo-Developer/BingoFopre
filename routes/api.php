@@ -45,3 +45,4 @@ Route::post('admin/cartones/removeFromCart/{cartonId}', [CardboardsController::c
 
 Route::resource('cartongroups',CartonGroupsController::class);
 Route::resource('users',UsersController::class);
+

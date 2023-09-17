@@ -11,6 +11,7 @@ use Database\Seeders\TemplateConfigs\TemplateConfigsSeeder;
 use Database\Seeders\User\UsersSeeder;
 use Illuminate\Database\Seeder;
 
+use App\Models\User;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -31,6 +32,16 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         //UsersSeeder
         $this->call(UsersSeeder::class);
+        // Crear 25 registros con el rol "Estudiante"
+        User::factory(25)->create()->each(function ($user) {
+            $user->assignRole('Estudiante');
+        });
+
+        // Crear 25 registros con el rol "Vendedor"
+        User::factory(25)->create()->each(function ($user) {
+            $user->assignRole('Vendedor');
+        });
+
         //TemplateConfigs
         $this->call(TemplateConfigsSeeder::class);
         //CardmainsSeeder
