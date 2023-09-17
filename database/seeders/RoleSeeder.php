@@ -33,6 +33,8 @@ class RoleSeeder extends Seeder
             'description'=> 'Ver panel administrativo Estudiantes y Vendedores'
         ])->syncRoles([$role1, $role2,$role3,$role4]);
 
+
+
         //Permisos admin Estados
         Permission::create([
             'name' => 'admin.states.index',
@@ -50,6 +52,25 @@ class RoleSeeder extends Seeder
             'name' => 'admin.states.destroy',
             'description'=> 'Eliminar Estados'
         ])->syncRoles([$role1]);
+
+        //Permisos admin usuarios
+        Permission::create([
+            'name' => 'admin.users.index',
+            'description'=> 'Lista de usuarios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.users.create',
+            'description'=> 'Creación de usuarios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.users.edit',
+            'description'=> 'Edición de usuarios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.users.destroy',
+            'description'=> 'Eliminación de usuarios'
+        ])->syncRoles([$role1]);
+
 
         //Permisos admin Configuracion Template
         Permission::create([

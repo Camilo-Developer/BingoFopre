@@ -35,7 +35,7 @@ class UsersController extends Controller
         $states = State::all();
         $roles = Role::all();
 
-        return view('admin.users.index', compact('users', 'search','states','roles'));
+        return view('admin.users.index', compact('users', 'search', 'states', 'roles'));
     }
 
     public function store(Request $request)
@@ -60,7 +60,6 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        User::all();
         $states = State::all();
         $roles = Role::all();
         $roles_user = [];

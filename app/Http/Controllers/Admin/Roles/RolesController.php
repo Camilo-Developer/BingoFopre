@@ -22,8 +22,13 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::all();
+        return view('admin.roles.index', compact('roles'));
+    }
+
+    public function create()
+    {
         $permissions = Permission::all();
-        return view('admin.roles.index', compact('roles','permissions'));
+        return view('admin.roles.create', compact('permissions'));
     }
 
 
@@ -47,7 +52,7 @@ class RolesController extends Controller
         foreach($role->permissions as $role_permission){
             array_push($permisosa, $role_permission->pivot->permission_id);
         }
-        return view('admin.roles.index',compact('role', 'permissions'));
+        return view('admin.roles.show',compact('role', 'permissions'));
     }
 
     public function edit(Role $role)
@@ -57,7 +62,8 @@ class RolesController extends Controller
         foreach($role->permissions as $role_permission){
             array_push($permisos, $role_permission->pivot->permission_id);
         }
-        return view('admin.roles.index',compact('role', 'permissions','permisos'));
+        return view('admin.roles.edit',compact('role', 'permissions','permisos'));
+
     }
 
 
@@ -70,7 +76,6 @@ class RolesController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->permissions);
         return redirect()->route('admin.roles.index')->with('info', 'el Rol se actualizo con exito');
-
     }
 
     public function destroy(Role $role)

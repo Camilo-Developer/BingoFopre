@@ -172,140 +172,129 @@
                         </a>
                     </li>
                     <li class="nav-header">Accesos</li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.templateconfigs.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/templateconfigs" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Administración de la aplición">
-                                Adm. Aplicación
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.cardmains.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cardmains" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Noticias Generales">
-                                Noticias Generales
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.sponsors.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/sponsors" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Patrocinadores">
-                                Patrocinadores
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.instructions.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/instructions" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Instrucciones">
-                                Instrucciones
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.dynamicgames.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/dynamicgames" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Dinámica del Juego">
-                                Dinámica del Juego
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.prizes.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/prizes" ) active @endif">
-                            <i class="nav-icon fa fa-users-cog"></i>
-                            <p title="Dinámica del Juego">
-                                Premios
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                            <a href="{{route('admin.states.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
-                                <i class="nav-icon fab fa-usps"></i>
-                                <p>
-                                    Estados
-                                </p>
-                            </a>
-                    </li>
 
                     <li class="nav-item">
-                            <a href="{{route('admin.roles.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
-                                <i class="nav-icon fab fa-product-hunt"></i>
-                                <p>
-                                    Roles
-                                </p>
-                            </a>
-                    </li>
-                    <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                <i class="nav-icon fab fa-product-hunt"></i>
-                                <p>
-                                    Cartones
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
+                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/templateconfigs" || $_SERVER['REQUEST_URI'] === "/admin/cardmains" || $_SERVER['REQUEST_URI'] === "/admin/sponsors" || $_SERVER['REQUEST_URI'] === "/admin/instructions" || $_SERVER['REQUEST_URI'] === "/admin/dynamicgames" || $_SERVER['REQUEST_URI'] === "/admin/prizes") active @endif">
+                            <i class="nav-icon fab fa-product-hunt"></i>
+                            <p class="Configuración del sitio">
+                                Conf. Sitio
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
                         <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{route('admin.cartones.createForm')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Creación de Cartones</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Grupo de Cartones</p>
-                                    </a>
-                                </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.templateconfigs.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/templateconfigs") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Administración de la aplición">
+                                        Adm. Aplicación
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.cardmains.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cardmains") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Noticias Generales">
+                                        Noticias Generales
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.sponsors.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/sponsors") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Patrocinadores">
+                                        Patrocinadores
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.instructions.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/instructions") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Instrucciones">
+                                        Instrucciones
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.dynamicgames.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/dynamicgames") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Dinámica del Juego">
+                                        Dinámica del Juego
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.prizes.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/prizes") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p title="Premios">
+                                        Premios
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                <i class="nav-icon fab fa-product-hunt"></i>
-                                <p>
-                                    usuarios
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
+                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                            <i class="nav-icon fab fa-product-hunt"></i>
+                            <p>
+                                Cartones
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
                         <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Productos</p>
-                                    </a>
-                                </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.cartones.createForm')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Creación de Cartones</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Asignación de Cartones</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                <i class="nav-icon fab fa-product-hunt"></i>
-                                <p>
-                                    Terminos y Condiciones
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
+                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/users" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                            <i class="nav-icon fab fa-product-hunt"></i>
+                            <p>
+                                Usuarios
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
                         <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Productos</p>
-                                    </a>
-                                </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.users.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/users") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>lista Usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Listar Productos</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.states.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
+                            <i class="nav-icon fab fa-usps"></i>
+                            <p title="Estados">
+                                Estados
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.roles.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
+                            <i class="nav-icon fab fa-product-hunt"></i>
+                            <p title="Roles">
+                                Roles
+                            </p>
+                        </a>
+                    </li>
+
                     <li class="nav-header ">Configuraciones</li>
                     <li class="nav-item" title="{{auth()->user()->email}}">
                         <a   class="nav-link disabled">

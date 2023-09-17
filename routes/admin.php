@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\States\StatesController;
 use App\Http\Controllers\Admin\Roles\RolesController;
 
 use App\Http\Controllers\Admin\Cardboards\CardboardsController;
+use App\Http\Controllers\Admin\Users\UsersController;
 
 
 
@@ -31,7 +32,11 @@ Route::resource('/roles', RolesController::class)->names('admin.roles');
 Route::get('/cartones/create', [CardboardsController::class,'createForm'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.createForm');
 Route::post('/cartones/create', [CardboardsController::class,'create'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.create');
 
+
+
 Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart']);
 Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->name('admin.cartones.finishPurchase');
 Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('admin.cartones.removeFromCart');
+
+Route::resource('/users', UsersController::class)->names('admin.users');
 
