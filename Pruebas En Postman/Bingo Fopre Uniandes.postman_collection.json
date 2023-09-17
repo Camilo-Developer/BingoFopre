@@ -356,7 +356,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://bingofopre.test/api/templateconfigs?logo&img_main&url_carton=https://prueba.com&description_carton=asdasd&price_carton=2232&url_live=https://prueba.live.com&description_live=asddasd&area=assad&email=email.email.com&phone=121221",
+							"raw": "http://bingofopre.test/api/templateconfigs?logo=prueba.png&img_main=prueba_img.png&color_main_one=%232asd545&color_main_two=%23asf365&img_carton=img_carton.png&url_carton=https:venta.carton.com&description_carton=Descripcion del carton&price_carton=12000&img_live=img_live.png&url_live=https:url_live.com&description_live=descripcion del live&area=Area del la universidad&email=emai@email.com&phone=755456&color_text_one=%23000000&color_text_two=%23000000&color_text_three=%23000000&color_text_four=%23000000&img_login=img_login.png&color_login_one=%23000000&color_login_two=%23000000&color_login_hover_three=%23000000&color_login_hover_four=%23000000",
 							"protocol": "http",
 							"host": [
 								"bingofopre",
@@ -369,53 +369,118 @@
 							"query": [
 								{
 									"key": "logo",
-									"value": null,
-									"description": "Logo de la pagina"
+									"value": "prueba.png",
+									"description": "Logo del sitio"
 								},
 								{
 									"key": "img_main",
-									"value": null,
-									"description": "Imagen principal de la pagina"
+									"value": "prueba_img.png",
+									"description": "Imagen del sitio"
+								},
+								{
+									"key": "color_main_one",
+									"value": "#2asd545",
+									"description": "Color 1 para el fondo del sitio"
+								},
+								{
+									"key": "color_main_two",
+									"value": "#asf365",
+									"description": "Color 2 para el fondo del sitio"
+								},
+								{
+									"key": "img_carton",
+									"value": "img_carton.png",
+									"description": "Imagen para carta del carton del sitio"
 								},
 								{
 									"key": "url_carton",
-									"value": "https://prueba.com",
-									"description": "Url de compra del carton"
+									"value": "https:venta.carton.com",
+									"description": "Url para comprar el carton del sitio"
 								},
 								{
 									"key": "description_carton",
-									"value": "asdasd",
-									"description": "Descripcion pequeña del carton"
+									"value": "Descripcion del carton",
+									"description": "Descripcion para el carton del sitio"
 								},
 								{
 									"key": "price_carton",
-									"value": "2232",
-									"description": "Precio del carton"
+									"value": "12000",
+									"description": "Precio para el carton del sitio"
+								},
+								{
+									"key": "img_live",
+									"value": "img_live.png",
+									"description": "Imagen carta live del sitio"
 								},
 								{
 									"key": "url_live",
-									"value": "https://prueba.live.com",
-									"description": "Url de trasmición"
+									"value": "https:url_live.com",
+									"description": "Url para ir al live"
 								},
 								{
 									"key": "description_live",
-									"value": "asddasd",
-									"description": "Descripción corta de la trasmición"
+									"value": "descripcion del live",
+									"description": "Descripcion del live"
 								},
 								{
 									"key": "area",
-									"value": "assad",
+									"value": "Area del la universidad",
 									"description": "Area de la universidad"
 								},
 								{
 									"key": "email",
-									"value": "email.email.com",
-									"description": "Correo institucional"
+									"value": "emai@email.com",
+									"description": "Correo de la universidad"
 								},
 								{
 									"key": "phone",
-									"value": "121221",
-									"description": "Telefono institucional"
+									"value": "755456",
+									"description": "Telefono de la universidad"
+								},
+								{
+									"key": "color_text_one",
+									"value": "#000000",
+									"description": "Color 1 para el texto "
+								},
+								{
+									"key": "color_text_two",
+									"value": "#000000",
+									"description": "Color 2 para el texto "
+								},
+								{
+									"key": "color_text_three",
+									"value": "#000000",
+									"description": "Color 3 para el texto "
+								},
+								{
+									"key": "color_text_four",
+									"value": "#000000",
+									"description": "Color 4 para el texto "
+								},
+								{
+									"key": "img_login",
+									"value": "img_login.png",
+									"description": "Imagen del login"
+								},
+								{
+									"key": "color_login_one",
+									"value": "#000000",
+									"description": "Color 1 para la cartica del login"
+								},
+								{
+									"key": "color_login_two",
+									"value": "#000000",
+									"description": "Color 2 para la cartica del login"
+								},
+								{
+									"key": "color_login_hover_three",
+									"value": "#000000",
+									"description": "Color para el hover 1 del login"
+								},
+								{
+									"key": "color_login_hover_four",
+									"value": "#000000",
+									"description": "Color para el hover 1 del login"
 								}
 							]
 						}
@@ -444,7 +509,7 @@
 					"response": []
 				},
 				{
-					"name": "Editando Componestes por id",
+					"name": "Editando Configuracion del sitio por id",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -464,60 +529,138 @@
 								{
 									"key": "logo",
 									"value": "prueba.png",
-									"description": "Logo de la pagina"
+									"description": "Logo del sitio"
 								},
 								{
 									"key": "img_main",
-									"value": null,
-									"description": "Imagen principal de la pagina",
+									"value": "prueba_img.png",
+									"description": "Imagen del sitio",
+									"disabled": true
+								},
+								{
+									"key": "color_main_one",
+									"value": "%232asd545",
+									"description": "Color 1 para el fondo del sitio",
+									"disabled": true
+								},
+								{
+									"key": "color_main_two",
+									"value": "%23asf365",
+									"description": "Color 2 para el fondo del sitio",
+									"disabled": true
+								},
+								{
+									"key": "img_carton",
+									"value": "img_carton.png",
+									"description": "Imagen para carta del carton del sitio",
 									"disabled": true
 								},
 								{
 									"key": "url_carton",
-									"value": null,
-									"description": "Url de compra del carton",
+									"value": "https:venta.carton.com",
+									"description": "Url para comprar el carton del sitio",
 									"disabled": true
 								},
 								{
 									"key": "description_carton",
-									"value": null,
-									"description": "Descripcion pequeña del carton",
+									"value": "Descripcion del carton",
+									"description": "Descripcion para el carton del sitio",
 									"disabled": true
 								},
 								{
 									"key": "price_carton",
-									"value": null,
-									"description": "Precio del carton",
+									"value": "12000",
+									"description": "Precio para el carton del sitio",
+									"disabled": true
+								},
+								{
+									"key": "img_live",
+									"value": "img_live.png",
+									"description": "Imagen carta live del sitio",
 									"disabled": true
 								},
 								{
 									"key": "url_live",
-									"value": null,
-									"description": "Url de trasmición",
+									"value": "https:url_live.com",
+									"description": "Url para ir al live",
 									"disabled": true
 								},
 								{
 									"key": "description_live",
-									"value": null,
-									"description": "Descripción corta de la trasmición",
+									"value": "descripcion del live",
+									"description": "Descripcion del live",
 									"disabled": true
 								},
 								{
 									"key": "area",
-									"value": null,
+									"value": "Area del la universidad",
 									"description": "Area de la universidad",
 									"disabled": true
 								},
 								{
 									"key": "email",
-									"value": null,
-									"description": "Correo institucional",
+									"value": "emai@email.com",
+									"description": "Correo de la universidad",
 									"disabled": true
 								},
 								{
 									"key": "phone",
-									"value": null,
-									"description": "Telefono institucional",
+									"value": "755456",
+									"description": "Telefono de la universidad",
+									"disabled": true
+								},
+								{
+									"key": "color_text_one",
+									"value": "%23000000",
+									"description": "Color 1 para el texto ",
+									"disabled": true
+								},
+								{
+									"key": "color_text_two",
+									"value": "%23000000",
+									"description": "Color 2 para el texto ",
+									"disabled": true
+								},
+								{
+									"key": "color_text_three",
+									"value": "%23000000",
+									"description": "Color 3 para el texto ",
+									"disabled": true
+								},
+								{
+									"key": "color_text_four",
+									"value": "%23000000",
+									"description": "Color 4 para el texto ",
+									"disabled": true
+								},
+								{
+									"key": "img_login",
+									"value": "img_login.png",
+									"description": "Imagen del login",
+									"disabled": true
+								},
+								{
+									"key": "color_login_one",
+									"value": "%23000000",
+									"description": "Color 1 para la cartica del login",
+									"disabled": true
+								},
+								{
+									"key": "color_login_two",
+									"value": "%23000000",
+									"description": "Color 2 para la cartica del login",
+									"disabled": true
+								},
+								{
+									"key": "color_login_hover_three",
+									"value": "%23000000",
+									"description": "Color para el hover 1 del login",
+									"disabled": true
+								},
+								{
+									"key": "color_login_hover_four",
+									"value": "%23000000",
+									"description": "Color para el hover 1 del login",
 									"disabled": true
 								}
 							]
