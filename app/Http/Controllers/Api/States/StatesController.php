@@ -79,7 +79,7 @@ class StatesController extends Controller
     {
         try {
             $state = State:: find($id)->update($request->all());
-            return response()->json([ 'message' => 'El estado se actualizo correctamente'],202);
+            return response()->json([ 'message' => 'El estado se actualizó correctamente'],202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -95,7 +95,7 @@ class StatesController extends Controller
     {
         try {
             $state = State:: find($id)->delete();
-            return response()->json([ 'message' => 'El estado se elimino correctamente'],202);
+            return response()->json([ 'message' => 'El estado se eliminó correctamente'],202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

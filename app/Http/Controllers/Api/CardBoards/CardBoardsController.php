@@ -80,7 +80,7 @@ class CardBoardsController extends Controller
     {
         try {
             $cardboard = Cardboard:: find($id)->update($request->all());
-            return response()->json(['message' => 'El carton se ha editado correctamente'], 202);
+            return response()->json(['message' => 'El cartón se ha editado correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -96,7 +96,7 @@ class CardBoardsController extends Controller
     {
         try {
             $cardboard = Cardboard:: find($id)->delete();
-            return response()->json(['message' => 'El carton se a eliminado con exito'], 202);
+            return response()->json(['message' => 'El cartón se a eliminado con éxito'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -140,7 +140,7 @@ class CardBoardsController extends Controller
                 $cardboard->group_id = $group ? $group->id : null;
                 $cardboard->save();
             }
-            return response()->json(['message' => 'Los cartones se Crearon correctamente'], 202);
+            return response()->json(['message' => 'Los cartones se crearón correctamente'], 202);
 
         } catch (ValidationException $e) {
             // Manejo de excepciones de validación
@@ -178,7 +178,7 @@ class CardBoardsController extends Controller
             ];
 
             session()->put('cart', $cart);
-            return response()->json(['message' => 'El acrton se ha añadido al carrito'], 202);
+            return response()->json(['message' => 'El cartón se ha añadido al carrito'], 202);
 
         } catch (Exception $e) {
             // Manejo de excepciones

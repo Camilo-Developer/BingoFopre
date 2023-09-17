@@ -74,7 +74,7 @@ class InstructionsController extends Controller
     {
         try {
             $instruction = Instruction:: find($id)->update($request->all());
-            return response()->json(['message' => 'La instrucción Se Edito correctamente'], 202);
+            return response()->json(['message' => 'La instrucción se edito correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class InstructionsController extends Controller
     {
         try {
             $instruction = Instruction:: find($id)->delete();
-            return response()->json(['message' => 'La instrucción se elimino Correctamente'], 202);
+            return response()->json(['message' => 'La instrucción se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

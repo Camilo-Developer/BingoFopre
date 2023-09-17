@@ -37,7 +37,7 @@ class CardMainsController extends Controller
     {
         try {
             $cardmain = CardMain:: create($request->all());
-            return response()->json(['message' => 'La noticia ' . $cardmain->title . ' Se creo correctamente'], 201);
+            return response()->json(['message' => 'La noticia ' . $cardmain->title . ' Se creó correctamente'], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -74,7 +74,7 @@ class CardMainsController extends Controller
     {
         try {
             $cardmain = CardMain:: find($id)->update($request->all());
-            return response()->json(['message' => 'La noticia Se Edito correctamente'], 202);
+            return response()->json(['message' => 'La noticia se editó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class CardMainsController extends Controller
     {
         try {
             $cardmain = CardMain:: find($id)->delete();
-            return response()->json(['message' => 'La noticia se elimino Correctamente'], 202);
+            return response()->json(['message' => 'La noticia se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
