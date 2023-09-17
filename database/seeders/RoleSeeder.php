@@ -79,6 +79,96 @@ class RoleSeeder extends Seeder
             'description'=> 'Eliminación de noticias principales'
         ])->syncRoles([$role1]);
 
+        //Permisos admin Patrocinadores
+        Permission::create([
+            'name' => 'admin.sponsors.index',
+            'description'=> 'Lista de patrocinadores'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.sponsors.create',
+            'description'=> 'Creación de patrocinadores'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.sponsors.edit',
+            'description'=> 'Edición de patrocinadores'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.sponsors.destroy',
+            'description'=> 'Eliminación de patrocinadores'
+        ])->syncRoles([$role1]);
+
+        //Permisos admin Instrucciones
+        Permission::create([
+            'name' => 'admin.instructions.index',
+            'description'=> 'Lista de instrucciones'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.instructions.create',
+            'description'=> 'Creación de instrucciones'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.instructions.edit',
+            'description'=> 'Edición de instrucciones'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.instructions.destroy',
+            'description'=> 'Eliminación de instrucciones'
+        ])->syncRoles([$role1]);
+
+        //Permisos admin Dinamicas del juego
+        Permission::create([
+            'name' => 'admin.dynamicgames.index',
+            'description'=> 'Lista de dinamicas del juego'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.dynamicgames.create',
+            'description'=> 'Creación de dinamicas del juego'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.dynamicgames.edit',
+            'description'=> 'Edición de dinamicas del juego'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.dynamicgames.destroy',
+            'description'=> 'Eliminación de dinamicas del juego'
+        ])->syncRoles([$role1]);
+
+        //Permisos admin Premios
+        Permission::create([
+            'name' => 'admin.prizes.index',
+            'description'=> 'Lista de premios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.prizes.create',
+            'description'=> 'Creación de premios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.prizes.edit',
+            'description'=> 'Edición de premios'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.prizes.destroy',
+            'description'=> 'Eliminación de premios'
+        ])->syncRoles([$role1]);
+
+        //Permisos admin roles
+        Permission::create([
+            'name' => 'admin.roles.index',
+            'description'=> 'Lista de roles'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.roles.create',
+            'description'=> 'Creación de roles'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.roles.edit',
+            'description'=> 'Edición de roles'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.roles.destroy',
+            'description'=> 'Eliminación de roles'
+        ])->syncRoles([$role1]);
+
 
         //Permisos admin Creacion de cartones
         Permission::create([

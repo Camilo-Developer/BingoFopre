@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - Bingo Fopre</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="icon" href="{{asset('logo.png')}}" type="image/x-icon">
+    <link rel="icon" sizes="192x192" href="{{asset('logo.png')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
@@ -228,7 +230,7 @@
                     </li>
 
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
+                            <a href="{{route('admin.roles.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
                                 <i class="nav-icon fab fa-product-hunt"></i>
                                 <p>
                                     Roles
@@ -236,30 +238,7 @@
                             </a>
                     </li>
                     <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                <i class="nav-icon fab fa-product-hunt"></i>
-                                <p>
-                                    Patrocinadores
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Productos</p>
-                                    </a>
-                                </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                            <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
                                 <i class="nav-icon fab fa-product-hunt"></i>
                                 <p>
                                     Cartones
@@ -268,15 +247,15 @@
                             </a>
                         <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                                    <a href="{{route('admin.cartones.createForm')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create") active @endif">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Crear Productos</p>
+                                        <p>Creación de Cartones</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Listar Productos</p>
+                                        <p>Grupo de Cartones</p>
                                     </a>
                                 </li>
                         </ul>

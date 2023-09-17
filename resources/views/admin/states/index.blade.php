@@ -68,7 +68,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal para crear una noticia -->
         <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog">
@@ -79,7 +78,6 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-
                     <form action="{{route('admin.states.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -93,14 +91,42 @@
                                     <input type="text" name="name" required class="form-control form-control-border" id="title" placeholder="Título">
                                 </div>
                                 <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="1" name="check" >
-                                        <label class="form-check-label" >Activo</label>
+                                    <label><span class="text-danger mt-1">* </span> Tipo de estado</label>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input id="activo" class="form-check-input" type="radio" value="1" name="check" >
+                                                <label for="activo" class="form-check-label" >Activo</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="no_activo" class="form-check-input" type="radio" value="2" name="check" >
+                                                <label for="no_activo" class="form-check-label">No activo</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input id="circulacion" class="form-check-input" type="radio" value="3" name="check" >
+                                                <label for="circulacion" class="form-check-label">Circulación</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="anulado" class="form-check-input" type="radio" value="4" name="check" >
+                                                <label for="anulado" class="form-check-label">Anulado</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input id="vendido" class="form-check-input" type="radio" value="5" name="check" >
+                                                <label for="vendido" class="form-check-label">Vendido</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input id="obsequio" class="form-check-input" type="radio" value="6" name="check" >
+                                                <label for="obsequio" class="form-check-label">Obsequio</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="2" name="check" >
-                                        <label class="form-check-label">No activo</label>
-                                    </div>
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -126,8 +152,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-
-                        <form action="{{route('admin.states.update', $state)}}" method="post">
+                        <form action="{{route('admin.states.update',$state)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
@@ -137,18 +162,47 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="title"><span class="text-danger">*</span> Nombre:</label>
-                                        <input type="text" value="{{$state->name}}" name="name" required class="form-control form-control-border" id="title" placeholder="Título">
+                                        <input type="text" name="name" value="{{$state->name}}" required class="form-control form-control-border" id="title" placeholder="Título">
                                     </div>
                                     <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="1" name="check" @if($state->check == 1) checked @endif>
-                                            <label class="form-check-label" >Activo</label>
+                                        <label><span class="text-danger mt-1">* </span> Tipo de estado</label>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-check">
+                                                    <input id="activo" class="form-check-input" type="radio" value="1" name="check" @if($state->check == 1) checked @endif>
+                                                    <label for="activo" class="form-check-label" >Activo</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input id="no_activo" class="form-check-input" type="radio" value="2" name="check" @if($state->check == 2) checked @endif>
+                                                    <label for="no_activo" class="form-check-label">No activo</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-check">
+                                                    <input id="circulacion" class="form-check-input" type="radio" value="3" name="check" @if($state->check == 3) checked @endif>
+                                                    <label for="circulacion" class="form-check-label">Circulación</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input id="anulado" class="form-check-input" type="radio" value="4" name="check" @if($state->check == 4) checked @endif>
+                                                    <label for="anulado" class="form-check-label">Anulado</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-check">
+                                                    <input id="vendido" class="form-check-input" type="radio" value="5" name="check" @if($state->check == 5) checked @endif>
+                                                    <label for="vendido" class="form-check-label">Vendido</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input id="obsequio" class="form-check-input" type="radio" value="6" name="check" @if($state->check == 6) checked @endif>
+                                                    <label for="obsequio" class="form-check-label">Obsequio</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="2" name="check" @if($state->check == 2) checked @endif>
-                                            <label class="form-check-label">No activo</label>
-                                        </div>
+
+
+
                                     </div>
+                                </div>
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -165,8 +219,11 @@
                             @method('DELETE')
                         </form>
                     </div>
+                    <!-- /.modal-content -->
                 </div>
+                <!-- /.modal-dialog -->
             </div>
+
         @endforeach
     </section>
 @endsection

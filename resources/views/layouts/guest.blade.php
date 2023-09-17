@@ -8,6 +8,8 @@
     </title>
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link rel="icon" href="{{asset('logo.png')}}" type="image/x-icon">
+    <link rel="icon" sizes="192x192" href="{{asset('logo.png')}}">
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet" />

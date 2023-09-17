@@ -41,4 +41,8 @@ Route::middleware([
     Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->middleware('can:dashboard')->name('dashboard');
     Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->name('dashboard');
 
+
+    Route::match(['get', 'post', 'put', 'delete'], '/register', function () {
+        abort(404);
+    })->name('register');
 });
