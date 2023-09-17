@@ -37,7 +37,7 @@ class CartonGroupsController extends Controller
     {
         try {
             $cartonGroup = CartonGroup:: create($request->all());
-            return response()->json(['message' => 'El grupo se creo correctamente'], 201);
+            return response()->json(['message' => 'El grupo se creó correctamente'], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -74,7 +74,7 @@ class CartonGroupsController extends Controller
     {
         try {
             $cartonGroup = CartonGroup:: find($id)->update($request->all());
-            return response()->json(['message' => 'El grupo se edito correctamente'], 202);
+            return response()->json(['message' => 'El grupo se editó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class CartonGroupsController extends Controller
     {
         try {
             $cartonGroup = CartonGroup:: find($id)->delete();
-            return response()->json(['message' => 'El grupo se elimino Correctamente'], 202);
+            return response()->json(['message' => 'El grupo se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

@@ -37,7 +37,7 @@ class UsersController extends Controller
     {
         try {
             $user = User:: create($request->all());
-            return response()->json(['message' => 'El usuario se creo correctamente'], 201);
+            return response()->json(['message' => 'El usuario se creó correctamente'], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -74,7 +74,7 @@ class UsersController extends Controller
     {
         try {
             $user = User:: find($id)->update($request->all());
-            return response()->json(['message' => 'El usuario Se Edito correctamente'], 202);
+            return response()->json(['message' => 'El usuario se editó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class UsersController extends Controller
     {
         try {
             $user = User:: find($id)->delete();
-            return response()->json(['message' => 'El usuario se elimino Correctamente'], 202);
+            return response()->json(['message' => 'El usuario se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

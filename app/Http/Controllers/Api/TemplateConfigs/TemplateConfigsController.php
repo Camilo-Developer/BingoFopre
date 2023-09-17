@@ -40,7 +40,7 @@ class TemplateConfigsController extends Controller
     {
         try {
             $templateconfig = TemplateConfig:: create($request->all());
-            return response()->json(['message'=> 'Las nuevas configuraciones del sitio se crearon correctamente'],201);
+            return response()->json(['message'=> 'Las nuevas configuraciones del sitio se crearón correctamente'],201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -78,7 +78,7 @@ class TemplateConfigsController extends Controller
     {
         try {
             $templateconfig = TemplateConfig:: find($id)->update($request->all());
-            return response()->json([ 'message' => 'La configuraciones del sitio se editaron correctamente'],202);
+            return response()->json([ 'message' => 'La configuraciones del sitio se editarón correctamente'],202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -94,7 +94,7 @@ class TemplateConfigsController extends Controller
     {
         try {
             $templateconfig = TemplateConfig:: find($id)->delete();
-            return response()->json([ 'message' => 'La configuración del sitio se elimino correctamente'],202);
+            return response()->json([ 'message' => 'La configuración del sitio se eliminó correctamente'],202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

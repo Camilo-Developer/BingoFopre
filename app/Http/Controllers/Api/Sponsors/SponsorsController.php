@@ -74,7 +74,7 @@ class SponsorsController extends Controller
     {
         try {
             $sponsor = Sponsor:: find($id)->update($request->all());
-            return response()->json(['message' => 'El patrocinador se edito correctamente'], 202);
+            return response()->json(['message' => 'El patrocinador se editó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class SponsorsController extends Controller
     {
         try {
             $sponsor = Sponsor:: find($id)->delete();
-            return response()->json(['message' => 'El patrocinador se elimino correctamente'], 202);
+            return response()->json(['message' => 'El patrocinador se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

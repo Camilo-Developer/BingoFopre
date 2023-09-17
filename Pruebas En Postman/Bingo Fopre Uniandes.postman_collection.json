@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "915bf6aa-68f7-48ae-8e32-1a440a409988",
+		"_postman_id": "0a4b517c-53bf-4041-9a12-6242cc844623",
 		"name": "Bingo Fopre Uniandes",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20891165"
 	},
 	"item": [
 		{
@@ -106,8 +107,8 @@
 								},
 								{
 									"key": "check",
-									"value": null,
-									"description": "Tipo del estado",
+									"value": "",
+									"description": "Tipo del Estado [1,2,3,4,5,6]",
 									"disabled": true
 								}
 							]
@@ -180,15 +181,18 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "Usuario"
+									"value": "Usuario",
+									"description": "Nombre del Usuario"
 								},
 								{
 									"key": "lastname",
-									"value": "apellido"
+									"value": "apellido",
+									"description": "Apellido del Usuario"
 								},
 								{
 									"key": "email",
-									"value": "usuario@gmail.com"
+									"value": "usuario@gmail.com",
+									"description": "Correro del Usuario "
 								},
 								{
 									"key": "password",
@@ -197,26 +201,27 @@
 								},
 								{
 									"key": "state_id",
-									"value": "1"
+									"value": "1",
+									"description": "Estado del usuario "
 								},
 								{
 									"key": "avatar",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "external_id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "external_auth",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "profile_photo_url",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -251,7 +256,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://bingofopre.test/api/users/3?name=Usuario Pruebas&lastname=dsasd&email=Usuario@gmail.com&state_id=2",
+							"raw": "http://bingofopre.test/api/users/3?name=Usuario Pruebas",
 							"protocol": "http",
 							"host": [
 								"bingofopre",
@@ -265,38 +270,49 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "Usuario Pruebas"
+									"value": "Usuario Pruebas",
+									"description": "Nombreel Usuario"
 								},
 								{
 									"key": "lastname",
-									"value": "dsasd"
+									"value": "dsasd",
+									"description": "Apellido del Uaurio",
+									"disabled": true
 								},
 								{
 									"key": "email",
-									"value": "Usuario@gmail.com"
+									"value": "Usuario@gmail.com",
+									"description": "Correo del Usuario",
+									"disabled": true
 								},
 								{
 									"key": "state_id",
-									"value": "2"
+									"value": "2",
+									"description": "Estado del Usuario",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": null,
+									"value": "",
+									"description": "1234",
 									"disabled": true
 								},
 								{
 									"key": "avatar",
-									"value": null,
+									"value": "",
+									"description": "Auth Azure",
 									"disabled": true
 								},
 								{
 									"key": "external_id",
-									"value": null,
+									"value": "",
+									"description": "Auth Azure",
 									"disabled": true
 								},
 								{
 									"key": "external_auth",
-									"value": null,
+									"value": "",
+									"description": "Auth Azure",
 									"disabled": true
 								}
 							]
@@ -570,13 +586,13 @@
 								{
 									"key": "price_carton",
 									"value": "12000",
-									"description": "Precio para el carton del sitio",
+									"description": "Precio para el cartón del sitio",
 									"disabled": true
 								},
 								{
 									"key": "img_live",
 									"value": "img_live.png",
-									"description": "Imagen carta live del sitio",
+									"description": "Imagén carta live del sitio",
 									"disabled": true
 								},
 								{
@@ -588,13 +604,13 @@
 								{
 									"key": "description_live",
 									"value": "descripcion del live",
-									"description": "Descripcion del live",
+									"description": "Descripción del live",
 									"disabled": true
 								},
 								{
 									"key": "area",
 									"value": "Area del la universidad",
-									"description": "Area de la universidad",
+									"description": "Área de la universidad",
 									"disabled": true
 								},
 								{
@@ -606,7 +622,7 @@
 								{
 									"key": "phone",
 									"value": "755456",
-									"description": "Telefono de la universidad",
+									"description": "Teléfono de la universidad",
 									"disabled": true
 								},
 								{
@@ -636,7 +652,7 @@
 								{
 									"key": "img_login",
 									"value": "img_login.png",
-									"description": "Imagen del login",
+									"description": "Imagén del login",
 									"disabled": true
 								},
 								{
@@ -808,7 +824,7 @@
 								{
 									"key": "imagen",
 									"value": "prueba.png",
-									"description": "Imagen Princial de la noticia"
+									"description": "Imagén Princial de la noticia"
 								},
 								{
 									"key": "title",
@@ -1179,17 +1195,17 @@
 								{
 									"key": "logo",
 									"value": "logo.png",
-									"description": "Logo para las dinamicas"
+									"description": "Logo para las dinámicas"
 								},
 								{
 									"key": "title",
 									"value": "Prueba",
-									"description": "Titulo para la dinamica"
+									"description": "Título para la dinámica"
 								},
 								{
 									"key": "letra",
 									"value": "a",
-									"description": "Letra para la dinamica"
+									"description": "Letra para la dinámica"
 								},
 								{
 									"key": "fila",
@@ -1199,12 +1215,12 @@
 								{
 									"key": "colum",
 									"value": "2",
-									"description": "Columnas para las dinamicas"
+									"description": "Columnas para las dinamica"
 								},
 								{
 									"key": "state_id",
 									"value": "1",
-									"description": "Estado para las dinamicas"
+									"description": "Estado para las dinamica"
 								}
 							]
 						}
@@ -1252,36 +1268,36 @@
 								{
 									"key": "logo",
 									"value": "123.png",
-									"description": "Logo para las dinamicas"
+									"description": "Logo para las dinámicas"
 								},
 								{
 									"key": "title",
-									"value": null,
-									"description": "Titulo para la dinamica",
+									"value": "",
+									"description": "Tiatulo para la dinámica",
 									"disabled": true
 								},
 								{
 									"key": "letra",
-									"value": null,
-									"description": "Letra para la dinamica",
+									"value": "",
+									"description": "Letra para la dinámica",
 									"disabled": true
 								},
 								{
 									"key": "fila",
-									"value": null,
-									"description": "Fila para la dinamica",
+									"value": "",
+									"description": "Fila para la dinámica",
 									"disabled": true
 								},
 								{
 									"key": "colum",
-									"value": null,
-									"description": "Columnas para las dinamicas",
+									"value": "",
+									"description": "Columnas para las dinámicas",
 									"disabled": true
 								},
 								{
 									"key": "state_id",
-									"value": null,
-									"description": "Estado para las dinamicas",
+									"value": "",
+									"description": "Estado para las dinámicas",
 									"disabled": true
 								}
 							]
@@ -1360,12 +1376,12 @@
 								{
 									"key": "imagen",
 									"value": "img.png",
-									"description": "Imagen del premio"
+									"description": "Imagén del premio"
 								},
 								{
 									"key": "description",
 									"value": "prueba",
-									"description": "Descripcion del premio"
+									"description": "Descripción del premio"
 								},
 								{
 									"key": "state_id",
@@ -1423,19 +1439,19 @@
 								},
 								{
 									"key": "imagen",
-									"value": null,
-									"description": "Imagen del premio",
+									"value": "",
+									"description": "Imagén del premio",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": null,
-									"description": "Descripcion del premio",
+									"value": "",
+									"description": "Descripción del premio",
 									"disabled": true
 								},
 								{
 									"key": "state_id",
-									"value": null,
+									"value": "",
 									"description": "Estado del premio",
 									"disabled": true
 								}
@@ -1643,17 +1659,18 @@
 							"query": [
 								{
 									"key": "name",
-									"value": null,
+									"value": "",
+									"description": "Nombre Carton ",
 									"disabled": true
 								},
 								{
 									"key": "date_finish",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "price",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
@@ -1666,7 +1683,7 @@
 								},
 								{
 									"key": "group_id",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]

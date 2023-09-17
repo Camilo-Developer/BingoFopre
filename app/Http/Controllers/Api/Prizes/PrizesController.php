@@ -37,7 +37,7 @@ class PrizesController extends Controller
     {
         try {
             $prize = Prize:: create($request->all());
-            return response()->json(['message' => 'El premio se creo correctamente'], 201);
+            return response()->json(['message' => 'El premio se creó correctamente'], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th

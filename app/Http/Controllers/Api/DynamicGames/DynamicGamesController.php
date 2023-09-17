@@ -37,7 +37,7 @@ class DynamicGamesController extends Controller
     {
         try {
             $dynamicgame = DynamicGame:: create($request->all());
-            return response()->json(['message' => 'La dinamica ' . $dynamicgame->title . ' Se creo correctamente'], 201);
+            return response()->json(['message' => 'La dinámica ' . $dynamicgame->title . ' Se creó correctamente'], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -74,7 +74,7 @@ class DynamicGamesController extends Controller
     {
         try {
             $dynamicgame = DynamicGame:: find($id)->update($request->all());
-            return response()->json(['message' => 'La dinamica Se Edito correctamente'], 202);
+            return response()->json(['message' => 'La dinámica se editó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
@@ -89,7 +89,7 @@ class DynamicGamesController extends Controller
     {
         try {
             $dynamicgame = DynamicGame:: find($id)->delete();
-            return response()->json(['message' => 'La dinamica se elimino Correctamente'], 202);
+            return response()->json(['message' => 'La dinámica se eliminó correctamente'], 202);
         } catch (\Throwable $th) {
             return response()->json([
                 'errors' => $th
