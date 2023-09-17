@@ -72,12 +72,37 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-                                            <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
+                                            <td style="width: 100px;">
+                                                <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning">Editar</button>
+                                                <a href="{{route('admin.users.show',$user)}}" class="btn btn-success">Ver</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
+                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
+                            @if(!empty($search) && !$users->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
+                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
+                            @if($users->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-center mt-4">No hay resultados para tu búsqueda.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
