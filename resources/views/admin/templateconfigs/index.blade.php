@@ -76,7 +76,30 @@
                                     <label >Imagen Live</label>
                                     <img width="50px" src="{{asset('storage/'. $templateconfig->img_live)}}" alt="">
                                 </div>
+                                <div class="col-2 mb-3">
+                                    {!! $templateconfig->url_live !!}
+                                </div>
+                                <div class="col-2 mb-3">
+                                    {!! $templateconfig->description_live !!}
+                                </div>
                             </div>
+                            <label>Colors</label>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_one}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_two}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_three}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_four}}"> </div>
+
+                            
+                            <div class="col-2 mb-3">
+                                <label >Colores</label>
+                                <img width="50px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
+                            </div>
+
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_one}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_two}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_hover_three}}"> </div>
+                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_hover_four}}"> </div>
+
                         @endforeach
                     </div>
                 </div>
