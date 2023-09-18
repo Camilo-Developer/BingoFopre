@@ -20,11 +20,10 @@
     font-weight: 500;
     height: 40px;
     outline: none;
-    padding: 0 0 0 20px;
     perspective: 100px;
     position: relative;
     text-align: left;
-    width: 130px;
+    width: 107px;
     -webkit-tap-highlight-color: transparent;
 }
 .logoutButton::before {
@@ -99,7 +98,7 @@ svg {
 
 .figure {
     bottom: 5px;
-    fill: black;
+    fill: #ffc107;
     right: 18px;
     transform: var(--transform-figure);
     transition: transform calc(var(--figure-duration) * 1ms) cubic-bezier(0.2, 0.1, 0.8, 0.9);
