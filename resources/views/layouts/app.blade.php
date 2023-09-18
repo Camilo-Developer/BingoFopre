@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{url('recursos/admin/dist/css/style.css')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/js/stylesda.css')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <link rel="stylesheet" href="{{url('recursos/admin/js/ppp.css')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/summernote/summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="{{url('recursos/admin/plugins/select2/css/select2.min.css')}}" />
