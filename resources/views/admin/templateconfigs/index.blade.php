@@ -25,81 +25,123 @@
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
                     <div class="row">
                         @foreach($templateconfigs as $templateconfig)
-                            <div>
+                            <div class="col-12">
                                 <label>Información del sitio principal</label>
-                                <div class="col-2 mb-3">
-                                    <label >Logo</label>
-                                    <img width="50px" src="{{asset('storage/'. $templateconfig->logo)}}" alt="">
-                                </div>
-                                <div class="col-2 mb-3">
-                                    <label>Imagen principal</label>
-                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_main)}}" alt="">
-                                </div>
-                                <div class="col-2 mb-3">
-                                    <label>Gradiente</label>
-                                    <div>
-                                        <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
-                                        </div>
-                                        <br>
-                                        <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_two}}">
+                                <div class="row">
+                                    <div class="col-2 mb-3">
+                                        <label >Logo</label>
+                                        <img width="50px" src="{{asset('storage/'. $templateconfig->logo)}}" alt="">
+                                    </div>
+                                    <div class="col-2 mb-3">
+                                        <label>Imagen principal</label>
+                                        <img width="50px" src="{{asset('storage/'. $templateconfig->img_main)}}" alt="">
+                                    </div>
+                                    <div class="col-2 mb-3">
+                                        <label>Gradiente</label>
+                                        <div style="width: 50px; height: 50px; background: linear-gradient(195deg, {{$templateconfig->color_main_one}}, {{$templateconfig->color_main_two}})">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="col-12">
                                 <label> Información cartones</label>
-                                <div class="col-2 mb-3">
-                                    <label >Imagen Cartón</label>
-                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_carton)}}" alt="">
-                                </div>
-                                <div class="col-12">
-                                    <label>Url del cartón</label>
-                                    <div>
-                                        {!! $templateconfig->url_carton !!}
+                                <div class="row">
+                                    <div class="col-2 mb-3">
+                                        <label >Imagen Cartón</label>
+                                        <img width="50px" src="{{asset('storage/'. $templateconfig->img_carton)}}" alt="">
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Url del cartón</label>
+                                        <div>
+                                            {!! $templateconfig->url_carton !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Descripción del carton</label>
+                                        <div>
+                                            {!! $templateconfig->description_carton !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Precio del carton</label>
+                                        <p>$ {{number_format(intval($templateconfig->price_carton))}}</p>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <label>Descripción del carton</label>
-                                    <div>
-                                        {!! $templateconfig->description_carton !!}
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->price_carton}}">
-                                    </div>
-                                </div>
-
                             </div>
-                            <div>
+                            <div class="col-12">
                                 <label >Información Live</label>
-                                <div class="col-2 mb-3">
-                                    <label >Imagen Live</label>
-                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_live)}}" alt="">
-                                </div>
-                                <div class="col-2 mb-3">
-                                    {!! $templateconfig->url_live !!}
-                                </div>
-                                <div class="col-2 mb-3">
-                                    {!! $templateconfig->description_live !!}
+
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <label >Imagen Live</label>
+                                        <img width="50px" src="{{asset('storage/'. $templateconfig->img_live)}}" alt="">
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label>Url de la trasmición</label>
+                                        <p>{{$templateconfig->url_live}}</p>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label>Descripcón de la trasmición</label><br>
+                                        {!! $templateconfig->description_live !!}
+                                    </div>
                                 </div>
                             </div>
-                            <label>Colors</label>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_one}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_two}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_three}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_four}}"> </div>
-
-                            
-                            <div class="col-2 mb-3">
-                                <label >Colores</label>
-                                <img width="50px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Area de la universidad</label>
+                                    <p>{{$templateconfig->area}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <label>Correo de la universidad</label>
+                                    <p>{{$templateconfig->email}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <label>Telefono de la universidad</label>
+                                    <p>{{$templateconfig->phone}}</p>
+                                </div>
                             </div>
-
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_one}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_two}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_hover_three}}"> </div>
-                            <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_login_hover_four}}"> </div>
-
+                        </div>
+                        <div class="col-12">
+                            <label>Colores del texto</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Color texto 1</label>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_one}}"> </div>
+                                </div>
+                                <div class="col-3">
+                                    <label>Color texto 2</label>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_two}}"> </div>
+                                </div>
+                                <div class="col-3">
+                                    <label>Color texto 3</label>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_three}}"> </div>
+                                </div>
+                                <div class="col-3">
+                                    <label>Color texto 4</label>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_text_four}}"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label>Informacion del login</label>
+                            <div class="row">
+                                <div class="col-2 mb-3">
+                                    <label >Imagen del Login</label>
+                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
+                                </div>
+                                <div class="col-2">
+                                    <label>Color de fondo del button</label>
+                                    <div style="height: 50px; width: 50px; background: linear-gradient(195deg, {{$templateconfig->color_login_one}}, {{$templateconfig->color_login_two}})">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <label>Color de fondo del button</label>
+                                    <div style="height: 50px; width: 50px; background: linear-gradient(195deg, {{$templateconfig->color_login_hover_three}}, {{$templateconfig->color_login_hover_four}})">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -145,8 +187,10 @@
                                             <input type="file" name="img_main" value="{{$templateconfig->img_main}}" class="form-control form-control-border" id="img_main" placeholder="Escriba la URL">
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div style="width: 100%;height: 70px;" id="gradientDiv" class="gradient-div"></div>
+                                    </div>
                                     <div class="col-12 col-md-6">
-
                                         <div class="form-group">
                                             <label for="color_main_one">Color principal 1:</label>
                                             <input type="color" name="color_main_one" value="{{$templateconfig->color_main_one}}" class="form-control form-control-border" id="color_main_one" placeholder="Escriba la URL">
@@ -165,7 +209,7 @@
                                         <div style="display: flex; justify-content: center">
                                             <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_carton)}}" id="imagenSeleccionadaImgCarton" class="card-img-top img-fluid">
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label for="img_carton">Imagén del carton:</label>
                                             <input type="file" name="img_carton" value="{{$templateconfig->img_carton}}" class="form-control form-control-border" id="img_carton" placeholder="Escriba la URL">
@@ -189,7 +233,7 @@
                                         <div style="display: flex; justify-content: center">
                                             <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_live)}}" id="imagenSeleccionadaImgLive" class="card-img-top img-fluid">
                                         </div>
-                                        
+
                                         <div class="form-group">
 
                                             <label for="img_live">Imagén del Live:</label>
@@ -264,7 +308,7 @@
                                     <div style="display: flex; justify-content: center">
                                         <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_login)}}" id="imagenSeleccionadaImgLogin" class="card-img-top img-fluid">
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="img_login">Imagen Login:</label>
                                         <input type="file" name="img_login" value="{{$templateconfig->img_login}}" class="form-control form-control-border" id="img_login" placeholder="el email">
@@ -420,6 +464,25 @@
     });
 
 </script>
+    <script>
+        $(document).ready(function() {
+            // Función para actualizar el fondo del div con el gradiente lineal
+            function updateGradient() {
+                const colorMainOne = $('#color_main_one').val();
+                const colorMainTwo = $('#color_main_two').val();
+
+                // Actualiza el fondo del div con el gradiente lineal
+                $('#gradientDiv').css('background', `linear-gradient(195deg, ${colorMainOne}, ${colorMainTwo})`);
+            }
+
+            // Escucha los eventos input en los inputs de color
+            $('#color_main_one, #color_main_two').on('input', updateGradient);
+
+            // Llama a la función para establecer el fondo inicial
+            updateGradient();
+        });
+
+    </script>
 
 
 @endsection
