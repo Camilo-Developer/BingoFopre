@@ -25,9 +25,8 @@
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
                     <div class="row">
                         @foreach($templateconfigs as $templateconfig)
-                        <div class="col-12">
-                            <label>Información del sitio principal</label>
-                            <div class="row">
+                            <div>
+                                <label>Información del sitio principal</label>
                                 <div class="col-2 mb-3">
                                     <label >Logo</label>
                                     <img width="50px" src="{{asset('storage/'. $templateconfig->logo)}}" alt="">
@@ -38,12 +37,46 @@
                                 </div>
                                 <div class="col-2 mb-3">
                                     <label>Gradiente</label>
-                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
+                                    <div>
+                                        <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
+                                        </div>
                                         <br>
-                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_two}}">
+                                        <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_two}}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div>
+                                <label> Información cartones</label>
+                                <div class="col-2 mb-3">
+                                    <label >Imagen Cartón</label>
+                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_carton)}}" alt="">
+                                </div>
+                                <div class="col-12">
+                                    <label>Url del cartón</label>
+                                    <div>
+                                        {!! $templateconfig->url_carton !!}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label>Descripción del carton</label>
+                                    <div>
+                                        {!! $templateconfig->description_carton !!}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->price_carton}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <label >Información Live</label>
+                                <div class="col-2 mb-3">
+                                    <label >Imagen Live</label>
+                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_live)}}" alt="">
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
