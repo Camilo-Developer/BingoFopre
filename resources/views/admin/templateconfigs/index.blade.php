@@ -28,24 +28,24 @@
                         <div class="col-12">
                             <label>Información del sitio principal</label>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-2 mb-3">
+                                    <label >Logo</label>
                                     <img width="50px" src="{{asset('storage/'. $templateconfig->logo)}}" alt="">
-
                                 </div>
-                                <div class="col-3">
-                                    <img src="{{asset('storage/'. $templateconfig->img_main)}}" alt="">
-
+                                <div class="col-2 mb-3">
+                                    <label>Imagen principal</label>
+                                    <img width="50px" src="{{asset('storage/'. $templateconfig->img_main)}}" alt="">
                                 </div>
-                                <div class="col-3">
-                                    <div style="width: 50px; height: :25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
-
+                                <div class="col-2 mb-3">
+                                    <label>Gradiente</label>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
+                                        <br>
+                                    <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_two}}">
                                 </div>
+
                             </div>
                         </div>
-
-
                         @endforeach
-
                     </div>
                 </div>
             </div>
@@ -72,7 +72,9 @@
 
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionadaLogo" class="card-img-top img-fluid" width="17px" height="27px">
+                                        <div style="display: flex; justify-content: center">
+                                            <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->logo)}}" id="imagenSeleccionadaLogo" class="card-img-top img-fluid">
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="logo"><span class="text-danger">*</span> Logo:</label>
@@ -136,9 +138,9 @@
                                             <input type="url" name="url_live" value="{{$templateconfig->url_live}}" class="form-control form-control-border" id="url_live" placeholder="Escriba la URL">
                                         </div>
                                     </div>
-                                    
-  
-                                  
+
+
+
 
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
@@ -249,7 +251,7 @@
                                         {{$templateconfig->description_live}}
                                     </textarea>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -338,7 +340,7 @@
     });
 
 </script>
-    
+
 <script>
     $(document).ready(function (e) {
         $('#img_login').change(function(){
