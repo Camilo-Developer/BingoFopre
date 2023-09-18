@@ -78,7 +78,7 @@
                                             <div class="col-4">
                                                 <label>• Url del cartón</label>
                                                 <br>
-                                                <a class="btn btn-primary" href="{!! $templateconfig->url_carton !!}">
+                                                <a class="btn btn-primary" href="{!! $templateconfig->url_carton !!}" target="_blank">
                                                     Ir la Sitio
                                                 </a>
                                             </div>
@@ -210,18 +210,19 @@
 
                                 <div class="card-body" style="display: none;">
                                     <div class="row">
-                                        <div class="col-2 mb-3">
+                                        <div class="col-12">
                                             <label >Imagen del Login</label>
-                                            <img width="50px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
+                                            <br>
+                                            <img width="150px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-12">
                                             <label>Color de fondo del button</label>
-                                            <div style="height: 50px; width: 50px; background: linear-gradient(195deg, {{$templateconfig->color_login_one}}, {{$templateconfig->color_login_two}})">
+                                            <div style="height: 50px; width: 100%; background: linear-gradient(195deg, {{$templateconfig->color_login_one}}, {{$templateconfig->color_login_two}})">
                                             </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-12">
                                             <label>Color de fondo del button</label>
-                                            <div style="height: 50px; width: 50px; background: linear-gradient(195deg, {{$templateconfig->color_login_hover_three}}, {{$templateconfig->color_login_hover_four}})">
+                                            <div style="height: 50px; width: 100%; background: linear-gradient(195deg, {{$templateconfig->color_login_hover_three}}, {{$templateconfig->color_login_hover_four}})">
                                             </div>
                                         </div>
                                     </div>
