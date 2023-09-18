@@ -137,7 +137,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionadaImgMain" class="card-img-top img-fluid" width="17px" height="27px">
+                                        <div style="display: flex; justify-content: center">
+                                            <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_main)}}" id="imagenSeleccionadaImgMain" class="card-img-top img-fluid">
+                                        </div>
                                         <div class="form-group">
                                             <label for="img_main">Imagen principal:</label>
                                             <input type="file" name="img_main" value="{{$templateconfig->img_main}}" class="form-control form-control-border" id="img_main" placeholder="Escriba la URL">
@@ -160,7 +162,10 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionadaImgCarton" class="card-img-top img-fluid" width="17px" height="27px">
+                                        <div style="display: flex; justify-content: center">
+                                            <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_carton)}}" id="imagenSeleccionadaImgCarton" class="card-img-top img-fluid">
+                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="img_carton">Imagén del carton:</label>
                                             <input type="file" name="img_carton" value="{{$templateconfig->img_carton}}" class="form-control form-control-border" id="img_carton" placeholder="Escriba la URL">
@@ -181,8 +186,12 @@
                                     </div>
 
                                     <div class="col-12 col-md-6">
-                                        <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionadaImgLive" class="card-img-top img-fluid" width="17px" height="27px">
+                                        <div style="display: flex; justify-content: center">
+                                            <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_live)}}" id="imagenSeleccionadaImgLive" class="card-img-top img-fluid">
+                                        </div>
+                                        
                                         <div class="form-group">
+
                                             <label for="img_live">Imagén del Live:</label>
                                             <input type="file" name="img_live" value="{{$templateconfig->img_live}}" class="form-control form-control-border" id="img_live" placeholder="Escriba la URL">
                                         </div>
@@ -252,7 +261,10 @@
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionadaImgLogin" class="card-img-top img-fluid" width="17px" height="27px">
+                                    <div style="display: flex; justify-content: center">
+                                        <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_login)}}" id="imagenSeleccionadaImgLogin" class="card-img-top img-fluid">
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <label for="img_login">Imagen Login:</label>
                                         <input type="file" name="img_login" value="{{$templateconfig->img_login}}" class="form-control form-control-border" id="img_login" placeholder="el email">
