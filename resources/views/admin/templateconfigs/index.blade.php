@@ -23,47 +23,27 @@
             <div class="card card-default color-palette-box">
                 <div class="card-body">
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
-                    <div>
+                    <div class="row">
                         @foreach($templateconfigs as $templateconfig)
-                        <div class="card card-widget widget-user">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header text-white" style="background: url({{asset('storage/'. $templateconfig->img_main)}}) center center;">
-                                <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                                <h5 class="widget-user-desc text-right">Web Designer</h5>
-                            </div>
-                            <div class="widget-user-image">
-                                <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-sm-4 border-right">
-                                        <div class="description-block">
-                                            <h5 class="description-header">3,200</h5>
-                                            <span class="description-text">SALES</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 border-right">
-                                        <div class="description-block">
-                                            <h5 class="description-header">13,000</h5>
-                                            <span class="description-text">FOLLOWERS</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4">
-                                        <div class="description-block">
-                                            <h5 class="description-header">35</h5>
-                                            <span class="description-text">PRODUCTS</span>
-                                        </div>
-                                        <!-- /.description-block -->
-                                    </div>
-                                    <!-- /.col -->
+                        <div class="col-12">
+                            <label>Información del sitio principal</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <img width="50px" src="{{asset('storage/'. $templateconfig->logo)}}" alt="">
+
                                 </div>
-                                <!-- /.row -->
+                                <div class="col-3">
+                                    <img src="{{asset('storage/'. $templateconfig->img_main)}}" alt="">
+
+                                </div>
+                                <div class="col-3">
+                                    <div style="width: 50px; height: :25px; border-radius: 6px; background: {{$templateconfig->color_main_one}}">
+
+                                </div>
                             </div>
                         </div>
+
+
                         @endforeach
 
                     </div>
@@ -157,8 +137,8 @@
                                         </div>
                                     </div>
                                     
-
-                                    
+  
+                                  
 
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
