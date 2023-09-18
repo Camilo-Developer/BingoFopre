@@ -315,6 +315,10 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12">
+                                    <div style="width: 100%;height: 70px;" id="gradient_login_one" class="gradient-div"></div>
+                                </div>
+
                                 <div class="col-12 col-md-6">
 
                                     <div class="form-group">
@@ -330,7 +334,9 @@
                                         <input type="color" name="color_login_two" value="{{$templateconfig->color_login_two}}" class="form-control form-control-border" id="color_login_two" placeholder="Escriba la URL">
                                     </div>
                                 </div>
-
+                                <div class="col-12">
+                                    <div style="width: 100%;height: 70px;" id="gradient_login_two" class="gradient-div"></div>
+                                </div>
 
                                 <div class="col-12 col-md-6">
 
@@ -483,6 +489,47 @@
         });
 
     </script>
+
+<script>
+    $(document).ready(function() {
+        // Función para actualizar el fondo del div con el gradiente lineal
+        function updateGradient() {
+            const colorLoginOne = $('#color_login_one').val();
+            const colorLoginTwo = $('#color_login_two').val();
+
+            // Actualiza el fondo del div con el gradiente lineal
+            $('#gradient_login_one').css('background', `linear-gradient(195deg, ${colorLoginOne}, ${colorLoginTwo})`);
+        }
+
+        // Escucha los eventos input en los inputs de color
+        $('#color_login_one, #color_login_two').on('input', updateGradient);
+
+        // Llama a la función para establecer el fondo inicial
+        updateGradient();
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        // Función para actualizar el fondo del div con el gradiente lineal
+        function updateGradient() {
+            const colorLogin_Hover_One = $('#color_login_hover_three').val();
+            const colorLogin_Hover_Two = $('#color_login_hover_four').val();
+
+            // Actualiza el fondo del div con el gradiente lineal
+            $('#gradient_login_two').css('background', `linear-gradient(195deg, ${colorLogin_Hover_One}, ${colorLogin_Hover_Two})`);
+        }
+
+        // Escucha los eventos input en los inputs de color
+        $('#color_login_hover_three, #color_login_hover_four').on('input', updateGradient);
+
+        // Llama a la función para establecer el fondo inicial
+        updateGradient();
+    });
+
+</script>
 
 
 @endsection
