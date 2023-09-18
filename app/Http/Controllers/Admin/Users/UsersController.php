@@ -66,6 +66,10 @@ class UsersController extends Controller
         foreach ($user->roles as $role_user){
             array_push($roles_user, $role_user->id);
         }
+        $grupo_cartones = CartonGroup::where('user_id', null)
+            ->where('state_id', 3)
+            ->get();
+
         $card_groups = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
             ->get();
@@ -135,7 +139,8 @@ class UsersController extends Controller
             'totalGruposAsignados',
             'totalMontoGrupo',
             'totalMontoObsequio',
-            'sumademontos'
+            'sumademontos',
+            'grupo_cartones'
         ));
     }
 
@@ -147,7 +152,7 @@ class UsersController extends Controller
         foreach ($user->roles as $role_user){
             array_push($roles_user, $role_user->id);
         }
-        return view('admin.users.index', compact('user','states', 'roles','roles_user','totalGruposAsignados'));
+        return view('admin.users.index', compact('user','states', 'roles','roles_user'));
     }
 
 
@@ -181,4 +186,30 @@ class UsersController extends Controller
         $user->delete();
         return redirect()->route('admin.users.index')->with('error', 'El Usuario se ha eliminado correctamente.');
     }
+
+    public function asiginacionGrupos(Request $request)
+    {
+        // Obtén el ID del usuario que deseas asignar a los grupos de cartones
+        $user_id = $request->input('user_id');
+
+        // Obtén los IDs de los grupos de cartones seleccionados en el formulario
+        $grupo_cartones_ids = $request->input('grupo_cartones');
+
+        // Obtén el usuario
+        $user = User::find($user_id);
+
+        // Asigna el usuario a los grupos de cartones seleccionados
+        foreach ($grupo_cartones_ids as $grupo_id) {
+            $cartonGroup = CartonGroup::find($grupo_id);
+
+            // Asigna el usuario al grupo de cartones
+            $cartonGroup->user_id = $user_id;
+            $cartonGroup->save();
+        }
+
+        // Redirecciona de regreso a la página anterior o realiza alguna otra acción
+        return redirect()->back()->with('success', 'Usuario asignado a los grupos de cartones exitosamente.');
+    }
+
+
 }

@@ -118,9 +118,7 @@
                                                                 <span class="description-text">Monto Total Cartones Obsequio</span>
                                                             </div>
                                                         </div>
-
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -130,20 +128,16 @@
                                         <div class="col-6">
                                             <canvas id="miGrafica2"></canvas>
                                         </div>
-
+                                        <div class="col-12">
+                                            <button class="btn btn-success"  data-toggle="modal" data-target="#modal-asign-groups">
+                                                Asiganar Grupos
+                                            </button>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                        <!--
-                        <div class="card-footer" style="display: block;">
-                            Footer
-                        </div>
-                        -->
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -172,6 +166,48 @@
             </div>
         </div>
     </section>
+    <!-- Modal para asignar grupos -->
+    <div class="modal fade" id="modal-asign-groups"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Asignación de Grupos</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="{{ route('admin.users.asiginacionGrupos') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="user_id">Asignar cartones al usuario</label><br>
+                            <input type="hidden" value="{{ $user->id }}" name="user_id">
+                            <input class="form-control form-control-border" type="text" disabled value="{{ $user->name }} {{ $user->lastname }}" id="user_id">
+                        </div>
+                        <label>Grupo de cartones disponibles</label>
+                        <div style="max-height: 200px; overflow-y: scroll;">
+                            <div class="form-group">
+                                @foreach ($grupo_cartones as $grupo)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="{{ $grupo->id }}" name="grupo_cartones[]">
+                                        <label class="form-check-label" for="checkbox{{ $grupo->id }}">
+                                            {{ $grupo->id }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success">Asignar grupos</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>

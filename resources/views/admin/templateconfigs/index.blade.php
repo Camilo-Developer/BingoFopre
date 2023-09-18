@@ -42,7 +42,6 @@
                                         <br>
                                     <div style="width: 50px; height:25px; border-radius: 6px; background: {{$templateconfig->color_main_two}}">
                                 </div>
-
                             </div>
                         </div>
                         @endforeach
