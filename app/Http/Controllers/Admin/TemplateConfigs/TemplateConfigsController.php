@@ -108,26 +108,26 @@ class TemplateConfigsController extends Controller
         $request->validate([
             'logo' => 'nullable', //
             'img_main' => 'nullable', //
-            'color_main_one' => 'required', //
-            'color_main_two' => 'required',
+            'color_main_one' => 'nullable', //
+            'color_main_two' => 'nullable',
             'img_carton' => 'nullable',//
-            'url_carton' => 'required', //
-            'description_carton' => 'required',
-            'price_carton' => 'required',
+            'url_carton' => 'nullable', //
+            'description_carton' => 'nullable',
+            'price_carton' => 'nullable',
             'img_live' => 'nullable',
-            'url_live' => 'required',
-            'description_live' => 'required',
-            'area' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'color_text_one' => 'required',
-            'color_text_two' => 'required',
-            'color_text_three' => 'required',
+            'url_live' => 'nullable',
+            'description_live' => 'nullable',
+            'area' => 'nullable',
+            'email' => 'nullable',
+            'phone' => 'nullable',
+            'color_text_one' => 'nullable',
+            'color_text_two' => 'nullable',
+            'color_text_three' => 'nullable',
             'img_login' => 'nullable',
-            'color_login_one' => 'required',
-            'color_login_two' => 'required',
-            'color_login_hover_three' => 'required',
-            'color_login_hover_four' => 'required',
+            'color_login_one' => 'nullable',
+            'color_login_two' => 'nullable',
+            'color_login_hover_three' => 'nullable',
+            'color_login_hover_four' => 'nullable',
         ]);
         $data = $request->all();
 
