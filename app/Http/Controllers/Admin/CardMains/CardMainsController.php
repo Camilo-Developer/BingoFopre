@@ -16,12 +16,18 @@ class CardMainsController extends Controller
         $this->middleware('can:admin.cardmains.destroy')->only('destroy');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $cardmains = CardMain::all();
+        $search = $request->input('search');
+        $cardmains = CardMain::query()
+            ->where('title', 'LIKE', "%$search%")
+            ->orWhereHas('state', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->paginate(5);
         $states = State::all();
 
-        return view('admin.cardmains.index',compact('cardmains', 'states'));
+        return view('admin.cardmains.index', compact('cardmains', 'states', 'search'));
     }
     public function store(Request $request)
     {

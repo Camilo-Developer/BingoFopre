@@ -15,10 +15,14 @@ class StatesController extends Controller
         $this->middleware('can:admin.states.destroy')->only('destroy');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $states = State::all();
-        return view('admin.states.index',compact('states'));
+        $search = $request->input('search');
+
+        $states = State::query()
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(5);
+        return view('admin.states.index',compact('states','search'));
     }
 
     public function store(Request $request)

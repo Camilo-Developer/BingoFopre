@@ -14,7 +14,7 @@ class Cardboard extends Model
     protected $primaryKey = 'id';
     protected  $fillable = [
       'name',
-      'date_finish',
+      //'date_finish',
       'document_number',
       'price',
       'state_id',

@@ -15,7 +15,7 @@ class CardboardsSeeder extends Seeder
     {
         $carton = new Cardboard([
             'name' => 'Nombre del cartón',
-            'date_finish' => now(),
+            //'date_finish' => now(),
             'price' => '12000',
             'state_id' => 1, // Reemplaza con el estado correcto
         ]);

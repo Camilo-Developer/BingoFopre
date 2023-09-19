@@ -40,6 +40,7 @@ class UsersController extends Controller
         return view('admin.users.index', compact('users', 'search', 'states', 'roles'));
     }
 
+
     public function store(Request $request)
     {
         $request->validate([

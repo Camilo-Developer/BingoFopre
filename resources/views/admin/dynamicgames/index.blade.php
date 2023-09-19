@@ -29,14 +29,16 @@
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-dynamicgame">Crear Dinámica</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                    <form action="{{ route('admin.dynamicgames.index') }}" method="GET">
+                                        <div class="input-group input-group-sm buq-menu" >
+                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Nombre">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +70,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
+                            @if(!empty($search) && !$dynamicgames->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.dynamicgames.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
+                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
+                            @if($dynamicgames->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-center mt-4">No hay resultados para tu búsqueda.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -103,7 +126,7 @@
                                         <label for="title"><span class="text-danger">*</span> Título:</label>
                                         <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
                                     </div>
-    
+
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
                                             <label for="state_id">Estado:</label>
@@ -114,8 +137,8 @@
                                             </select>
                                         </div>
                                     </div>
-    
-    
+
+
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
@@ -183,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                            
+
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -239,7 +262,7 @@
                                                         <input type="text" value="{{$dynamicgame->letra}}" name="letra" class="form-control form-control-border" id="letra" placeholder="Escriba la letra">
                                                     </div>
                                                 </div>
-        
+
                                                 <div class="col-12 col-md-12">
                                                     <div class="form-group">
                                                         <label for="state_id">Estado:</label>
@@ -250,7 +273,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-        
+
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Filas:</label>
@@ -305,7 +328,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

@@ -15,7 +15,6 @@
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
-                    <th>Fecha de Finalización</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -26,7 +25,6 @@
                         <td>{{ $carton['name'] }}</td>
                         <td>{{ $carton['quantity'] }}</td>
                         <td>$ {{ number_format(intval($carton['price'])) }}</td>
-                        <td>{{ $carton['date_finish'] }}</td>
                         <td>
                             <div class="form-group">
                                 <div class="form-check">

@@ -27,7 +27,7 @@ class CardboardsController extends Controller
         $startNumber = strval($request->input('start_number')); // Convierte a cadena
         $endNumber = strval($request->input('end_number')); // Convierte a cadena
         $groupSize = $request->input('group_size');
-        $date = $request->input('date');
+        //$date = $request->input('date');
         $price = $request->input('price');
 
         //$user_id = auth()->user()->id; // Obtener el ID del usuario autenticado
@@ -45,7 +45,7 @@ class CardboardsController extends Controller
 
             $cardboard = Cardboard::create([
                 'name' => $formattedName,
-                'date_finish' => $date,
+                //'date_finish' => $date,
                 'price' => $price,
                 'state_id' => 3, // Reemplaza con el estado correcto
                 'group_id' => $group ? $group->id : null,
@@ -74,7 +74,7 @@ class CardboardsController extends Controller
         $cart[$carton->id] = [
             'name' => $carton->name,
             'quantity' => 1,
-            'date_finish' => $carton->date_finish,
+            //'date_finish' => $carton->date_finish,
             'price' => $carton->price,
             'state_id' => $carton->state_id,
             'user_id' => $carton->user_id,

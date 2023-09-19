@@ -29,15 +29,16 @@
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">Crear Noticia</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                    <form action="{{ route('admin.cardmains.index') }}" method="GET">
+                                        <div class="input-group input-group-sm buq-menu" >
+                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Noticia">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -67,6 +68,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
+                            @if(!empty($search) && !$cardmains->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
+                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
+                            @if($cardmains->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-center mt-4">No hay resultados para tu búsqueda.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

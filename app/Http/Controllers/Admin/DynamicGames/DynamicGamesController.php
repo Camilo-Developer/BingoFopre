@@ -9,11 +9,19 @@ use App\Models\State\State;
 class DynamicGamesController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $dynamicgames = DynamicGame::all();
+        $search = $request->input('search');
+
+        $dynamicgames = DynamicGame::query()
+            ->where('title', 'LIKE', "%$search%")
+            ->orWhere('letra', 'LIKE', "%$search%")
+            ->orWhereHas('state', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->paginate(5);
         $states = State::all();
-        return view('admin.dynamicgames.index',compact('dynamicgames','states'));
+        return view('admin.dynamicgames.index',compact('dynamicgames','states','search'));
     }
 
 

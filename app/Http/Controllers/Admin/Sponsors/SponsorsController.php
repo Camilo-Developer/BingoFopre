@@ -9,11 +9,17 @@ use App\Models\State\State;
 class SponsorsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $sponsors = Sponsor::all();
+        $search = $request->input('search');
+        $sponsors = Sponsor::query()
+            ->where('name', 'LIKE', "%$search%")
+            ->orWhereHas('state', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->paginate(5);
         $states = State::all();
-        return view('admin.sponsors.index',compact('sponsors', 'states'));
+        return view('admin.sponsors.index',compact('sponsors', 'states','search'));
     }
 
     public function store(Request $request)

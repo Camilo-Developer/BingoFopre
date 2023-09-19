@@ -30,13 +30,16 @@
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                                        <form action="{{ route('admin.states.index') }}" method="GET">
+                                            <div class="input-group input-group-sm buq-menu" >
+                                                <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Usuario">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -63,8 +66,32 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
+                            @if(!empty($search) && !$states->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
+                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
+                            @if($states->isEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-center mt-4">No hay resultados para tu búsqueda.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
+                </div>
+                <div class="card-footer clearfix">
+                    {!! $states->links() !!}
                 </div>
             </div>
         </div>
