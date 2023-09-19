@@ -6,31 +6,33 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
                     <div class="rotating-card-container">
-                        <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
-                            <div class="front front-background"
-                                 style="background-image: url({{asset('img/bingo.jpg')}}); background-size: cover; width: 100%;">
-                                <div class="card-body py-7 text-center" >
-                                    <i class="material-icons text-white text-4xl my-3">touch_app</i>
-                                    <h3 class="text-white" >Bingo Fopre</h3>
+                        @foreach($templateconfigs as $templateconfig)
+                            <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
+                                <div class="front front-background"
+                                     style="background-image: url({{asset('storage'.$templateconfig->img_carton)}}); background-size: cover; width: 100%;">
+                                    <div class="card-body py-7 text-center" >
+                                        <i class="material-icons text-white text-4xl my-3">touch_app</i>
+                                        <h3 class="text-white" >Bingo Fopre</h3>
+                                    </div>
+                                </div>
+                                <div class="back back-background"
+                                     style="background-image: url({{asset('storage'.$templateconfig->img_carton)}}); background-size: cover;">
+                                    <div class="card-body pt-7 text-center">
+                                        <h3 class="text-white">Bingo Fopre</h3>
+                                            <h5 class="text-white opacity-8"> Valor: $ {{number_format(intval($templateconfig->price_carton))}}</h5>
+                                            <div class="text-white opacity-8"> {!! $templateconfig->description_carton !!}</div>
+                                            <a href="{{$templateconfig->url_carton}}" target="_blank"
+                                                class="btn btn-white btn-sm w-50 mx-auto mt-3" style="width: 150px!important; margin-bottom: 40px;"><i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i> Comprar aquí</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="back back-background"
-                                 style="background-image: url({{asset('img/bingo_2.avif')}}); background-size: cover;">
-                                <div class="card-body pt-7 text-center">
-                                    <h3 class="text-white">Bingo Fopre</h3>
-                                    @foreach($templateconfigs as $templateconfig)
-                                        <h5 class="text-white opacity-8"> Valor: $ {{number_format(intval($templateconfig->price_carton))}}</h5>
-                                        <div class="text-white opacity-8"> {!! $templateconfig->description_carton !!}</div>
-                                        <a href="{{$templateconfig->url_carton}}" target="_blank"
-                                            class="btn btn-white btn-sm w-50 mx-auto mt-3" style="width: 150px!important; margin-bottom: 40px;"><i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i> Comprar aquí</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="col-lg-6 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
                     <div class="rotating-card-container">
+                        @foreach($templateconfigs as $templateconfig)
                         <div class="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
                             <div class="front front-background"
                                  style="background-image: url({{asset('img/live.png')}}); background-size: cover; width: 100%; height: 305px;">
@@ -43,14 +45,13 @@
                                  style="background-image: url({{asset('img/live_stream.jpg')}}); background-size: cover; height: 305px;">
                                 <div class="card-body pt-7 text-center">
                                     <h3 class="text-white">Trasmición en Vivo</h3>
-                                    @foreach($templateconfigs as $templateconfig)
                                     <p class="text-white opacity-8"> {{$templateconfig->description_live}}</p>
                                     <a href="{{$templateconfig->url_live}}" target="_blank"
                                        class="btn btn-white btn-sm w-50 mx-auto mt-3" style="width: 150px!important;"><i class="material-icons opacity-6 me-2 text-md">cast_connected</i> Conectarse</a>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
