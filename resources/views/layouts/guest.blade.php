@@ -19,6 +19,21 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
     <style>
+        @foreach($templateconfigs as $templateconfig)
+        :root{ 
+            --color_login_one:{{$templateconfig->color_login_one}};
+            --color_login_two:{{$templateconfig->color_login_two}};
+            --color_login_hover_three:{{$templateconfig->color_login_hover_three}};
+            --color_login_hover_four:{{$templateconfig->color_login_hover_four}};
+            --color_main_one:{{$templateconfig->color_main_one}};
+            --color_main_two:{{$templateconfig->color_main_two}};
+            --color_text_one:{{$templateconfig->color_text_one}};
+            --color_text_two:{{$templateconfig->color_text_two}};
+            --color_text_three:{{$templateconfig->color_text_three}};
+            --color_text_four:{{$templateconfig->color_text_four}};
+
+        }
+        @endforeach
         .async-hide {
             opacity: 0 !important
         }
@@ -187,7 +202,7 @@
 <header class="header-2">
     @foreach($templateconfigs as $templateconfig)
     <div class="page-header min-vh-75" style="background-image: url({{asset('storage/'. $templateconfig->img_main)}})" loading="lazy">
-        <span class="mask bg-gradient-primary opacity-4"></span>
+        <span class="mask bg-gradient-primary-main opacity-4"></span>
     </div>
     @endforeach
 </header>
@@ -200,13 +215,27 @@
             <div class="col-md-12 mb-4 ms-auto">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <div class="d-flex">
-                            <a href="{{route('bingofopre.index')}}">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="d-flex">
+                                    <a href="{{route('bingofopre.index')}}">
+                                        @foreach($templateconfigs as $templateconfig)
+                                        <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
+                                        @endforeach
+                                    </a>
+                                    
+                                    <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
                                 @foreach($templateconfigs as $templateconfig)
-                                <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
+                                
+                                <h6 class="font-weight-bolder mb-4">{{$templateconfig->area}}</h6>
+                                <h6 class="font-weight-bolder mb-4">{{$templateconfig->email}}</h6>
+                                <h6 class="font-weight-bolder mb-4">{{$templateconfig->phone}}</h6>
+                                
                                 @endforeach
-                            </a>
-                            <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
+                            </div>
                         </div>
                         <div >
                             <ul class="d-flex flex-row ms-n3 nav">

@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
             $templateconfigs = TemplateConfig::all();
             $view->with('templateconfigs', $templateconfigs);
         });
+        View::composer('auth.login',function ($view) {
+            $templateconfigs = TemplateConfig::all();
+            $view->with('templateconfigs', $templateconfigs);
+        });
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
 

@@ -15,6 +15,14 @@
     <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
     <link id="pagestyle" href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
     <style>
+        @foreach($templateconfigs as $templateconfig)
+        :root{ 
+            --color_login_one:{{$templateconfig->color_login_one}};
+            --color_login_two:{{$templateconfig->color_login_two}};
+            --color_login_hover_three:{{$templateconfig->color_login_hover_three}};
+            --color_login_hover_four:{{$templateconfig->color_login_hover_four}};
+        }
+        @endforeach
         .async-hide {
             opacity: 0 !important
         }
@@ -75,9 +83,12 @@
     </div>
 </nav>
 
+@foreach ($templateconfigs as $templateconfig) 
+
+
 
 <div class="page-header align-items-start min-vh-100"
-     style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');"
+     style="background-image: url({{asset('storage/'. $templateconfig->img_login)}});"
      loading="lazy">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
@@ -162,7 +173,7 @@
         </div>
     </footer>
 </div>
-
+@endforeach
 <script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -172,5 +183,7 @@
 <script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
+
+
 </body>
 </html>
