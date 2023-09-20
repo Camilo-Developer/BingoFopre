@@ -1880,7 +1880,7 @@ label {
 }
 .footer .nav-link:hover {
     opacity: 1!important;
-    transition: opacity .3 ease
+    transition: opacity .3 ease;
 }
 .footer .footer-logo {
     max-width: 2rem

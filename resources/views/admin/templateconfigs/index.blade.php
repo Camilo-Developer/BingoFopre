@@ -49,6 +49,7 @@
                                                 <label>• Transfondo de la Imagen</label>
                                                 <div style="width: 100%; height: 50px; background: linear-gradient(195deg, {{$templateconfig->color_main_one}}, {{$templateconfig->color_main_two}})">
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -279,14 +280,14 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="color_main_one">Color principal 1:</label>
-                                            <input type="color" name="color_main_one" value="{{$templateconfig->color_main_one}}" class="form-control form-control-border" id="color_main_one" placeholder="Escriba la URL">
+                                            <input type="color" name="color_main_one" value="{{$templateconfig->color_main_one}}" class="form-control form-control-border" id="color_main_one" >
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
 
                                         <div class="form-group">
                                             <label for="color_main_two">Color principal 2:</label>
-                                            <input type="color" name="color_main_two" value="{{$templateconfig->color_main_two}}" class="form-control form-control-border" id="color_main_two" placeholder="Escriba la URL">
+                                            <input type="color" name="color_main_two" value="{{$templateconfig->color_main_two}}" class="form-control form-control-border" id="color_main_two">
                                         </div>
                                     </div>
                                 </div>
@@ -469,26 +470,26 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="area">Color texto 1:</label>
-                                            <input type="color" name="area" value="{{$templateconfig->color_text_one}}" class="form-control form-control-border" id="area" >
+                                            <label for="color_text_one">Color texto 1:</label>
+                                            <input type="color" name="color_text_one" value="{{$templateconfig->color_text_one}}" class="form-control form-control-border" id="color_text_one" >
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="area">Color texto 2:</label>
-                                            <input type="color" name="email" value="{{$templateconfig->color_text_two}}" class="form-control form-control-border" id="email">
+                                            <label for="color_text_two">Color texto 2:</label>
+                                            <input type="color" name="color_text_two" value="{{$templateconfig->color_text_two}}" class="form-control form-control-border" id="color_text_two">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="phone">Color texto 3:</label>
-                                            <input type="color" name="phone" value="{{$templateconfig->color_text_three}}" class="form-control form-control-border" id="phone">
+                                            <label for="color_text_three">Color texto 3:</label>
+                                            <input type="color" name="color_text_three" value="{{$templateconfig->color_text_three}}" class="form-control form-control-border" id="color_text_three">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="phone">Color texto 4:</label>
-                                            <input type="color" name="phone" value="{{$templateconfig->color_text_four}}" class="form-control form-control-border" id="phone">
+                                            <label for="color_text_four">Color texto 4:</label>
+                                            <input type="color" name="color_text_four" value="{{$templateconfig->color_text_four}}" class="form-control form-control-border" id="color_text_four">
                                         </div>
                                     </div>
                                 </div>
@@ -583,6 +584,7 @@
     </section>
 @endsection
 @section('js')
+
     <script>
         $(function () {
             $('#compose-textarea').summernote(
@@ -680,11 +682,19 @@
 
             // Llama a la función para establecer el fondo inicial
             updateGradient();
+
+            // Establece el valor inicial de los campos de entrada de color desde la base de datos
+            const initialColorMainOne = '{{$templateconfig->color_main_one}}';
+            const initialColorMainTwo = '{{$templateconfig->color_main_two}}';
+
+            $('#color_main_one').val(initialColorMainOne);
+            $('#color_main_two').val(initialColorMainTwo);
         });
 
     </script>
 
-<script>
+
+    <script>
     $(document).ready(function() {
         // Función para actualizar el fondo del div con el gradiente lineal
         function updateGradient() {

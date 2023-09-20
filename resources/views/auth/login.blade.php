@@ -16,7 +16,7 @@
     <link id="pagestyle" href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
     <style>
         @foreach($templateconfigs as $templateconfig)
-        :root{ 
+        :root{
             --color_login_one:{{$templateconfig->color_login_one}};
             --color_login_two:{{$templateconfig->color_login_two}};
             --color_login_hover_three:{{$templateconfig->color_login_hover_three}};
@@ -83,7 +83,7 @@
     </div>
 </nav>
 
-@foreach ($templateconfigs as $templateconfig) 
+@foreach ($templateconfigs as $templateconfig)
 
 
 

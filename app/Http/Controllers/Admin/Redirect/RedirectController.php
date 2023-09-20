@@ -23,9 +23,6 @@ class RedirectController extends Controller
         }
     }
 
-    public function dashboardAdmin(){
-        return view('admin.dashboard.index');
-    }
     public function dashboardUser(){
         return view('user.dashboard.index');
     }

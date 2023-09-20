@@ -133,7 +133,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <a href="{{route('dashboard')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/dashboard") active @endif">
+                        <a href="{{route('admin.dashboard')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/dashboard") active @endif">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Inicio
@@ -224,36 +224,15 @@
                                     <p>Creación de Cartones</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Asignación de Cartones</p>
-                                </a>
-                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/users" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link @if(Str::startsWith(request()->getRequestUri(), '/admin/users')) active @endif">
                             <i class="nav-icon fab fa-product-hunt"></i>
                             <p>
                                 Usuarios
-                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('admin.users.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/users") active @endif">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>lista Usuarios</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/products") active @endif">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Listar Productos</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.states.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/states") active @endif">
@@ -264,7 +243,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('admin.roles.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/roles") active @endif">
+                        <a href="{{route('admin.roles.index')}}" class="nav-link @if(Str::startsWith(request()->getRequestUri(), '/admin/roles')) active @endif">
                             <i class="nav-icon fab fa-product-hunt"></i>
                             <p title="Roles">
                                 Roles
