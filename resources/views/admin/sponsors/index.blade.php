@@ -62,8 +62,19 @@
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $sponsor->logo)}}" alt="{{$sponsor->name}}"></td>
                                             <td>{{$sponsor->name}}</td>
                                             <td>{{$sponsor->state->name}}</td>
-                                            <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
+                                            <td>
+                                                <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <a title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </a>
+                                                </td>
                                         </tr>
+                                        <form action="{{route('admin.sponsors.destroy',$sponsor)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -216,17 +227,12 @@
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <div>
-                                    <button type="submit" class="btn btn-warning">Editar</button>
-                                    <a title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
+                                    
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('admin.sponsors.destroy',$sponsor)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+                        
                     </div>
                 </div>
             </div>
