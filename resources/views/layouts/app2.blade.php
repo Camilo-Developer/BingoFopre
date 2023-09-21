@@ -43,6 +43,18 @@
 
         }
         @endforeach
+        .accordion-body h1,
+        .accordion-body h2,
+        .accordion-body h3,
+        .accordion-body h4,
+        .accordion-body h5,
+        .accordion-body h6{
+            color: var(--color_main_one);
+        } 
+        .accordion-body p{
+            color: var(--color_main_two);
+        }
+
     </style>
 </head>
 <body class="automotive">
