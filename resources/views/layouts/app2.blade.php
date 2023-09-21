@@ -28,6 +28,21 @@
         .async-hide {
             opacity: 0 !important
         }
+        @foreach($templateconfigs as $templateconfig)
+        :root{
+            --color_login_one:{{$templateconfig->color_login_one}};
+            --color_login_two:{{$templateconfig->color_login_two}};
+            --color_login_hover_three:{{$templateconfig->color_login_hover_three}};
+            --color_login_hover_four:{{$templateconfig->color_login_hover_four}};
+            --color_main_one:{{$templateconfig->color_main_one}};
+            --color_main_two:{{$templateconfig->color_main_two}};
+            --color_text_one:{{$templateconfig->color_text_one}};
+            --color_text_two:{{$templateconfig->color_text_two}};
+            --color_text_three:{{$templateconfig->color_text_three}};
+            --color_text_four:{{$templateconfig->color_text_four}};
+
+        }
+        @endforeach
     </style>
 </head>
 <body class="automotive">
