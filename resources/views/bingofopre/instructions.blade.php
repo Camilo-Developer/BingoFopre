@@ -121,7 +121,7 @@
                         <div class="accordion-item mb-3">
                             @foreach($instructions as $instruction)
                             <h5 class="accordion-header" id="headingOne">
-                                <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="accordion-button border-bottom font-weight-bold withe-special-lckm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Instrucciones
                                     <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
                                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>
@@ -136,8 +136,8 @@
                             @endforeach
                         </div>
                         <div class="accordion-item mb-3">
-                            <h5 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h5 class="accordion-header withe-special-lckm" id="headingTwo">
+                                <button class="accordion-button withe-special-lckm border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Cómo cantar ¡BINGO FOPRE!
                                     <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0"></i>
                                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0"></i>

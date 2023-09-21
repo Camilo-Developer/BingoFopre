@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="col-12">
-                                <div class="card  collapsed-card">
+                                <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Información cartones</h3>
                                         <div class="card-tools">
@@ -69,7 +69,7 @@
 
                                     </div>
 
-                                    <div class="card-body" style="display: none;">
+                                    <div class="card-body" style="display: block;">
                                         <div class="row">
                                             <div class="col-4">
                                                 <label>• Imagen Cartón</label>
@@ -79,8 +79,8 @@
                                             <div class="col-4">
                                                 <label>• Url del cartón</label>
                                                 <br>
-                                                <a class="btn btn-primary" href="{!! $templateconfig->url_carton !!}" target="_blank">
-                                                    Ir la Sitio
+                                                <a class="btn btn-primary" href="{{$templateconfig->url_carton}}" target="_blank">
+                                                    <i class="fa fa-link"></i> Ir la Sitio
                                                 </a>
                                             </div>
                                             <div class="col-4">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="card  collapsed-card">
+                                <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Información de la Trasmición</h3>
                                         <div class="card-tools">
@@ -108,10 +108,9 @@
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
                                             </button>
                                         </div>
-
                                     </div>
 
-                                    <div class="card-body" style="display: none;">
+                                    <div class="card-body" style="display: block;">
                                         <div class="row">
                                             <div class="col-6 mb-3">
                                                 <label >Imagen Live</label>
@@ -121,7 +120,9 @@
                                             <div class="col-6 mb-3">
                                                 <label>Url de la trasmición</label>
                                                 <br>
-                                                <a href="{{$templateconfig->url_live}}" class="btn btn-success" target="_blank">Ir al Sitio web</a>
+                                                <a class="btn btn-success" href="{{$templateconfig->url_live}}"  target="_blank"> 
+                                                    <i class="fa fa-link"></i> Ir al Sitio web
+                                                </a>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label>Descripcón de la trasmición</label><br>
@@ -134,7 +135,7 @@
                             </div>
 
                         <div class="col-12">
-                            <div class="card  collapsed-card">
+                            <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Datos de la Universidad</h3>
                                     <div class="card-tools">
@@ -144,7 +145,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="display: none;">
+                                <div class="card-body" style="display: block;">
                                     <div class="row">
                                         <div class="col-4">
                                             <label>Area de la universidad</label>
@@ -164,7 +165,7 @@
                         </div>
 
                         <div class="col-12">
-                            <div class="card  collapsed-card">
+                            <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Colores del texto</h3>
                                     <div class="card-tools">
@@ -174,7 +175,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="display: none;">
+                                <div class="card-body" style="display: block;">
                                     <div class="row">
                                         <div class="col-3">
                                             <label>Color texto 1</label>
@@ -197,7 +198,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="card  collapsed-card">
+                            <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Información del Inicio de Sesión</h3>
                                     <div class="card-tools">
@@ -209,7 +210,7 @@
 
                                 </div>
 
-                                <div class="card-body" style="display: none;">
+                                <div class="card-body" style="display: block;">
                                     <div class="row">
                                         <div class="col-12">
                                             <label >Imagen del Login</label>
@@ -295,7 +296,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"> <i class="fa fa-edit"></i>  Editar  </button>
                         </div>
                     </form>
                 </div>
@@ -351,7 +352,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
                 </div>
@@ -401,7 +402,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
                 </div>
@@ -446,7 +447,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
                 </div>
@@ -497,7 +498,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
                 </div>
@@ -575,7 +576,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
                 </div>

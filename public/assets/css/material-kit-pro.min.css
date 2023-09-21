@@ -15,7 +15,18 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-
+.title-special-lckm{
+   color: var(--color_text_one)!important;
+}
+.p-special-lckm{
+   color: var(--color_text_two)!important;
+}
+.url-special-lckm{
+   color: var(--color_text_three)!important;
+}
+.withe-special-lckm{
+   color: var(--color_text_four)!important;
+}
 
 /*!
    * Bootstrap  v5.2.3 (https://getbootstrap.com/)
