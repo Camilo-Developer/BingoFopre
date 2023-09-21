@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <h5 class="mb-2">Información general</h5>
+            <h5 class="mb-2">Información general año: {{$year}}</h5>
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-12">
                     <div class="info-box">
@@ -74,8 +74,34 @@
                         </div>
                         <div class="card-body text-center">
                             <div class="row">
-                                <div class="col-12">
-                                    <canvas id="cartonGrap"></canvas>
+                                <div class="col-12 col-md-6">
+                                    <div class="col-12">
+                                        <label>Total de cartones creados en el año: {{$year}}</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <canvas id="cartonGrap"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="col-12">
+                                        <label>Filtro por fecha de Total de cartones Vendidos</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <input type="date" id="startDate" class="form-control" placeholder="Fecha de inicio">
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="date" id="endDate" class="form-control" placeholder="Fecha de fin">
+                                        </div>
+                                        <div class="col-2">
+                                            <button id="filterButton" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="chart-container">
+                                            <canvas id="graficaBarra"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,16 +122,31 @@
         var pieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Cartones Creados', 'Cartones Vendidos'],
+                labels: ['Cartones Creados', 'Cartones Vendidos','Cartones Obsequio'],
                 datasets: [{
-                    data: [{{ $allCardboard }}, {{ $caronesVendidos }}],
+                    data: [{{ $allCardboard }}, {{ $caronesVendidos }},{{$caronesObsequio}}],
                     backgroundColor: [
                         'rgb(75, 192, 192)', // Color para Cartones Asignados
-                        'rgb(255, 99, 132)'  // Color para Cartones Pendientes
+                        'rgb(255, 99, 132)',  // Color para Cartones Pendientes
+                        'rgb(46,217,54)',  // Color para Cartones Pendientes
                     ]
                 }]
             },
-
+            options: {
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = ((currentValue / total) * 100).toFixed(2) + "%";
+                            return data.labels[tooltipItem.index] + ": " + currentValue + " (" + percentage + ")";
+                        }
+                    }
+                }
+            }
         });
     </script>
     <script>
@@ -125,4 +166,62 @@
             });
         });
     </script>
+
+    <script>
+        // Obtén el contexto del lienzo (canvas) para la gráfica de barras
+        var ctxBarra = document.getElementById('graficaBarra').getContext('2d');
+
+        // Define los datos para la gráfica de barras
+        var dataBarra = {
+            labels: ['Cartones Creados', 'Cartones Vendidos', 'Catones Obsequio'],
+            datasets: [
+                {
+                    label: 'Cartones Creados',
+                    data: [{{ $cartonFilter }}, 0 , 0], // Inicialmente, el total de vendidos es 0
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Cartones Vendidos',
+                    data: [0, {{ $caronesVendidosFilter }} , 0], // Inicialmente, el total de creados es 0
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Cartones Obsequio',
+                    data: [ 0,0, {{ $caronesObsequioFilter }}], // Inicialmente, el total de creados es 0
+                    backgroundColor: 'rgba(99,235,54,0.2)',
+                    borderColor: 'rgb(223,235,54)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        var optionsBarra = {
+            scales: {
+                y: {
+                    beginAtZero: false // No comiences el eje Y en cero
+                }
+            }
+        };
+
+        // Crea la gráfica de barras
+        var myBarChart = new Chart(ctxBarra, {
+            type: 'bar', // Tipo de gráfica
+            data: dataBarra, // Datos de la gráfica
+            options: optionsBarra // Opciones de configuración
+        });
+
+        // Agregar evento de clic al botón de filtro
+        document.getElementById('filterButton').addEventListener('click', function () {
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+            // Redirigir a la acción 'index' del controlador actual con los parámetros de fecha
+            window.location.href = '/admin/dashboard?startDate=' + startDate + '&endDate=' + endDate;
+        });
+    </script>
+
+
 @endsection
