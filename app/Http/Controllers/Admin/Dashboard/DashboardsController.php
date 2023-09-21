@@ -17,12 +17,31 @@ class DashboardsController extends Controller
             ->orWhere('name', 'like', "%$query%")
             ->orWhere('lastname', 'like', "%$query%")
             ->get();
-
         $allUser = User::count();
-        $allCartonGroup = CartonGroup::count();
-        $allCardboard = Cardboard::count();
+        $year = date('Y');
+        $allCartonGroup = CartonGroup::whereYear('created_at', $year)->count();
+        $allCardboard = Cardboard::whereYear('created_at', $year)->count();
+        $caronesVendidos = Cardboard::whereYear('created_at', $year)->where('state_id', 5)->count();
+        $caronesObsequio = Cardboard::whereYear('created_at', $year)->where('state_id', 6)->count();
 
-        $caronesVendidos = Cardboard::where('state_id',5)->count();
+
+        // Filtra por fechas si se proporcionan en la solicitud
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $queryBuilder = Cardboard::query();
+        $queryBuilders = Cardboard::query();
+        if ($startDate && $endDate) {
+            $queryBuilder->whereBetween('created_at', [$startDate, $endDate]);
+            $queryBuilders->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        $cartonFilter = $queryBuilder->count(); // Contar cartones filtrados por fecha
+
+        // Contar cartones vendidos filtrados por fecha
+        $caronesVendidosFilter = $queryBuilder->where('state_id', 5)->count();
+
+        // Consulta separada para contar cartones obsequio filtrados por fecha
+        $caronesObsequioFilter = $queryBuilders->where('state_id', 6)->count();
+
 
         return view('admin.dashboard.index', compact(
             'users',
@@ -30,7 +49,14 @@ class DashboardsController extends Controller
             'allUser',
             'allCartonGroup',
             'allCardboard',
+            'caronesObsequio',
             'caronesVendidos',
+            'startDate',
+            'endDate',
+            'cartonFilter',
+            'caronesVendidosFilter',
+            'year',
+            'caronesObsequioFilter'
         ));
     }
 }
