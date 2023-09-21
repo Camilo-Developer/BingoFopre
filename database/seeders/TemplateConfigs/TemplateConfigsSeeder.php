@@ -16,8 +16,8 @@ class TemplateConfigsSeeder extends Seeder
         TemplateConfig::create([
             'logo'=> 'logo.png',
             'img_main'=> 'img_main.png',
-            'color_main_one'=> '#408decd1',
-            'color_main_two'=> '#3c61ddaf',
+            'color_main_one'=> '#64A1F2',
+            'color_main_two'=> '#728ACF',
             'img_carton'=> 'img_carton.png',
             'url_carton'=> 'https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones',
             'description_carton'=> 'o adquierelo en el campus con nuestros voluntarios',
@@ -33,10 +33,10 @@ class TemplateConfigsSeeder extends Seeder
             'color_text_three'=> '#110b79',
             'color_text_four'=> '#feae11',
             'img_login'=> 'img_login.png',
-            'color_login_one'=> '#408decd1',
-            'color_login_two'=> '#3c61ddaf',
-            'color_login_hover_three'=> '#1e4ae966',
-            'color_login_hover_four'=> '#0043ff96',
+            'color_login_one'=> '#64A1F2',
+            'color_login_two'=> '#728ACF',
+            'color_login_hover_three'=> '#2145CA',
+            'color_login_hover_four'=> '#5F77BF',
         ]);
     }
 }

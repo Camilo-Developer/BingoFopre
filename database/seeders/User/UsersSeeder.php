@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         /*
-        
+
         User::create([
             'name'=> 'Jordy',
             'lastname'=> 'ENP',
@@ -32,6 +32,16 @@ class UsersSeeder extends Seeder
             'lastname'=> 'Developer',
             'email'=> 'camilo@gmail.com',
             'password'=> Hash::make('1234'),
+            'state_id'=> '1',
+            'avatar'=> '',
+            'external_id'=> '',///
+            'external_auth'=> 'Azure',
+        ])->assignRole('Admin');
+        User::create([
+            'name'=> 'Admin.',
+            'lastname'=> 'Bingo',
+            'email'=> 'bingofopre@uniandes.edu.co',
+            'password'=> Hash::make('Bingo1234*'),
             'state_id'=> '1',
             'avatar'=> '',
             'external_id'=> '',///
