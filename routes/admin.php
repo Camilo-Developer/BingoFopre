@@ -33,4 +33,5 @@ Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPu
 Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('admin.cartones.removeFromCart');
 Route::resource('/users', UsersController::class)->names('admin.users');
 Route::post('/users/group_assignment',[UsersController::class,'asiginacionGrupos'])->name('admin.users.asiginacionGrupos');
+Route::post('/users/cambio-state-grupos-cartones',[UsersController::class,'cambioStateGruposCartones'])->name('admin.users.cambioStateGruposCartones');
 

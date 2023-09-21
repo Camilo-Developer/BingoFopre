@@ -99,7 +99,7 @@
 
         <!-- Modal para crear una noticia -->
         <div class="modal fade" id="modal-dynamicgame"  aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Nueva Dinámica</h4>
@@ -156,24 +156,32 @@
                                             <div class="form-group">
                                                 <label><span class="text-danger">*</span> Filas:</label>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="fila1" name="fila[]" value="1">
+                                                    <input class="custom-control-input" type="checkbox" id="fila0" name="fila[]" value="1">
+                                                    <label for="fila0" class="custom-control-label">No aplica</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila1" name="fila[]" value="2">
                                                     <label for="fila1" class="custom-control-label">Primera Fila</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="fila2" name="fila[]" value="2">
+                                                    <input class="custom-control-input" type="checkbox" id="fila2" name="fila[]" value="3">
                                                     <label for="fila2" class="custom-control-label">Segunda Fila</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="fila3" name="fila[]" value="3">
+                                                    <input class="custom-control-input" type="checkbox" id="fila3" name="fila[]" value="4">
                                                     <label for="fila3" class="custom-control-label">Tercera Fila</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="fila4" name="fila[]" value="4">
+                                                    <input class="custom-control-input" type="checkbox" id="fila4" name="fila[]" value="5">
                                                     <label for="fila4" class="custom-control-label">Cuarta Fila</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="fila5" name="fila[]" value="5">
+                                                    <input class="custom-control-input" type="checkbox" id="fila5" name="fila[]" value="6">
                                                     <label for="fila5" class="custom-control-label">Quinta Fila</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="fila6" name="fila[]" value="7">
+                                                    <label for="fila6" class="custom-control-label">Completo</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,24 +189,32 @@
                                             <div class="form-group">
                                                 <label><span class="text-danger">*</span> Columnas:</label>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="columna1" name="colum[]" value="1">
+                                                    <input class="custom-control-input" type="checkbox" id="columna0" name="colum[]" value="1">
+                                                    <label for="columna0" class="custom-control-label">No aplica</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna1" name="colum[]" value="2">
                                                     <label for="columna1" class="custom-control-label">Primera Columnas</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="columna2" name="colum[]" value="2">
+                                                    <input class="custom-control-input" type="checkbox" id="columna2" name="colum[]" value="3">
                                                     <label for="columna2" class="custom-control-label">Segunda Columnas</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="columna3" name="colum[]" value="3">
+                                                    <input class="custom-control-input" type="checkbox" id="columna3" name="colum[]" value="4">
                                                     <label for="columna3" class="custom-control-label">Tercera Columnas</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="columna4" name="colum[]" value="4">
+                                                    <input class="custom-control-input" type="checkbox" id="columna4" name="colum[]" value="5">
                                                     <label for="columna4" class="custom-control-label">Cuarta Columnas</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox" id="columna5" name="colum[]" value="5">
+                                                    <input class="custom-control-input" type="checkbox" id="columna5" name="colum[]" value="6">
                                                     <label for="columna5" class="custom-control-label">Quinta Columnas</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" type="checkbox" id="columna6" name="colum[]" value="7">
+                                                    <label for="columna6" class="custom-control-label">Completo</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -278,24 +294,32 @@
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Filas:</label>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila1" name="fila[]" value="1" {{ in_array('1', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila0" name="fila[]" value="1" {{ in_array('1', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <label for="editfila0" class="custom-control-label">No aplica</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input class="custom-control-input" type="checkbox" id="editfila1" name="fila[]" value="2" {{ in_array('2', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
                                                             <label for="editfila1" class="custom-control-label">Primera Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila2" name="fila[]" value="2" {{ in_array('2', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila2" name="fila[]" value="3" {{ in_array('3', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
                                                             <label for="editfila2" class="custom-control-label">Segunda Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila3" name="fila[]" value="3" {{ in_array('3', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila3" name="fila[]" value="4" {{ in_array('4', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
                                                             <label for="editfila3" class="custom-control-label">Tercera Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila4" name="fila[]" value="4" {{ in_array('4', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila4" name="fila[]" value="5" {{ in_array('5', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
                                                             <label for="editfila4" class="custom-control-label">Cuarta Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila5" name="fila[]" value="5" {{ in_array('5', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila5" name="fila[]" value="6" {{ in_array('6', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
                                                             <label for="editfila5" class="custom-control-label">Quinta Fila</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input class="custom-control-input" type="checkbox" id="editfila6" name="fila[]" value="7" {{ in_array('7', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <label for="editfila6" class="custom-control-label">Completo</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -303,24 +327,32 @@
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Columnas:</label>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna1" name="colum[]" value="1" {{ in_array('1', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna0" name="colum[]" value="1" {{ in_array('1', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <label for="editcolumna0" class="custom-control-label">No aplica</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna1" name="colum[]" value="2" {{ in_array('2', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
                                                             <label for="editcolumna1" class="custom-control-label">Primera Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna2" name="colum[]" value="2" {{ in_array('2', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna2" name="colum[]" value="3" {{ in_array('3', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
                                                             <label for="editcolumna2" class="custom-control-label">Segunda Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna3" name="colum[]" value="3" {{ in_array('3', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna3" name="colum[]" value="4" {{ in_array('4', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
                                                             <label for="editcolumna3" class="custom-control-label">Tercera Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna4" name="colum[]" value="4" {{ in_array('4', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna4" name="colum[]" value="5" {{ in_array('5', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
                                                             <label for="editcolumna4" class="custom-control-label">Cuarta Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna5" name="colum[]" value="5" {{ in_array('5', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna5" name="colum[]" value="6" {{ in_array('6', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
                                                             <label for="editcolumna5" class="custom-control-label">Quinta Columnas</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna6" name="colum[]" value="7" {{ in_array('7', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <label for="editcolumna6" class="custom-control-label">Completo</label>
                                                         </div>
                                                     </div>
                                                 </div>

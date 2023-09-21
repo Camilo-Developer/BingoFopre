@@ -62,6 +62,7 @@ class UsersController extends Controller
     }
     public function show(User $user)
     {
+        $states = State::all();
         $roles = Role::all();
         $roles_user = [];
         foreach ($user->roles as $role_user){
@@ -70,15 +71,12 @@ class UsersController extends Controller
         $grupo_cartones = CartonGroup::where('user_id', null)
             ->where('state_id', 3)
             ->get();
-
         $card_groups = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
             ->get();
-
         $totalGruposAsignados = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
             ->count();
-
         // Inicializar una variable para almacenar la suma total
         $totalCartonesAsignados = 0;
         $totalCartonesVendidos = 0;
@@ -121,6 +119,9 @@ class UsersController extends Controller
             $totalMontoGrupo += $montoGrupo; // Sumar el monto vendido al total general
             $totalMontoObsequio += $montoObsequio; // Sumar el monto vendido al total general
             $totalCartonesObsequios += $totalCartonesObse;
+
+
+
         }
 
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
@@ -141,7 +142,8 @@ class UsersController extends Controller
             'totalMontoGrupo',
             'totalMontoObsequio',
             'sumademontos',
-            'grupo_cartones'
+            'grupo_cartones',
+            'states',
         ));
     }
 
@@ -211,6 +213,24 @@ class UsersController extends Controller
         // Redirecciona de regreso a la página anterior o realiza alguna otra acción
         return redirect()->back()->with('success', 'Usuario asignado a los grupos de cartones exitosamente.');
     }
+
+    public function cambioStateGruposCartones(Request $request) {
+        // Obtén el ID del usuario y los grupos de cartones seleccionados desde la solicitud
+        $user_id = $request->input('user_id');
+        $grupo_cartones_ids = $request->input('state_groups');
+
+        // Verifica si hay grupos de cartones seleccionados
+        if (!$grupo_cartones_ids) {
+            return redirect()->back()->with('error', 'No se han seleccionado grupos de cartones para cambiar el estado.');
+        }
+
+        // Actualiza el estado de los grupos de cartones seleccionados
+        CartonGroup::whereIn('id', $grupo_cartones_ids)
+            ->update(['state_id' => 5]); // Cambia el estado a 5 (Vendido) o el estado deseado
+
+        return redirect()->back()->with('success', 'Estado de los grupos de cartones actualizado correctamente.');
+    }
+
 
 
 }

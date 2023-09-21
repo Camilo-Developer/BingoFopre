@@ -167,7 +167,7 @@
 
             <div class="redes" style="margin-bottom: 61px;margin-right: -55px;">
                 <a style="cursor: pointer;" title="Asignar Grupos Disponibles" class="fa fa-check-circle" data-toggle="modal" data-target="#modal-asign-groups"></a>
-                <a href="#" class="fas fa-edit" title="Editar Grupos Asignados"></a>
+                <a data-toggle="modal" data-target="#modal-cambio-state-groups" href="#" class="fas fa-edit" title="Editar Grupos Asignados"></a>
             </div>
             <div class="btn-mas">
                 <label for="btn-mas" class="fa fa-plus"></label>
@@ -215,6 +215,62 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <!-- Modal para Cambiar estado Vendido a los grupos de cartones asignados al usuario -->
+        <div class="modal fade" id="modal-cambio-state-groups"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Grupos de Cartones Asignados: Circulación</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('admin.users.cambioStateGruposCartones') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th scope="col"># Grupo</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($card_groups as $card_group)
+                                        <tr class="text-center">
+                                            <td>
+                                                <input type="hidden" name="carton_group_state" value="{{$card_group->id}}" >
+                                                {{$card_group->id}}
+                                            </td>
+                                            <td>
+                                                {{$card_group->state->name}}
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" value="{{$card_group->id}}" name="state_groups[]" type="checkbox">
+                                                    <label class="form-check-label">Vendido</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-warning">Cambiar Estado</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
     </div>
 @endsection
 @section('js')

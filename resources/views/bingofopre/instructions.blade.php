@@ -40,20 +40,22 @@
                             </li>
                             @php
                                 $nombreFila = [
-                                    1 => 'Primera fila.',
-                                    2 => 'Segunda fila.',
-                                    3 => 'Tercera fila.',
-                                    4 => 'Cuarta fila.',
-                                    5 => 'Quinta fila.',
-                                    6 => 'Completo.',
+                                    1 => 'No aplica.',
+                                    2 => 'Primera fila.',
+                                    3 => 'Segunda fila.',
+                                    4 => 'Tercera fila.',
+                                    5 => 'Cuarta fila.',
+                                    6 => 'Quinta fila.',
+                                    7 => 'Completo.',
                                 ];
                                 $nombreColum = [
-                                    1 => 'Primera columna.',
-                                    2 => 'Segunda columna.',
-                                    3 => 'Tercera columna.',
-                                    4 => 'Cuarta columna.',
-                                    5 => 'Quinta columna.',
-                                    6 => 'Completo.',
+                                    1 => 'No aplica.',
+                                    2 => 'Primera columna.',
+                                    3 => 'Segunda columna.',
+                                    4 => 'Tercera columna.',
+                                    5 => 'Cuarta columna.',
+                                    6 => 'Quinta columna.',
+                                    7 => 'Completo.',
                                 ];
                             @endphp
 
