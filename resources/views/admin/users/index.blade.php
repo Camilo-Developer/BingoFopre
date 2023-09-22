@@ -80,7 +80,6 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                             <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$users->isEmpty())

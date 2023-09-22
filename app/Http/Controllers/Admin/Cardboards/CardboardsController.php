@@ -15,10 +15,20 @@ use Illuminate\Support\Facades\Session;
 
 class CardboardsController extends Controller
 {
-    public function createForm()
+    public function index(Request $request){
+        $search = $request->input('search');
+        $cardboards = Cardboard::query()
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(50);
+        return view('admin.cartones.index', compact('cardboards', 'search'));
+    }
+    public function createForm(Request $request)
     {
-        $cartones = Cardboard::all();
-        return view('admin.cartones.create',compact('cartones'));
+        $search = $request->input('search');
+        $cartones = Cardboard::query()
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(50);
+        return view('admin.cartones.create',compact('cartones', 'search'));
     }
 
 

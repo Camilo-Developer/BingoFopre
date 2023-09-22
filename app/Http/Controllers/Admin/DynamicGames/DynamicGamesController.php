@@ -30,7 +30,7 @@ class DynamicGamesController extends Controller
         $request->validate([
             'logo' => 'required',
             'title' => 'required',
-            'letra' => 'required',
+            'letra' => 'nullable',
             'fila' => 'nullable',
             'colum' => 'nullable',
         ]);
@@ -71,7 +71,7 @@ class DynamicGamesController extends Controller
         $request->validate([
             'logo' => 'nullable',
             'title' => 'required',
-            'letra' => 'required',
+            'letra' => 'nullable',
             'fila' => 'nullable',
             'colum' => 'nullable',
         ]);

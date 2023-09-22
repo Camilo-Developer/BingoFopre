@@ -13,6 +13,7 @@
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/ftp.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
 
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -20,7 +21,7 @@
     <link id="pagestyle" href="{{asset('assets/css/material-kit-pro.min.css')}}" rel="stylesheet" />
     <style>
         @foreach($templateconfigs as $templateconfig)
-        :root{ 
+        :root{
             --color_login_one:{{$templateconfig->color_login_one}};
             --color_login_two:{{$templateconfig->color_login_two}};
             --color_login_hover_three:{{$templateconfig->color_login_hover_three}};
@@ -63,18 +64,35 @@
                     @if(auth()->check())
 
 
-                        @if(session('cart'))
-                            @php $cartCount = count(session('cart')); @endphp
-                            <a href="{{route('user.cart.index')}}"
-                               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" title="Ver Carrito">
-                                <i class="material-icons  text-md">shopping_cart</i> {{ $cartCount }}
-                            </a>
-                        @else
-                            <a href="{{route('user.cart.index')}}"
-                               class="btn btn-sm  bg-gradient-primary  mb-0 ms-auto d-lg-none d-block" title="Ver Carrito">
-                                <i class="material-icons  text-md">shopping_cart</i> 0
-                            </a>
-                        @endif
+                            @if(session('cart'))
+                                @php $cartCount = count(session('cart')); @endphp
+                                        <a href="{{route('user.cart.index')}}" id="ruta_pre"  class="ms-auto d-lg-none d-block mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <div class="button">
+                                                <span><i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}</span>
+                                                <div class="cart">
+                                                    <svg viewBox="0 0 36 26">
+                                                        <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
+                                                        <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </a>
+                            @else
+                                        <a href="{{route('user.cart.index')}}" id="ruta_pre"  class="ms-auto d-lg-none d-block mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <div class="button">
+                                                <span><i class="material-icons opacity-6  text-md">shopping_cart</i> 0</span>
+                                                <div class="cart">
+                                                    <svg viewBox="0 0 36 26">
+                                                        <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
+                                                        <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </a>
+                            @endif
+
+
+
 
                     @else
                         <a href="{{route('login')}}"
@@ -134,16 +152,32 @@
                                 @php $cartCount = count(session('cart')); @endphp
                                 <ul class="navbar-nav d-lg-block d-none">
                                     <li class="nav-item">
-                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
-                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}
+                                        <a href="{{route('user.cart.index')}}" id="ruta_pre"  class=" mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <div class="button">
+                                                <span><i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}</span>
+                                                <div class="cart">
+                                                    <svg viewBox="0 0 36 26">
+                                                        <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
+                                                        <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
                             @else
                                 <ul class="navbar-nav d-lg-block d-none">
                                     <li class="nav-item">
-                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
-                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> 0
+                                        <a href="{{route('user.cart.index')}}" id="ruta_pre"  class=" mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                            <div class="button">
+                                                <span><i class="material-icons opacity-6  text-md">shopping_cart</i> 0</span>
+                                                <div class="cart">
+                                                    <svg viewBox="0 0 36 26">
+                                                        <polyline points="1 2.5 6 2.5 10 18.5 25.5 18.5 28.5 7.5 7.5 7.5"></polyline>
+                                                        <polyline points="15 13.5 17 15.5 22 10.5"></polyline>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -223,17 +257,17 @@
                                         <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
                                         @endforeach
                                     </a>
-                                    
+
                                     <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
                                 </div>
                             </div>
                             <div class="col-6">
                                 @foreach($templateconfigs as $templateconfig)
-                                
+
                                 <h6 class="font-weight-bolder mb-4">{{$templateconfig->area}}</h6>
                                 <h6 class="font-weight-bolder mb-4">{{$templateconfig->email}}</h6>
                                 <h6 class="font-weight-bolder mb-4">{{$templateconfig->phone}}</h6>
-                                
+
                                 @endforeach
                             </div>
                         </div>
@@ -296,20 +330,12 @@
 <script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
-
-
-
 <script src="{{asset('assets/js/plugins/glide.min.js')}}"></script>
-
 <script src="{{asset('assets/js/plugins/countup.min.js')}}"></script>
-
 <script src="{{asset('assets/js/plugins/rellax.min.js')}}"></script>
-
 <script src="{{asset('assets/js/plugins/tilt.min.js')}}"></script>
+<script src="{{asset('assets/js/ftp.js')}}"></script>
 <script src="{{asset('assets/js/plugins/chartjs.min.js')}}" type="text/javascript"></script>
-
-
-
 <script>
 </script>
 <script type="text/javascript">
