@@ -33,7 +33,7 @@
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_cartones">Crear Cartones</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
-                                    <form action="{{ route('admin.cartones.index') }}" method="GET">
+                                    <form action="{{ route('admin.cartones.createForm') }}" method="GET">
                                         <div class="input-group input-group-sm buq-menu" >
                                             <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar carton">
                                             <div class="input-group-append">
@@ -74,7 +74,7 @@
                             @if(!empty($search) && !$cartones->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cartones.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger">Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cartones.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger">Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif

@@ -26,7 +26,6 @@ Route::resource('/dynamicgames', DynamicGamesController::class)->names('admin.dy
 Route::resource('/prizes', PrizesController::class)->names('admin.prizes');
 Route::resource('/states', StatesController::class)->names('admin.states');
 Route::resource('/roles', RolesController::class)->names('admin.roles');
-Route::get('/cartones', [CardboardsController::class,'index'])->name('admin.cartones.index');
 Route::get('/cartones/create', [CardboardsController::class,'createForm'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.createForm');
 Route::post('/cartones/create', [CardboardsController::class,'create'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.create');
 Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart']);
