@@ -217,25 +217,14 @@
     </div>
 </div>
 
-<header>
-    <div class="page-header min-vh-50"
-    @foreach ($templateconfigs as $templateconfig)
-         style="background-image: url({{asset('storage/'.$templateconfig->img_main)}});"
-         loading="lazy">
-        <span class="mask bg-gradient-dark"></span>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-8 d-flex justify-content-center flex-column text-center position-absolute top-0 h-100">
-                    <div class="mx-auto text-start">
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
+<header class="header-2">
+    @foreach($templateconfigs as $templateconfig)
+    <div class="page-header min-vh-75" style="background-image: url({{asset('storage/'. $templateconfig->img_main)}})" loading="lazy">
+        <span class="mask bg-gradient-primary-main opacity-4"></span>
     </div>
+    @endforeach
 </header>
-
-<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
     @yield('contents')
 
 

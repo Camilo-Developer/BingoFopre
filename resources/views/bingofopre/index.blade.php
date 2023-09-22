@@ -15,8 +15,10 @@
                                         <h3 class="withe-special-lckm" >Bingo Fopre</h3>
                                     </div>
                                 </div>
-                                <div class="back back-background"
-                                     style="background-image: url({{asset('storage/'.$templateconfig->img_carton)}}); background-size: cover;">
+                                <div class="back back-background">
+                                     {{-- 
+                                        style="background-image: url({{asset('storage/'.$templateconfig->img_carton)}}); background-size: cover;"
+                                        --}}
                                     <div class="card-body pt-7 text-center">
                                         <h3 class="withe-special-lckm">Bingo Fopre</h3>
                                             <h5 class="withe-special-lckm opacity-8"> Valor: $ {{number_format(intval($templateconfig->price_carton))}}</h5>
@@ -41,8 +43,8 @@
                                     <h3 class="withe-special-lckm">Trasmición en <br /> Vivo</h3>
                                 </div>
                             </div>
-                            <div class="back back-background"
-                                 style="background-image: url({{asset('storage/'.$templateconfig->img_live)}}); background-size: cover; height: 305px;">
+                            <div class="back back-background">
+                                {{--style="background-image: url({{asset('storage/'.$templateconfig->img_live)}}); background-size: cover; height: 305px;"--}}
                                 <div class="card-body pt-7 text-center">
                                     <h3 class="withe-special-lckm">Trasmición en Vivo</h3>
                                     <p class="withe-special-lckm opacity-8"> {{$templateconfig->description_live}}</p>
