@@ -219,7 +219,8 @@
 
 <header>
     <div class="page-header min-vh-50"
-         style="background-image: url('https://images.unsplash.com/photo-1497377825569-02ad2f9edb81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1966&q=80');"
+    @foreach ($templateconfigs as $templateconfig)
+         style="background-image: url({{asset('storage/'.$templateconfig->img_main)}});"
          loading="lazy">
         <span class="mask bg-gradient-dark"></span>
         <div class="container-fluid">
@@ -230,6 +231,7 @@
                 </div>
             </div>
         </div>
+    @endforeach
     </div>
 </header>
 
