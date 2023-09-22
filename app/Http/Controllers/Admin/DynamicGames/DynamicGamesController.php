@@ -67,7 +67,6 @@ class DynamicGamesController extends Controller
 
     public function update(Request $request, DynamicGame $dynamicgame)
     {
-
         $request->validate([
             'logo' => 'nullable',
             'title' => 'required',
