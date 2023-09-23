@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Cardboards;
 
 use App\Http\Controllers\Controller;
+use App\Models\State\State;
 use Illuminate\Http\Request;
 
 use App\Models\Cardboard\Cardboard;
@@ -18,13 +19,19 @@ class CardboardsController extends Controller
     public function createForm(Request $request)
     {
         $search = $request->input('search');
-        $cartones = Cardboard::query()
+        $cardboards = Cardboard::query()
             ->where('name', 'LIKE', "%$search%")
             ->paginate(5);
-        return view('admin.cartones.create',compact('cartones', 'search'));
+        $states = State::all();
+        $carton_groups = CartonGroup::all();
+
+        return view('admin.cartones.create',compact(
+            'cardboards',
+            'search',
+            'states',
+            'carton_groups'
+        ));
     }
-
-
     public function create(Request $request)
     {
         $startNumber = strval($request->input('start_number')); // Convierte a cadena
@@ -62,7 +69,6 @@ class CardboardsController extends Controller
 
         return redirect()->route('admin.cartones.createForm')->with('success', 'Cartones y grupos creados exitosamente.');
     }
-
     public function addToCart($name) {
         // Buscar el cartón por el nombre en lugar del ID
         $carton = Cardboard::where('name', $name)->first();
@@ -94,8 +100,6 @@ class CardboardsController extends Controller
 
         return view('user.cart.index', compact('cart'));
     }
-
-
     public function finishPurchase(Request $request)
     {
         // Obtener el carrito desde la sesión
@@ -123,11 +127,6 @@ class CardboardsController extends Controller
 
         return redirect()->route('user.cart.index')->with('success', 'Compra finalizada con éxito.');
     }
-
-
-
-
-
     public function removeFromCart($cartonId)
     {
         // Obtener el carrito desde la sesión
@@ -147,6 +146,11 @@ class CardboardsController extends Controller
         return redirect()->route('user.cart.index')->with('error', 'El cartón no se encontró en el carrito.');
     }
 
+    public function edit(Cardboard $cardboard)
+    {
+        $states = State::all();
+        return view('admin.cartones.create', compact('cardboard','states'));
+    }
 
 
 

@@ -175,7 +175,7 @@
         </div>
         <!-- Modal para asignar grupos -->
         <div class="modal fade" id="modal-asign-groups"  aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Asignación de Grupos Disponibles</h4>
@@ -192,16 +192,47 @@
                                 <input class="form-control form-control-border" type="text" disabled value="{{ $user->name }} {{ $user->lastname }}" id="user_id">
                             </div>
                             <label>Grupo de cartones disponibles</label>
-                            <div style="max-height: 200px; overflow-y: scroll;">
-                                <div class="form-group">
-                                    @foreach ($grupo_cartones as $grupo)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{ $grupo->id }}" name="grupo_cartones[]">
-                                            <label class="form-check-label" for="checkbox{{ $grupo->id }}">
-                                                {{ $grupo->id }}
-                                            </label>
-                                        </div>
-                                    @endforeach
+                            <div style="max-height: 250px; overflow-y: scroll;">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Grupo</th>
+                                            <th scope="col">Total Cartones</th>
+                                            <th scope="col">Cartones Pendientes por Vender</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Asignar</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($grupo_cartones as $grupo)
+                                            @php
+                                            $totalCartones = $grupo->cardboard_count;
+                                            $cartones_vendidos = $grupo->cardboards_vendidos;
+                                            $cartones_obsequio = $grupo->cardboards_obsequio;
+
+                                            $totalCartones_pendientes = $totalCartones - ($cartones_vendidos + $cartones_obsequio);
+                                            @endphp
+                                            <tr class="text-center">
+                                                <td>
+                                                    {{ $grupo->id }}
+                                                </td>
+                                                <td>
+                                                    {{$totalCartones}}
+                                                </td>
+                                                <td>{{$totalCartones_pendientes}}</td>
+                                                <td>{{$grupo->state->name}}</td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $grupo->id }}" name="grupo_cartones[]">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +248,7 @@
         </div>
         <!-- Modal para Cambiar estado Vendido a los grupos de cartones asignados al usuario -->
         <div class="modal fade" id="modal-cambio-state-groups"  aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Grupos de Cartones Asignados: Circulación</h4>
@@ -233,18 +264,29 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                     <tr class="text-center">
-                                        <th scope="col"># Grupo</th>
+                                        <th scope="col">Grupo</th>
+                                        <th scope="col">Total Cartones</th>
+                                        <th scope="col">Total Cartones Pendientes por Perder</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($card_groups as $card_group)
+                                        @php
+                                            $totalCartones2 = $card_group->cardboard_count;
+                                            $cartones_vendidos2 = $card_group->cardboards_vendidos;
+                                            $cartones_obsequio2 = $card_group->cardboards_obsequio;
+
+                                            $totalCartones_pendientes2 = $totalCartones2 - ($cartones_vendidos2 + $cartones_obsequio2);
+                                        @endphp
                                         <tr class="text-center">
                                             <td>
                                                 <input type="hidden" name="carton_group_state" value="{{$card_group->id}}" >
                                                 {{$card_group->id}}
                                             </td>
+                                            <td>{{$totalCartones2}}</td>
+                                            <td>{{$totalCartones_pendientes2}}</td>
                                             <td>
                                                 {{$card_group->state->name}}
                                             </td>

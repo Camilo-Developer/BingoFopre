@@ -51,7 +51,7 @@
         .accordion-body h5,
         .accordion-body h6{
             color: var(--color_main_one);
-        } 
+        }
         .accordion-body p{
             color: var(--color_main_two);
         }
@@ -143,7 +143,7 @@
                                 </li>
                                 <li class="nav-item dropdown dropdown-hover mx-2">
                                     <a  class=" mb-0  ms-auto d-lg-none d-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar Sesión">
-                                         
+
                                         <div class="background background--light">
                                             <button id="cerrar-button2" class="logoutButton logoutButton--dark" style="--figure-duration: 100; --transform-figure: none; --walking-duration: 100; --transform-arm1: none; --transform-wrist1: none; --transform-arm2: none; --transform-wrist2: none; --transform-leg1: none; --transform-calf1: none; --transform-leg2: none; --transform-calf2: none;">
                                                 <svg class="doorway" viewBox="0 0 100 100">
@@ -201,7 +201,7 @@
                             <ul class="navbar-nav mx-2 d-lg-block d-none">
                                 <li class="nav-item">
                                     <a  class=" mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar Sesión">
-                                         
+
                                         <div class="background background--light">
                                             <button id="cerrar-button2" class="logoutButton logoutButton--dark" style="--figure-duration: 100; --transform-figure: none; --walking-duration: 100; --transform-arm1: none; --transform-wrist1: none; --transform-arm2: none; --transform-wrist2: none; --transform-leg1: none; --transform-calf1: none; --transform-leg2: none; --transform-calf2: none;">
                                                 <svg class="doorway" viewBox="0 0 100 100">

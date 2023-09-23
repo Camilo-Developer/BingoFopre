@@ -70,10 +70,31 @@ class UsersController extends Controller
         }
         $grupo_cartones = CartonGroup::where('user_id', null)
             ->where('state_id', 3)
+            ->withCount([
+                'cardboard',
+                'cardboard as cardboards_vendidos' => function ($query) {
+                    $query->where('state_id', 5);
+                },
+                'cardboard as cardboards_obsequio' => function ($query) {
+                    $query->where('state_id', 6);
+                },
+            ])
             ->get();
+
         $card_groups = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
+            ->withCount([
+                'cardboard',
+                'cardboard as cardboards_vendidos' => function ($query) {
+                    $query->where('state_id', 5);
+                },
+                'cardboard as cardboards_obsequio' => function ($query) {
+                    $query->where('state_id', 6);
+                },
+            ])
             ->get();
+        //dd($card_groups);
+
         $totalGruposAsignados = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
             ->count();
@@ -84,7 +105,6 @@ class UsersController extends Controller
         $totalMontoVendido = 0;
         $totalMontoGrupo = 0;
         $totalMontoObsequio = 0;
-
 
         // Iterar a través de los grupos de cartones
         foreach ($card_groups as $group) {
@@ -107,7 +127,6 @@ class UsersController extends Controller
                 ->where('state_id', 6)
                 ->sum('price');
 
-
             $totalCartonesObse = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
                 ->count();
@@ -119,8 +138,6 @@ class UsersController extends Controller
             $totalMontoGrupo += $montoGrupo; // Sumar el monto vendido al total general
             $totalMontoObsequio += $montoObsequio; // Sumar el monto vendido al total general
             $totalCartonesObsequios += $totalCartonesObse;
-
-
 
         }
 
