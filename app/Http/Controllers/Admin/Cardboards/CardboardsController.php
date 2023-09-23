@@ -19,9 +19,13 @@ class CardboardsController extends Controller
     public function createForm(Request $request)
     {
         $search = $request->input('search');
+
+
         $cardboards = Cardboard::query()
             ->where('name', 'LIKE', "%$search%")
-            ->paginate(5);
+            ->orderBy('id', 'desc') //asc o desc
+            ->paginate(10);
+
         $states = State::all();
         $carton_groups = CartonGroup::all();
 
@@ -29,7 +33,7 @@ class CardboardsController extends Controller
             'cardboards',
             'search',
             'states',
-            'carton_groups'
+            'carton_groups',
         ));
     }
     public function create(Request $request)

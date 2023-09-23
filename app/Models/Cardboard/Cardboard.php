@@ -19,7 +19,7 @@ class Cardboard extends Model
       'price',
       'state_id',
       'group_id',
-      'user_id',
+      //'user_id',
     ];
     protected static function boot()
     {
@@ -46,10 +46,5 @@ class Cardboard extends Model
     public function cartongroup()
     {
         return $this->belongsTo('App\Models\CartonGroup\CartonGroup', 'group_id');
-    }
-    /*Lista con relacion directa e inversa revisada*/
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }
