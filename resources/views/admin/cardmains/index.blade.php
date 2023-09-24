@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Noticias Pricipales')
 @section('content')
-    <!--Migas de pan-->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +16,6 @@
             </div>
         </div>
     </section>
-    <!--Contenido- Formulario-->
     <section class="content">
         <div class="container-fluid" >
             <div class="card card-default color-palette-box">
@@ -26,7 +24,7 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">Crear Noticia</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Noticia</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.cardmains.index') }}" method="GET">
@@ -42,7 +40,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
@@ -67,7 +64,7 @@
                                                         <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
-                                                        <a title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                        <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </a>
                                                     </div>
@@ -81,15 +78,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$cardmains->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger"> <i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($cardmains->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -98,17 +93,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cardmains.index') }}" class="btn btn-danger"> <i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    {{$cardmains->links()}}
+                </div>
             </div>
         </div>
-
-        <!-- Modal para crear una noticia -->
         <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -176,8 +172,8 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
@@ -192,7 +188,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar Notica</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Notica</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -252,19 +248,15 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <div>
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
-                                    
+
                                 </div>
                             </div>
                         </form>
-                        
-
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
         @endforeach
     </section>

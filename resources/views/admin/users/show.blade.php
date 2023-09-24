@@ -53,7 +53,7 @@
                                                             @foreach ($user->roles as $role)
                                                                 {{ $role->name }}
                                                                 @if (!$loop->last)
-                                                                    , <!-- Agregar una coma entre los nombres de los roles, excepto el último -->
+                                                                    ,
                                                                 @endif
                                                             @endforeach
                                                         </p>
@@ -63,27 +63,20 @@
                                                             <h5 class="description-header">{{$totalCartonesAsignados}}</h5>
                                                             <span class="description-text">Cartones Asignados</span>
                                                         </div>
-
                                                     </div>
-
                                                     <div class="col-sm-4 border-right">
                                                         <div class="description-block">
                                                             <h5 class="description-header">{{$totalCartonesVendidos}}</h5>
                                                             <span class="description-text">Cartones vendidos</span>
                                                         </div>
-
                                                     </div>
-
                                                     <div class="col-sm-4">
                                                         <div class="description-block">
                                                             <h5 class="description-header">{{$totalCartonesObsequios}}</h5>
                                                             <span class="description-text">Cartones Obsequio</span>
                                                         </div>
-
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -99,14 +92,12 @@
                                                                     <span class="description-text">Grupos Asignados</span>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-sm-3 border-right">
                                                                 <div class="description-block">
                                                                     <h5 class="description-header">$ {{number_format(intval($totalMontoGrupo))}}</h5>
                                                                     <span class="description-text">Precio Total Grupos Asiginados</span>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-sm-3 border-right">
                                                                 <div class="description-block">
                                                                     <h5 class="description-header">$ {{number_format(intval($totalMontoVendido))}}</h5>
@@ -259,7 +250,6 @@
                 <label for="btn-mas" class="fa fa-plus"></label>
             </div>
         </div>
-        <!-- Modal para asignar grupos -->
         <div class="modal fade" id="modal-asign-groups"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -330,7 +320,6 @@
                 </div>
             </div>
         </div>
-        <!-- Modal para Cambiar estado Vendido a los grupos de cartones asignados al usuario -->
         <div class="modal fade" id="modal-cambio-state-groups"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -397,7 +386,6 @@
             <!-- /.modal-dialog -->
         </div>
 
-        <!-- Modal para el detalle del grupo -->
         @foreach($card_groups as $card_group)
             @php
                 $totalCartones3 = $card_group->cardboard_count;
@@ -450,7 +438,6 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <!--Aqui deben ir los cartones segun el grupo en el que este-->
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <thead>
@@ -477,7 +464,7 @@
                                                         </td>
                                                     </tr>
                                                     @php
-                                                        $cartonNumber++; // Incrementar el número de cartón en cada iteración
+                                                        $cartonNumber++;
                                                     @endphp
                                                 @endforeach
                                                 </tbody>
@@ -492,14 +479,11 @@
             </div>
         </div>
         @endforeach
-
-        <!-- Modal para el detalle del grupo por año -->
         @foreach($card_groups_shows as $card_groups_show)
             @php
                 $totalCartones5 = $card_groups_show->cardboard_count;
                 $cartones_vendidos5 = $card_groups_show->cardboards_vendidos;
                 $cartones_obsequio5 = $card_groups_show->cardboards_obsequio;
-
                 $totalCartones_pendientes5 = $totalCartones5 - ($cartones_vendidos5 + $cartones_obsequio5);
             @endphp
             <div class="modal fade" id="modal-datail-group_year_{{$loop->iteration}}"  aria-hidden="true">
@@ -546,7 +530,6 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <!--Aqui deben ir los cartones segun el grupo en el que este-->
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-hover">
                                                     <thead>
@@ -559,7 +542,7 @@
                                                     </thead>
                                                     <tbody>
                                                     @php
-                                                        $cartonNumber_two = 1; // Inicializar el número de cartón
+                                                        $cartonNumber_two = 1;
                                                     @endphp
                                                     @foreach ($card_groups_show->cardboard as $carton)
                                                         <tr class="text-center">
@@ -573,7 +556,7 @@
                                                             </td>
                                                         </tr>
                                                         @php
-                                                            $cartonNumber_two++; // Incrementar el número de cartón en cada iteración
+                                                            $cartonNumber_two++;
                                                         @endphp
                                                     @endforeach
                                                     </tbody>
@@ -592,7 +575,6 @@
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-
     <script>
         var ctx = document.getElementById('pieChart').getContext('2d');
         var pieChart = new Chart(ctx, {
@@ -602,20 +584,16 @@
                 datasets: [{
                     data: [{{ $totalCartonesAsignados }}, {{ $totalCartonesPendientes }}],
                     backgroundColor: [
-                        'rgb(75, 192, 192)', // Color para Cartones Asignados
-                        'rgb(255, 99, 132)'  // Color para Cartones Pendientes
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
                     ]
                 }]
             },
 
         });
     </script>
-
     <script>
-        // Obtén el contexto del lienzo (canvas)
         var ctx = document.getElementById('miGrafica2').getContext('2d');
-
-        // Define los datos para la gráfica de barras
         var data = {
             labels: ['Car. Vendidos', 'Car. Obsequio', 'Sum. Ven + Obs', 'Tol. Grupos'],
             datasets: [{
@@ -636,20 +614,17 @@
                 borderWidth: 1
             }]
         };
-
         var options = {
             scales: {
                 y: {
-                    beginAtZero: false // No comiences el eje Y en cero
+                    beginAtZero: false
                 }
             }
         };
-
-        // Crea la gráfica de barras
         var myChart = new Chart(ctx, {
-            type: 'bar', // Tipo de gráfica
-            data: data, // Datos de la gráfica
-            options: options // Opciones de configuración
+            type: 'bar',
+            data: data,
+            options: options
         });
     </script>
 @endsection

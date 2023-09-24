@@ -205,7 +205,7 @@ class UsersController extends Controller
             'name' => 'required',
             'lastname' => 'required',
             'email' => ['required', 'email'], // Verifica unicidad del correo electrónico en la tabla 'users'
-            'estado_id' => 'required|numeric',
+            'state_id' => 'required',
             'roles' => ['required', 'array', 'min:1'],
         ]);
         $data = $request->all();

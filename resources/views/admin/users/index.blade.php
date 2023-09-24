@@ -1,23 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Usuarios')
+@section('title', 'Lista de Usuarios')
 @section('content')
-    <!--Migas de pan-->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Usuarios</h1>
+                    <h1>Lista de Usuarios</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Inicio</a></li>
-                        <li class="breadcrumb-item active">Usuarios</li>
+                        <li class="breadcrumb-item active">Lista de Usuarios</li>
                     </ol>
                 </div>
             </div>
         </div>
     </section>
-    <!--Contenido- Formulario-->
     <section class="content">
         <div class="container-fluid" >
             <div class="card card-default color-palette-box">
@@ -26,7 +24,7 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_user">Crear Usuarios</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_user"> <i class="fa fa-plus"></i> Crear Usuarios</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.users.index') }}" method="GET">
@@ -68,28 +66,28 @@
                                                 @foreach ($user->roles as $role)
                                                     {{ $role->name }}
                                                     @if (!$loop->last)
-                                                        , <!-- Agregar una coma entre los nombres de los roles, excepto el último -->
+                                                        ,
                                                     @endif
                                                 @endforeach
                                             </td>
                                             <td style="width: 100px;">
-                                                <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning">Editar</button>
-                                                <a href="{{route('admin.users.show',$user)}}" class="btn btn-success">Ver</a>
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    <a href="{{route('admin.users.show',$user)}}" class="btn btn-success" style="margin-left: 5px;"><i class="fa fa-eye"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$users->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($users->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -98,7 +96,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger"> <i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -110,12 +108,11 @@
                 </div>
             </div>
         </div>
-        <!-- Modal para crear una usuario -->
         <div class="modal fade" id="modal_crear_user"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Usuario</h4>
+                        <h4 class="modal-title"> <i class="fa fa-user"></i> Nuevo Usuario</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -131,7 +128,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="nombre_usuario">Nombres del usuario:</label>
+                                            <label for="nombre_usuario"><span class="text-danger mt-1">* </span> Nombres del usuario:</label>
                                             <input type="text" class="form-control form-control-border" id="nombre_usuario" name="name" placeholder="Nombre del usuario">
                                         </div>
                                         @error('name')
@@ -140,7 +137,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="apellido_usuario">Apellidos del usuario:</label>
+                                            <label for="apellido_usuario"><span class="text-danger mt-1">* </span> Apellidos del usuario:</label>
                                             <input type="text" class="form-control form-control-border" id="apellido_usuario" name="lastname" placeholder="Apellidos del usuario">
                                         </div>
                                         @error('lastname')
@@ -149,7 +146,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="email_usuario">Correo eléctronico del usuario:</label>
+                                            <label for="email_usuario"><span class="text-danger mt-1">* </span> Correo eléctronico del usuario:</label>
                                             <input autocomplete="off" type="email" class="form-control form-control-border" id="email_usuario" name="email" placeholder="Example@example.com">
                                         </div>
                                         @error('email')
@@ -158,7 +155,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="password_usuario">Contraseña del usuario:</label>
+                                            <label for="password_usuario"><span class="text-danger mt-1">* </span> Contraseña del usuario:</label>
                                             <input autocomplete="off" type="password" class="form-control form-control-border" id="password_usuario" name="password" placeholder="Contraseña del usuario">
                                         </div>
                                         @error('password')
@@ -167,7 +164,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="roles">Rol del usuario:</label>
+                                            <label for="roles"><span class="text-danger mt-1">* </span> Rol del usuario:</label>
                                             <select class="custom-select form-control-border" name="roles[]" id="roles" multiple>
                                                 <option value="" disabled>--Seleccionar Rol--</option>
                                                 @foreach($roles as $role)
@@ -181,7 +178,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="state_id">Estado del usuario:</label>
+                                            <label for="state_id"><span class="text-danger mt-1">* </span> Estado del usuario:</label>
                                             <select class="custom-select form-control-border" name="state_id" id="state_id">
                                                 <option value="">--Seleccionar Estado--</option>
                                                 @foreach($states as $state)
@@ -197,21 +194,19 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
         @foreach($users as $user)
-            <!-- Modal para crear una usuario -->
             <div class="modal fade" id="modal_edit_user_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Nueva Usuario</h4>
+                            <h4 class="modal-title"><i class="fa fa-user-edit"></i> Editar Usuario</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -227,8 +222,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="nombre_usuario">Nombres del usuario:</label>
-                                                <input type="text" class="form-control form-control-border" id="nombre_usuario" name="name" value="{{$user->name}}">
+                                                <label for="name"><span class="text-danger mt-1">* </span> Nombres del usuario:</label>
+                                                <input type="text" class="form-control form-control-border" id="name" name="name" value="{{$user->name}}">
                                             </div>
                                             @error('name')
                                             <span class="text-danger">{{$message}}</span>
@@ -236,8 +231,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="apellido_usuario">Apellidos del usuario:</label>
-                                                <input type="text" class="form-control form-control-border" id="apellido_usuario" name="lastname" value="{{$user->lastname}}">
+                                                <label for="lastname"><span class="text-danger mt-1">* </span> Apellidos del usuario:</label>
+                                                <input type="text" class="form-control form-control-border" id="lastname" name="lastname" value="{{$user->lastname}}">
                                             </div>
                                             @error('lastname')
                                             <span class="text-danger">{{$message}}</span>
@@ -245,8 +240,8 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="email_usuario">Correo eléctronico del usuario:</label>
-                                                <input type="email" class="form-control form-control-border" id="email_usuario" name="email" value="{{$user->email}}">
+                                                <label for="email"><span class="text-danger mt-1">* </span> Correo eléctronico del usuario:</label>
+                                                <input type="email" class="form-control form-control-border" id="email" name="email" value="{{$user->email}}">
                                             </div>
                                             @error('email')
                                             <span class="text-danger">{{$message}}</span>
@@ -260,7 +255,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="state_id">Estado del usuario:</label>
+                                                <label for="state_id"><span class="text-danger mt-1">* </span>  Estado del usuario:</label>
                                                 <select class="custom-select form-control-border" name="state_id" id="state_id">
                                                     <option >--Seleccionar Estado--</option>
                                                     @foreach($states as $state)
@@ -274,7 +269,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label>Rol del usuario:</label>
+                                                <label><span class="text-danger mt-1">* </span>  Rol del usuario:</label>
                                                 @foreach($roles as $role)
                                                     <div>
                                                         <div class="form-check">
@@ -295,8 +290,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-success">Crear</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cerrar</button>
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
                             </div>
                         </form>
                     </div>
@@ -305,3 +300,4 @@
         @endforeach
     </section>
 @endsection
+

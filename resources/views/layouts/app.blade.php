@@ -28,13 +28,10 @@
     <form action="{{route('logout')}}" method="post" id="cerrar">
         @csrf
     </form>
-    <!-- Preloader -->
     <div class="preloader loader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="{{url('recursos/admin/dist/img/logo-uniandes-preload.png')}}" alt="AdminLTELogo" height="120" width="280">
     </div>
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -43,9 +40,7 @@
                 <a href="{{route('dashboard')}}" class="nav-link">Inicio</a>
             </li>
         </ul>
-        <!-- Right navbar links -->
         @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Usuario'))
-
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -93,12 +88,11 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="{{route('dashboard')}}" class="brand-link">
             <!--
-            <img src="{{url('recursos/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="{{--url('recursos/admin/dist/img/AdminLTELogo.png')--}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
              -->
             <span class="brand-text font-weight-light">Bingo Fopre</span>
         </a>
 
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <!--
@@ -195,7 +189,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create" || $_SERVER['REQUEST_URI'] === "/admin/products/create") active @endif">
+                        <a href="#" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create" || $_SERVER['REQUEST_URI'] === "/admin/cartongroups") active @endif">
                             <i class="nav-icon fab fa-product-hunt"></i>
                             <p>
                                 Cartones
@@ -206,7 +200,13 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.cartones.createForm')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartones/create") active @endif">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Creación de Cartones</p>
+                                    <p>Listado de Cartones</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.cartongroups.index')}}" class="nav-link @if($_SERVER['REQUEST_URI'] === "/admin/cartongroups") active @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Listado de Grupos</p>
                                 </a>
                             </li>
                         </ul>
@@ -253,13 +253,11 @@
             </nav>
         </div>
     </aside>
-    <!--main donde se encuenta nuestro contenido-->
     <main>
         <div class="content-wrapper">
             @yield('content')
         </div>
     </main>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>Copyright &copy; 2023 <a href="https://uniandes.edu.co/">Universidad de los Andes</a>.</strong>
         Derechos Reservados.
@@ -275,6 +273,8 @@
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <script src="{{url('recursos/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url('recursos/admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{url('recursos/admin/plugins/toastr/toastr.min.js')}}"></script>
 <script src="{{url('recursos/admin/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <script src="{{url('recursos/admin/plugins/moment/moment.min.js')}}"></script>
 <script src="{{url('recursos/admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
@@ -346,7 +346,7 @@
         retrasarEnvio(); // Llama a la función para retrasar el envío
     });
 </script>
-
+@include('components.flash_alerts')
 @yield('js')
 </body>
 </html>

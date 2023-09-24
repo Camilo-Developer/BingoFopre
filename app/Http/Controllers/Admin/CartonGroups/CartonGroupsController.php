@@ -13,7 +13,7 @@ class CartonGroupsController extends Controller
      */
     public function index()
     {
-        $cartongroups = CartonGroup::all();
+        $cartongroups = CartonGroup::paginate(5);
         return view('admin.cartongroups.index',compact('cartongroups'));
     }
 

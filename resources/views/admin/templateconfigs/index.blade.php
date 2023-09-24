@@ -120,7 +120,7 @@
                                             <div class="col-6 mb-3">
                                                 <label>Url de la trasmición</label>
                                                 <br>
-                                                <a class="btn btn-success" href="{{$templateconfig->url_live}}"  target="_blank"> 
+                                                <a class="btn btn-success" href="{{$templateconfig->url_live}}"  target="_blank">
                                                     <i class="fa fa-link"></i> Ir al Sitio web
                                                 </a>
                                             </div>
@@ -240,7 +240,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Información Principal del Sitio</h4>
+                        <h4 class="modal-title"> <i class="fa fa-edit"></i> Editar Información Principal del Sitio</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -295,7 +295,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"> <i class="fa fa-edit"></i>  Editar  </button>
                         </div>
                     </form>
@@ -306,7 +306,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Información de cartones</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Información de cartones</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -351,7 +351,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
@@ -362,7 +362,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Información de la Trasmición</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Información de la Trasmición</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -401,7 +401,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
@@ -412,7 +412,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Datos de la Universidad</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Datos de la Universidad</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -446,7 +446,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
@@ -457,7 +457,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Colores del texto</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Colores del texto</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -497,7 +497,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>
@@ -508,7 +508,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Información del Inicio de Sesión</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Información del Inicio de Sesión</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -575,7 +575,7 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cerrar</button>
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
                         </div>
                     </form>

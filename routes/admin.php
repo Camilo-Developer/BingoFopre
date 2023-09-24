@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\States\StatesController;
 use App\Http\Controllers\Admin\Roles\RolesController;
 use App\Http\Controllers\Admin\Cardboards\CardboardsController;
 use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\Admin\CartonGroups\CartonGroupsController;
 
 
 
@@ -35,4 +36,4 @@ Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController
 Route::resource('/users', UsersController::class)->names('admin.users');
 Route::post('/users/group_assignment',[UsersController::class,'asiginacionGrupos'])->name('admin.users.asiginacionGrupos');
 Route::post('/users/cambio-state-grupos-cartones',[UsersController::class,'cambioStateGruposCartones'])->name('admin.users.cambioStateGruposCartones');
-
+Route::resource('/cartongroups', CartonGroupsController::class)->names('admin.cartongroups');

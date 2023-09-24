@@ -56,38 +56,44 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $sponsorN = 1;
+                                    @endphp
                                     @foreach($sponsors as $sponsor)
                                         <tr class="text-center">
-                                            <th scope="row" style="width: 50px;">{{$sponsor->id}}</th>
+                                            <th scope="row" style="width: 50px;">{{$sponsorN}}</th>
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $sponsor->logo)}}" alt="{{$sponsor->name}}"></td>
                                             <td>{{$sponsor->name}}</td>
                                             <td>{{$sponsor->state->name}}</td>
                                             <td>
-                                                <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <a title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                                </td>
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <form action="{{route('admin.sponsors.destroy',$sponsor)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
                                             @csrf
                                             @method('DELETE')
                                         </form>
+                                        @php
+                                            $sponsorN++;
+                                        @endphp
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$sponsors->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($sponsors->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -96,12 +102,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
                         </div>
                     </div>
+                </div>
+                <div class="card-footer">
+                    {{$sponsors->links()}}
                 </div>
             </div>
         </div>
@@ -228,11 +237,11 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <div>
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
-                                    
+
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
