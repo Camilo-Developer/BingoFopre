@@ -42,7 +42,10 @@
     </style>
 </head>
 <body class="automotive ">
-<form action="{{route('logout')}}" method="post" id="cerrar">
+<form action="{{route('logout')}}" method="post" id="cerrarUser">
+    @csrf
+</form>
+<form action="{{route('logout')}}" method="post" id="cerrarUser2">
     @csrf
 </form>
 <div class="container position-sticky z-index-sticky top-0">
@@ -223,7 +226,7 @@
                                     <a  class=" mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar Sesión">
 
                                         <div class="background background--light">
-                                            <button id="cerrar-button" class="logoutButton logoutButton--dark" style="--figure-duration: 100; --transform-figure: none; --walking-duration: 100; --transform-arm1: none; --transform-wrist1: none; --transform-arm2: none; --transform-wrist2: none; --transform-leg1: none; --transform-calf1: none; --transform-leg2: none; --transform-calf2: none;">
+                                            <button id="cerrar-button2" class="logoutButton logoutButton--dark" style="--figure-duration: 100; --transform-figure: none; --walking-duration: 100; --transform-arm1: none; --transform-wrist1: none; --transform-arm2: none; --transform-wrist2: none; --transform-leg1: none; --transform-calf1: none; --transform-leg2: none; --transform-calf2: none;">
                                                 <svg class="doorway" viewBox="0 0 100 100">
                                                     <path d="M93.4 86.3H58.6c-1.9 0-3.4-1.5-3.4-3.4V17.1c0-1.9 1.5-3.4 3.4-3.4h34.8c1.9 0 3.4 1.5 3.4 3.4v65.8c0 1.9-1.5 3.4-3.4 3.4z"></path>
                                                     <path class="bang" d="M40.5 43.7L26.6 31.4l-2.5 6.7zM41.9 50.4l-19.5-4-1.4 6.3zM40 57.4l-17.7 3.9 3.9 5.7z"></path>
@@ -255,11 +258,8 @@
                                             </button>
                                         </div>
                                     </a>
-
-
                                 </li>
                             </ul>
-
                         @else
                             <ul class="navbar-nav navbar-nav-hover ms-auto">
                                 <li class="nav-item dropdown dropdown-hover mx-2">
@@ -439,7 +439,7 @@
     function retrasarEnvio() {
         setTimeout(function () {
             // Selecciona el formulario y lo envía
-            document.getElementById('cerrar').submit();
+            document.getElementById('cerrarUser').submit();
         }, 1400); // 5000 milisegundos = 5 segundos
     }
 
@@ -449,7 +449,20 @@
         retrasarEnvio(); // Llama a la función para retrasar el envío
     });
 </script>
+<script>
+    // Función para retrasar el envío del formulario
+    function retrasarEnvio() {
+        setTimeout(function () {
+            // Selecciona el formulario y lo envía
+            document.getElementById('cerrarUser2').submit();
+        }, 1400); // 5000 milisegundos = 5 segundos
+    }
 
+    // Agrega un evento de clic al botón
+    document.getElementById('cerrar-button2').addEventListener('click', function (e) {
+        e.preventDefault(); // Previene el envío inmediato del formulario al hacer clic
+        retrasarEnvio(); // Llama a la función para retrasar el envío
+    });
+</script>
 </body>
-
 </html>

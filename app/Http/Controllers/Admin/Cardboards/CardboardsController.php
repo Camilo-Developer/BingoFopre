@@ -156,7 +156,19 @@ class CardboardsController extends Controller
         return view('admin.cartones.create', compact('cardboard','states'));
     }
 
-
+    public function update(Request $request, Cardboard $cardboard)
+    {
+        $request->validate([
+           'name' => 'required',
+           'price' => 'required',
+           'document_number' => 'nullable',
+           'state_id' => 'required',
+           'group_id' => 'required',
+        ]);
+        $data = $request->all();
+        $cardboard->update($data);
+        return redirect()->route('admin.cartones.create')->with('edit', 'El Cartón se ha editado correctamente.');
+    }
 
 
 }

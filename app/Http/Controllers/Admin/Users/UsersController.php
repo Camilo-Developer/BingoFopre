@@ -92,8 +92,29 @@ class UsersController extends Controller
                     $query->where('state_id', 6);
                 },
             ])
+            ->with(['cardboard' => function ($query) {
+                $query->select('id', 'name', 'state_id', 'group_id');
+            }])
+            ->paginate(5);
+
+
+        $currentYear = date('Y'); // Obtener el año actual
+
+        $card_groups_shows = CartonGroup::where('user_id', $user->id)
+            ->whereYear('created_at', $currentYear)
+            ->withCount([
+                'cardboard',
+                'cardboard as cardboards_vendidos' => function ($query) {
+                    $query->where('state_id', 5);
+                },
+                'cardboard as cardboards_obsequio' => function ($query) {
+                    $query->where('state_id', 6);
+                },
+            ])
+            ->with(['cardboard' => function ($query) {
+                $query->select('id', 'name', 'state_id', 'group_id');
+            }])
             ->get();
-        //dd($card_groups);
 
         $totalGruposAsignados = CartonGroup::where('user_id', $user->id)
             ->where('state_id', 3)
@@ -161,6 +182,8 @@ class UsersController extends Controller
             'sumademontos',
             'grupo_cartones',
             'states',
+            'card_groups_shows',
+            'currentYear',
         ));
     }
 

@@ -47,21 +47,6 @@
         @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Usuario'))
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    @if(session('cart'))
-
-                        @php $cartCount = count(session('cart')); @endphp
-                        <a class="nav-link"  href="{{route('user.cart.index')}}" title="Carrito de Compra">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span class="badge badge-warning navbar-badge" style="font-weight: bold" title="aaa">{{ $cartCount }}</span>
-                        </a>
-                    @else
-                        <a class="nav-link" href="{{route('user.cart.index')}}" title="Carrito de Compra">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span class="badge badge-warning navbar-badge" style="font-weight: bold" title="aaa">0</span>
-                        </a>
-                    @endif
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>

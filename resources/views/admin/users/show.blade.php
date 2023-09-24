@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Detalle del usaurio')
+@section('title', 'Detalle del usuario')
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -138,26 +138,112 @@
                 </div>
             </div>
         </section>
-        <section class="content">
+        <section class="content pb-4">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card  collapsed-card">
+                        <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Expandable</h3>
+                                <h3 class="card-title">Historial del Usuario</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-
                             </div>
+                            <div class="card-body" style="display: block;">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <label>Grupos Asginados hasta el momento: </label>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">Grupo</th>
+                                                    <th scope="col">Tol. Cart</th>
+                                                    <th scope="col">Pend. Cart</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Accion</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($card_groups as $card_group)
+                                                    @php
+                                                        $totalCartones2 = $card_group->cardboard_count;
+                                                        $cartones_vendidos2 = $card_group->cardboards_vendidos;
+                                                        $cartones_obsequio2 = $card_group->cardboards_obsequio;
 
-                            <div class="card-body" style="display: none;">
-                                The body of the card
+                                                        $totalCartones_pendientes2 = $totalCartones2 - ($cartones_vendidos2 + $cartones_obsequio2);
+                                                    @endphp
+                                                    <tr class="text-center">
+                                                        <td>
+                                                            <input type="hidden" name="carton_group_state" value="{{$card_group->id}}" >
+                                                            {{$card_group->id}}
+                                                        </td>
+                                                        <td>{{$totalCartones2}}</td>
+                                                        <td>{{$totalCartones_pendientes2}}</td>
+                                                        <td>
+                                                            {{$card_group->state->name}}
+                                                        </td>
+                                                        <td>
+                                                            <a data-toggle="modal" data-target="#modal-datail-group_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                <button  type="button" class="btn btn-success">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{ $card_groups->links() }}
+
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label>Total de Grupos Asginados año: {{$currentYear}}</label>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">Grupo</th>
+                                                    <th scope="col">Tol. Cart</th>
+                                                    <th scope="col">Pend. Cart</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Accion</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($card_groups_shows as $card_groups_show)
+                                                    @php
+                                                        $totalCartones4 = $card_groups_show->cardboard_count;
+                                                        $cartones_vendidos4 = $card_groups_show->cardboards_vendidos;
+                                                        $cartones_obsequio4 = $card_groups_show->cardboards_obsequio;
+
+                                                        $totalCartones_pendientes4 = $totalCartones4 - ($cartones_vendidos4 + $cartones_obsequio4);
+                                                    @endphp
+                                                    <tr class="text-center">
+                                                        <td>{{$card_groups_show->id}}</td>
+                                                        <td>{{$totalCartones4}}</td>
+                                                        <td>{{$totalCartones_pendientes4}}</td>
+                                                        <td>{{$card_groups_show->state->name}}</td>
+                                                        <td>
+                                                            <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                <button  type="button" class="btn btn-success">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -242,9 +328,7 @@
                         </div>
                     </form>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
         </div>
         <!-- Modal para Cambiar estado Vendido a los grupos de cartones asignados al usuario -->
         <div class="modal fade" id="modal-cambio-state-groups"  aria-hidden="true">
@@ -313,6 +397,197 @@
             <!-- /.modal-dialog -->
         </div>
 
+        <!-- Modal para el detalle del grupo -->
+        @foreach($card_groups as $card_group)
+            @php
+                $totalCartones3 = $card_group->cardboard_count;
+                $cartones_vendidos3 = $card_group->cardboards_vendidos;
+                $cartones_obsequio3 = $card_group->cardboards_obsequio;
+
+                $totalCartones_pendientes3 = $totalCartones3 - ($cartones_vendidos3 + $cartones_obsequio3);
+            @endphp
+        <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Detalle del grupo</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="username">Usuario Responsable</label><br>
+                                            <input class="form-control form-control-border" type="text" disabled value="{{ $user->name }} {{ $user->lastname }}" id="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="group">Grupo</label><br>
+                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_group->id }}" id="group">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="group">Estado</label><br>
+                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_group->state->name }}" id="group">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="group">Total Cartones</label><br>
+                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones3 }}" id="group">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="group">Total Pendientes por Vender</label><br>
+                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones_pendientes3 }}" id="group">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <!--Aqui deben ir los cartones segun el grupo en el que este-->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Nombre Carton</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Acción</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @php
+                                                    $cartonNumber = 1; // Inicializar el número de cartón
+                                                @endphp
+                                                @foreach ($card_group->cardboard as $carton)
+                                                    <tr class="text-center">
+                                                        <td>{{ $cartonNumber }}</td>
+                                                        <td>{{ $carton->name }}</td>
+                                                        <td>{{ $carton->state->name }}</td>
+                                                        <td>
+                                                            <a href="/admin/cartones/create?search={{ $carton->name }}" class="btn btn-success">
+                                                                <i class="fa fa-search"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $cartonNumber++; // Incrementar el número de cartón en cada iteración
+                                                    @endphp
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+        <!-- Modal para el detalle del grupo por año -->
+        @foreach($card_groups_shows as $card_groups_show)
+            @php
+                $totalCartones5 = $card_groups_show->cardboard_count;
+                $cartones_vendidos5 = $card_groups_show->cardboards_vendidos;
+                $cartones_obsequio5 = $card_groups_show->cardboards_obsequio;
+
+                $totalCartones_pendientes5 = $totalCartones5 - ($cartones_vendidos5 + $cartones_obsequio5);
+            @endphp
+            <div class="modal fade" id="modal-datail-group_year_{{$loop->iteration}}"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle del grupo por el año </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="username">Usuario Responsable</label><br>
+                                                <input class="form-control form-control-border" type="text" disabled value="{{ $user->name }} {{ $user->lastname }}" id="username">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="group">Grupo</label><br>
+                                                <input class="form-control form-control-border" type="text" disabled value="{{ $card_groups_show->id }}" id="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="group">Estado</label><br>
+                                                <input class="form-control form-control-border" type="text" disabled value="{{ $card_groups_show->state->name }}" id="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="group">Total Cartones</label><br>
+                                                <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones5 }}" id="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="group">Total Pendientes por Vender</label><br>
+                                                <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones_pendientes5 }}" id="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <!--Aqui deben ir los cartones segun el grupo en el que este-->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Nombre Carton</th>
+                                                        <th scope="col">Estado</th>
+                                                        <th scope="col">Acción</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @php
+                                                        $cartonNumber_two = 1; // Inicializar el número de cartón
+                                                    @endphp
+                                                    @foreach ($card_groups_show->cardboard as $carton)
+                                                        <tr class="text-center">
+                                                            <td>{{ $cartonNumber_two }}</td>
+                                                            <td>{{ $carton->name }}</td>
+                                                            <td>{{ $carton->state->name }}</td>
+                                                            <td>
+                                                                <a href="/admin/cartones/create?search={{ $carton->name }}" class="btn btn-success">
+                                                                    <i class="fa fa-search"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        @php
+                                                            $cartonNumber_two++; // Incrementar el número de cartón en cada iteración
+                                                        @endphp
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection
 @section('js')

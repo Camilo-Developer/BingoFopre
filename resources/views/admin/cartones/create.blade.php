@@ -1,7 +1,6 @@
-@extends('layouts.app') <!-- Asegúrate de que esta línea coincida con tu diseño de plantilla -->
+@extends('layouts.app')
 @section('title', 'Listadado Cartones')
 @section('content')
-    <!--Migas de pan-->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +16,6 @@
             </div>
         </div>
     </section>
-    <!--Contenido- Formulario-->
     <section class="content">
         <div class="container-fluid" >
             <div class="card card-default color-palette-box">
@@ -78,7 +76,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$cardboards->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -86,7 +83,6 @@
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($cardboards->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -177,19 +173,20 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="POST" action="{{ route('admin.cartones.create') }}">
+                            <form method="POST" action="{{ route('admin.cartones.update',$cardboard) }}">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="start_number">Nombre:</label>
-                                            <input type="number" value="{{$cardboard->name}}" id="start_number" name="start_number" class="form-control" required>
+                                            <label for="name">Nombre:</label>
+                                            <input type="number" value="{{$cardboard->name}}" id="name" name="name" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="end_number">Precio:</label>
-                                            <input type="number" value="{{$cardboard->price}}"  id="end_number" name="end_number" class="form-control" required>
+                                            <label for="price">Precio:</label>
+                                            <input type="number" value="{{$cardboard->price}}"  id="price" name="price" class="form-control" required>
                                         </div>
                                     </div>
                                     <style>
@@ -198,10 +195,10 @@
                                         }
                                     </style>
                                     <div class="col-6">
-                                        <label for="">Grupos:</label>
+                                        <label>Grupos:</label>
                                         <div class="row">
                                             <div class="col-12">
-                                                    <select id="groupSelect_{{$loop->iteration}}" class="form-control" style="width: 100%;">
+                                                    <select id="groupSelect_{{$loop->iteration}}" name="group_id" class="form-control" style="width: 100%;">
                                                         <option value=""></option> <!-- Agrega una opción en blanco -->
                                                         @foreach($carton_groups as $carton_group)
                                                             <option value="{{$carton_group->id}}" {{ $carton_group->id == $cardboard->group_id ? 'selected' : '' }} {{ old('group_id') == $carton_group->id ? 'selected' : '' }}>{{$carton_group->id}}</option>
@@ -220,13 +217,19 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="name_vendedor">Correo del Vendedor:</label>
+                                            <input disabled value="{{ optional($cardboard->cartongroup)->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
+                                        </div>
+                                    </div>
 
                                     <div class="col-12">
-                                        <label for="group_size">Documento de Identidad Comprador</label>
+                                        <label for="document_number">Documento de Identidad Comprador</label>
                                     </div>
                                     <div class="col-10">
                                         <div class="form-group">
-                                            <input type="number" value="{{$cardboard->document_number}}" id="group_size" name="group_size" class="form-control" required>
+                                            <input type="number" value="{{$cardboard->document_number}}" id="document_number" name="document_number" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-2">
@@ -236,7 +239,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Editar Cartón</button>
+                                            <button type="submit" class="btn btn-warning"> <i class="fa fa-edit"></i> Editar Cartón</button>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +250,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modal_show_cartones_{{$loop->iteration}}"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
