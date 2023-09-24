@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Premios')
+@section('title', 'Lista de Premios')
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -24,7 +24,7 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">Crear Premio</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Premio</button>
                                 </div>
                             </div>
                         </div>
@@ -41,14 +41,31 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                    $premiosN = 1;
+                                    @endphp
                                     @foreach($prizes as $prize)
                                         <tr class="text-center">
-                                            <th scope="row" style="width: 50px;">{{$prize->id}}</th>
+                                            <th scope="row" style="width: 50px;">{{$premiosN}}</th>
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $prize->imagen)}}" alt="{{$prize->color}}"></td>
                                             <td><div style="width: 100%; display: flex; justify-content: center"> <div style="background: {{$prize->color}}; width: 30px; height: 30px; border-radius: 5px;"></div></div></td>
                                             <td>{{$prize->state->name}}</td>
-                                            <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
+                                            <td style="width: 100px;">
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
+                                        <form action="{{route('admin.prizes.destroy',$prize)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        @php
+                                            $premiosN++;
+                                        @endphp
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -56,19 +73,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    {{$prizes->links()}}
+                </div>
             </div>
         </div>
-         <!-- Modal para crear un Premio  -->
         <div class="modal fade" id="modal-default"  aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nuevo Premio</h4>
+                        <h4 class="modal-title"><i class="fa fa-check-circle"></i> Nuevo Premio</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-
                     <form action="{{route('admin.prizes.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -76,14 +94,14 @@
 
                             <div class="row">
                                 <div class="col-3">
-                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px"> 
+                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
                                 </div>
                                 <div class="col-9">
                                     <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
                                         <div class="d-flex justify-content-end">
                                             <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
                                         </div>
-        
+
                                         <div class="form-group">
                                             <label for="color"><span class="text-danger">*</span> Color:</label>
                                             <input type="color" name="color" required class="form-control form-control-border" id="color">
@@ -109,23 +127,22 @@
                                 </div>
                             </div>
 
-                            
+
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-<!-- Modal para editar un Premio  -->
         @foreach($prizes as $prize)
             <div class="modal fade" id="modal-edit-noticia_{{$loop->iteration}}"  aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar Premio</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Premio</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -145,7 +162,7 @@
                                             <div class="d-flex justify-content-end">
                                                 <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
                                             </div>
-        
+
                                             <div class="form-group">
                                                 <label for="color"><span class="text-danger">*</span> Color:</label>
                                                 <input type="color" value="{{$prize->color}}" name="color" required class="form-control form-control-border" id="color">
@@ -171,28 +188,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <div>
-                                    <button type="submit" class="btn btn-warning">Editar</button>
-                                    <a title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
+
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('admin.prizes.destroy',$prize)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
-                            @csrf
-                            @method('DELETE')
-                        </form>
-
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
         @endforeach
     </section>
@@ -200,7 +206,6 @@
 @section('js')
     <script>
         $(function () {
-            //Add text editor
             $('#compose-textarea').summernote(
                 {
                     tabsize: 2,
@@ -210,7 +215,6 @@
         });
         @foreach($prizes as $prize)
         $(function () {
-            //Add text editor
             $('#editNovedad_{{$loop->iteration}}').summernote(
                 {
                     tabsize: 2,
@@ -230,7 +234,6 @@
                 reader.readAsDataURL(this.files[0]);
             });
         });
-    
     </script>
     <script>
         @foreach($prizes as $prize)

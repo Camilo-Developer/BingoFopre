@@ -1,23 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Estados')
+@section('title', 'Lista de Estados')
 @section('content')
-    <!--Migas de pan-->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Estados</h1>
+                    <h1>Lista de Estados</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Inicio</a></li>
-                        <li class="breadcrumb-item active">Estados</li>
+                        <li class="breadcrumb-item active">Lista de Estados</li>
                     </ol>
                 </div>
             </div>
         </div>
     </section>
-    <!--Contenido- Formulario-->
     <section class="content">
         <div class="container-fluid" >
             <div class="card card-default color-palette-box">
@@ -26,13 +24,13 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">Crear Estado</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Estado</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <form action="{{ route('admin.states.index') }}" method="GET">
                                             <div class="input-group input-group-sm buq-menu" >
-                                                <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Usuario">
+                                                <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Estado">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn btn-default">
                                                         <i class="fas fa-search"></i>
@@ -60,21 +58,30 @@
                                         <tr class="text-center">
                                             <th scope="row" style="width: 50px;">{{$state->id}}</th>
                                             <td>{{$state->name}}</td>
-                                            <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-estado_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
+                                            <td style="width: 100px;">
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-edit-estado_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarEstado_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
+                                        <form action="{{route('admin.states.destroy',$state)}}"  method="POST" id="eliminarEstado_{{ $loop->iteration }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$states->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($states->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -83,7 +90,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.states.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -95,12 +102,11 @@
                 </div>
             </div>
         </div>
-        <!-- Modal para crear una noticia -->
         <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Estado</h4>
+                        <h4 class="modal-title"><i class="fa fa-check-circle"></i> Nuevo Estado</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -151,30 +157,24 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
         </div>
 
         @foreach($states as $state)
-            <!-- Modal para editar una noticia -->
             <div class="modal fade" id="modal-edit-estado_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar Estado</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Estado</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -225,26 +225,18 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <div>
-                                    <button type="submit" class="btn btn-warning">Editar</button>
-                                    <a title="Eliminar" onclick="document.getElementById('eliminarEstado_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
+
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('admin.states.destroy',$state)}}"  method="POST" id="eliminarEstado_{{ $loop->iteration }}">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+
                     </div>
                     <!-- /.modal-content -->
                 </div>

@@ -12,7 +12,7 @@ class PrizesController extends Controller
 
     public function index()
     {
-        $prizes = Prize::all();
+        $prizes = Prize::paginate(5);
         $states = State::all();
         return view('admin.prizes.index',compact('prizes', 'states'));
     }

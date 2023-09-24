@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Dinámica del Juego')
 @section('content')
-    <!--Migas de pan-->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +16,6 @@
             </div>
         </div>
     </section>
-    <!--Contenido- Formulario-->
     <section class="content">
         <div class="container-fluid" >
             <div class="card card-default color-palette-box">
@@ -26,12 +24,12 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-dynamicgame">Crear Dinámica</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-dynamicgame"><i class="fa fa-check"></i> Crear Dinámica</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.dynamicgames.index') }}" method="GET">
                                         <div class="input-group input-group-sm buq-menu" >
-                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Nombre">
+                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Dinamica">
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
                                                     <i class="fas fa-search"></i>
@@ -42,7 +40,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
@@ -57,28 +54,43 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                    $dinamic = 1;
+                                    @endphp
                                     @foreach($dynamicgames as $dynamicgame)
                                         <tr class="text-center">
-                                            <th scope="row" style="width: 50px;">{{$dynamicgame->id}}</th>
+                                            <th scope="row" style="width: 50px;">{{$dinamic}}</th>
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $dynamicgame->logo)}}" alt="{{$dynamicgame->title}}"></td>
                                             <td>{{$dynamicgame->title}}</td>
                                             <td>{{$dynamicgame->state->name}}</td>
                                             <td>{{$dynamicgame->letra}}</td>
-                                            <td style="width: 100px;"><button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning">Editar</button></td>
+                                            <td style="width: 100px;">
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminardynamicgames_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
+                                        @php
+                                            $dinamic++;
+                                        @endphp
+                                        <form action="{{route('admin.dynamicgames.destroy',$dynamicgame)}}"  method="POST" id="eliminardynamicgames_{{ $loop->iteration }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- Agregar código para mostrar el botón cuando haya resultados -->
                             @if(!empty($search) && !$dynamicgames->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.dynamicgames.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.dynamicgames.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
-                            <!-- Agregar código para mostrar el mensaje cuando no haya resultados -->
                             @if($dynamicgames->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
@@ -87,7 +99,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.sponsors.index') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -96,13 +108,11 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal para crear una noticia -->
         <div class="modal fade" id="modal-dynamicgame"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Dinámica</h4>
+                        <h4 class="modal-title"><i class="fa fa-check-circle"></i> Nueva Dinámica</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -225,23 +235,20 @@
 
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
         </div>
 
         @foreach($dynamicgames as $dynamicgame)
-            <!-- Modal para editar una noticia -->
             <div class="modal fade" id="modal-edit-dynamicgame_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar dinámica del juego</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar dinámica del juego</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -251,7 +258,6 @@
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
-
                                 <div class="row">
                                     <div class="col-3">
                                         <img src="{{asset('storage/' . $dynamicgame->logo)}}" id="imagenSeleccionadas_{{$loop->iteration}}" class="card-img-top img-fluid" width="17px" height="27px">
@@ -289,7 +295,6 @@
                                                         </select>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Filas:</label>
@@ -360,56 +365,42 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <div>
-                                    <button type="submit" class="btn btn-warning">Editar</button>
-                                    <a title="Eliminar" onclick="document.getElementById('eliminardynamicgames_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('admin.dynamicgames.destroy',$dynamicgame)}}"  method="POST" id="eliminardynamicgames_{{ $loop->iteration }}">
-                            @csrf
-                            @method('DELETE')
-                        </form>
-
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
         @endforeach
     </section>
 @endsection
 @section('js')
-
-    <script>
+<script>
+    $(function () {
+        $('#compose-textarea').summernote(
+            {
+                tabsize: 2,
+                height: 200
+            }
+        );
+    });
+    @foreach($dynamicgames as $dynamicgame)
         $(function () {
             //Add text editor
-            $('#compose-textarea').summernote(
+            $('#editNovedad_{{$loop->iteration}}').summernote(
                 {
                     tabsize: 2,
                     height: 200
                 }
             );
         });
-        @foreach($dynamicgames as $dynamicgame)
-            $(function () {
-                //Add text editor
-                $('#editNovedad_{{$loop->iteration}}').summernote(
-                    {
-                        tabsize: 2,
-                        height: 200
-                    }
-                );
-            });
-        @endforeach
-    </script>
-
+    @endforeach
+</script>
 <script>
     $(document).ready(function (e) {
         $('#logo').change(function(){
@@ -421,7 +412,6 @@
         });
     });
 </script>
-
 <script>
     @foreach($dynamicgames as $dynamicgame)
     $(document).ready(function (e) {
@@ -435,5 +425,4 @@
     });
     @endforeach
 </script>
-
 @endsection

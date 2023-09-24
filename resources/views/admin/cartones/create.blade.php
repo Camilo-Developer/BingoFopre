@@ -79,7 +79,7 @@
                             @if(!empty($search) && !$cardboards->isEmpty())
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger">Borrar búsqueda</a>
+                                        <a href="{{ route('admin.cartones.createForm') }}" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar búsqueda</a>
                                     </div>
                                 </div>
                             @endif
@@ -108,7 +108,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Creación de cartones masivos</h4>
+                    <h4 class="modal-title"><i class="fa fa-check-circle"></i> Creación de Grupos y Cartones masivos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Crear Cartones y Grupos</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Crear Cartones y Grupos</button>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edición de cartón</h4>
+                    <h4 class="modal-title"><i class="fa fa-edit"></i> Edición de cartón</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
