@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('cardboards', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            //$table->date('date_finish');
             $table->string('price');
             $table->string('document_number')->nullable();
             $table->bigInteger('state_id')->unsigned()->default(3);
             $table->bigInteger('group_id')->unsigned()->nullable();
-            //$table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

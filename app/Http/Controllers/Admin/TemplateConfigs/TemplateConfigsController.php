@@ -25,12 +25,12 @@ class TemplateConfigsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'logo' => 'required', //
-            'img_main' => 'required', //
-            'color_main_one' => 'required', //
+            'logo' => 'required',
+            'img_main' => 'required',
+            'color_main_one' => 'required',
             'color_main_two' => 'required',
-            'img_carton' => 'required',//
-            'url_carton' => 'required', //
+            'img_carton' => 'required',
+            'url_carton' => 'required',
             'description_carton' => 'required',
             'price_carton' => 'required',
             'img_live' => 'required',
@@ -50,7 +50,6 @@ class TemplateConfigsController extends Controller
         ]);
         $templateconfigs = $request->all();
 
-        //1
         if ($request->hasFile('logo')){
             $logo = $request->file('logo');
             $rutaGuardarLogo = public_path('storage/templateconfing');
@@ -59,7 +58,6 @@ class TemplateConfigsController extends Controller
             $templateconfigs['logo'] = 'templateconfing/' . $imagenLogo;
         }
 
-        //2
         if ($request->hasFile('img_main')){
             $img_main = $request->file('img_main');
             $rutaGuardarImgMain = public_path('storage/templateconfing');
@@ -68,7 +66,6 @@ class TemplateConfigsController extends Controller
             $templateconfigs['img_main'] = 'templateconfing/' . $imagenImgMian;
         }
 
-        //3
         if ($request->hasFile('img_carton')){
             $img_carton = $request->file('img_carton');
             $rutaGuardarImgCarton = public_path('storage/templateconfing');
@@ -76,7 +73,6 @@ class TemplateConfigsController extends Controller
             $img_carton->move($rutaGuardarImgCarton, $imagenImgCarton);
             $templateconfigs['img_carton'] = 'templateconfing/' . $imagenImgCarton;
         }
-        //4
         if ($request->hasFile('img_live')){
             $img_live = $request->file('img_live');
             $rutaGuardarImgLive = public_path('storage/templateconfing');
@@ -84,7 +80,6 @@ class TemplateConfigsController extends Controller
             $img_live->move($rutaGuardarImgLive, $imagenImgLive);
             $templateconfigs['img_live'] = 'templateconfing/' . $imagenImgLive;
         }
-        //5
         if ($request->hasFile('img_login')){
             $img_login = $request->file('img_login');
             $rutaGuardarImgLogin = public_path('storage/templateconfing');
@@ -92,7 +87,6 @@ class TemplateConfigsController extends Controller
             $img_login->move($rutaGuardarImgLogin, $imagenImgLogin);
             $templateconfigs['img_login'] = 'templateconfing/' . $imagenImgLogin;
         }
-
         TemplateConfig::create($templateconfigs);
         return redirect()->route('admin.templateconfigs.index')->with('success', 'La configuración del aplicativo se creo correctamente.');
 
@@ -106,12 +100,12 @@ class TemplateConfigsController extends Controller
     public function update(Request $request, TemplateConfig $templateconfig)
     {
         $request->validate([
-            'logo' => 'nullable', //
-            'img_main' => 'nullable', //
-            'color_main_one' => 'nullable', //
+            'logo' => 'nullable',
+            'img_main' => 'nullable',
+            'color_main_one' => 'nullable',
             'color_main_two' => 'nullable',
-            'img_carton' => 'nullable',//
-            'url_carton' => 'nullable', //
+            'img_carton' => 'nullable',
+            'url_carton' => 'nullable',
             'description_carton' => 'nullable',
             'price_carton' => 'nullable',
             'img_live' => 'nullable',
@@ -131,7 +125,6 @@ class TemplateConfigsController extends Controller
         ]);
         $data = $request->all();
 
-        //1
         if ($request->hasFile('logo')){
             $logo = $request->file('logo');
             $rutaGuardarLogo = public_path('storage/templateconfing');
@@ -149,7 +142,6 @@ class TemplateConfigsController extends Controller
             unset($data['logo']);
         }
 
-        //2
         if ($request->hasFile('img_main')){
             $img_main = $request->file('img_main');
             $rutaGuardarImgMain = public_path('storage/templateconfing');
@@ -167,7 +159,6 @@ class TemplateConfigsController extends Controller
             unset($data['img_main']);
         }
 
-        //3
         if ($request->hasFile('img_carton')){
             $img_carton = $request->file('img_carton');
             $rutaGuardarImgCarton = public_path('storage/templateconfing');
@@ -185,7 +176,6 @@ class TemplateConfigsController extends Controller
             unset($data['img_carton']);
         }
 
-        //4
         if ($request->hasFile('img_live')){
             $img_live = $request->file('img_live');
             $rutaGuardarImgLive = public_path('storage/templateconfing');
@@ -203,7 +193,6 @@ class TemplateConfigsController extends Controller
             unset($data['img_live']);
         }
 
-        //5
         if ($request->hasFile('img_login')){
             $img_login = $request->file('img_login');
             $rutaGuardarImgLogin = public_path('storage/templateconfing');

@@ -98,7 +98,7 @@ class UsersController extends Controller
             ->paginate(5);
 
 
-        $currentYear = date('Y'); // Obtener el año actual
+        $currentYear = date('Y');
 
         $card_groups_shows = CartonGroup::where('user_id', $user->id)
             ->whereYear('created_at', $currentYear)

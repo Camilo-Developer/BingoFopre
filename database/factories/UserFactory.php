@@ -24,8 +24,8 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
-            'password' => bcrypt('1234'), // Puedes cambiar 'password' a la contraseña que desees.
-            'state_id' => 1, // Aquí puedes establecer el estado predeterminado.
+            'password' => bcrypt('1234'),
+            'state_id' => 1,
         ];
     }
 

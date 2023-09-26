@@ -4,64 +4,71 @@ namespace App\Http\Controllers\Admin\CartonGroups;
 
 use App\Http\Controllers\Controller;
 use App\Models\CartonGroup\CartonGroup;
+use App\Models\State\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartonGroupsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $cartongroups = CartonGroup::paginate(5);
-        return view('admin.cartongroups.index',compact('cartongroups'));
+        $users = User::all();
+        $states = State::all();
+        $search = $request->input('search');
+
+        $cartongroups = CartonGroup::query()
+            ->where('id', 'LIKE', "%$search%")
+            ->orWhereHas('state', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('user', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })
+            ->paginate(5);
+
+        $ultimoGrupo = CartonGroup::latest('id')->first();
+        $numeroSiguienteGrupo = $ultimoGrupo ? $ultimoGrupo->id + 1 : 1;
+        return view('admin.cartongroups.index',compact(
+            'cartongroups',
+            'users',
+            'states',
+            'search',
+            'numeroSiguienteGrupo'
+        ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'user_id' => 'nullable',
+           'state_id' => 'required',
+        ]);
+        $cartongroups = $request->all();
+        CartonGroup::create($cartongroups);
+        return redirect()->route('admin.cartongroups.index')->with('success', 'El grupo de cartones se a creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function edit(CartonGroup $cartongroup)
     {
-        //
+        return view('admin.cartongroups.index',compact('cartongroup'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, CartonGroup $cartongroup)
     {
-        //
+        $request->validate([
+            'user_id' => 'nullable',
+            'state_id' => 'required',
+        ]);
+        $data = $request->all();
+        $cartongroup->update($data);
+        return redirect()->route('admin.cartongroups.index')->with('edit', 'El grupo de cartones se ha actualizado correctamente.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(CartonGroup $cartongroup)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $cartongroup->delete();
+        return redirect()->route('admin.cartongroups.index')->with('delete', 'El grupo de cartones se ha eliminado correctamente.');
     }
 }

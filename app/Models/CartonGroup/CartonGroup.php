@@ -14,7 +14,6 @@ class CartonGroup extends Model
       'user_id',
     ];
 
-    /*Lista con relacion directa e inversa revisada*/
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
@@ -25,7 +24,6 @@ class CartonGroup extends Model
         return $this->belongsTo('App\Models\State\State', 'state_id');
     }
 
-    /*Lista con relacion directa e inversa revisada*/
     public function cardboard()
     {
         return $this->hasMany('App\Models\Cardboard\Cardboard', 'group_id');

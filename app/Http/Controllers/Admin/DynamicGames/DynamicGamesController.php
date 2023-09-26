@@ -43,7 +43,6 @@ class DynamicGamesController extends Controller
             $logo->move($rutaGuardarlogo, $imagenlogo);
             $dynamicgames['logo'] = 'dynamicgames/' . $imagenlogo;
         }
-        // Verifica si fila y colum están definidos y convierte a JSON si es necesario
         if (isset($dynamicgames['fila'])) {
             $dynamicgames['fila'] = json_encode($dynamicgames['fila']);
         }
@@ -53,11 +52,6 @@ class DynamicGamesController extends Controller
 
         DynamicGame::create($dynamicgames);
         return redirect()->route('admin.dynamicgames.index')->with('success', 'La nueva dinámica se creo correctamente.');
-    }
-
-    public function show(DynamicGame $dynamicgame)
-    {
-        //
     }
 
     public function edit(DynamicGame $dynamicgame)
@@ -93,8 +87,6 @@ class DynamicGamesController extends Controller
         } else {
             unset($dynamicgameData['logo']);
         }
-
-        // Verifica si fila y colum están definidos y convierte a JSON si es necesario
         if (isset($dynamicgameData['fila'])) {
             $dynamicgameData['fila'] = json_encode($dynamicgameData['fila']);
         }

@@ -21,12 +21,12 @@ return new class extends Migration
 
             $table->string('img_carton')->nullable();
             $table->longText('url_carton')->nullable();
-            $table->longText('description_carton')->nullable();//
+            $table->longText('description_carton')->nullable();
             $table->string('price_carton')->nullable();
 
             $table->string('img_live')->nullable();
             $table->longText('url_live')->nullable();
-            $table->longText('description_live')->nullable();//
+            $table->longText('description_live')->nullable();
 
 
             $table->string('area')->nullable();

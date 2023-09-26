@@ -9,14 +9,12 @@ use Illuminate\Http\Request;
 
 class PrizesController extends Controller
 {
-
     public function index()
     {
         $prizes = Prize::paginate(5);
         $states = State::all();
         return view('admin.prizes.index',compact('prizes', 'states'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -35,13 +33,11 @@ class PrizesController extends Controller
         Prize::create($prizes);
         return redirect()->route('admin.prizes.index')->with('success', 'El premio se creo correctamente.');
     }
-
     public function edit(Prize $prize)
     {
         return view('admin.prizes.index',compact('prize'));
 
     }
-
     public function update(Request $request, Prize $prize)
     {
         $request->validate([
@@ -69,7 +65,6 @@ class PrizesController extends Controller
         $prize->update($data);
         return redirect()->route('admin.prizes.index')->with('edit', 'El premio se edito correctamente.');
     }
-
     public function destroy(Prize $prize)
     {
         $prize->delete();

@@ -11,15 +11,15 @@ class TemplateConfig extends Model
     protected $table = 'template_configs';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'logo',//1
-        'img_main',//2
+        'logo',
+        'img_main',
         'color_main_one',
         'color_main_two',
-        'img_carton',//3
+        'img_carton',
         'url_carton',
         'description_carton',
         'price_carton',
-        'img_live',//4
+        'img_live',
         'url_live',
         'description_live',
         'area',
@@ -29,7 +29,7 @@ class TemplateConfig extends Model
         'color_text_two',
         'color_text_three',
         'color_text_four',
-        'img_login',//5
+        'img_login',
         'color_login_one',
         'color_login_two',
         'color_login_hover_three',
