@@ -57,6 +57,8 @@
                                 <tr class="text-center">
                                     <th>ID</th>
                                     <th>Nombre del Rol</th>
+                                    <th scope="col">Creación</th>
+                                    <th scope="col">Edición</th>
                                     <th>Acciones</th>
                                 </tr>
                                 </thead>
@@ -65,6 +67,8 @@
                                     <tr class="text-center">
                                         <td>{{$role->id}}</td>
                                         <td>{{$role->name}}</td>
+                                        <td>{{ $role->created_at->format('Y-m-d')  }}</td>
+                                        <td>{{$role->updated_at->format('Y-m-d')}}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <form method="post" action="{{route('admin.roles.destroy', $role)}}" id="eliminarrol_{{ $loop->iteration }}">

@@ -50,6 +50,8 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Letra</th>
+                                        <th scope="col">Creación</th>
+                                        <th scope="col">Edición</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -64,6 +66,8 @@
                                             <td>{{$dynamicgame->title}}</td>
                                             <td>{{$dynamicgame->state->name}}</td>
                                             <td>{{$dynamicgame->letra}}</td>
+                                            <td>{{ $dynamicgame->created_at->format('Y-m-d')  }}</td>
+                                            <td>{{$dynamicgame->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
                                                     <button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>

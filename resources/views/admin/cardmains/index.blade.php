@@ -49,6 +49,8 @@
                                         <th scope="col">Imagen</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Estado</th>
+                                        <th scope="col">Creación</th>
+                                        <th scope="col">Edición</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -59,6 +61,8 @@
                                                 <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $cardmain->imagen)}}" alt="{{$cardmain->title}}"></td>
                                                 <td>{{$cardmain->title}}</td>
                                                 <td>{{$cardmain->state->name}}</td>
+                                                <td>{{ $cardmain->created_at->format('Y-m-d')  }}</td>
+                                                <td>{{$cardmain->updated_at->format('Y-m-d')}}</td>
                                                 <td >
                                                     <div class="btn btn-group">
                                                         <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning">

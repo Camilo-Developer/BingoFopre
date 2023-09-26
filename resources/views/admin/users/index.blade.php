@@ -51,6 +51,8 @@
                                         <th scope="col">Correo</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Rol</th>
+                                        <th scope="col">Creación</th>
+                                        <th scope="col">Edición</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -70,6 +72,8 @@
                                                     @endif
                                                 @endforeach
                                             </td>
+                                            <td>{{ $user->created_at->format('Y-m-d')  }}</td>
+                                            <td>{{$user->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
                                                     <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>

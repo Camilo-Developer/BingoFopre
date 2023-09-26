@@ -46,6 +46,8 @@
                                                 <th scope="col">Grupo</th>
                                                 <th scope="col">Responsable</th>
                                                 <th scope="col">Estado</th>
+                                                <th scope="col">Creación</th>
+                                                <th scope="col">Edición</th>
                                                 <th scope="col">Accion</th>
                                             </tr>
                                             </thead>
@@ -56,6 +58,8 @@
                                                     <td>{{$cartongroup->id}}</td>
                                                     <td>{{$cartongroup->user->name ?? 'No Asignado'}}</td>
                                                     <td>{{$cartongroup->state->name}}</td>
+                                                    <td>{{ $cartongroup->created_at->format('Y-m-d')  }}</td>
+                                                    <td>{{$cartongroup->updated_at->format('Y-m-d')}}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <a href="" class="btn btn-success">

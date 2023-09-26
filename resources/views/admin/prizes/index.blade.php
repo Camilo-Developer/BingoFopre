@@ -37,6 +37,8 @@
                                         <th scope="col">Imagen</th>
                                         <th scope="col">Color</th>
                                         <th scope="col">Estado</th>
+                                        <th scope="col">Creación</th>
+                                        <th scope="col">Edición</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -50,6 +52,8 @@
                                             <td style="width: 100px;"><img width="14px" src="{{asset('storage/' . $prize->imagen)}}" alt="{{$prize->color}}"></td>
                                             <td><div style="width: 100%; display: flex; justify-content: center"> <div style="background: {{$prize->color}}; width: 30px; height: 30px; border-radius: 5px;"></div></div></td>
                                             <td>{{$prize->state->name}}</td>
+                                            <td>{{ $prize->created_at->format('Y-m-d')  }}</td>
+                                            <td>{{$prize->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
                                                     <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>

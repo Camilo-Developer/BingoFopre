@@ -50,6 +50,8 @@
                                     <tr class="text-center">
                                         <th scope="col">#</th>
                                         <th scope="col">Nombre</th>
+                                        <th scope="col">Creación</th>
+                                        <th scope="col">Edición</th>
                                         <th scope="col">Accion</th>
                                     </tr>
                                     </thead>
@@ -58,6 +60,8 @@
                                         <tr class="text-center">
                                             <th scope="row" style="width: 50px;">{{$state->id}}</th>
                                             <td>{{$state->name}}</td>
+                                            <td>{{ $state->created_at->format('Y-m-d')  }}</td>
+                                            <td>{{$state->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
                                                     <button type="button" data-toggle="modal" data-target="#modal-edit-estado_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
