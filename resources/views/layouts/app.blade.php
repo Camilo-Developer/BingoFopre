@@ -95,11 +95,11 @@
 
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <!--
+
                  <div class="image">
-                    <img src="" class="img-circle elevation-2" alt="User Image">
+                    <img src="https://ui-avatars.com/api/?name={{ substr(auth()->user()->name, 0, 1) . substr(auth()->user()->lastname, 0, 1) }}&color=7F9CF5&background=EBF4FF" class="img-circle elevation-2" alt="User Image">
                 </div>
-                 -->
+
                 <div class="info">
                     @if(auth()->user()->hasRole('Admin'))
                         <a href="{{route('dashboard')}}" class="d-block">{{auth()->user()->name}} {{auth()->user()->lastname}}</a>

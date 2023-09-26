@@ -63,7 +63,7 @@ class CardboardsController extends Controller
         if (Auth::check()) {
             $carton = Cardboard::where('name', $name)->first();
             if (!$carton) {
-                return redirect()->route('dashboard')->with('error', 'El cartón no fue encontrado.');
+                return redirect()->route('dashboard')->with('delete', 'El cartón no fue encontrado.');
             }
             if ($carton->state_id == 3) {
                 $user = Auth::user();
@@ -81,13 +81,13 @@ class CardboardsController extends Controller
                     session()->put('cart', $cart);
                     return redirect()->route('dashboard')->with('success', 'Se añadió al carrito con éxito.');
                 } else {
-                    return redirect()->route('dashboard')->with('error', 'No tienes permiso para agregar este cartón al carrito.');
+                    return redirect()->route('dashboard')->with('delete', 'No tienes permiso para agregar este cartón al carrito.');
                 }
             } else {
-                return redirect()->route('dashboard')->with('error', 'Este cartón no puede ser agregado al carrito porque su estado no es 3.');
+                return redirect()->route('dashboard')->with('delete', 'Este cartón no puede ser agregado al carrito porque su estado no es 3.');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión para agregar cartones al carrito.');
+            return redirect()->route('login')->with('delete', 'Debes iniciar sesión para agregar cartones al carrito.');
         }
     }
 

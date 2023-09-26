@@ -259,6 +259,14 @@
                                         </div>
                                     </a>
                                 </li>
+
+                            </ul>
+                            <ul class="navbar-nav mx-2 d-lg-block d-none">
+                                <li class="nav-item">
+                                    <a href="{{route('dashboard')}}" class="avatar avatar-sm rounded-circle"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{auth()->user()->email}}">
+                                        <img alt="Image placeholder" src="https://ui-avatars.com/api/?name={{ substr(auth()->user()->name, 0, 1) . substr(auth()->user()->lastname, 0, 1) }}&color=7F9CF5&background=EBF4FF">
+                                    </a>
+                                </li>
                             </ul>
                         @else
                             <ul class="navbar-nav navbar-nav-hover ms-auto">
@@ -386,6 +394,8 @@
         </div>
     </div>
 </footer>
+<script src="{{url('recursos/admin/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{url('recursos/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -406,6 +416,8 @@
 <script src="{{asset('assets/js/plugins/tilt.min.js')}}"></script>
 <script src="{{asset('assets/js/ftp.js')}}"></script>
 <script src="{{asset('assets/js/plugins/chartjs.min.js')}}" type="text/javascript"></script>
+<script src="{{url('recursos/admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+
 <script>
 </script>
 <script type="text/javascript">
@@ -464,5 +476,8 @@
         retrasarEnvio(); // Llama a la función para retrasar el envío
     });
 </script>
+@include('components.flash_alerts')
+@yield('js')
+
 </body>
 </html>
