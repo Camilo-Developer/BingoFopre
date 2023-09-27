@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Cardboards;
 
+use App\Http\Controllers\Admin\Salesforce\SalesforceController;
 use App\Http\Controllers\Controller;
 use App\Models\State\State;
 use Illuminate\Http\Request;
@@ -14,6 +15,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CardboardsController extends Controller
 {
@@ -91,10 +95,14 @@ class CardboardsController extends Controller
         }
     }
 
-    public function showCart()
+    public function showCart(Request $request)
     {
+        $salesforceController = new SalesforceController();
+        $data = $salesforceController->index($document_number = $request->input('document_number'));
+
+        $userData = json_decode($data->getContent());
         $cart = Session::get('cart', []);
-        return view('user.cart.index', compact('cart'));
+        return view('user.cart.index', compact('cart','userData'));
     }
     public function finishPurchase(Request $request)
     {
@@ -141,6 +149,57 @@ class CardboardsController extends Controller
         $data = $request->all();
         $cardboard->update($data);
         return redirect()->route('admin.cartones.create')->with('edit', 'El Cartón se ha editado correctamente.');
+    }
+
+    public function generadormasivoQR(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'inicio' => 'required|numeric',
+            'final' => 'required|numeric',
+        ]);
+
+        $inicio = $request->input('inicio');
+        $final = $request->input('final');
+        $baseUrl = 'https://bingofopre.uniandes.edu.co/admin/add-to-cart/';
+
+        // Ruta de la carpeta temporal
+        $tempFolder = public_path('temp_qr');
+
+        // Verificar si la carpeta ya existe
+        if (!File::exists($tempFolder)) {
+            // Si no existe, crear la carpeta
+            File::makeDirectory($tempFolder, 0755, true);
+        }
+
+        // Generar los códigos QR y guardarlos en la carpeta temporal
+        for ($i = $inicio; $i <= $final; $i++) {
+            $filename =  '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.png';
+            QrCode::format('png')
+                ->size(200) // Tamaño del código QR
+                ->generate($baseUrl . str_pad($i, strlen($final), '0', STR_PAD_LEFT), public_path('temp_qr/' . $filename));
+        }
+
+
+
+
+        // Comprimir la carpeta temporal en un archivo ZIP
+        $zipFileName = 'qrcodes.zip';
+        $zipPath = public_path($zipFileName);
+        $zip = new \ZipArchive;
+        if ($zip->open($zipPath, \ZipArchive::CREATE) === true) {
+            $files = File::allFiles($tempFolder);
+            foreach ($files as $file) {
+                $zip->addFile($file->getRealPath(), $file->getFilename());
+            }
+            $zip->close();
+        }
+
+        // Eliminar la carpeta temporal y su contenido
+        File::deleteDirectory($tempFolder);
+
+        // Descargar el archivo ZIP con los códigos QR
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 
 

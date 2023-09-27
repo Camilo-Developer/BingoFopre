@@ -25,6 +25,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_cartones"> <i class="fa fa-plus"></i> Crear Cartones</button>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear qr</button>
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.cartones.createForm') }}" method="GET">
@@ -160,6 +161,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal_crear_qr"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-check-circle"></i> Creación de qr masivos</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="POST" action="{{ route('cardboard.generadormasivoQR') }}">
+                                @csrf
+                                <label for="inicio">Número de inicio:</label>
+                                <input type="number" name="inicio" required>
+
+                                <label for="final">Número final:</label>
+                                <input type="number" name="final" required>
+
+                                <button type="submit">Generar QRs</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     @foreach($cardboards as $cardboard)
     <div class="modal fade" id="modal_editar_cartones_{{$loop->iteration}}"  aria-hidden="true">
         <div class="modal-dialog modal-lg">

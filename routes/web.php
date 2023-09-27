@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Redirect\RedirectController;
 
 use App\Http\Controllers\Admin\Cardboards\CardboardsController;
 
+use App\Http\Controllers\Admin\Salesforce\SalesforceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +32,9 @@ Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth
 Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
 Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('user.cart.index');
+Route::post('/cardboard/generadormasivoQR', [CardboardsController::class,'generadormasivoQR'])->name('cardboard.generadormasivoQR');
 
+Route::get('/salesforece/{id}', [SalesforceController::class, 'index']);
 
 
 Route::middleware([

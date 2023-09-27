@@ -3,12 +3,23 @@
 @section('content')
     <div class="container">
         <h1>Carrito de Compras</h1>
-        <form action="{{ route('admin.cartones.finishPurchase') }}" method="POST">
-            @csrf
+        <form action="{{route('user.cart.index')}}" method="GET">
             <label for="document_number">Documento de Identidad del Comprador:</label>
             <input type="text" name="document_number" id="document_number" required>
+            <button type="submit" class="btn btn-success">buscar</button>
+
+        </form>
 
 
+
+        <form action="{{ route('admin.cartones.finishPurchase') }}" method="POST">
+            <div class="form-group">
+                <label for="names" class="small">Nombres:</label>
+                <input required type="text" id="names" name="names" placeholder="Nombres"
+                       @isset($userData->FirstName) value="{{ $userData->FirstName }}" readonly @endisset
+                       class="input-form border border-warning" />
+            </div>
+            @csrf
             <table class="table">
                 <thead>
                 <tr>
