@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Intervention\Image\Facades\Image;
 
 class CardboardsController extends Controller
 {
@@ -180,6 +181,14 @@ class CardboardsController extends Controller
                 ->generate($baseUrl . str_pad($i, strlen($final), '0', STR_PAD_LEFT), public_path('temp_qr/' . $filename));
         }
 
+        // Convertir los códigos QR de PNG a GIF
+        foreach (range($inicio, $final) as $i) {
+            $pngFileName = '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.png';
+            $gifFileName = '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.gif';
+
+            $image = Image::make(public_path('temp_qr/' . $pngFileName));
+            $image->save(public_path('temp_qr/' . $gifFileName), 100);
+        }
 
 
 
