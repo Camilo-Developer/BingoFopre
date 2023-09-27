@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\Facades\Image;
+use ZipArchive;
+use App\Jobs\GenerateQRCodes;
 
 class CardboardsController extends Controller
 {
@@ -141,11 +143,11 @@ class CardboardsController extends Controller
     public function update(Request $request, Cardboard $cardboard)
     {
         $request->validate([
-           'name' => 'required',
-           'price' => 'required',
-           'document_number' => 'nullable',
-           'state_id' => 'required',
-           'group_id' => 'required',
+            'name' => 'required',
+            'price' => 'required',
+            'document_number' => 'nullable',
+            'state_id' => 'required',
+            'group_id' => 'required',
         ]);
         $data = $request->all();
         $cardboard->update($data);
@@ -154,6 +156,8 @@ class CardboardsController extends Controller
 
     public function generadormasivoQR(Request $request)
     {
+        set_time_limit(0);
+
         // Validar los datos del formulario
         $request->validate([
             'inicio' => 'required|numeric',
@@ -162,53 +166,12 @@ class CardboardsController extends Controller
 
         $inicio = $request->input('inicio');
         $final = $request->input('final');
-        $baseUrl = 'https://bingofopre.uniandes.edu.co/admin/add-to-cart/';
 
-        // Ruta de la carpeta temporal
-        $tempFolder = public_path('temp_qr');
+        // Despachar la tarea de generación de códigos QR en segundo plano
+        GenerateQRCodes::dispatch($inicio, $final);
 
-        // Verificar si la carpeta ya existe
-        if (!File::exists($tempFolder)) {
-            // Si no existe, crear la carpeta
-            File::makeDirectory($tempFolder, 0755, true);
-        }
-
-        // Generar los códigos QR y guardarlos en la carpeta temporal
-        for ($i = $inicio; $i <= $final; $i++) {
-            $filename =  '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.png';
-            QrCode::format('png')
-                ->size(200) // Tamaño del código QR
-                ->generate($baseUrl . str_pad($i, strlen($final), '0', STR_PAD_LEFT), public_path('temp_qr/' . $filename));
-        }
-
-        // Convertir los códigos QR de PNG a GIF
-        foreach (range($inicio, $final) as $i) {
-            $pngFileName = '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.png';
-            $gifFileName = '000' . str_pad($i, strlen($final), '0', STR_PAD_LEFT) . '.gif';
-
-            $image = Image::make(public_path('temp_qr/' . $pngFileName));
-            $image->save(public_path('temp_qr/' . $gifFileName), 100);
-        }
-
-
-
-        // Comprimir la carpeta temporal en un archivo ZIP
-        $zipFileName = 'qrcodes.zip';
-        $zipPath = public_path($zipFileName);
-        $zip = new \ZipArchive;
-        if ($zip->open($zipPath, \ZipArchive::CREATE) === true) {
-            $files = File::allFiles($tempFolder);
-            foreach ($files as $file) {
-                $zip->addFile($file->getRealPath(), $file->getFilename());
-            }
-            $zip->close();
-        }
-
-        // Eliminar la carpeta temporal y su contenido
-        File::deleteDirectory($tempFolder);
-
-        // Descargar el archivo ZIP con los códigos QR
-        return response()->download($zipPath)->deleteFileAfterSend(true);
+        // Retorna una respuesta al usuario, por ejemplo, para notificar que la generación está en progreso
+        return response()->json(['message' => 'La generación de códigos QR está en progreso. Te notificaremos cuando estén listos para descargar.']);
     }
 
 
