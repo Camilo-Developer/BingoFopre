@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('cardboards', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('price');
-            $table->string('document_number')->nullable();
-            $table->bigInteger('state_id')->unsigned()->default(3);
-            $table->bigInteger('group_id')->unsigned()->nullable();
+            $table->string('name')->comment = 'Nombre del cartón';
+            $table->string('price')->comment = 'Precio del cartón';
+            $table->string('document_number')->nullable()->comment = 'Número de documento del cartón';
+            $table->bigInteger('state_id')->unsigned()->default(3)->comment = 'Estado del cartón';
+            $table->bigInteger('group_id')->unsigned()->nullable()->comment = 'Grupo del cartón';
             $table->timestamps();
         });
     }

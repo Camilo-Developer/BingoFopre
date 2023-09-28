@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table){
-            $table->string('password')->nullable()->change()->comment = 'Contraseña del usuario';
-            $table->string('avatar')->nullable()->comment = 'Avatar del usuario';
-            $table->string('external_id')->nullable()->comment = 'Token de azure';
-            $table->string('external_auth')->nullable()->comment = 'Por donde se autentifica';
+            if (!Schema::hasColumn('users', 'document_number')) {
+                $table->string('document_number',200)->after('lastname')->nullable()->default(null)->comment = 'Documento de indentidad del Usuario';
+            }
         });
     }
 

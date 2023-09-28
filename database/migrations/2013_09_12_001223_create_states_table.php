@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('check',[1,2,3,4,5,6]);
+            $table->string('name')->comment = 'Nombre del estado';
+            $table->enum('check',[1,2,3,4,5,6])->comment = 'Validación del estado';
             $table->timestamps();
         });
     }

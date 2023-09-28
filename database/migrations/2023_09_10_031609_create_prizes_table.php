@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('prizes', function (Blueprint $table) {
             $table->id();
-            $table->string('color');
-            $table->string('imagen');
-            $table->longText('description');
-            $table->bigInteger('state_id')->unsigned();
+            $table->string('color')->comment = 'Color del precio';
+            $table->string('imagen')->comment = 'imagen del precio';
+            $table->longText('description')->comment = 'Descripción del precio';
+            $table->bigInteger('state_id')->unsigned()->default(1)->comment = 'Estado del precio';
             $table->softDeletes();
             $table->timestamps();
         });

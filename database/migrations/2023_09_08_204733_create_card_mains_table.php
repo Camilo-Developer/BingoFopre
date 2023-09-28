@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('card_mains', function (Blueprint $table) {
             $table->id();
-            $table->string('imagen')->nullable();
-            $table->longText('title')->nullable();
-            $table->longText('description')->nullable();
-            $table->longText('mas_info')->nullable();
+            $table->string('imagen')->nullable()->comment = 'Imagen de las noticias generales';
+            $table->longText('title')->nullable()->comment = 'Titulo de las noticias generales';
+            $table->longText('description')->nullable()->comment = 'Descripción de las noticias generales';
+            $table->longText('mas_info')->nullable()->comment = 'Más información de las noticias generales';
 
-            $table->bigInteger('state_id')->unsigned();
+            $table->bigInteger('state_id')->unsigned()->default(1)->comment = 'Estado de las noticias generales';
             $table->softDeletes();
             $table->timestamps();
         });

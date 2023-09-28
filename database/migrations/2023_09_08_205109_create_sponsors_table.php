@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
-            $table->string('name')->nullable();
+            $table->string('logo')->nullable()->comment = 'Logo del patrocinado';
+            $table->string('name')->nullable()->comment = 'Nombre del patrocinado';
 
-            $table->bigInteger('state_id')->unsigned();
+            $table->bigInteger('state_id')->unsigned()->default(1)->comment = 'Estado del patrocinado';
             $table->timestamps();
         });
     }

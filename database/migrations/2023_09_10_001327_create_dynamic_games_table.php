@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('dynamic_games', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
-            $table->string('title')->nullable();
-            $table->longText('letra')->nullable();
-            $table->text('fila')->nullable();
-            $table->text('colum')->nullable();
-            $table->bigInteger('state_id')->unsigned();
+            $table->string('logo')->nullable()->comment = 'Logo de las dinamicas de juego';
+            $table->string('title')->nullable()->comment = 'Titulo de las dinamicas de juego';
+            $table->longText('letra')->nullable()->comment = 'Letras de las dinamicas de juego';
+            $table->text('fila')->nullable()->comment = 'Filas de las dinamicas de juego';
+            $table->text('colum')->nullable()->comment = 'Columnas de las dinamicas de juego';
+            $table->bigInteger('state_id')->unsigned()->default(1)->comment = 'Estado de las dinamicas de juego';
             $table->softDeletes();
             $table->timestamps();
         });

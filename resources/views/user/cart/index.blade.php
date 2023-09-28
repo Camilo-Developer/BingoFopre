@@ -82,9 +82,6 @@
                 </div>
             </div>
 
-
-
-
             @csrf
             <div class="table-responsive">
                 <table class="table">
