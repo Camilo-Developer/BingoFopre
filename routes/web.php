@@ -31,7 +31,6 @@ Route::get('/redirect',[RedirectController::class, 'dashboard']);
 Route::get('/auth/azure', [RedirectController::class, 'azureLogin'])->name('auth.azure');
 Route::get('/auth/azure/callback', [RedirectController::class, 'azureCallback']);
 
-Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('user.cart.index');
 Route::post('/cardboard/generadormasivoQR', [CardboardsController::class,'generadormasivoQR'])->name('cardboard.generadormasivoQR');
 
 Route::get('/salesforece/{id}', [SalesforceController::class, 'index']);
@@ -44,6 +43,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->middleware('can:dashboard')->name('dashboard');
     Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->name('dashboard');
+    Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('user.cart.index');
 
 
     Route::match(['get', 'post', 'put', 'delete'], '/register', function () {

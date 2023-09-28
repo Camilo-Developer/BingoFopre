@@ -3,22 +3,88 @@
 @section('content')
     <div class="container">
         <h1>Carrito de Compras</h1>
-        <form action="{{route('user.cart.index')}}" method="GET">
-            <label for="document_number">Documento de Identidad del Comprador:</label>
-            <input type="text" name="document_number" id="document_number" required>
-            <button type="submit" class="btn btn-success">buscar</button>
+        <div class="row">
+            <div class="col-12">
+                <form action="{{route('user.cart.index')}}" method="GET">
+                    <label for="document_number">Documento o correo del comprador:</label>
+                    <div class="row">
+                        <div class="col-9">
+                            <input class="form-control"  type="text" name="document_number" value="{{ $userData->N_mero_de_Identificaci_n__c }}" id="document_number" required>
+                        </div>
+                        <div class="col-3">
+                            <button type="submit" class="btn  btn-success">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-        </form>
 
 
 
         <form action="{{ route('admin.cartones.finishPurchase') }}" method="POST">
             <div class="form-group">
-                <label for="names" class="small">Nombres:</label>
-                <input required type="text" id="names" name="names" placeholder="Nombres"
-                       @isset($userData->FirstName) value="{{ $userData->FirstName }}" readonly @endisset
-                       class="input-form border border-warning" />
+                <div class="row  py-2">
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Categoria Principal</label>
+                            <input  value="{{ $userData->Categoria_Principal__c }}" class="form-control"   placeholder="Nombre" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Categoria </label>
+                            <input  value="{{ $userData->Categoria__c }}" class="form-control"   placeholder="Nombre" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Categoria Administrativa</label>
+                            <input  value="{{ $userData->Categoria_Administrativo__c }}" class="form-control"   placeholder="Nombre" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Nombres del Comprador</label>
+                            <input  value="{{ $userData->FirstName }} {{ $userData->LastName }}" class="form-control"   placeholder="Nombre" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Correo del Comprador</label>
+                            <input  value="{{ $userData->Email }}" class="form-control"   placeholder="Correo" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Genero email</label>
+                            <input  value="{{ $userData->generoEmail__c }}" class="form-control"   placeholder="Correo" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Tipo de documento</label>
+                            <input  value="{{ $userData->Tipo_identificaci_n__c }}" class="form-control"   placeholder="Correo" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Numero de documento</label>
+                            <input  value="{{ $userData->N_mero_de_Identificaci_n__c }}" class="form-control"   placeholder="Correo" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                        <div>
+                            <label>Numero de documento</label>
+                            <input  value="{{ $userData->Tel_fono_celular_1__c }}" class="form-control"   placeholder="Correo" type="text" >
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
             @csrf
             <table class="table">
                 <thead>
