@@ -8,10 +8,10 @@
                 <form action="{{route('user.cart.index')}}" method="GET">
                     <label for="document_number">Documento o correo del comprador:</label>
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-7 col-lg-9">
                             <input class="form-control"  type="text" name="document_number" value="{{ $userData->N_mero_de_Identificaci_n__c }}" id="document_number" required>
                         </div>
-                        <div class="col-3">
+                        <div class="col-5 col-lg-3">
                             <button type="submit" class="btn  btn-success">Buscar</button>
                         </div>
                     </div>
@@ -86,40 +86,42 @@
 
 
             @csrf
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($cart as $cartonId => $carton)
-                    <tr  class="{{ $carton['state_id'] == 6 ? 'obsequio' : '' }}">
-                        <td>{{ $carton['name'] }}</td>
-                        <td>{{ $carton['quantity'] }}</td>
-                        <td>$ {{ number_format(intval($carton['price'])) }}</td>
-                        <td>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="5" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 3 ? 'checked' : '' }}>
-                                    <label class="form-check-label">Vendido</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" value="6" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 6 ? 'checked' : '' }}>
-                                    <label class="form-check-label">Obsequio</label>
-                                </div>
-                            </div>
-                        </td>
-                        <td><a onclick="document.getElementById('eliminar_carton').submit()" class="btn btn-danger">Eliminar</a></td>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
-                @endforeach
-                </tbody>
+                    </thead>
+                    <tbody>
+                    @foreach($cart as $cartonId => $carton)
+                        <tr  class="{{ $carton['state_id'] == 6 ? 'obsequio' : '' }}">
+                            <td>{{ $carton['name'] }}</td>
+                            <td>{{ $carton['quantity'] }}</td>
+                            <td>$ {{ number_format(intval($carton['price'])) }}</td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="5" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 3 ? 'checked' : '' }}>
+                                        <label class="form-check-label">Vendido</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="6" type="radio" name="cartons[{{ $cartonId }}][state_id]" {{ $carton['state_id'] == 6 ? 'checked' : '' }}>
+                                        <label class="form-check-label">Obsequio</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><a onclick="document.getElementById('eliminar_carton').submit()" class="btn btn-danger">Eliminar</a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
             <div>
                 <strong>Total a Pagar:</strong> <span id="total-to-pay">$ 0</span>
             </div>
