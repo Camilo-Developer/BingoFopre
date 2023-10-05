@@ -44,12 +44,8 @@ return new class extends Migration
                 $table->string('Tipo_identificaci_n__c')->after('generoEmail__c')->nullable()->default(null)->comment = 'Salesforce Tipo_identificaci_n__c';
             }
 
-            if (!Schema::hasColumn('cardboards', 'N_mero_de_Identificaci_n__c')) {
-                $table->string('N_mero_de_Identificaci_n__c')->after('Tipo_identificaci_n__c')->nullable()->default(null)->comment = 'Salesforce N_mero_de_Identificaci_n__c';
-            }
-
             if (!Schema::hasColumn('cardboards', 'Tel_fono_celular_1__c')) {
-                $table->string('Tel_fono_celular_1__c')->after('N_mero_de_Identificaci_n__c')->nullable()->default(null)->comment = 'Salesforce Tel_fono_celular_1__c';
+                $table->string('Tel_fono_celular_1__c')->after('Tipo_identificaci_n__c')->nullable()->default(null)->comment = 'Salesforce Tel_fono_celular_1__c';
             }
         });
     }

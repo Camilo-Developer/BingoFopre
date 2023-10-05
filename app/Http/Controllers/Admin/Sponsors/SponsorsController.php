@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\State\State;
 class SponsorsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.sponsors.index')->only('index');
+        $this->middleware('can:admin.sponsors.edit')->only('edit', 'update');
+        $this->middleware('can:admin.sponsors.create')->only('create', 'store');
+        $this->middleware('can:admin.sponsors.destroy')->only('destroy');
+    }
 
     public function index(Request $request)
     {

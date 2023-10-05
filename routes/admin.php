@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\Admin\CartonGroups\CartonGroupsController;
 
 
-
 Route::get('/dashboard', [DashboardsController::class, 'index'])->middleware('can:admin.dashboard')->name('admin.dashboard');
 Route::resource('/templateconfigs', TemplateConfigsController::class)->names('admin.templateconfigs');
 Route::resource('/cardmains', CardMainsController::class)->names('admin.cardmains');
@@ -29,11 +28,12 @@ Route::resource('/states', StatesController::class)->names('admin.states');
 Route::resource('/roles', RolesController::class)->names('admin.roles');
 Route::get('/cartones/create', [CardboardsController::class,'createForm'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.createForm');
 Route::post('/cartones/create', [CardboardsController::class,'create'])->middleware('can:admin.cartones.createForm')->name('admin.cartones.create');
-Route::put('/cartones/{cardboard}', [CardboardsController::class,'update'])->name('admin.cartones.update');
-Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart']);
-Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->name('admin.cartones.finishPurchase');
-Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->name('admin.cartones.removeFromCart');
+Route::put('/cartones/{cardboard}', [CardboardsController::class,'update'])->middleware('can:admin.cartones.update')->name('admin.cartones.update');
+Route::get('/add-to-cart/{name}',[CardboardsController::class,'addToCart'])->middleware('can:addToCart');
+Route::post('/cartones/finalizar-compra', [CardboardsController::class,'finishPurchase'])->middleware('can:admin.cartones.finishPurchase')->name('admin.cartones.finishPurchase');
+Route::delete('/cartones/eliminar-del-carrito/{cartonId}', [CardboardsController::class,'removeFromCart'])->middleware('can:admin.cartones.removeFromCart')->name('admin.cartones.removeFromCart');
 Route::resource('/users', UsersController::class)->names('admin.users');
-Route::post('/users/group_assignment',[UsersController::class,'asiginacionGrupos'])->name('admin.users.asiginacionGrupos');
-Route::post('/users/cambio-state-grupos-cartones',[UsersController::class,'cambioStateGruposCartones'])->name('admin.users.cambioStateGruposCartones');
+Route::post('/users/group_assignment',[UsersController::class,'asiginacionGrupos'])->middleware('can:admin.users.asiginacionGrupos')->name('admin.users.asiginacionGrupos');
+Route::post('/users/cambio-state-grupos-cartones',[UsersController::class,'cambioStateGruposCartones'])->middleware('can:admin.users.cambioStateGruposCartones')->name('admin.users.cambioStateGruposCartones');
 Route::resource('/cartongroups', CartonGroupsController::class)->names('admin.cartongroups');
+Route::post('/cardboard/generadormasivoQR', [CardboardsController::class,'generadormasivoQR'])->middleware('can:admin.cardboard.generadormasivoQR')->name('admin.cardboard.generadormasivoQR');

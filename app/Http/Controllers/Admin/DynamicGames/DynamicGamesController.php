@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\State\State;
 class DynamicGamesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.dynamicgames.index')->only('index');
+        $this->middleware('can:admin.dynamicgames.edit')->only('edit', 'update');
+        $this->middleware('can:admin.dynamicgames.create')->only('create', 'store');
+        $this->middleware('can:admin.dynamicgames.destroy')->only('destroy');
+    }
 
     public function index(Request $request)
     {

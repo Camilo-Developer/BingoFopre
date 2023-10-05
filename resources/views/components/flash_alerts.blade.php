@@ -16,3 +16,9 @@
         @slot('message', session('delete'))
     @endcomponent
 @endif
+@if(session('info'))
+    @component('components.alert')
+        @slot('class', 'info')
+        @slot('message', session('info'))
+    @endcomponent
+@endif

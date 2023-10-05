@@ -24,33 +24,34 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                    @can('admin.instructions.edit')
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-12">
-                                    <label> Instrucciones:</label><br>
+                                    <p style="font-size: 1.8rem; font-weight: 500"> Instrucciones:</p>
                                     @foreach($instructions as $instruction)
                                         {!! $instruction->description_one !!}
                                     @endforeach
                                 </div>
                                 <div class="col-12 mt-3">
-                                    <label> Cómo cantar ¡BINGO FOPRE!:</label><br>
+                                    <p style="font-size: 1.8rem; font-weight: 500"> Cómo cantar ¡BINGO FOPRE!:</p>
                                     @foreach($instructions as $instruction)
                                         {!! $instruction->description_two !!}
                                     @endforeach
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-default"  aria-hidden="true">
+        @can('admin.instructions.edit')
+            <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -89,6 +90,7 @@
                 </div>
             </div>
         </div>
+        @endcan
     </section>
 @endsection
 @section('js')

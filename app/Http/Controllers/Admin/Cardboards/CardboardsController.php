@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\Facades\Image;
 use ZipArchive;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class CardboardsController extends Controller
 {
@@ -111,17 +113,72 @@ class CardboardsController extends Controller
         $cart = Session::get('cart', []);
         $cartonData = $request->input('cartons');
         $documentoComprador = $request->input('document_number');
+
+        $Categoria_Principal__c = $request->input('Categoria_Principal__c');
+        $Categoria__c = $request->input('Categoria__c');
+        $Categoria_Administrativo__c = $request->input('Categoria_Administrativo__c');
+        $FirstName = $request->input('FirstName');
+        $LastName = $request->input('LastName');
+        $Email = $request->input('Email');
+        $generoEmail__c = $request->input('generoEmail__c');
+        $Tipo_identificaci_n__c = $request->input('Tipo_identificaci_n__c');
+        $Tel_fono_celular_1__c = $request->input('Tel_fono_celular_1__c');
+
+        // Buscar al usuario por número de documento
+        $user = User::where('email', $Email)->first();
+
+        if (!$user) {
+            // Si el usuario no existe, créalo
+            $user = new User();
+            $user->name = $FirstName;
+            $user->lastname = $LastName;
+            $user->document_number = $documentoComprador;
+            $user->email = $Email;
+            $user->password = bcrypt($documentoComprador);
+            $user->external_auth = 'Salesforce';
+            $user->state_id = 1;
+            $userSaved = $user->save();
+
+            if ($userSaved) {
+                // Asigna el rol si el usuario se ha guardado correctamente
+                $user->assignRole('Estudiante');
+            }
+        } else {
+            // Si el usuario existe, actualiza los campos necesarios
+            $user->name = $FirstName;
+            $user->lastname = $LastName;
+            $user->document_number = $documentoComprador;
+            $user->email = $Email;
+            $user->password = bcrypt($documentoComprador);
+            if (empty($user->external_auth)) {
+                $user->external_auth = 'Salesforce';
+            }
+            $user->state_id = 1;
+            $user->save();
+
+        }
+
         foreach ($cart as $cartonId => $carton) {
             $cartonDB = Cardboard::find($cartonId);
             if ($cartonDB) {
                 $cartonDB->state_id = $cartonData[$cartonId]['state_id'];
                 $cartonDB->document_number = $documentoComprador;
+                $cartonDB->Categoria_Principal__c = $Categoria_Principal__c;
+                $cartonDB->Categoria__c = $Categoria__c;
+                $cartonDB->Categoria_Administrativo__c = $Categoria_Administrativo__c;
+                $cartonDB->FirstName = $FirstName;
+                $cartonDB->LastName = $LastName;
+                $cartonDB->Email = $Email;
+                $cartonDB->generoEmail__c = $generoEmail__c;
+                $cartonDB->Tipo_identificaci_n__c = $Tipo_identificaci_n__c;
+                $cartonDB->Tel_fono_celular_1__c = $Tel_fono_celular_1__c;
                 $cartonDB->save();
             }
         }
         Session::forget('cart');
         return redirect()->route('user.cart.index')->with('success', 'Compra finalizada con éxito.');
     }
+
     public function removeFromCart($cartonId)
     {
         $cart = Session::get('cart', []);

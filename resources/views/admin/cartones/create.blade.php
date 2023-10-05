@@ -25,7 +25,9 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_cartones"> <i class="fa fa-plus"></i> Crear Cartones</button>
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear qr</button>
+                                    @can('admin.cardboard.generadormasivoQR')
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear qr</button>
+                                    @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.cartones.createForm') }}" method="GET">
@@ -68,8 +70,12 @@
                                             <td>{{$cardboard->updated_at->format('Y-m-d')}}</td>
                                             <td>
                                                 <div class="btn btn-group">
+                                                    @can('admin.cartones.update')
                                                     <a href="" class="btn btn-warning"  data-toggle="modal" data-target="#modal_editar_cartones_{{$loop->iteration}}"> <i class="fa fa-edit"></i> </a>
-                                                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal_show_cartones_{{$loop->iteration}}" style="margin-left: 5px;"> <i class="fa fa-eye"></i> </a>
+                                                    @endcan
+                                                    @can('admin.cartones.show')
+                                                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal_show_cartones_{{$loop->iteration}}" style="margin-left: 5px;"> <i class="fa fa-eye"></i> </a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
@@ -105,6 +111,7 @@
             </div>
         </div>
     </section>
+
     <div class="modal fade" id="modal_crear_cartones"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -161,8 +168,8 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modal_crear_qr"  aria-hidden="true">
+    @can('admin.cardboard.generadormasivoQR')
+        <div class="modal fade" id="modal_crear_qr"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -174,15 +181,25 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="POST" action="{{ route('cardboard.generadormasivoQR') }}">
+                            <form method="POST" action="{{ route('admin.cardboard.generadormasivoQR') }}">
                                 @csrf
-                                <label for="inicio">Número de inicio:</label>
-                                <input type="number" name="inicio" required>
-
-                                <label for="final">Número final:</label>
-                                <input type="number" name="final" required>
-
-                                <button type="submit">Generar QRs</button>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="inicio">Número de Inicio</label>
+                                            <input type="number" id="inicio" name="inicio" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="final">Número de Final</label>
+                                            <input type="number" id="final" name="final" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <button type="submit" class="btn btn-success">Generar QRs</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -190,11 +207,12 @@
             </div>
         </div>
     </div>
-
+    @endcan
 
 
     @foreach($cardboards as $cardboard)
-    <div class="modal fade" id="modal_editar_cartones_{{$loop->iteration}}"  aria-hidden="true">
+        @can('admin.cartones.update')
+            <div class="modal fade" id="modal_editar_cartones_{{$loop->iteration}}"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -258,17 +276,72 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="document_number">Documento de Identidad Comprador</label>
+                                        <label for="document_number">Datos del comprador</label>
                                     </div>
-                                    <div class="col-10">
-                                        <div class="form-group">
-                                            <input type="number" value="{{$cardboard->document_number}}" id="document_number" name="document_number" class="form-control" >
+
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="FirstName">Nombre:</label>
+                                                    <input disabled value="{{$cardboard->FirstName}}" type="text" id="FirstName" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="LastName">Apellido:</label>
+                                                    <input disabled value="{{$cardboard->LastName}}" type="text" id="LastName" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Tipo_identificaci_n__c">Tipo Documento:</label>
+                                                    <input disabled value="{{$cardboard->Tipo_identificaci_n__c}}" type="text" id="Tipo_identificaci_n__c" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="document_number">Numero Documento:</label>
+                                                    <input disabled value="{{$cardboard->document_number}}" type="text" id="document_number" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Categoria_Principal__c">Categoria principal:</label>
+                                                    <input disabled value="{{$cardboard->Categoria_Principal__c}}" type="text" id="Categoria_Principal__c" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Categoria__c">Categoria C:</label>
+                                                    <input disabled value="{{$cardboard->Categoria__c}}" type="text" id="Categoria__c" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Categoria_Administrativo__c">Categoria Administrativa C:</label>
+                                                    <input disabled value="{{$cardboard->Categoria_Administrativo__c}}" type="text" id="Categoria_Administrativo__c" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Email">Correo:</label>
+                                                    <input disabled value="{{$cardboard->Email}}" type="text" id="Email" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="generoEmail__c">Genero:</label>
+                                                    <input disabled value="{{$cardboard->generoEmail__c}}" type="text" id="generoEmail__c" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Tel_fono_celular_1__c">Telefono:</label>
+                                                    <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" id="Tel_fono_celular_1__c" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button" class="btn btn-success">
-                                            <i class="fa fa-search"></i>
-                                        </button>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
@@ -283,7 +356,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal_show_cartones_{{$loop->iteration}}"  aria-hidden="true">
+        @endcan
+        @can('admin.cartones.show')
+            <div class="modal fade" id="modal_show_cartones_{{$loop->iteration}}"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -339,6 +414,8 @@
             </div>
         </div>
     </div>
+        @endcan
+
     @endforeach
 @endsection
 @section('js')

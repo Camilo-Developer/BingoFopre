@@ -44,5 +44,15 @@ class UsersSeeder extends Seeder
             'external_id'=> '',
             'external_auth'=> 'Azure',
         ])->assignRole('Estudiante');
+        User::create([
+            'name'=> 'Juan',
+            'lastname'=> '',
+            'email'=> 'j.rodriguezramirez@uniandes.edu.co',
+            'password'=> '',
+            'state_id'=> '1',
+            'avatar'=> '',
+            'external_id'=> '',
+            'external_auth'=> 'Azure',
+        ])->assignRole('Estudiante');
     }
 }

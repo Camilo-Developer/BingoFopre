@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UsersSeeder::class);
-        User::factory(25)->create()->each(function ($user) {
+        User::factory(5)->create()->each(function ($user) {
             $user->assignRole('Estudiante');
         });
-        User::factory(25)->create()->each(function ($user) {
+        User::factory(5)->create()->each(function ($user) {
             $user->assignRole('Vendedor');
         });
         $this->call(TemplateConfigsSeeder::class);

@@ -24,7 +24,9 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-dynamicgame"><i class="fa fa-check"></i> Crear Dinámica</button>
+                                    @can('admin.dynamicgames.create')
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-dynamicgame"><i class="fa fa-check"></i> Crear Dinámica</button>
+                                    @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.dynamicgames.index') }}" method="GET">
@@ -70,20 +72,26 @@
                                             <td>{{$dynamicgame->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
-                                                    <button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminardynamicgames_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </a>
+                                                    @can('admin.dynamicgames.edit')
+                                                        <button type="button" data-toggle="modal" data-target="#modal-edit-dynamicgame_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    @endcan
+                                                    @can('admin.dynamicgames.destroy')
+                                                        <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminardynamicgames_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
                                         @php
                                             $dinamic++;
                                         @endphp
-                                        <form action="{{route('admin.dynamicgames.destroy',$dynamicgame)}}"  method="POST" id="eliminardynamicgames_{{ $loop->iteration }}">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                        @can('admin.dynamicgames.destroy')
+                                            <form action="{{route('admin.dynamicgames.destroy',$dynamicgame)}}"  method="POST" id="eliminardynamicgames_{{ $loop->iteration }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endcan
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -112,6 +120,7 @@
                 </div>
             </div>
         </div>
+        @can('admin.dynamicgames.create')
         <div class="modal fade" id="modal-dynamicgame"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -127,33 +136,22 @@
                         @method('POST')
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-3">
-                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
-                                </div>
 
-                            <div class="col-9">
+                            <div class="col-12">
                                 <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                    <div class="d-flex justify-content-end">
-                                        <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="title"><span class="text-danger">*</span> Título:</label>
-                                        <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
-                                    </div>
-
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="state_id">Estado:</label>
-                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                                @foreach($states as $state)
-                                                    <option value="{{$state->id}}">{{$state->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-
                                     <div class="row">
+
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-end">
+                                                <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-center">
+                                                <img style="width: 100px; height: 100px;" src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid">
+                                            </div>
+                                        </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                 <label for="logo"><span class="text-danger">*</span> Imagen:</label>
@@ -162,13 +160,34 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
+                                                <label for="title"><span class="text-danger">*</span> Título:</label>
+                                                <input type="text" name="title" required class="form-control form-control-border" id="title" placeholder="Título">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="state_id"><span class="text-danger">*</span> Estado:</label>
+                                                <select required class="custom-select form-control-border" name="state_id" id="state_id">
+                                                    <option disabled selected>-- Seleccionar --</option>
+                                                    @foreach($states as $state)
+                                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
                                                 <label for="letra">Letra:</label>
                                                 <input type="text" name="letra" class="form-control form-control-border" id="letra" placeholder="Escriba la letra.">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label><span class="text-danger">*</span> Filas:</label>
+                                                <label> Filas:</label>
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" type="checkbox" id="fila0" name="fila[]" value="1">
                                                     <label for="fila0" class="custom-control-label">No aplica</label>
@@ -201,7 +220,7 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label><span class="text-danger">*</span> Columnas:</label>
+                                                <label> Columnas:</label>
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" type="checkbox" id="columna0" name="colum[]" value="1">
                                                     <label for="columna0" class="custom-control-label">No aplica</label>
@@ -246,7 +265,8 @@
                 </div>
             </div>
         </div>
-
+        @endcan
+        @can('admin.dynamicgames.edit')
         @foreach($dynamicgames as $dynamicgame)
             <div class="modal fade" id="modal-edit-dynamicgame_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -302,32 +322,35 @@
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Filas:</label>
+                                                        @php
+                                                            $filaValues = json_decode($dynamicgame->fila);
+                                                        @endphp
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila0" name="fila[]" value="1" {{ in_array('1', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila0" name="fila[]" value="1"  {{ ($filaValues && in_array('1', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila0" class="custom-control-label">No aplica</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila1" name="fila[]" value="2" {{ in_array('2', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila1" name="fila[]" value="2"  {{ ($filaValues && in_array('2', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila1" class="custom-control-label">Primera Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila2" name="fila[]" value="3" {{ in_array('3', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila2" name="fila[]" value="3"  {{ ($filaValues && in_array('3', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila2" class="custom-control-label">Segunda Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila3" name="fila[]" value="4" {{ in_array('4', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila3" name="fila[]" value="4"  {{ ($filaValues && in_array('4', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila3" class="custom-control-label">Tercera Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila4" name="fila[]" value="5" {{ in_array('5', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila4" name="fila[]" value="5"  {{ ($filaValues && in_array('5', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila4" class="custom-control-label">Cuarta Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila5" name="fila[]" value="6" {{ in_array('6', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila5" name="fila[]" value="6"  {{ ($filaValues && in_array('6', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila5" class="custom-control-label">Quinta Fila</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editfila6" name="fila[]" value="7" {{ in_array('7', json_decode($dynamicgame->fila)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editfila6" name="fila[]" value="7"  {{ ($filaValues && in_array('7', $filaValues)) ? 'checked' : '' }}>
                                                             <label for="editfila6" class="custom-control-label">Completo</label>
                                                         </div>
                                                     </div>
@@ -335,32 +358,35 @@
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label><span class="text-danger">*</span> Columnas:</label>
+                                                        @php
+                                                            $columValues = json_decode($dynamicgame->colum);
+                                                        @endphp
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna0" name="colum[]" value="1" {{ in_array('1', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna0" name="colum[]" value="1" {{ ($columValues && in_array('1', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna0" class="custom-control-label">No aplica</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna1" name="colum[]" value="2" {{ in_array('2', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna1" name="colum[]" value="2" {{ ($columValues && in_array('2', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna1" class="custom-control-label">Primera Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna2" name="colum[]" value="3" {{ in_array('3', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna2" name="colum[]" value="3" {{ ($columValues && in_array('3', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna2" class="custom-control-label">Segunda Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna3" name="colum[]" value="4" {{ in_array('4', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna3" name="colum[]" value="4" {{ ($columValues && in_array('4', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna3" class="custom-control-label">Tercera Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna4" name="colum[]" value="5" {{ in_array('5', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna4" name="colum[]" value="5" {{ ($columValues && in_array('5', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna4" class="custom-control-label">Cuarta Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna5" name="colum[]" value="6" {{ in_array('6', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna5" name="colum[]" value="6" {{ ($columValues && in_array('6', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna5" class="custom-control-label">Quinta Columnas</label>
                                                         </div>
                                                         <div class="custom-control custom-checkbox">
-                                                            <input class="custom-control-input" type="checkbox" id="editcolumna6" name="colum[]" value="7" {{ in_array('7', json_decode($dynamicgame->colum)) ? 'checked' : '' }}>
+                                                            <input class="custom-control-input" type="checkbox" id="editcolumna6" name="colum[]" value="7" {{ ($columValues && in_array('7', $columValues)) ? 'checked' : '' }}>
                                                             <label for="editcolumna6" class="custom-control-label">Completo</label>
                                                         </div>
                                                     </div>
@@ -381,6 +407,7 @@
                 </div>
             </div>
         @endforeach
+        @endcan
     </section>
 @endsection
 @section('js')

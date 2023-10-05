@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class PrizesController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('can:admin.prizes.index')->only('index');
+        $this->middleware('can:admin.prizes.edit')->only('edit', 'update');
+        $this->middleware('can:admin.prizes.create')->only('create', 'store');
+        $this->middleware('can:admin.prizes.destroy')->only('destroy');
+    }
+
+
     public function index()
     {
         $prizes = Prize::paginate(5);

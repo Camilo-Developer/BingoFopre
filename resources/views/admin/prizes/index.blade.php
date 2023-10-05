@@ -24,7 +24,9 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Premio</button>
+                                    @can('admin.prizes.create')
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Premio</button>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -56,17 +58,23 @@
                                             <td>{{$prize->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
+                                                    @can('admin.prizes.edit')
                                                     <button type="button" data-toggle="modal" data-target="#modal-edit-noticia_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </a>
+                                                    @endcan
+                                                    @can('admin.prizes.destroy')
+                                                        <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarApunte_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
-                                        <form action="{{route('admin.prizes.destroy',$prize)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                        @can('admin.prizes.destroy')
+                                            <form action="{{route('admin.prizes.destroy',$prize)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endcan
                                         @php
                                             $premiosN++;
                                         @endphp
@@ -82,6 +90,7 @@
                 </div>
             </div>
         </div>
+        @can('admin.prizes.create')
         <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -97,41 +106,54 @@
                         <div class="modal-body">
 
                             <div class="row">
-                                <div class="col-3">
-                                    <img src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" width="17px" height="27px">
-                                </div>
-                                <div class="col-9">
+                                <div class="col-12">
                                     <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                        <div class="d-flex justify-content-end">
-                                            <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
-                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex justify-content-end">
+                                                    <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-flex justify-content-center">
+                                                    <img style="width: 100px; height: 100px;" src="{{asset('img/bingo.jpg')}}" id="imagenSeleccionada" class="card-img-top img-fluid" >
+                                                </div>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="color"><span class="text-danger">*</span> Color:</label>
-                                            <input type="color" name="color" required class="form-control form-control-border" id="color">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="imagen"><span class="text-danger">*</span> Imagen:</label>
-                                            <input type="file" name="imagen" required class="form-control form-control-border" id="imagen">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="state_id">Estado:</label>
-                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                                @foreach($states as $state)
-                                                    <option value="{{$state->id}}">{{$state->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description"><span class="text-danger">*</span> Descripción</label>
-                                            <textarea id="compose-textarea" name="description" required class="form-control" style="height: 500px!important;">
-                                            </textarea>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="color"><span class="text-danger">*</span> Color:</label>
+                                                    <input type="color" name="color" required class="form-control form-control-border" id="color">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="imagen"><span class="text-danger">*</span> Imagen:</label>
+                                                    <input type="file" name="imagen" required class="form-control form-control-border" id="imagen">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="state_id">Estado:</label>
+                                                    <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                        @foreach($states as $state)
+                                                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="description"><span class="text-danger">*</span> Descripción</label>
+                                                    <textarea id="compose-textarea" name="description" required class="form-control" style="height: 500px!important;">
+                                                    </textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
@@ -141,70 +163,86 @@
                 </div>
             </div>
         </div>
-        @foreach($prizes as $prize)
-            <div class="modal fade" id="modal-edit-noticia_{{$loop->iteration}}"  aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Premio</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
+        @endcan
+        @can('admin.prizes.edit')
+            @foreach($prizes as $prize)
+                <div class="modal fade" id="modal-edit-noticia_{{$loop->iteration}}"  aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Premio</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
 
-                        <form action="{{route('admin.prizes.update', $prize)}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-body">
+                            <form action="{{route('admin.prizes.update', $prize)}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
 
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="{{asset('storage/' . $prize->imagen)}}" id="imagenSeleccionadas_{{$loop->iteration}}" class="card-img-top img-fluid" width="17px" height="27px">
-                                    </div>
-                                    <div class="col-9">
-                                        <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
-                                            <div class="d-flex justify-content-end">
-                                                <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-end">
+                                                            <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <img style="width: 100px; height: 100px;" src="{{asset('storage/' . $prize->imagen)}}" id="imagenSeleccionadas_{{$loop->iteration}}" class="card-img-top img-fluid">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="color"><span class="text-danger">*</span> Color:</label>
+                                                            <input type="color" value="{{$prize->color}}" name="color" required class="form-control form-control-border" id="color">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="imagen"><span class="text-danger">*</span> Imagen:</label>
+                                                            <input type="file" value="{{$prize->imagen}}" name="imagen"  class="form-control form-control-border" id="imagenes_{{$loop->iteration}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="state_id">Estado:</label>
+                                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                                @foreach($states as $state)
+                                                                    <option value="{{$state->id}}" {{ $state->id == $prize->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="description"><span class="text-danger">*</span> Descripción</label>
+                                                            <textarea id="editNovedad_{{$loop->iteration}}" name="description" required class="form-control" style="height: 500px!important;">
+                                                            {!! $prize->description !!}
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="form-group">
-                                                <label for="color"><span class="text-danger">*</span> Color:</label>
-                                                <input type="color" value="{{$prize->color}}" name="color" required class="form-control form-control-border" id="color">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="imagen"><span class="text-danger">*</span> Imagen:</label>
-                                                <input type="file" value="{{$prize->imagen}}" name="imagen"  class="form-control form-control-border" id="imagenes_{{$loop->iteration}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="state_id">Estado:</label>
-                                                <select class="custom-select form-control-border" name="state_id" id="state_id">
-                                                    @foreach($states as $state)
-                                                        <option value="{{$state->id}}" {{ $state->id == $prize->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="description"><span class="text-danger">*</span> Descripción</label>
-                                                <textarea id="editNovedad_{{$loop->iteration}}" name="description" required class="form-control" style="height: 500px!important;">
-                                                    {!! $prize->description !!}
-                                                </textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-                                <div>
-                                    <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
-
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                                    <div>
+                                        <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endcan
     </section>
 @endsection
 @section('js')

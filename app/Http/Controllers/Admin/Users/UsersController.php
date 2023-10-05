@@ -21,6 +21,7 @@ class UsersController extends Controller
     public function __construct(){
         $this->middleware('can:admin.users.index')->only('index');
         $this->middleware('can:admin.users.edit')->only('edit', 'update');
+        $this->middleware('can:admin.users.show')->only('show');
         $this->middleware('can:admin.users.create')->only('create', 'store');
         $this->middleware('can:admin.users.destroy')->only('destroy');
     }
@@ -227,7 +228,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('error', 'El Usuario se ha eliminado correctamente.');
+        return redirect()->route('admin.users.index')->with('delete', 'El Usuario se ha eliminado correctamente.');
     }
 
     public function asiginacionGrupos(Request $request)
@@ -238,20 +239,25 @@ class UsersController extends Controller
         // Obtén los IDs de los grupos de cartones seleccionados en el formulario
         $grupo_cartones_ids = $request->input('grupo_cartones');
 
-        // Obtén el usuario
-        $user = User::find($user_id);
+        if (!is_null($grupo_cartones_ids) && count($grupo_cartones_ids) > 0) {
+            // Obtén el usuario
+            $user = User::find($user_id);
 
-        // Asigna el usuario a los grupos de cartones seleccionados
-        foreach ($grupo_cartones_ids as $grupo_id) {
-            $cartonGroup = CartonGroup::find($grupo_id);
+            // Asigna el usuario a los grupos de cartones seleccionados
+            foreach ($grupo_cartones_ids as $grupo_id) {
+                $cartonGroup = CartonGroup::find($grupo_id);
 
-            // Asigna el usuario al grupo de cartones
-            $cartonGroup->user_id = $user_id;
-            $cartonGroup->save();
+                // Asigna el usuario al grupo de cartones
+                $cartonGroup->user_id = $user_id;
+                $cartonGroup->save();
+            }
+
+            // Redirecciona de regreso a la página anterior o realiza alguna otra acción
+            return redirect()->back()->with('success', 'Usuario asignado a los grupos de cartones exitosamente.');
+        } else {
+            // Si $grupo_cartones_ids está vacío, muestra un mensaje de alerta
+            return redirect()->back()->with('info', 'La asignación de grupos no puede estar vacía.');
         }
-
-        // Redirecciona de regreso a la página anterior o realiza alguna otra acción
-        return redirect()->back()->with('success', 'Usuario asignado a los grupos de cartones exitosamente.');
     }
 
     public function cambioStateGruposCartones(Request $request) {
@@ -261,7 +267,7 @@ class UsersController extends Controller
 
         // Verifica si hay grupos de cartones seleccionados
         if (!$grupo_cartones_ids) {
-            return redirect()->back()->with('error', 'No se han seleccionado grupos de cartones para cambiar el estado.');
+            return redirect()->back()->with('info', 'No se han seleccionado grupos de cartones para cambiar el estado.');
         }
 
         // Actualiza el estado de los grupos de cartones seleccionados

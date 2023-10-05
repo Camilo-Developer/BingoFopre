@@ -40,7 +40,7 @@
                 <a href="{{route('dashboard')}}" class="nav-link">Inicio</a>
             </li>
         </ul>
-        @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Usuario'))
+        @if(auth()->user()->can('admin.dashboard'))
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="info">
-                    @if(auth()->user()->hasRole('Admin'))
+                    @if(auth()->user()->can('admin.dashboard'))
                         <a href="{{route('dashboard')}}" class="d-block">{{auth()->user()->name}} {{auth()->user()->lastname}}</a>
                     @elseif(auth()->user()->hasRole('Usuario'))
                         <a href="{{route('dashboard')}}" class="d-block">{{auth()->user()->name}} {{auth()->user()->lastname}}</a>

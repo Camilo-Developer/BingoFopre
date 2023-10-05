@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class InstructionsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.instructions.index')->only('index');
+        $this->middleware('can:admin.instructions.edit')->only('edit', 'update');
+        $this->middleware('can:admin.instructions.create')->only('create', 'store');
+        $this->middleware('can:admin.instructions.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $instructions = Instruction::all();

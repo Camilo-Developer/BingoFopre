@@ -24,7 +24,9 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
+                                    @can('admin.states.create')
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-check"></i> Crear Estado</button>
+                                    @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -64,17 +66,23 @@
                                             <td>{{$state->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
+                                                    @can('admin.states.edit')
                                                     <button type="button" data-toggle="modal" data-target="#modal-edit-estado_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                                                    <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarEstado_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </a>
+                                                    @endcan
+                                                    @can('admin.states.destroy')
+                                                        <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarEstado_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
-                                        <form action="{{route('admin.states.destroy',$state)}}"  method="POST" id="eliminarEstado_{{ $loop->iteration }}">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+                                        @can('admin.states.destroy')
+                                            <form action="{{route('admin.states.destroy',$state)}}"  method="POST" id="eliminarEstado_{{ $loop->iteration }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endcan
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -106,7 +114,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-default"  aria-hidden="true">
+        @can('admin.states.create')
+            <div class="modal fade" id="modal-default"  aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -172,8 +181,9 @@
                 </div>
             </div>
         </div>
-
-        @foreach($states as $state)
+        @endcan
+        @can('admin.states.edit')
+            @foreach($states as $state)
             <div class="modal fade" id="modal-edit-estado_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -248,5 +258,7 @@
             </div>
 
         @endforeach
+        @endcan
+
     </section>
 @endsection

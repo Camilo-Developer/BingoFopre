@@ -51,34 +51,38 @@ class SalesforceController extends Controller
     protected function gatData($accessToken, $id)
     {
         $client = new Client();
+        if ($id !== null && !empty($id)){
+            $url = "https://vde.my.salesforce.com/services/data/v58.0/query?q=SELECT+Categoria_Principal__c,Categoria__c,Categoria_Administrativo__c,FirstName,LastName,Email,generoEmail__c,Tipo_identificaci_n__c,N_mero_de_Identificaci_n__c,Tel_fono_celular_1__c+FROM+Contact+WHERE+N_mero_de_Identificaci_n__c='$id' OR Email='$id' OR Email_corporativo__c='$id' OR Email_Uniandes__c='$id' OR Carnet__c='$id' OR VDE_Email_Alterno__c='$id'";
 
-        $url = "https://vde.my.salesforce.com/services/data/v58.0/query?q=SELECT+Categoria_Principal__c,Categoria__c,Categoria_Administrativo__c,FirstName,LastName,Email,generoEmail__c,Tipo_identificaci_n__c,N_mero_de_Identificaci_n__c,Tel_fono_celular_1__c+FROM+Contact+WHERE+N_mero_de_Identificaci_n__c='$id' OR Email='$id'";
+            try {
+                $contactsResponse = $client->get($url, [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $accessToken,
+                    ],
+                ]);
 
-        try {
-            $contactsResponse = $client->get($url, [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $accessToken,
-                ],
-            ]);
+                $contactsData = json_decode($contactsResponse->getBody());
 
-            $contactsData = json_decode($contactsResponse->getBody());
+                // Verifica si "records" es un array y si tiene al menos un elemento
+                if (is_array($contactsData->records) && count($contactsData->records) > 0) {
+                    // Accede al primer elemento (índice 0) y obtén el valor de "Categoria_Administrativo__c"
+                    $categoriaAdministrativo = $contactsData->records[0];
 
-            // Verifica si "records" es un array y si tiene al menos un elemento
-            if (is_array($contactsData->records) && count($contactsData->records) > 0) {
-                // Accede al primer elemento (índice 0) y obtén el valor de "Categoria_Administrativo__c"
-                $categoriaAdministrativo = $contactsData->records[0];
+                    // Retorna el valor de "Categoria_Administrativo__c"
+                    return $categoriaAdministrativo;
+                } else {
+                    // Maneja el caso en que no haya registros o la estructura sea diferente a la esperada
+                    return null; // O puedes retornar un valor predeterminado según tu lógica
+                }
 
-                // Retorna el valor de "Categoria_Administrativo__c"
-                return $categoriaAdministrativo;
-            } else {
-                // Maneja el caso en que no haya registros o la estructura sea diferente a la esperada
-                return null; // O puedes retornar un valor predeterminado según tu lógica
+
+            } catch (ClientException $e) {
+                // Maneja errores de solicitud aquí si es necesario
             }
 
-
-        } catch (ClientException $e) {
-            // Maneja errores de solicitud aquí si es necesario
         }
+
+
 
         return null;
     }

@@ -24,8 +24,10 @@ class RoleSeeder extends Seeder
         //Permiso admin Dashboard
         Permission::create([
             'name' => 'admin.dashboard',
-            'description'=> 'Ver panel administrativo Administrador'
+            'description'=> 'Ver panel administrativo ( Administrador y Sub-Administrador )'
         ])->syncRoles([$role1, $role2]);
+
+
 
         //Permiso User Dashboard
         Permission::create([
@@ -53,6 +55,7 @@ class RoleSeeder extends Seeder
             'description'=> 'Eliminar Estados'
         ])->syncRoles([$role1]);
 
+
         //Permisos admin usuarios
         Permission::create([
             'name' => 'admin.users.index',
@@ -67,9 +70,14 @@ class RoleSeeder extends Seeder
             'description'=> 'Edición de usuarios'
         ])->syncRoles([$role1]);
         Permission::create([
+            'name' => 'admin.users.show',
+            'description'=> 'Detalle del usuario'
+        ])->syncRoles([$role1]);
+        Permission::create([
             'name' => 'admin.users.destroy',
             'description'=> 'Eliminación de usuarios'
         ])->syncRoles([$role1]);
+
 
 
         //Permisos admin Configuracion Template
@@ -82,6 +90,7 @@ class RoleSeeder extends Seeder
             'description'=> 'Edición de la configuración template'
         ])->syncRoles([$role1]);
 
+
         //Permisos admin Noticias principales
         Permission::create([
             'name' => 'admin.cardmains.index',
@@ -89,7 +98,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.cardmains.create',
-            'description'=> 'Creacion de noticias principales'
+            'description'=> 'Creación de noticias principales'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.cardmains.edit',
@@ -99,6 +108,7 @@ class RoleSeeder extends Seeder
             'name' => 'admin.cardmains.destroy',
             'description'=> 'Eliminación de noticias principales'
         ])->syncRoles([$role1]);
+
 
         //Permisos admin Patrocinadores
         Permission::create([
@@ -118,23 +128,19 @@ class RoleSeeder extends Seeder
             'description'=> 'Eliminación de patrocinadores'
         ])->syncRoles([$role1]);
 
+
+
         //Permisos admin Instrucciones
         Permission::create([
             'name' => 'admin.instructions.index',
             'description'=> 'Lista de instrucciones'
         ])->syncRoles([$role1]);
         Permission::create([
-            'name' => 'admin.instructions.create',
-            'description'=> 'Creación de instrucciones'
-        ])->syncRoles([$role1]);
-        Permission::create([
             'name' => 'admin.instructions.edit',
             'description'=> 'Edición de instrucciones'
         ])->syncRoles([$role1]);
-        Permission::create([
-            'name' => 'admin.instructions.destroy',
-            'description'=> 'Eliminación de instrucciones'
-        ])->syncRoles([$role1]);
+
+
 
         //Permisos admin Dinamicas del juego
         Permission::create([
@@ -154,6 +160,8 @@ class RoleSeeder extends Seeder
             'description'=> 'Eliminación de dinamicas del juego'
         ])->syncRoles([$role1]);
 
+
+
         //Permisos admin Premios
         Permission::create([
             'name' => 'admin.prizes.index',
@@ -172,30 +180,107 @@ class RoleSeeder extends Seeder
             'description'=> 'Eliminación de premios'
         ])->syncRoles([$role1]);
 
+
         //Permisos admin roles
         Permission::create([
             'name' => 'admin.roles.index',
-            'description'=> 'Lista de roles'
+            'description'=> 'Listado de roles'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.roles.create',
-            'description'=> 'Creación de roles'
+            'description'=> 'Creación del rol'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.roles.edit',
-            'description'=> 'Edición de roles'
+            'description'=> 'Edición del rol'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.roles.show',
+            'description'=> 'Detalle del rol'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.roles.destroy',
-            'description'=> 'Eliminación de roles'
+            'description'=> 'Eliminación del rol'
         ])->syncRoles([$role1]);
+
 
 
         //Permisos admin Creacion de cartones
         Permission::create([
             'name' => 'admin.cartones.createForm',
-            'description'=> 'Creación de cartones'
+            'description'=> 'Listado y creación de cartones masivos'
         ])->syncRoles([$role1]);
+
+
+        //Edicion de cartones
+        Permission::create([
+            'name' => 'admin.cartones.update',
+            'description'=> 'Edición del cartón'
+        ])->syncRoles([$role1]);
+        //Detalles de cartones
+        Permission::create([
+            'name' => 'admin.cartones.show',
+            'description'=> 'Detalle del cartón'
+        ])->syncRoles([$role1]);
+        //Creacion de qr masivos
+        Permission::create([
+            'name' => 'admin.cardboard.generadormasivoQR',
+            'description'=> 'Creación masiva de codigos QR'
+        ])->syncRoles([$role1]);
+
+
+        //Añadir cartones al carrito
+        Permission::create([
+            'name' => 'addToCart',
+            'description'=> 'Añadir cartones al carrito'
+        ])->syncRoles([$role1,$role2,$role4]);
+
+        //Finalizar compra de cartones
+        Permission::create([
+            'name' => 'admin.cartones.finishPurchase',
+            'description'=> 'Finalizar comprar de cartones'
+        ])->syncRoles([$role1,$role2,$role4]);
+
+        //remover cartones del carrito
+        Permission::create([
+            'name' => 'admin.cartones.removeFromCart',
+            'description'=> 'Eliminar carton del carrito'
+        ])->syncRoles([$role1,$role2,$role4]);
+
+        //Asigancion de grupo de cartones usuarios
+        Permission::create([
+            'name' => 'admin.users.asiginacionGrupos',
+            'description'=> 'Asignación de grupo de cartones a un usuario'
+        ])->syncRoles([$role1]);
+
+        //Cambio del estado en grupo de cartones usuarios
+        Permission::create([
+            'name' => 'admin.users.cambioStateGruposCartones',
+            'description'=> 'Cambiar el estado de los grupos de cartones en vista usuario'
+        ])->syncRoles([$role1]);
+
+
+
+        //Permisos admin Grupo de cartones
+        Permission::create([
+            'name' => 'admin.cartongroups.index',
+            'description'=> 'Lista de grupos de cartones'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.cartongroups.create',
+            'description'=> 'Creación de grupo de cartón'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.cartongroups.edit',
+            'description'=> 'Edición del grupo del cartón'
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'admin.cartongroups.destroy',
+            'description'=> 'Eliminación del grupo de cartón'
+        ])->syncRoles([$role1]);
+
+
+        //Permisos para Usuarios
 
 
 

@@ -13,11 +13,21 @@ class Cardboard extends Model
     protected $table = 'cardboards';
     protected $primaryKey = 'id';
     protected  $fillable = [
-      'name',
-      'document_number',
-      'price',
-      'state_id',
-      'group_id',
+        'name',
+        'price',
+        'document_number',
+        'Categoria_Principal__c',
+        'Categoria__c',
+        'Categoria_Administrativo__c',
+        'FirstName',
+        'LastName',
+        'Email',
+        'generoEmail__c',
+        'Tipo_identificaci_n__c',
+        'N_mero_de_Identificaci_n__c',
+        'Tel_fono_celular_1__c',
+        'state_id',
+        'group_id',
     ];
     protected static function boot()
     {

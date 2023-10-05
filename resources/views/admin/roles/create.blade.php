@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Crear Roles')
+@section('title', 'Creación de roles')
 @section('content')
     <!--Migas de pan-->
     <section class="content-header">

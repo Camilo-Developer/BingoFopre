@@ -14,6 +14,7 @@ class RolesController extends Controller
      public function __construct(){
         $this->middleware('can:admin.roles.index')->only('index');
         $this->middleware('can:admin.roles.edit')->only('edit', 'update');
+        $this->middleware('can:admin.roles.show')->only('show');
         $this->middleware('can:admin.roles.create')->only('create', 'store');
         $this->middleware('can:admin.roles.destroy')->only('destroy');
     }
@@ -75,12 +76,12 @@ class RolesController extends Controller
         ]);
         $role->update($request->all());
         $role->permissions()->sync($request->permissions);
-        return redirect()->route('admin.roles.index')->with('info', 'el Rol se actualizo con exito');
+        return redirect()->route('admin.roles.index')->with('edit', 'El rol se edito correctamente.');
     }
 
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('admin.roles.index')->with('info', 'el Rol se elimino con exito');
+        return redirect()->route('admin.roles.index')->with('delete', 'El rol se elimino correctamente.');
     }
 }

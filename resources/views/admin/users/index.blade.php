@@ -24,7 +24,9 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_user"> <i class="fa fa-plus"></i> Crear Usuarios</button>
+                                    @can('admin.users.create')
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_user"> <i class="fa fa-plus"></i> Crear Usuarios</button>
+                                    @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.users.index') }}" method="GET">
@@ -76,11 +78,27 @@
                                             <td>{{$user->updated_at->format('Y-m-d')}}</td>
                                             <td style="width: 100px;">
                                                 <div class="btn-group">
-                                                    <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                                                    <a href="{{route('admin.users.show',$user)}}" class="btn btn-success" style="margin-left: 5px;"><i class="fa fa-eye"></i></a>
+                                                    @can('admin.users.edit')
+                                                        <button type="button" data-toggle="modal" data-target="#modal_edit_user_{{$loop->iteration}}" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                                    @endcan
+                                                    @can('admin.users.show')
+                                                        <a href="{{route('admin.users.show',$user)}}" class="btn btn-success" style="margin-left: 5px;"><i class="fa fa-eye"></i></a>
+                                                    @endcan
+                                                    @can('admin.users.destroy')
+                                                        <a title="Eliminar" onclick="document.getElementById('eliminaruser_{{ $loop->iteration }}').submit()" class="  btn btn-danger btn-company-danger">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
+                                        @can('admin.users.destroy')
+                                            <form method="post" action="{{route('admin.users.destroy', $user)}}" id="eliminaruser_{{ $loop->iteration }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endcan
+
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -205,6 +223,7 @@
                 </div>
             </div>
         </div>
+        @can('admin.users.edit')
         @foreach($users as $user)
             <div class="modal fade" id="modal_edit_user_{{$loop->iteration}}"  aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -302,6 +321,8 @@
                 </div>
             </div>
         @endforeach
+        @endcan
+
     </section>
 @endsection
 

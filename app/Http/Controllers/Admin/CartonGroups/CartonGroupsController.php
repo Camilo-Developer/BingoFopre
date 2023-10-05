@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CartonGroupsController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('can:admin.cartongroups.index')->only('index');
+        $this->middleware('can:admin.cartongroups.edit')->only('edit', 'update');
+        $this->middleware('can:admin.cartongroups.create')->only('create', 'store');
+        $this->middleware('can:admin.cartongroups.destroy')->only('destroy');
+    }
+
     public function index(Request $request)
     {
         $users = User::all();

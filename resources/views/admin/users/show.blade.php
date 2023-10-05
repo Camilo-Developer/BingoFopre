@@ -22,7 +22,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Información del Usuario</h3>
@@ -243,13 +242,19 @@
             <input type="checkbox" id="btn-mas">
 
             <div class="redes" style="margin-bottom: 61px;margin-right: -55px;">
+                @can('admin.users.asiginacionGrupos')
                 <a style="cursor: pointer;" title="Asignar Grupos Disponibles" class="fa fa-check-circle" data-toggle="modal" data-target="#modal-asign-groups"></a>
-                <a data-toggle="modal" data-target="#modal-cambio-state-groups" href="#" class="fas fa-edit" title="Editar Grupos Asignados"></a>
+                @endcan
+                @can('admin.users.cambioStateGruposCartones')
+                    <a data-toggle="modal" data-target="#modal-cambio-state-groups" href="#" class="fas fa-edit" title="Editar Grupos Asignados"></a>
+                @endcan
+
             </div>
             <div class="btn-mas">
                 <label for="btn-mas" class="fa fa-plus"></label>
             </div>
         </div>
+        @can('admin.users.asiginacionGrupos')
         <div class="modal fade" id="modal-asign-groups"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -320,6 +325,8 @@
                 </div>
             </div>
         </div>
+        @endcan
+        @can('admin.users.cambioStateGruposCartones')
         <div class="modal fade" id="modal-cambio-state-groups"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -385,8 +392,9 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        @endcan
 
-        @foreach($card_groups as $card_group)
+    @foreach($card_groups as $card_group)
             @php
                 $totalCartones3 = $card_group->cardboard_count;
                 $cartones_vendidos3 = $card_group->cardboards_vendidos;
