@@ -282,7 +282,16 @@ class RoleSeeder extends Seeder
 
         //Permisos para Usuarios
 
-
+        //Infomacion administrativa Estudiante
+        Permission::create([
+            'name' => 'users.dashboard.admin.stundents',
+            'description'=> 'Ver información administrativa estudiantes'
+        ])->syncRoles([$role1,$role2,$role3]);
+        //Infomacion administrativa Vendedor
+        Permission::create([
+            'name' => 'users.dashboard.admin.seller',
+            'description'=> 'Ver información administrativa vendedores'
+        ])->syncRoles([$role1,$role2,$role4]);
 
     }
 }

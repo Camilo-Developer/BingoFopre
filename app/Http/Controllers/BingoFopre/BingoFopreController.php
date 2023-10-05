@@ -59,6 +59,7 @@ class BingoFopreController extends Controller
                 'prizes'
             ));
     }
+
     public function dashboardcartsgroup(){
         $user = Auth::user();
         $userId = $user->id;
@@ -90,10 +91,5 @@ class BingoFopreController extends Controller
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
         return view('user.dashboard.index', compact('card_groups', 'totalCartonesAsignados', 'totalCartonesVendidos', 'totalCartonesPendientes','totalCartonesObsequios'));
     }
-
-
-
-
-
 
 }

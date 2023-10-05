@@ -1,43 +1,6 @@
 @extends('layouts.guest')
 @section('title','Panel administrativo')
 @section('content')
-    <section class="pt-3 pb-4" id="count-stats">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mx-auto py-3">
-                    <div class="row">
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countto="{{ $totalCartonesAsignados }}">{{ $totalCartonesAsignados }}</span></h1>
-                                <h5 class="mt-3">Cartones Asignado</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countto="{{ $totalCartonesVendidos }}">{{ $totalCartonesVendidos }}</span></h1>
-                                <h5 class="mt-3">Cartones Vendidos</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesPendientes }}">{{ $totalCartonesPendientes }}</h1>
-                                <h5 class="mt-3">Cartones Pendientes</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesObsequios }}">{{ $totalCartonesObsequios }}</h1>
-                                <h5 class="mt-3">Cartones Obsequio</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="pt-3 pb-4">
         <style>
             .moving-tab{
@@ -50,6 +13,8 @@
                     <div class="col-lg-12 col-md-12 col-12 mx-auto text-center">
                         <div class="nav-wrapper mt-5 position-relative z-index-2">
                             <ul class="nav nav-pills nav-fill flex-row p-1" id="tabs-pricing" role="tablist">
+                                @can('users.dashboard.admin.stundents')
+
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0 active" id="tabs-iconpricing-tab-1" data-bs-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="true">
                                         Gráficas
@@ -60,22 +25,80 @@
                                         Información General
                                     </a>
                                 </li>
+                                @endcan
+
+                                @can('users.dashboard.admin.seller')
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link mb-0" id="tabs-iconpricing-tab-3" data-bs-toggle="tab" href="#seller" role="tab" aria-controls="seller" aria-selected="false" tabindex="-1">
+                                            Información Vendedor
+                                        </a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content tab-space">
-                    <div class="tab-pane active show" id="monthly" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-1">
-                        <canvas id="miGrafica"></canvas>
+                    @can('users.dashboard.admin.stundents')
 
-                    </div>
-                    <div class="tab-pane" id="annual" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-2">
-                        <canvas id="miGrafica2"></canvas>
-                    </div>
+                        <div class="tab-pane active show" id="monthly" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-1">
+                            <canvas id="miGrafica"></canvas>
+
+                        </div>
+                        <div class="tab-pane" id="annual" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-2">
+                            <canvas id="miGrafica2"></canvas>
+                        </div>
+                    @endcan
+
+                     @can('users.dashboard.admin.seller')
+                        <div class="tab-pane" id="seller" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-3">
+                            <div  id="count-stats">
+                                    <div class="row">
+                                        <div class="col-lg-9 z-index-2 border-radius-xl mx-auto py-3">
+                                            <div class="row">
+                                                <div class="col-md-3 position-relative">
+                                                    <div class="p-3 text-center">
+                                                        <h1 class="text-gradient text-primary"><span id="state1" countto="{{ $totalCartonesAsignados }}">{{ $totalCartonesAsignados }}</span></h1>
+                                                        <h5 class="mt-3">Cartones Asignado</h5>
+                                                    </div>
+                                                    <hr class="vertical dark">
+                                                </div>
+                                                <div class="col-md-3 position-relative">
+                                                    <div class="p-3 text-center">
+                                                        <h1 class="text-gradient text-primary"> <span id="state2" countto="{{ $totalCartonesVendidos }}">{{ $totalCartonesVendidos }}</span></h1>
+                                                        <h5 class="mt-3">Cartones Vendidos</h5>
+                                                    </div>
+                                                    <hr class="vertical dark">
+                                                </div>
+                                                <div class="col-md-3 position-relative">
+                                                    <div class="p-3 text-center">
+                                                        <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesPendientes }}">{{ $totalCartonesPendientes }}</h1>
+                                                        <h5 class="mt-3">Cartones Pendientes</h5>
+                                                    </div>
+                                                    <hr class="vertical dark">
+                                                </div>
+                                                <div class="col-md-3 position-relative">
+                                                    <div class="p-3 text-center">
+                                                        <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesObsequios }}">{{ $totalCartonesObsequios }}</h1>
+                                                        <h5 class="mt-3">Cartones Obsequio</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    @endcan
+
                 </div>
             </div>
         </div>
     </section>
+
+
+
+@endsection
+@section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script>
         // Obtén el contexto del lienzo (canvas)
@@ -156,8 +179,4 @@
             options: options // Opciones de configuración
         });
     </script>
-
-@endsection
-@section('js')
-
 @endsection

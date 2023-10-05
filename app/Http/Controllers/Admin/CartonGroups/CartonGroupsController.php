@@ -84,10 +84,7 @@ class CartonGroupsController extends Controller
             return redirect()->route('admin.cartongroups.index')
                 ->with('info', 'No se puede eliminar el grupo de cartones porque contiene cartones asignados.');
         }
-
-        // Si no hay cartones asignados, procede con la eliminación del grupo
         $cartongroup->delete();
-
         return redirect()->route('admin.cartongroups.index')
             ->with('delete', 'El grupo de cartones se ha eliminado correctamente.');
     }

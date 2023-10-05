@@ -6,7 +6,7 @@ document.querySelectorAll('.button').forEach(button => button.addEventListener('
         setTimeout(() => {
             // Aquí puedes redirigir al usuario a la ruta deseada después de la animación de carga.
             window.location.href = href ; // Agrega '#ruta_pre' a la URL para redirigir al elemento con id="ruta_pre"
-        }, 3700);
+        }, 2000);
     }
     e.preventDefault();
 }));
