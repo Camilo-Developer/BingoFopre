@@ -68,9 +68,51 @@ class BingoFopreController extends Controller
             ->where('state_id', 3)
             ->get();
 
+
         $totalCartonesAsignados = 0;
         $totalCartonesVendidos = 0;
         $totalCartonesObsequios = 0;
+
+        $totalMontoVendido = 0;
+        $totalMontoGrupo = 0;
+        $totalMontoObsequio = 0;
+
+
+        $currentYear = date('Y');
+
+        $card_groups_shows = CartonGroup::where('user_id', $userId)
+            ->whereYear('created_at', $currentYear)
+            ->withCount([
+                'cardboard',
+                'cardboard as cardboards_vendidos' => function ($query) {
+                    $query->where('state_id', 5);
+                },
+                'cardboard as cardboards_obsequio' => function ($query) {
+                    $query->where('state_id', 6);
+                },
+            ])
+            ->with(['cardboard' => function ($query) {
+                $query->select('id', 'name', 'state_id', 'group_id');
+            }])
+            ->get();
+
+        $card_groups = CartonGroup::where('user_id', $userId)
+            ->where('state_id', 3)
+            ->withCount([
+                'cardboard',
+                'cardboard as cardboards_vendidos' => function ($query) {
+                    $query->where('state_id', 5);
+                },
+                'cardboard as cardboards_obsequio' => function ($query) {
+                    $query->where('state_id', 6);
+                },
+            ])
+            ->with(['cardboard' => function ($query) {
+                $query->select('id', 'name', 'state_id', 'group_id');
+            }])
+            ->paginate(5);
+
+
 
         foreach ($card_groups as $group) {
             $totalCartones = Cardboard::where('group_id', $group->id)
@@ -84,12 +126,45 @@ class BingoFopreController extends Controller
                 ->where('state_id', 6)
                 ->count();
 
+
+            $montoVendido = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 5)
+                ->sum('price');
+
+            $montoGrupo = Cardboard::where('group_id', $group->id)
+                ->sum('price');
+
+            $montoObsequio = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 6)
+                ->sum('price');
+
             $totalCartonesAsignados += $totalCartones;
             $totalCartonesVendidos += $totalCartonesVen;
             $totalCartonesObsequios += $totalCartonesObse;
+            $totalMontoVendido += $montoVendido; // Sumar el monto vendido al total general
+            $totalMontoGrupo += $montoGrupo; // Sumar el monto vendido al total general
+            $totalMontoObsequio += $montoObsequio; // Sumar el monto vendido al total general
         }
+        //dd($totalMontoObsequio);
+
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
-        return view('user.dashboard.index', compact('card_groups', 'totalCartonesAsignados', 'totalCartonesVendidos', 'totalCartonesPendientes','totalCartonesObsequios'));
+        $sumademontos = $totalMontoVendido + $totalMontoObsequio;
+
+        return view('user.dashboard.index', compact(
+            'card_groups',
+            'totalCartonesAsignados',
+            'totalCartonesVendidos',
+            'totalCartonesPendientes',
+            'totalCartonesObsequios',
+            'totalMontoVendido',
+            'totalMontoGrupo',
+            'totalMontoObsequio',
+            'sumademontos',
+            'card_groups_shows',
+            'currentYear',
+            'card_groups',
+
+        ));
     }
 
 }

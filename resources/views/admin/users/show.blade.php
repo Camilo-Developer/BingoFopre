@@ -113,10 +113,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <canvas id="pieChart"></canvas>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <canvas id="miGrafica2"></canvas>
                                             </div>
                                         </div>
@@ -394,7 +394,7 @@
         </div>
         @endcan
 
-    @foreach($card_groups as $card_group)
+        @foreach($card_groups as $card_group)
             @php
                 $totalCartones3 = $card_group->cardboard_count;
                 $cartones_vendidos3 = $card_group->cardboards_vendidos;
@@ -402,7 +402,7 @@
 
                 $totalCartones_pendientes3 = $totalCartones3 - ($cartones_vendidos3 + $cartones_obsequio3);
             @endphp
-        <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}"  aria-hidden="true">
+            <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}"  aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
