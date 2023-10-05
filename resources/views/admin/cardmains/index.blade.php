@@ -80,10 +80,12 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <form action="{{route('admin.cardmains.destroy',$cardmain)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                            @can('admin.cardmains.destroy')
+                                                <form action="{{route('admin.cardmains.destroy',$cardmain)}}"  method="POST" id="eliminarApunte_{{ $loop->iteration }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            @endcan
                                     @endforeach
                                     </tbody>
                                 </table>

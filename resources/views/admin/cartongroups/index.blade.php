@@ -24,7 +24,9 @@
                         <div class="col-12 mb-3">
                             <div class="row">
                                 <div class="col-12 col-md-3">
+                                    @can('admin.cartongroups.create')
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_carton_group"> <i class="fa fa-plus"></i> Crear Grupo</button>
+                                    @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.cartongroups.index') }}" method="GET">
@@ -62,12 +64,25 @@
                                                     <td>{{$cartongroup->updated_at->format('Y-m-d')}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="" class="btn btn-success">
-                                                                <i class="fa fa-eye"></i>
-                                                            </a>
+                                                            @can('admin.cartongroups.edit')
+                                                                <a href="" data-toggle="modal" data-target="#modal_edit_carton_group_{{$loop->iteration}}" class="btn btn-warning">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                            @endcan
+                                                            @can('admin.cartongroups.destroy')
+                                                                <a style="margin-left: 5px" title="Eliminar" onclick="document.getElementById('eliminarCartonGroup_{{ $loop->iteration }}').submit()" class="btn btn-danger ">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </a>
+                                                            @endcan
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @can('admin.cartongroups.destroy')
+                                                    <form action="{{route('admin.cartongroups.destroy',$cartongroup)}}"  method="POST" id="eliminarCartonGroup_{{ $loop->iteration }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                @endcan
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -102,6 +117,7 @@
             </div>
         </div>
     </section>
+    @can('admin.cartongroups.create')
     <div class="modal fade" id="modal_crear_carton_group"  aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -127,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="userSelect"><span class="text-danger mt-1">* </span> Correo del Usuario:</label>
+                                    <label for="userSelect">Correo del Usuario:</label>
                                     <div class="form-group">
                                         <select id="userSelect" name="user_id" class="form-control" style="width: 100%">
                                             <option value=""></option>
@@ -165,6 +181,75 @@
             </div>
         </div>
     </div>
+    @endcan
+
+    @can('admin.cartongroups.edit')
+        @foreach($cartongroups as $cartongroup)
+        <div class="modal fade" id="modal_edit_carton_group_{{$loop->iteration}}"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> <i class="fa fa-user"></i> Editar el grupo de carton</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="{{route('admin.cartongroups.update', $cartongroup)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div style="max-height: 365px; overflow-y: scroll; overflow-x: hidden">
+                                <div class="d-flex justify-content-end">
+                                    <span class="text-danger mt-1">* </span><span>Campo requerido.</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="n_group">Numero del grupo:</label>
+                                            <input type="text" value="{{$cartongroup->id}}" disabled class="form-control form-control-border" id="n_group">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="userSelect">Correo del Usuario:</label>
+                                        <div class="form-group">
+                                            <select id="userSelect" name="user_id" class="form-control" style="width: 100%">
+                                                <option value=""></option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{$user->id}}" {{ $user->id == $cartongroup->user_id ? 'selected' : '' }} {{ old('user_id') == $user->id ? 'selected' : '' }}>{{$user->email}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('user_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="state_id"><span class="text-danger mt-1">* </span> Estado del grupo:</label>
+                                            <select class="custom-select form-control-border" name="state_id" id="state_id">
+                                                @foreach($states as $state)
+                                                    <option value="{{$state->id}}" {{ $state->id == $cartongroup->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('state_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    @endcan
+
 @endsection
 @section('js')
     <script>

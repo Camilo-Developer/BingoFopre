@@ -59,7 +59,8 @@ class CartonGroupsController extends Controller
 
     public function edit(CartonGroup $cartongroup)
     {
-        return view('admin.cartongroups.index',compact('cartongroup'));
+        $states = State::all();
+        return view('admin.cartongroups.index',compact('cartongroup','states'));
 
     }
 
@@ -67,16 +68,28 @@ class CartonGroupsController extends Controller
     {
         $request->validate([
             'user_id' => 'nullable',
-            'state_id' => 'required',
+            'state_id' => 'nullable',
         ]);
         $data = $request->all();
-        $cartongroup->update($data);
+        $cartongroup->user_id = $data['user_id'];
+        $cartongroup->state_id = $data['state_id'];
+        $cartongroup->save();
         return redirect()->route('admin.cartongroups.index')->with('edit', 'El grupo de cartones se ha actualizado correctamente.');
     }
 
     public function destroy(CartonGroup $cartongroup)
     {
+        $hasAssignedCardboards = $cartongroup->cardboard()->exists();
+        if ($hasAssignedCardboards) {
+            return redirect()->route('admin.cartongroups.index')
+                ->with('info', 'No se puede eliminar el grupo de cartones porque contiene cartones asignados.');
+        }
+
+        // Si no hay cartones asignados, procede con la eliminación del grupo
         $cartongroup->delete();
-        return redirect()->route('admin.cartongroups.index')->with('delete', 'El grupo de cartones se ha eliminado correctamente.');
+
+        return redirect()->route('admin.cartongroups.index')
+            ->with('delete', 'El grupo de cartones se ha eliminado correctamente.');
     }
+
 }
