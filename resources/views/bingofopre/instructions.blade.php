@@ -10,6 +10,7 @@
 
         }
     </style>
+
     <section class="testimonial-2 mt-2 pt-2">
         <div class="row flex-lg-row-reverse">
             <div class="col-2">

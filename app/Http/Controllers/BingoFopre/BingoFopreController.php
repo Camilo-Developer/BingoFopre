@@ -64,9 +64,9 @@ class BingoFopreController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        $card_groups = CartonGroup::where('user_id', $userId)
-            ->where('state_id', 3)
-            ->get();
+        $user_document = Auth::user()->document_number;
+
+
 
 
         $totalCartonesAsignados = 0;
@@ -111,6 +111,39 @@ class BingoFopreController extends Controller
                 $query->select('id', 'name', 'state_id', 'group_id');
             }])
             ->paginate(5);
+
+
+        $carton_document_users = Cardboard::where('document_number', $user_document)
+            ->whereNotNull('document_number')
+            ->paginate(5);
+
+        //dd($carton_document_user);
+
+        $comprasPorDia = Cardboard::where('document_number', $user_document)
+            ->whereNotNull('document_number')
+            ->selectRaw('DATE(updated_at) as fecha, COUNT(*) as total_cartones')
+            ->groupBy('fecha')
+            ->orderBy('fecha')
+            ->get();
+
+
+
+        $carton_document_users_total = Cardboard::where('document_number', $user_document)
+            ->whereNotNull('document_number')
+            ->count();
+
+        $carton_document_users_vendidos = Cardboard::where('document_number', $user_document)
+            ->where('state_id',5)
+            ->whereNotNull('document_number')
+            ->count();
+
+        $carton_document_users_obsequio = Cardboard::where('document_number', $user_document)
+            ->where('state_id',6)
+            ->whereNotNull('document_number')
+            ->count();
+
+
+        //dd($carton_document_users_total,$carton_document_users_vendidos,$carton_document_users_obsequio);
 
 
 
@@ -163,6 +196,11 @@ class BingoFopreController extends Controller
             'card_groups_shows',
             'currentYear',
             'card_groups',
+            'carton_document_users',
+            'comprasPorDia',
+            'carton_document_users_total',
+            'carton_document_users_vendidos',
+            'carton_document_users_obsequio',
 
         ));
     }

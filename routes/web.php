@@ -39,8 +39,8 @@ Route::middleware([
 ])->group(function () {
     //Route de estudiante y vendedor
     Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->middleware('can:dashboard')->name('dashboard');
-    Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->name('dashboard');
-    Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->name('user.cart.index');
+    Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->middleware('can:dashboard')->name('dashboard');
+    Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->middleware('can:addToCart')->name('user.cart.index');
 
 
     Route::match(['get', 'post', 'put', 'delete'], '/register', function () {

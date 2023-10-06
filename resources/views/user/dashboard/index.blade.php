@@ -16,12 +16,12 @@
 
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0 active" id="tabs-iconpricing-tab-1" data-bs-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="true">
-                                        Estadisticas
+                                        Mis Cartones
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0" id="tabs-iconpricing-tab-2" data-bs-toggle="tab" href="#annual" role="tab" aria-controls="annual" aria-selected="false" tabindex="-1">
-                                        Información General
+                                        Información del Usuario
                                     </a>
                                 </li>
                                 @endcan
@@ -40,9 +40,89 @@
                 <div class="tab-content tab-space">
                     @can('users.dashboard.admin.stundents')
                         <div class="tab-pane active show" id="monthly" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-1">
-                            <canvas id="miGrafica"></canvas>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <h5 class="font-weight-bolder mb-3">Mis compras por dia</h5>
+                                    <canvas id="miGrafica"></canvas>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <h5 class="font-weight-bolder mb-3">Total de mis compras</h5>
+                                    <canvas id="miGrafica3"></canvas>
+                                </div>
+                                <div class="col-12 my-4">
+                                    <h5 class="font-weight-bolder ">Cartones Comprados</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Fecha Compra</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($carton_document_users as $carton_document_user)
+                                                <tr class="text-center">
+                                                    <td>
+                                                        {{$carton_document_user->name}}
+                                                    </td>
+                                                    <td>$ {{number_format(intval($carton_document_user->price))}}</td>
+                                                    <td>{{$carton_document_user->state->name}}</td>
+                                                    <td>{{$carton_document_user->updated_at}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex justify-content-end my-2">
+                                        {{ $carton_document_users->links() }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane" id="annual" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-2">
+                            <div class="row">
+                                <div class="col-lg-6  mb-3">
+                                    <div>
+                                        <label>Nombres</label>
+                                        <input value="{{auth()->user()->name}}"  class="form-control" placeholder="Nombres"  disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div>
+                                        <label>Apellidos</label>
+                                        <input value="{{auth()->user()->lastname}}"  class="form-control" placeholder="Apellidos" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div>
+                                        <label>Número documento</label>
+                                        <input value="{{auth()->user()->document_number}}"  class="form-control" placeholder="Número de documento" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div>
+                                        <label>Correo eléctronico</label>
+                                        <input value="{{auth()->user()->email}}"  class="form-control" placeholder="Correo eléctronico" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div>
+                                        <label>Estado</label>
+                                        <input value="{{auth()->user()->state->name}}"  class="form-control" placeholder="Correo eléctronico" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div>
+                                        <label>Rol</label>
+                                        @php
+                                            $roles = auth()->user()->roles->pluck('name')->implode(', ');
+                                        @endphp
+                                        <input value="{{ $roles }}" class="form-control" placeholder="Roles" disabled type="text">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endcan
 
@@ -185,11 +265,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
                     @endcan
                 </div>
             </div>
@@ -205,7 +280,7 @@
             $totalCartones_pendientes3 = $totalCartones3 - ($cartones_vendidos3 + $cartones_obsequio3);
         @endphp
 
-        <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}"  >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -296,7 +371,7 @@
             $cartones_obsequio5 = $card_groups_show->cardboards_obsequio;
             $totalCartones_pendientes5 = $totalCartones5 - ($cartones_vendidos5 + $cartones_obsequio5);
         @endphp
-        <div class="modal fade" id="modal-datail-group_year_{{$loop->iteration}}"  aria-hidden="true">
+        <div class="modal fade" id="modal-datail-group_year_{{$loop->iteration}}"   >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -381,66 +456,41 @@
             </div>
         </div>
     @endforeach
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script>
-        // Obtén el contexto del lienzo (canvas)
         var ctx = document.getElementById('miGrafica').getContext('2d');
 
-        // Define los datos para la gráfica (precios de una acción a lo largo del tiempo)
+        var fechas = @json($comprasPorDia->pluck('fecha'));
+        var cartonesComprados = @json($comprasPorDia->pluck('total_cartones'));
+
         var data = {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+            labels: fechas,
             datasets: [{
-                label: 'Precio de la Acción',
-                data: [100, 110, 105, 120, 130, 125],
-                fill: false, // No rellenes el área bajo la línea
-                borderColor: 'rgb(75, 192, 192)', // Color de la línea
-                tension: 0.4 // Tensión de la línea (0 para una línea recta, 1 para una curva suave)
+                label: 'Cartones Comprados por Día',
+                data: cartonesComprados,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.4
             }]
         };
 
-        // Configura la opción de la gráfica
         var options = {
             scales: {
                 y: {
-                    beginAtZero: false // No comiences el eje Y en cero
+                    beginAtZero: true
                 }
             }
         };
 
-        // Crea la gráfica de líneas
         var myChart = new Chart(ctx, {
-            type: 'line', // Tipo de gráfica
-            data: data, // Datos de la gráfica
-            options: options // Opciones de configuración
+            type: 'line',
+            data: data,
+            options: options
         });
     </script>
+
 
     <script>
         var ctx = document.getElementById('miGrafica2').getContext('2d');
@@ -457,6 +507,40 @@
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgb(31,185,85)',
+                ],
+                borderWidth: 1
+            }]
+        };
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        };
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('miGrafica3').getContext('2d');
+        var data = {
+            labels: ['Car. Comprados', 'Car. Obsequio', 'Tol. Cartones'],
+            datasets: [{
+                label: 'Totales cartones',
+                data: [{{ $carton_document_users_vendidos }}, {{$carton_document_users_obsequio}},{{$carton_document_users_total}}],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(49,220,169,0.2)',
+                ],
+                borderColor: [
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgb(31,185,85)',

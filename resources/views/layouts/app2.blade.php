@@ -15,7 +15,7 @@
     <link rel="icon" sizes="192x192" href="{{asset('logo.png')}}">
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet" />
+    <link href="{{--asset('assets/css/style.min.css')--}}" rel="stylesheet" />
     <link href="{{asset('assets/css/style2.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/ptp.css')}}" rel="stylesheet" />
 
@@ -83,6 +83,7 @@
                     </a>
                     @if(auth()->check())
 
+                        @can('addToCart')
 
                         @if(session('cart'))
                             @php $cartCount = count(session('cart')); @endphp
@@ -96,6 +97,7 @@
                                 <i class="material-icons  text-md">shopping_cart</i> 0
                             </a>
                         @endif
+                        @endcan
 
                     @else
                         <a href="{{route('login')}}"
@@ -182,24 +184,26 @@
                                     </a>
                                 </li>
                             </ul>
-                            @if(session('cart'))
-                                @php $cartCount = count(session('cart')); @endphp
-                                <ul class="navbar-nav d-lg-block d-none">
-                                    <li class="nav-item">
-                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
-                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            @else
-                                <ul class="navbar-nav d-lg-block d-none">
-                                    <li class="nav-item">
-                                        <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
-                                            <i class="material-icons opacity-6  text-md">shopping_cart</i> 0
-                                        </a>
-                                    </li>
-                                </ul>
-                            @endif
+                            @can('addToCart')
+                                @if(session('cart'))
+                                    @php $cartCount = count(session('cart')); @endphp
+                                    <ul class="navbar-nav d-lg-block d-none">
+                                        <li class="nav-item">
+                                            <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                                <i class="material-icons opacity-6  text-md">shopping_cart</i> {{ $cartCount }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @else
+                                    <ul class="navbar-nav d-lg-block d-none">
+                                        <li class="nav-item">
+                                            <a href="{{route('user.cart.index')}}" class="btn btn-sm  bg-gradient-primary  mb-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Carrito">
+                                                <i class="material-icons opacity-6  text-md">shopping_cart</i> 0
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @endif
+                            @endcan
 
                             <ul class="navbar-nav mx-2 d-lg-block d-none">
                                 <li class="nav-item">
