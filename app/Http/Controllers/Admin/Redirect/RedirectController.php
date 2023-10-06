@@ -15,11 +15,11 @@ class RedirectController extends Controller
     public function dashboard(){
         if (auth()->user()->can('admin.dashboard')){
             return redirect()->route('admin.dashboard');
-        }elseif (auth()->user()->hasRole('Estudiante')){
+        }elseif (auth()->user()->can('dashboard')){
             return redirect()->route('dashboard');
         }else{
             Auth::logout();
-            return redirect()->route('login');
+            return redirect()->route('login')->with('info', 'No tiene los permisos requeridos para ingresar al sistema comuniquese con la mesa de ayuda.');
         }
     }
 

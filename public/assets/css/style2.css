@@ -1883,7 +1883,7 @@ label {
     transition: opacity .3 ease;
 }
 .footer .footer-logo {
-    max-width: 2rem
+    max-width: 17rem
 }
 .bg-gradient-primary {
     background-image: linear-gradient(195deg, var(--color_login_one), var(--color_login_two))

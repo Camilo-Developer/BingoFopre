@@ -338,7 +338,6 @@
                                     @endforeach
                                 </a>
 
-                                <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
                             </div>
                         </div>
                     </div>

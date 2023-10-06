@@ -174,6 +174,9 @@
     </footer>
 </div>
 @endforeach
+<script src="{{url('recursos/admin/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{url('recursos/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+
 <script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -183,7 +186,9 @@
 <script src="{{asset('assets/js/plugins/anime.min.js')}}" type="text/javascript"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{{asset('assets/js/material-kit-pro.min.js')}}" type="text/javascript"></script>
+<script src="{{url('recursos/admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 
+@include('components.flash_alerts')
 
 </body>
 </html>
