@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Cardboards;
 
 use App\Http\Controllers\Admin\Salesforce\SalesforceController;
 use App\Http\Controllers\Controller;
+use App\Imports\CardboardImport;
 use App\Models\State\State;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,13 @@ use Intervention\Image\Facades\Image;
 use ZipArchive;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+
+
+
+use Maatwebsite\Excel\Facades\Excel;
+
+
+
 
 class CardboardsController extends Controller
 {
@@ -43,6 +51,7 @@ class CardboardsController extends Controller
     }
     public function create(Request $request)
     {
+
         $startNumber = strval($request->input('start_number'));
         $endNumber = strval($request->input('end_number'));
         $groupSize = $request->input('group_size');
@@ -110,7 +119,12 @@ class CardboardsController extends Controller
     }
     public function finishPurchase(Request $request)
     {
+        $user_id_required = Auth::user()->id;
+
+        $sold_date = now();
+
         $cart = Session::get('cart', []);
+
         $cartonData = $request->input('cartons');
         $documentoComprador = $request->input('document_number');
 
@@ -172,6 +186,8 @@ class CardboardsController extends Controller
                 $cartonDB->generoEmail__c = $generoEmail__c;
                 $cartonDB->Tipo_identificaci_n__c = $Tipo_identificaci_n__c;
                 $cartonDB->Tel_fono_celular_1__c = $Tel_fono_celular_1__c;
+                $cartonDB->user_id = $user_id_required;
+                $cartonDB->sold_date = $sold_date;
                 $cartonDB->save();
             }
         }
@@ -269,4 +285,25 @@ class CardboardsController extends Controller
     }
 
 
+
+
+    public function import(Request $request)
+    {
+
+        $this->validate($request, [
+            'file' => 'required|mimes:xlsx,xls', // Asegura que el archivo sea un archivo Excel válido.
+        ]);
+
+        $file = $request->file('file');
+
+        try {
+            // Procesar el archivo Excel
+            Excel::import(new CardboardImport, $file);
+
+
+            return redirect()->back()->with('success', 'Datos importados exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('delete', 'Ocurrió un error durante la importación: ' . $e->getMessage());
+        }
+    }
 }

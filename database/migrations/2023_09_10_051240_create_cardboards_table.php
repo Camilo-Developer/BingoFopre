@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('document_number')->nullable()->comment = 'Número de documento del cartón';
             $table->bigInteger('state_id')->unsigned()->default(3)->comment = 'Estado del cartón';
             $table->bigInteger('group_id')->unsigned()->nullable()->comment = 'Grupo del cartón';
+            $table->bigInteger('user_id')->unsigned()->nullable()->comment = 'Usuario que vendio el carton';
             $table->timestamps();
         });
     }

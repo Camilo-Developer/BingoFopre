@@ -23,13 +23,15 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                             <div class="row">
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-6">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_cartones"> <i class="fa fa-plus"></i> Crear Cartones</button>
                                     @can('admin.cardboard.generadormasivoQR')
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear qr</button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear QR</button>
                                     @endcan
+                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal_cargue_masivo"> <i class="fa fa-plus"></i> Cargue masivo</button>
+
                                 </div>
-                                <div class="col-12 col-md-9 d-flex justify-content-end">
+                                <div class="col-12 col-md-6 d-flex justify-content-end">
                                     <form action="{{ route('admin.cartones.createForm') }}" method="GET">
                                         <div class="input-group input-group-sm buq-menu" >
                                             <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar carton">
@@ -210,6 +212,114 @@
     @endcan
 
 
+    <div class="modal fade" id="modal_cargue_masivo"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-check-circle"></i> Cargue masivo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="container-fluid">
+                                        <form method="POST" action="{{ route('admin.importar.cartones') }}"  enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h4>Instrucciones para el cargue masivo de cartones</h4>
+                                                    <h5><b>Paso 1</b></h5>
+                                                    <p>
+                                                        Descague la plantilla de excel en la cual podra poner los datos necesarios para hacer el cargue masivo.
+                                                        <br>
+                                                        Recuerde no eliminar los titulos que encontra en esta plantilla.
+                                                        <a href="{{asset('archivos/Plantilla_Cargue_Masivo.xlsx')}}" download="">Descargar la Plantilla.</a>
+                                                        <br>
+                                                        Los campos requeridos son:
+                                                        <br>
+                                                    </p>
+                                                    <div class="mx-5">
+                                                        <ol>
+                                                            <li>
+                                                                <b>Nombre del cartón.</b>
+                                                            </li>
+                                                            <li>
+                                                                <b>Precio del cartón.</b>
+                                                            </li>
+                                                            <li>
+                                                                <b>Estado del cartón.</b>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                    <p>Los demás campos son opcionales.</p>
+                                                    <h5><b>Paso 2</b></h5>
+                                                    <p>
+                                                        El campo <b>Nombre del cartón</b>
+                                                         debe ser númerico y único.
+                                                        <br>
+                                                        <b>Ejemplo:</b> 15635
+                                                    </p>
+                                                    <h5><b>Paso 3</b></h5>
+                                                    <p>
+                                                        El campo <b>Precio</b> no debe llevar ni " , . $ " solo el valor correspondiente debe ser númerico.
+                                                    </p>
+                                                    <h5><b>Paso 4</b></h5>
+                                                    <p>
+                                                        El campo <b>Fecha de Venta</b> debe tener el siguiente formato: 18/05/2023
+                                                    </p>
+                                                    <h5><b>Paso 5</b></h5>
+                                                    <p>
+                                                        El campo <b>Estado del cartón</b> debe tener el siguiente formato:
+                                                        <br>
+                                                        <b>Estados Disponibles</b>
+                                                    </p>
+                                                    <div class="mx-5">
+                                                        <ol>
+                                                            <li>
+                                                                <b>Vendido:</b> 5
+                                                            </li>
+                                                            <li>
+                                                                <b>Obsequio.</b> 6
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                    <p>Recuerde poner el número que esta a cada lado del estado ya que de no ser asi no podra llevar acabo el cargue masivo.</p>
+                                                    <h5><b>Opcional</b></h5>
+                                                    <p>
+                                                        Si desea descargar un ejemplo de como se veria la plantilla completamente llena.
+                                                        <br>
+                                                        <a href="{{asset('archivos/Plantilla_ejemplo_de_llenado.xlsx')}}" download="">Descargar plantilla llena.</a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="file">Seleccione el archivo:</label>
+                                                        <input type="file" id="file" name="file"  accept=".xlsx, .xls" class="form-control" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-12">
+                                                    <button type="submit" class="btn btn-success">Cargar Cartones Masivos</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     @foreach($cardboards as $cardboard)
         @can('admin.cartones.update')
             <div class="modal fade" id="modal_editar_cartones_{{$loop->iteration}}"  aria-hidden="true">
@@ -341,6 +451,12 @@
                                                     <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" id="Tel_fono_celular_1__c" class="form-control">
                                                 </div>
                                             </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Tel_fono_celular_1__c">Fecha vendido:</label>
+                                                    <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" id="Tel_fono_celular_1__c" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -359,52 +475,54 @@
         @endcan
         @can('admin.cartones.show')
             <div class="modal fade" id="modal_show_cartones_{{$loop->iteration}}"  aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Detalle del cartón</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle del cartón</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <label>Datos del cartón</label>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="n_carton">Número del Cartón:</label>
-                                        <input disabled value="{{$cardboard->name}}" type="number" id="n_carton" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="price_carton">Precio del Cartón:</label>
-                                        <input disabled value="{{$cardboard->price}}" type="number" id="price_carton" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="price_carton">Grupo:</label>
-                                        <input disabled value="{{$cardboard->group_id}}" type="number" id="price_carton" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="n_carton">Nombre del Vendedor:</label>
-                                        <input disabled value="{{ optional($cardboard->cartongroup)->user->name ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label>Datos del Comprador</label>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="price_carton">Documento de Identidad:</label>
-                                        <input disabled value="{{$cardboard->document_number}}" type="number" id="price_carton" class="form-control">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label>Datos del cartón</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="n_carton">Número del Cartón:</label>
+                                                <input disabled value="{{$cardboard->name}}" type="number" id="n_carton" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="price_carton">Precio del Cartón:</label>
+                                                <input disabled value="{{$cardboard->price}}" type="number" id="price_carton" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="price_carton">Grupo:</label>
+                                                <input disabled value="{{$cardboard->group_id}}" type="number" id="price_carton" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="n_carton">Nombre del Vendedor:</label>
+                                                <input disabled value="{{ optional($cardboard->cartongroup)->user->name ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Datos del Comprador</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="price_carton">Documento de Identidad:</label>
+                                                <input disabled value="{{$cardboard->document_number}}" type="number" id="price_carton" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -412,8 +530,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
         @endcan
 
     @endforeach

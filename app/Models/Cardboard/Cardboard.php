@@ -24,24 +24,15 @@ class Cardboard extends Model
         'Email',
         'generoEmail__c',
         'Tipo_identificaci_n__c',
-        'N_mero_de_Identificaci_n__c',
         'Tel_fono_celular_1__c',
+        'sold_date',
+        'mode_sale',
         'state_id',
         'group_id',
+        'user_id',
     ];
-    protected static function boot()
-    {
-        parent::boot();
 
-        static::creating(function ($cardboard) {
-            $latestGroup = CartonGroup::latest()->first();
-            if (!$latestGroup) {
-                $latestGroup = new CartonGroup();
-                $latestGroup->save();
-            }
-            $cardboard->group_id = $latestGroup->id;
-        });
-    }
+
     public function state()
     {
         return $this->belongsTo('App\Models\State\State', 'state_id');
@@ -49,5 +40,9 @@ class Cardboard extends Model
     public function cartongroup()
     {
         return $this->belongsTo('App\Models\CartonGroup\CartonGroup', 'group_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

@@ -69,6 +69,7 @@ class UsersController extends Controller
         foreach ($user->roles as $role_user){
             array_push($roles_user, $role_user->id);
         }
+
         $grupo_cartones = CartonGroup::where('user_id', null)
             ->where('state_id', 3)
             ->withCount([
@@ -128,14 +129,21 @@ class UsersController extends Controller
         $totalMontoGrupo = 0;
         $totalMontoObsequio = 0;
 
+        $user_view_carton = $user->id;
+        $date_sold_user_requireds = now();
+        //dd($user_view_carton);
+
         // Iterar a través de los grupos de cartones
         foreach ($card_groups as $group) {
             // Calcular el total de cartones asignados para el estado 3 (cursante) en cada grupo y para el usuario actual
             $totalCartones = Cardboard::where('group_id', $group->id)
+
                 ->count();
 
             $totalCartonesVen = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
+                //->where('user_id', $user_view_carton)
+                //->where('sold_date', $date_sold_user_requireds)
                 ->count();
 
             $montoVendido = Cardboard::where('group_id', $group->id)
@@ -204,7 +212,7 @@ class UsersController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'lastname' => 'required',
+            'lastname' => 'nullable',
             'email' => ['required', 'email'], // Verifica unicidad del correo electrónico en la tabla 'users'
             'state_id' => 'required',
             'roles' => ['required', 'array', 'min:1'],

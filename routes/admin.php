@@ -37,3 +37,5 @@ Route::post('/users/group_assignment',[UsersController::class,'asiginacionGrupos
 Route::post('/users/cambio-state-grupos-cartones',[UsersController::class,'cambioStateGruposCartones'])->middleware('can:admin.users.cambioStateGruposCartones')->name('admin.users.cambioStateGruposCartones');
 Route::resource('/cartongroups', CartonGroupsController::class)->names('admin.cartongroups');
 Route::post('/cardboard/generadormasivoQR', [CardboardsController::class,'generadormasivoQR'])->middleware('can:admin.cardboard.generadormasivoQR')->name('admin.cardboard.generadormasivoQR');
+
+Route::post('/importar-cartones', [CardboardsController::class,'import'])->name('admin.importar.cartones');

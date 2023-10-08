@@ -32,6 +32,7 @@ class CartonGroupsController extends Controller
             ->orWhereHas('user', function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%$search%");
             })
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
         $ultimoGrupo = CartonGroup::latest('id')->first();

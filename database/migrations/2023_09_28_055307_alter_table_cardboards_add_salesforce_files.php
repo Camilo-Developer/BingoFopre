@@ -47,6 +47,12 @@ return new class extends Migration
             if (!Schema::hasColumn('cardboards', 'Tel_fono_celular_1__c')) {
                 $table->string('Tel_fono_celular_1__c')->after('Tipo_identificaci_n__c')->nullable()->default(null)->comment = 'Salesforce Tel_fono_celular_1__c';
             }
+            if (!Schema::hasColumn('cardboards', 'sold_date')) {
+                $table->date('sold_date')->after('Tel_fono_celular_1__c')->nullable()->default(null)->comment = 'Fecha Vendido';
+            }
+            if (!Schema::hasColumn('cardboards', 'mode_sale')) {
+                $table->string('mode_sale')->after('sold_date')->nullable()->default(null)->comment = 'Modo de venta';
+            }
         });
     }
 
