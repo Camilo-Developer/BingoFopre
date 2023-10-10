@@ -131,34 +131,46 @@ class UsersController extends Controller
 
         $user_view_carton = $user->id;
         $date_sold_user_requireds = now();
-        //dd($user_view_carton);
+        //dd($date_sold_user_requireds);
 
         // Iterar a través de los grupos de cartones
         foreach ($card_groups as $group) {
             // Calcular el total de cartones asignados para el estado 3 (cursante) en cada grupo y para el usuario actual
             $totalCartones = Cardboard::where('group_id', $group->id)
-
+                ->whereNull('user_id')
                 ->count();
+            //dd($totalCartones);
 
             $totalCartonesVen = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
-                //->where('user_id', $user_view_carton)
-                //->where('sold_date', $date_sold_user_requireds)
+                ->where('user_id', $user_view_carton)
+                ->where('sold_date', '2023-10-09')
                 ->count();
+
 
             $montoVendido = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
+                ->where('user_id', $user_view_carton)
+                ->where('sold_date', '2023-10-09')
                 ->sum('price');
 
+            //dd($montoVendido);
+
             $montoGrupo = Cardboard::where('group_id', $group->id)
+                ->whereNull('user_id')
+                //->where('sold_date', $date_sold_user_requireds)
                 ->sum('price');
 
             $montoObsequio = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
+                ->where('user_id', $user_view_carton)
+                ->where('sold_date', '2023-10-09')
                 ->sum('price');
 
             $totalCartonesObse = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
+                ->where('user_id', $user_view_carton)
+                ->where('sold_date', '2023-10-09')
                 ->count();
 
             // Sumar al total general

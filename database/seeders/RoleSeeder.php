@@ -44,11 +44,11 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.states.create',
-            'description'=> 'Creacion de Estados'
+            'description'=> 'Creación de Estados'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.states.edit',
-            'description'=> 'Edicion de Estados'
+            'description'=> 'Edición de Estados'
         ])->syncRoles([$role1]);
         Permission::create([
             'name' => 'admin.states.destroy',
