@@ -307,66 +307,82 @@
 
 
 </div>
-<footer class="footer pt-5 mt-5">
-    <div class="container">
-        <div class=" row">
-            <div class="col-md-12 mb-4 ms-auto">
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div class="d-flex">
-                            <a href="{{route('bingofopre.index')}}">
-                                @foreach($templateconfigs as $templateconfig)
-                                    <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
-                                @endforeach
-                            </a>
-                            <h6 class="font-weight-bolder mb-4">Bingo Fopre</h6>
+    <footer class="footer pt-5 mt-5">
+        <div class="container">
+            <div class=" row">
+                <div class="col-md-12 mb-4 ms-auto">
+                    <div class="row ">
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex justify-content-center">
+                                <div class="">
+                                    <a href="{{route('bingofopre.index')}}">
+                                        @foreach($templateconfigs as $templateconfig)
+                                            <img src="{{'storage/'.$templateconfig->logo}}" class="mb-3 footer-logo" alt="logo">
+                                        @endforeach
+                                    </a>
+
+                                </div>
+                            </div>
                         </div>
-                        <div >
-                            <ul class="d-flex flex-row ms-n3 nav">
-                                <li class="nav-item">
-                                    <a class="nav-link pe-1" href="https://www.facebook.com/UniandesCol/" target="_blank">
-                                        <i class="fab fa-facebook text-lg opacity-8"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pe-1" href="https://twitter.com/Uniandes" target="_blank">
-                                        <i class="fab fa-twitter text-lg opacity-8"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pe-1" href="https://www.linkedin.com/company/universidad-de-los-andes" target="_blank">
-                                        <i class="fab fa-linkedin-in text-lg opacity-8"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pe-1" href="https://www.instagram.com/uniandes/" target="_blank">
-                                        <i class="fab fa-instagram text-lg opacity-8"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pe-1" href="https://www.youtube.com/user/uniandes"
-                                       target="_blank">
-                                        <i class="fab fa-youtube text-lg opacity-8"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    @foreach($templateconfigs as $templateconfig)
+                                        <h6 class="font-weight-bolder mb-4">{{$templateconfig->area}}</h6>
+                                        <h6 class="font-weight-bolder mb-4">{{$templateconfig->email}}</h6>
+                                        <h6 class="font-weight-bolder mb-4 text-center">{{$templateconfig->phone}}</h6>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center" >
+                                <ul class="d-flex flex-row ms-n3 nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link pe-1" href="https://www.facebook.com/UniandesCol/" target="_blank">
+                                            <i class="fab fa-facebook text-lg opacity-8"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link pe-1" href="https://twitter.com/Uniandes" target="_blank">
+                                            <i class="fab fa-twitter text-lg opacity-8"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link pe-1" href="https://www.linkedin.com/company/universidad-de-los-andes" target="_blank">
+                                            <i class="fab fa-linkedin-in text-lg opacity-8"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link pe-1" href="https://www.instagram.com/uniandes/" target="_blank">
+                                            <i class="fab fa-instagram text-lg opacity-8"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link pe-1" href="https://www.youtube.com/user/uniandes"
+                                           target="_blank">
+                                            <i class="fab fa-youtube text-lg opacity-8"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="text-center">
-                    <p class="text-dark my-4 text-sm font-weight-normal">
-                        Copyright ©
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>  Universidad de los Andes | Colombia
-                    </p>
+                <div class="col-12">
+                    <div class="text-center">
+                        <p class="text-dark  text-sm font-weight-normal">
+                            Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>  Universidad de los Andes | Colombia
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
+
     <script src="{{url('recursos/admin/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{url('recursos/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/core/popper.min.js')}}" type="text/javascript"></script>
