@@ -121,9 +121,9 @@ class BingoFopreController extends Controller
 
         $comprasPorDia = Cardboard::where('document_number', $user_document)
             ->whereNotNull('document_number')
-            ->selectRaw('DATE(updated_at) as fecha, COUNT(*) as total_cartones')
-            ->groupBy('fecha')
-            ->orderBy('fecha')
+            ->groupBy('sold_date')
+            ->selectRaw('sold_date, sum(price)  as total_cartones')
+            ->orderBy('sold_date', 'asc')
             ->get();
 
 
@@ -140,6 +140,10 @@ class BingoFopreController extends Controller
         $carton_document_users_obsequio = Cardboard::where('document_number', $user_document)
             ->where('state_id',6)
             ->whereNotNull('document_number')
+            ->count();
+
+        $totalGruposAsignados = CartonGroup::where('user_id', $userId)
+            ->where('state_id', 3)
             ->count();
 
 
@@ -213,6 +217,7 @@ class BingoFopreController extends Controller
             'carton_document_users_total',
             'carton_document_users_vendidos',
             'carton_document_users_obsequio',
+            'totalGruposAsignados',
 
         ));
     }

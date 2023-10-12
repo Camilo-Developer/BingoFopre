@@ -14,16 +14,16 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name'=> 'Juan',
-            'lastname'=> 'Developer',
-            'email'=> 'camilo@gmail.com',
-            'password'=> Hash::make('1234'),
-            'state_id'=> '1',
-            'avatar'=> '',
-            'external_id'=> '',
-            'external_auth'=> 'Azure',
-        ])->assignRole('Admin');
+        //User::create([
+        //    'name'=> 'Juan',
+        //    'lastname'=> 'Developer',
+        //    'email'=> 'camilo@gmail.com',
+        //    'password'=> Hash::make('1234'),
+        //    'state_id'=> '1',
+        //    'avatar'=> '',
+        //    'external_id'=> '',
+        //    'external_auth'=> 'Azure',
+        //])->assignRole('Admin');
         User::create([
             'name'=> 'Admin.',
             'lastname'=> 'Bingo',
@@ -34,25 +34,25 @@ class UsersSeeder extends Seeder
             'external_id'=> '',
             'external_auth'=> 'Azure',
         ])->assignRole('Admin');
-        User::create([
-            'name'=> 'Estudiante',
-            'lastname'=> 'Uniandes',
-            'email'=> 'estudiante@gmail.com',
-            'password'=> Hash::make('1234'),
-            'state_id'=> '1',
-            'avatar'=> '',
-            'external_id'=> '',
-            'external_auth'=> 'Azure',
-        ])->assignRole('Estudiante');
-        User::create([
-            'name'=> 'Juan',
-            'lastname'=> '',
-            'email'=> 'j.rodriguezramirez@uniandes.edu.co',
-            'password'=> '',
-            'state_id'=> '1',
-            'avatar'=> '',
-            'external_id'=> '',
-            'external_auth'=> 'Azure',
-        ])->assignRole('Estudiante');
+        //User::create([
+        //    'name'=> 'Estudiante',
+        //    'lastname'=> 'Uniandes',
+        //    'email'=> 'estudiante@gmail.com',
+        //    'password'=> Hash::make('1234'),
+        //    'state_id'=> '1',
+        //    'avatar'=> '',
+        //    'external_id'=> '',
+        //    'external_auth'=> 'Azure',
+        //])->assignRole('Estudiante');
+        //User::create([
+        //    'name'=> 'Juan',
+        //    'lastname'=> '',
+        //    'email'=> 'j.rodriguezramirez@uniandes.edu.co',
+        //    'password'=> '',
+        //    'state_id'=> '1',
+        //    'avatar'=> '',
+        //    'external_id'=> '',
+        //    'external_auth'=> 'Azure',
+        //])->assignRole('Estudiante');
     }
 }

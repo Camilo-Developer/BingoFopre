@@ -58,7 +58,7 @@
                         <div class="tab-pane " id="monthly" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-1">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <h5 class="font-weight-bolder mb-3">Mis compras por dia</h5>
+                                    <h5 class="font-weight-bolder mb-3">Mis compras por día vendido + obsequio</h5>
                                     <canvas id="miGrafica"></canvas>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -149,29 +149,30 @@
                                                 <div class="row">
                                                     <div class="col-md-3 position-relative">
                                                         <div class="p-3 text-center">
-                                                            <h1 class="text-gradient text-primary"><span id="state1" countto="{{ $totalCartonesAsignados }}">{{ $totalCartonesAsignados }}</span></h1>
-                                                            <h5 class="mt-3">Cartones Asignado</h5>
+                                                            <h1 class="text-gradient text-primary"><span id="state1" countto="{{ $totalGruposAsignados }}">{{ $totalGruposAsignados }}</span></h1>
+                                                            <h5 class="mt-3">Grupos asignados</h5>
                                                         </div>
                                                         <hr class="vertical dark">
                                                     </div>
                                                     <div class="col-md-3 position-relative">
                                                         <div class="p-3 text-center">
-                                                            <h1 class="text-gradient text-primary"> <span id="state2" countto="{{ $totalCartonesVendidos }}">{{ $totalCartonesVendidos }}</span></h1>
-                                                            <h5 class="mt-3">Cartones Vendidos</h5>
+                                                            <h1 class="text-gradient text-primary"> <span id="state4" countto="{{ $totalMontoGrupo }}">{{$totalMontoGrupo }}</span></h1>
+                                                            <h5 class="mt-3">Monto total grupos asignados</h5>
+                                                        </div>
+                                                        <hr class="vertical dark">
+                                                    </div>
+
+                                                    <div class="col-md-3 position-relative">
+                                                        <div class="p-3 text-center">
+                                                            <h1 class="text-gradient text-primary"> <span id="state2" countto="{{ $totalMontoVendido }}">{{$totalMontoVendido }}</span></h1>
+                                                            <h5 class="mt-3">Monto total cartones vendidos</h5>
                                                         </div>
                                                         <hr class="vertical dark">
                                                     </div>
                                                     <div class="col-md-3 position-relative">
                                                         <div class="p-3 text-center">
-                                                            <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesPendientes }}">{{ $totalCartonesPendientes }}</h1>
-                                                            <h5 class="mt-3">Cartones Pendientes</h5>
-                                                        </div>
-                                                        <hr class="vertical dark">
-                                                    </div>
-                                                    <div class="col-md-3 position-relative">
-                                                        <div class="p-3 text-center">
-                                                            <h1 class="text-gradient text-primary" id="state3" countto="{{ $totalCartonesObsequios }}">{{ $totalCartonesObsequios }}</h1>
-                                                            <h5 class="mt-3">Cartones Obsequio</h5>
+                                                            <h1 class="text-gradient text-primary" id="state3" countto="{{$totalMontoObsequio }}">{{ $totalMontoObsequio}}</h1>
+                                                            <h5 class="mt-3">Monto total cartones obsequio</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,7 +263,7 @@
                                                     <td>{{$totalCartones_pendientes4}}</td>
                                                     <td>{{$card_groups_show->state->name}}</td>
                                                     <td>
-                                                        <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
+                                                        <a data-bs-toggle="modal" data-bs-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
                                                             <button  type="button" class="btn btn-success">
                                                                 <i class="fa fa-eye"></i>
                                                             </button>
@@ -276,6 +277,10 @@
                                     </div>
 
                                 </div>
+                                <div class="col-12 mt-3">
+                                    {{--<h5 class="font-weight-bolder ">Historial de cartones vendidos año {{$currentYear}}</h5>--}}
+
+                                </div>
                             </div>
                         </div>
 
@@ -283,7 +288,7 @@
                         <div class="tab-pane active show" id="monthly" role="tabpanel" aria-labelledby="#tabs-iconpricing-tab-1">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <h5 class="font-weight-bolder mb-3">Mis compras por dia</h5>
+                                    <h5 class="font-weight-bolder mb-3">Mis compras por día vendido + obsequio</h5>
                                     <canvas id="miGrafica"></canvas>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -446,6 +451,10 @@
                                                                         <button  type="button" class="btn btn-success">
                                                                             <i class="fa fa-eye"></i>
                                                                         </button>
+                                                                    </a><a data-bs-toggle="modal" data-bs-target="#modal-datail-group_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                        <button  type="button" class="btn btn-success">
+                                                                            <i class="fa fa-eye"></i>
+                                                                        </button>
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -489,7 +498,7 @@
                                                     <td>{{$totalCartones_pendientes4}}</td>
                                                     <td>{{$card_groups_show->state->name}}</td>
                                                     <td>
-                                                        <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
+                                                        <a data-bs-toggle="modal" data-bs-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
                                                             <button  type="button" class="btn btn-success">
                                                                 <i class="fa fa-eye"></i>
                                                             </button>
@@ -503,6 +512,10 @@
                                     </div>
 
                                 </div>
+                                <div class="col-12 mt-3">
+                                    {{--<h5 class="font-weight-bolder ">Historial de cartones vendidos año {{$currentYear}}</h5>--}}
+
+                                </div>
                             </div>
                         </div>
 
@@ -514,205 +527,31 @@
     </section>
 
 
-    @foreach($card_groups as $card_group)
-        @php
-            $totalCartones3 = $card_group->cardboard_count;
-            $cartones_vendidos3 = $card_group->cardboards_vendidos;
-            $cartones_obsequio3 = $card_group->cardboards_obsequio;
-
-            $totalCartones_pendientes3 = $totalCartones3 - ($cartones_vendidos3 + $cartones_obsequio3);
-        @endphp
-
-        <div class="modal fade" id="modal-datail-group_{{$loop->iteration}}"  >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Detalle del grupo</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="username">Usuario Responsable</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{-- $user->name --}}" id="username">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Grupo</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_group->id }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Estado</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_group->state->name }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Total Cartones</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones3 }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Total Pendientes por Vender</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones_pendientes3 }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nombre Carton</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Acción</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @php
-                                                    $cartonNumber = 1; // Inicializar el número de cartón
-                                                @endphp
-                                                @foreach ($card_group->cardboard as $carton)
-                                                    <tr class="text-center">
-                                                        <td>{{ $cartonNumber }}</td>
-                                                        <td>{{ $carton->name }}</td>
-                                                        <td>{{ $carton->state->name }}</td>
-                                                        <td>
-                                                            <a href="/admin/cartones/create?search={{ $carton->name }}" class="btn btn-success">
-                                                                <i class="fa fa-search"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    @php
-                                                        $cartonNumber++;
-                                                    @endphp
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-    @foreach($card_groups_shows as $card_groups_show)
-        @php
-            $totalCartones5 = $card_groups_show->cardboard_count;
-            $cartones_vendidos5 = $card_groups_show->cardboards_vendidos;
-            $cartones_obsequio5 = $card_groups_show->cardboards_obsequio;
-            $totalCartones_pendientes5 = $totalCartones5 - ($cartones_vendidos5 + $cartones_obsequio5);
-        @endphp
-        <div class="modal fade" id="modal-datail-group_year_{{$loop->iteration}}"   >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Detalle del grupo por el año </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="username">Usuario Responsable</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{-- $user->name --}} {{-- $user->lastname --}}" id="username">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Grupo</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_groups_show->id }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Estado</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $card_groups_show->state->name }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Total Cartones</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones5 }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="group">Total Pendientes por Vender</label><br>
-                                            <input class="form-control form-control-border" type="text" disabled value="{{ $totalCartones_pendientes5 }}" id="group">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nombre Carton</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Acción</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @php
-                                                    $cartonNumber_two = 1;
-                                                @endphp
-                                                @foreach ($card_groups_show->cardboard as $carton)
-                                                    <tr class="text-center">
-                                                        <td>{{ $cartonNumber_two }}</td>
-                                                        <td>{{ $carton->name }}</td>
-                                                        <td>{{ $carton->state->name }}</td>
-                                                        <td>
-                                                            <a href="/admin/cartones/create?search={{ $carton->name }}" class="btn btn-success">
-                                                                <i class="fa fa-search"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    @php
-                                                        $cartonNumber_two++;
-                                                    @endphp
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
     <script>
         var ctx = document.getElementById('miGrafica').getContext('2d');
 
-        var fechas = @json($comprasPorDia->pluck('fecha'));
-        var cartonesComprados = @json($comprasPorDia->pluck('total_cartones'));
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($comprasPorDia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_cartones;
+        });
 
         var data = {
             labels: fechas,
             datasets: [{
-                label: 'Cartones Comprados por Día',
-                data: cartonesComprados,
+                label: 'Monto total comprado por día cartones ven + obs',
+                data: montos,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.4

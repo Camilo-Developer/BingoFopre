@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UsersSeeder::class);
-        User::factory(5)->create()->each(function ($user) {
-            $user->assignRole('Estudiante');
-        });
-        User::factory(5)->create()->each(function ($user) {
-            $user->assignRole('Vendedor');
-        });
-        $this->call(TemplateConfigsSeeder::class);
-        $this->call(CardmainsSeeder::class);
-        $this->call(InstructionsSeeder::class);
+        //User::factory(5)->create()->each(function ($user) {
+        //    $user->assignRole('Estudiante');
+        //});
+        //User::factory(5)->create()->each(function ($user) {
+        //    $user->assignRole('Vendedor');
+        //});
+        //$this->call(TemplateConfigsSeeder::class);
+        //$this->call(CardmainsSeeder::class);
+        //$this->call(InstructionsSeeder::class);
 
     }
 }
