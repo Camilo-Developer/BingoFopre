@@ -1,0 +1,310 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: swpreprod
+  name: config-eventosdrepre-nginx
+  labels:
+    tier: backend
+data:
+  DB_DATABASE: 'dbeventosdrepre'
+  DB_HOST: prek8s.mysql.database.azure.com
+  DB_USERNAME: usdbeventosdrep@prek8s.mysql.database.azure.com
+  DB_PASSWORD: '9K7nIuMAqndq'
+  APP_URL: 'https://eventosdrepre.uniandes.edu.co'
+  LARAVEL_DB_HOST: prek8s.mysql.database.azure.com
+  LARAVEL_DB_USER: usdbeventosdrepre@prek8s.mysql.database.azure.com
+  LARAVEL_DB_PASSWORD: '9K7nIuMAqndq'
+  LARAVEL_DB_NAME: 'dbeventosdrepre'
+  LARAVEL_APP_URL: 'https://eventosdrepre.uniandes.edu.co'
+  config : |
+    server {
+      index index.php index.html;
+      error_log  /var/log/nginx/error.log;
+      access_log /var/log/nginx/access.log;
+      root /var/www/html/public;
+      gzip            on;
+      gzip_min_length 1100;
+      gzip_buffers 4 8k;
+      gzip_proxied    expired no-cache no-store private auth;
+      gzip_types      text/plain text/css text/js text/xml text/javascript application/javascript application/x-javascript application/json application/xml application/rss+xml image/svg+xml;
+      gzip_disable     "MSIE [1-6]\.";
+
+      location / {
+        try_files $uri $uri/ /index.php?$args;
+      }
+      add_header X-Content-Type-Options nosniff;
+
+      # deny running scripts inside writable directories
+      location ~* /(images|cache|media|logs|tmp)/.*\.(php|pl|py|jsp|asp|sh|cgi)$ {
+                return 403;
+                error_page 403 /403_error.html;
+      }
+      # caching of files
+      location ~* \.(ico|pdf|flv)$ {
+              expires 1y;
+      }
+      location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt)$ {
+        expires 14d;
+      }
+      location ~ \.php$ {
+          try_files $uri =404;
+          fastcgi_split_path_info ^(.+\.php)(/.+)$;
+          fastcgi_pass eventosdrepre-laravel:9000;
+          fastcgi_index index.php;
+          include fastcgi_params;
+          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          fastcgi_param PATH_INFO $fastcgi_path_info;
+      }
+
+      error_page 502 https://mantenimiento.uniandes.edu.co/tecnologia/index.html;
+      error_page 504 https://mantenimiento.uniandes.edu.co/tecnologia/index.html;
+
+      error_page 404 https://mantenimiento.uniandes.edu.co/tecnologia/index.html;
+      add_header Access-Control-Allow-Origin *;
+      #allow the server to close connection on non responding client, this will free up memory
+      reset_timedout_connection on;
+      # request timed out -- default 60
+      client_body_timeout 10;
+      #if client stop responding, free up memory -- default 60
+      send_timeout 2;
+      #server will close connection after this time -- default 75
+      keepalive_timeout 30;
+      #number of requests client can make over keep-alive -- for testing environment
+      keepalive_requests 100000;
+      client_max_body_size 1000M;
+    }
+---
+#############Services NGinx
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: swpreprod
+  name: eventosdrepre-nginx
+  labels:
+    tier: backend
+spec:
+  selector:
+    app: eventosdrepre-nginx
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+---
+############services joomla
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: swpreprod
+  name: eventosdrepre-laravel
+  labels:
+    tier: backend
+spec:
+  selector:
+    app: eventosdrepre-laravel
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 9000
+---
+###################### Deployment joomla
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: swpreprod
+  name: eventosdrepre-laravel
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventosdrepre-laravel
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: eventosdrepre-laravel
+        tier: backend
+    spec:
+      imagePullSecrets:
+      - name: myregistrykey
+      volumes:
+      - name: code
+        persistentVolumeClaim:
+          claimName: nfs-preprod
+      containers:
+      - name: eventosdrepre-laravel
+        image: andescontainers.azurecr.io/sw-larvel-senek-fpm:1.0.0
+        readinessProbe:
+          initialDelaySeconds: 600
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
+          httpGet: null
+          tcpSocket:
+            port: 9000
+        livenessProbe:
+          initialDelaySeconds: 600
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
+          httpGet: null
+          tcpSocket:
+            port: 9000
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 125m
+            memory: 200Mi
+        volumeMounts:
+        - name: code
+          mountPath: /var/www/html
+          subPath: eventosdrepre.uniandes.edu.co
+        env:
+        - name: DB_DATABASE
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: DB_DATABASE
+        - name: DB_HOST
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: DB_HOST
+        - name: DB_USERNAME
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: DB_PASSWORD
+        - name: APP_URL
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: APP_URL
+        - name: LARAVEL_DB_NAME
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: LARAVEL_DB_NAME
+        - name: LARAVEL_DB_HOST
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: LARAVEL_DB_HOST
+        - name: LARAVEL_DB_USER
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: LARAVEL_DB_USER
+        - name: LARAVEL_DB_PASSWORD
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: LARAVEL_DB_PASSWORD
+        - name: LARAVEL_APP_URL
+          valueFrom:
+              configMapKeyRef:
+                  name: config-eventosdrepre-nginx
+                  key: LARAVEL_APP_URL
+---
+################ deployment nginx
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: swpreprod
+  name: eventosdrepre-nginx
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventosdrepre-nginx
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: eventosdrepre-nginx
+        tier: backend
+    spec:
+      volumes:
+      - name: code
+        persistentVolumeClaim:
+          claimName: nfs-preprod
+      - name: config
+        configMap:
+          name: config-eventosdrepre-nginx
+          items:
+          - key: config
+            path: site.conf
+      containers:
+      - name: eventosdrepre-nginx
+        image: nginx:1.21.0-alpine
+        readinessProbe:
+          httpGet:
+            path: /favicon.ico
+            port: 80
+          initialDelaySeconds: 600
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /favicon.ico
+            port: 80
+          initialDelaySeconds: 600
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 1
+          successThreshold: 1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 150m
+            memory: 20Mi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: code
+          mountPath: /var/www/html
+          subPath: eventosdrepre.uniandes.edu.co
+        - name: config
+          mountPath: /etc/nginx/conf.d
+---
+##############ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eventosdrepre-nginx
+  namespace: swpreprod
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/request-timeout: "240"
+spec:
+  tls:
+    - hosts:
+        - eventosdrepre.uniandes.edu.co
+      secretName: crtuniandes
+  rules:
+    - host: eventosdrepre.uniandes.edu.co
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: eventosdrepre-nginx
+                port:
+                  number: 80
