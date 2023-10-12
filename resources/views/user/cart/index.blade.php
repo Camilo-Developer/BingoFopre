@@ -5,50 +5,62 @@
         <h1>Carrito de Compras</h1>
         <div class="row">
             <div class="col-12">
-                <form action="{{route('user.cart.index')}}" method="GET">
-                    <label for="document_number">Documento o correo del comprador:</label>
+                <!--Primer formulario-->
+                <form id="search-form">
+                    @csrf
+                    <label for="search2">Documento o correo del comprador:</label>
                     <div class="row">
                         <div class="col-7 col-lg-9">
-                            <input class="form-control"  type="text" name="document_number" value="{{ $userData->N_mero_de_Identificaci_n__c ?? ''}}" id="document_number" required>
+                            <input class="form-control" type="text" name="search2" value="{{ $userData->N_mero_de_Identificaci_n__c ?? ''}}" id="search2" required>
                         </div>
                         <div class="col-5 col-lg-3">
-                            <button type="submit" class="btn  btn-success">Buscar</button>
+                            <button type="button" id="search-button" class="btn btn-success">Buscar</button>
                         </div>
                     </div>
                 </form>
+                <!-- Campo oculto para almacenar la información -->
+                <input type="hidden" id="userData">
+                <!-- Agrega un div para mostrar la información consultada -->
+                <div id="user-info"></div>
             </div>
         </div>
 
 
 
+        <!--Segundo formulario-->
 
         <form action="{{ route('admin.cartones.finishPurchase') }}" method="POST">
-            <input  value="{{ $userData->Categoria_Principal__c ?? ''}}" name="Categoria_Principal__c" type="hidden" >
-            <input  value="{{ $userData->Categoria__c  ?? ''}}" name="Categoria__c"  type="hidden" >
-            <input  value="{{ $userData->Categoria_Administrativo__c  ?? ''}}" name="Categoria_Administrativo__c" type="hidden" >
-            <input type="hidden" value="{{ $userData->FirstName  ?? ''}}" name="FirstName">
-            <input type="hidden" value="{{ $userData->LastName ?? '' }}" name="LastName">
-            <input  value="{{ $userData->generoEmail__c  ?? ''}}" name="generoEmail__c" type="hidden" >
-            <input  value="{{ $userData->Tipo_identificaci_n__c  ?? ''}}" name="Tipo_identificaci_n__c" type="hidden" >
-            <input  value="{{ $userData->N_mero_de_Identificaci_n__c ?? '' }}" name="document_number" type="hidden" >
-            <input  value="{{ $userData->Tel_fono_celular_1__c ?? '' }}" name="Tel_fono_celular_1__c"  type="hidden" >
+            <input  name="Categoria_Principal__c"  type="hidden" >
+            <input   name="Categoria__c"   type="hidden" >
+            <input   name="Categoria_Administrativo__c"  type="hidden" >
+            <input type="hidden"  name="FirstName" >
+            <input type="hidden"  name="LastName" >
+            <input   name="generoEmail__c"  type="hidden" >
+            <input   name="Tipo_identificaci_n__c"  type="hidden" >
+            <input   name="document_number"  type="hidden" >
+            <input  name="Tel_fono_celular_1__c"   type="hidden" >
+            <input  name="Email"   type="hidden" >
 
             <div class="form-group">
                 <div class="row  py-2">
                     <div class="col-lg-6 ">
                         <div>
-                            <label>Nombres del Comprador</label>
-                            <input  value="{{ $userData->FirstName ?? '' }} {{ $userData->LastName ?? '' }}" class="form-control"   placeholder="Nombres" type="text" >
+                            <label>Nombre del Comprador</label>
+                            <input disabled  name="FirstName" class="form-control"   placeholder="Nombre" type="text" >
                         </div>
                     </div>
                     <div class="col-lg-6 ">
                         <div>
                             <label>Correo del Comprador</label>
-                            <input  value="{{ $userData->Email ?? '' }}" name="Email" class="form-control"   placeholder="Correo eléctronico" type="text" >
+                            <input disabled  name="Email" class="form-control"   placeholder="Correo eléctronico" type="text" >
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="loading-alert" class="alert alert-info" style="display: none;">
+                Buscando usuario comprador...
+            </div>
+
 
             @csrf
             <div class="table-responsive">
@@ -102,7 +114,6 @@
 
 
     </div>
-
     <script src="{{url('recursos/admin/plugins/jquery/jquery.min.js')}}"></script>
     <script>
         $(document).ready(function() {
@@ -127,4 +138,46 @@
             $('input[type="radio"]').on('change', calcularTotal);
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            function performAjaxRequest() {
+                // Muestra la alerta de "Buscando usuario comprador"
+                $("#loading-alert").show();
+
+                $.ajax({
+                    url: "{{ route('user.cart.prueba') }}",
+                    method: "GET",
+                    data: $("#search-form").serialize(),
+                    success: function(response) {
+                        const userData = JSON.parse(response);
+
+                        // Rellenar los campos del formulario con los datos de Salesforce
+                        $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
+                        $("input[name='Categoria__c']").val(userData.Categoria__c);
+                        $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
+                        $("input[name='FirstName']").val(userData.FirstName);
+                        $("input[name='LastName']").val(userData.LastName);
+                        $("input[name='Email']").val(userData.Email);
+                        $("input[name='generoEmail__c']").val(userData.generoEmail__c);
+                        $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
+                        $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
+                        $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
+
+                        // Oculta la alerta una vez que se encuentre el usuario
+                        $("#loading-alert").hide();
+                    }
+                });
+            }
+
+            $("#search-button").on("click", function() {
+                performAjaxRequest();
+            });
+
+            $("#search-form").submit(function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+
 @endsection

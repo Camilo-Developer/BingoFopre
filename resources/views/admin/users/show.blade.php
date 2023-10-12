@@ -57,22 +57,25 @@
                                                             @endforeach
                                                         </p>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <span class="description-text">Cartones Asignados: </span> <span class="font-weight-bold">{{$totalCartonesAsignados_sin_filtro}}</span>
+                                                    </div>
                                                     <div class="col-sm-4 border-right">
                                                         <div class="description-block">
                                                             <h5 class="description-header">{{$totalCartonesAsignados}}</h5>
-                                                            <span class="description-text">Cartones Asignados</span>
+                                                            <span class="description-text">Cart. Pend. Vender</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 border-right">
                                                         <div class="description-block">
                                                             <h5 class="description-header">{{$totalCartonesVendidos}}</h5>
-                                                            <span class="description-text">Cartones vendidos</span>
+                                                            <span class="description-text">Cart. vendidos</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="description-block">
                                                             <h5 class="description-header">{{$totalCartonesObsequios}}</h5>
-                                                            <span class="description-text">Cartones Obsequio</span>
+                                                            <span class="description-text">Cart. Obsequio</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,94 +145,285 @@
                             </div>
                             <div class="card-body" style="display: block;">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <label>Grupos Asginados hasta el momento: </label>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">Grupo</th>
-                                                    <th scope="col">Tol. Cart</th>
-                                                    <th scope="col">Pend. Cart</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Accion</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($card_groups as $card_group)
-                                                    @php
-                                                        $totalCartones2 = $card_group->cardboard_count;
-                                                        $cartones_vendidos2 = $card_group->cardboards_vendidos;
-                                                        $cartones_obsequio2 = $card_group->cardboards_obsequio;
+                                    <div class="col-12 col-lg-12">
+                                        <div class="card card-outline card-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Estadisticas del usuario</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="display: block;">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-primary">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Monto total de cartones por Día: Vendidos + Obsequio</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="monto_cartones_total_por_dia"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-primary">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Total de cartones por Día: Vendidos + Obsequio</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="cartones_vendidos_por_dia"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-secondary">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Monto total de cartones por Día: Vendidos</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="monto_cartones_por_dia"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-secondary">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Total de cartones por Día: Vendidos</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="cartones_usuario_vendidos_por_dia"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                        $totalCartones_pendientes2 = $totalCartones2 - ($cartones_vendidos2 + $cartones_obsequio2);
-                                                    @endphp
-                                                    <tr class="text-center">
-                                                        <td>
-                                                            <input type="hidden" name="carton_group_state" value="{{$card_group->id}}" >
-                                                            {{$card_group->id}}
-                                                        </td>
-                                                        <td>{{$totalCartones2}}</td>
-                                                        <td>{{$totalCartones_pendientes2}}</td>
-                                                        <td>
-                                                            {{$card_group->state->name}}
-                                                        </td>
-                                                        <td>
-                                                            <a data-toggle="modal" data-target="#modal-datail-group_{{$loop->iteration}}" title="Detalle del grupo">
-                                                                <button  type="button" class="btn btn-success">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-warning">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Monto total de cartones por Día: Obsequio</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="monto_cartones_por_dia_obsequio"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="card card-outline card-warning">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Total de cartones por Día: Obsequio</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display: block;">
+                                                                <canvas id="cartones_usuario_obsequio_por_dia"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        {{ $card_groups->links() }}
-
                                     </div>
-                                    <div class="col-12 col-lg-6">
-                                        <label>Total de Grupos Asginados año: {{$currentYear}}</label>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">Grupo</th>
-                                                    <th scope="col">Tol. Cart</th>
-                                                    <th scope="col">Pend. Cart</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Accion</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($card_groups_shows as $card_groups_show)
-                                                    @php
-                                                        $totalCartones4 = $card_groups_show->cardboard_count;
-                                                        $cartones_vendidos4 = $card_groups_show->cardboards_vendidos;
-                                                        $cartones_obsequio4 = $card_groups_show->cardboards_obsequio;
 
-                                                        $totalCartones_pendientes4 = $totalCartones4 - ($cartones_vendidos4 + $cartones_obsequio4);
-                                                    @endphp
-                                                    <tr class="text-center">
-                                                        <td>{{$card_groups_show->id}}</td>
-                                                        <td>{{$totalCartones4}}</td>
-                                                        <td>{{$totalCartones_pendientes4}}</td>
-                                                        <td>{{$card_groups_show->state->name}}</td>
-                                                        <td>
-                                                            <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
-                                                                <button  type="button" class="btn btn-success">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
 
-                                                </tbody>
-                                            </table>
+
+                                    <div class="col-12 col-lg-12">
+                                        <div class="card card-outline card-success">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Historial de cartones y grupos del usuario</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="display: block;">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-12">
+                                                        <label>Grupos Asginados hasta el momento: </label>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover" id="grupos_asignados_hasta_el_momento">
+                                                                <thead>
+                                                                <tr class="text-center">
+                                                                    <th scope="col">Grupo</th>
+                                                                    <th scope="col">Tol. Cart Grupo</th>
+                                                                    <th scope="col">Pend. Cart Grupo</th>
+                                                                    <th scope="col">Estado Grupo</th>
+                                                                    <th scope="col">Detalle Grupo</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach($card_groups as $card_group)
+                                                                    @php
+                                                                        $totalCartones2 = $card_group->cardboard_count;
+                                                                        $cartones_vendidos2 = $card_group->cardboards_vendidos;
+                                                                        $cartones_obsequio2 = $card_group->cardboards_obsequio;
+
+                                                                        $totalCartones_pendientes2 = $totalCartones2 - ($cartones_vendidos2 + $cartones_obsequio2);
+                                                                    @endphp
+                                                                    <tr class="text-center">
+                                                                        <td>
+                                                                            <input type="hidden" name="carton_group_state" value="{{$card_group->id}}" >
+                                                                            {{$card_group->id}}
+                                                                        </td>
+                                                                        <td>{{$totalCartones2}}</td>
+                                                                        <td>{{$totalCartones_pendientes2}}</td>
+                                                                        <td>
+                                                                            {{$card_group->state->name}}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a data-toggle="modal" data-target="#modal-datail-group_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                                <button  type="button" class="btn btn-success">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <label>Total de Grupos Asginados año: {{$currentYear}}</label>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover" id="total_grupos_asignados_por_año">
+                                                                <thead>
+                                                                <tr class="text-center">
+                                                                    <th scope="col">Grupo</th>
+                                                                    <th scope="col">Tol. Cart Grupo</th>
+                                                                    <th scope="col">Pend. Cart Grupo</th>
+                                                                    <th scope="col">Estado Grupo</th>
+                                                                    <th scope="col">Detalle Grupo</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach($card_groups_shows as $card_groups_show)
+                                                                    @php
+                                                                        $totalCartones4 = $card_groups_show->cardboard_count;
+                                                                        $cartones_vendidos4 = $card_groups_show->cardboards_vendidos;
+                                                                        $cartones_obsequio4 = $card_groups_show->cardboards_obsequio;
+
+                                                                        $totalCartones_pendientes4 = $totalCartones4 - ($cartones_vendidos4 + $cartones_obsequio4);
+                                                                    @endphp
+                                                                    <tr class="text-center">
+                                                                        <td>{{$card_groups_show->id}}</td>
+                                                                        <td>{{$totalCartones4}}</td>
+                                                                        <td>{{$totalCartones_pendientes4}}</td>
+                                                                        <td>{{$card_groups_show->state->name}}</td>
+                                                                        <td>
+                                                                            <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                                <button  type="button" class="btn btn-success">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <label for="">Cartones Vendidos y Obsequio por el Usuario de todos los años ( {{$numero_cartonesVendidosPorUsuario}} )</label>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover" id="total_catones_vendios_y_obsequi_todos_los_años">
+                                                                <thead>
+                                                                <tr class="text-center">
+                                                                    <th scope="col">Nombre Cartón</th>
+                                                                    <th scope="col">Estado</th>
+                                                                    <th scope="col">Fecha Venta</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach($cartonesVendidosPorUsuario as $cartonesVendidosPor_usuario)
+                                                                    <tr class="text-center">
+                                                                        <td>{{$cartonesVendidosPor_usuario->name}}</td>
+                                                                        <td>{{$cartonesVendidosPor_usuario->state->name}}</td>
+                                                                        <td>{{$cartonesVendidosPor_usuario->sold_date}}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <label for="">Total de Grupo de todos los años:</label>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover" id="total_grupos_todos_los_años">
+                                                                <thead>
+                                                                <tr class="text-center">
+                                                                    <th scope="col">Grupo</th>
+                                                                    <th scope="col">Tol. Cart Grupo</th>
+                                                                    <th scope="col">Pend. Cart Grupo</th>
+                                                                    <th scope="col">Estado Grupo</th>
+                                                                    <th scope="col">Detalle Grupo</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach($card_groups_shows_total as $card_groups_show2)
+                                                                    @php
+                                                                        $totalCartones8 = $card_groups_show2->cardboard_count;
+                                                                        $cartones_vendidos8 = $card_groups_show2->cardboards_vendidos;
+                                                                        $cartones_obsequio8 = $card_groups_show2->cardboards_obsequio;
+
+                                                                        $totalCartones_pendientes8 = $totalCartones8 - ($cartones_vendidos8 + $cartones_obsequio8);
+                                                                    @endphp
+                                                                    <tr class="text-center">
+                                                                        <td>{{$card_groups_show2->id}}</td>
+                                                                        <td>{{$totalCartones8}}</td>
+                                                                        <td>{{$totalCartones_pendientes8}}</td>
+                                                                        <td>{{$card_groups_show2->state->name}}</td>
+                                                                        <td>
+                                                                            <a data-toggle="modal" data-target="#modal-datail-group_year_{{$loop->iteration}}" title="Detalle del grupo">
+                                                                                <button  type="button" class="btn btn-success">
+                                                                                    <i class="fa fa-eye"></i>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -372,8 +566,12 @@
                                             </td>
                                             <td>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="{{$card_group->id}}" name="state_groups[]" type="checkbox">
+                                                    <input class="form-check-input" type="checkbox" name="state_groups[]" value="{{$card_group->id}}_vendido">
                                                     <label class="form-check-label">Vendido</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="state_groups[]" value="{{$card_group->id}}_devolucion">
+                                                    <label class="form-check-label">Devolución</label>
                                                 </div>
                                             </td>
                                         </tr>
@@ -451,9 +649,11 @@
                                                 <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Nombre Carton</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">Acción</th>
+                                                    <th scope="col">Nombre Cartón</th>
+                                                    <th scope="col">Estado Cartón</th>
+                                                    <th scope="col">Fecha Venta</th>
+                                                    <th scope="col">Vendido por</th>
+                                                    <th scope="col">Detalle</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -465,6 +665,8 @@
                                                         <td>{{ $cartonNumber }}</td>
                                                         <td>{{ $carton->name }}</td>
                                                         <td>{{ $carton->state->name }}</td>
+                                                        <td>{{ $carton->sold_date ?? 'No Vendido' }}</td>
+                                                        <td>{{ $carton->user->name ?? 'No Vendido'}}</td>
                                                         <td>
                                                             <a href="/admin/cartones/create?search={{ $carton->name }}" class="btn btn-success">
                                                                 <i class="fa fa-search"></i>
@@ -590,7 +792,7 @@
             data: {
                 labels: ['Cartones Asignados', 'Cartones Pendientes por Vender'],
                 datasets: [{
-                    data: [{{ $totalCartonesAsignados }}, {{ $totalCartonesPendientes }}],
+                    data: [{{$totalCartonesAsignados_sin_filtro}}, {{$totalCartonesAsignados}}],
                     backgroundColor: [
                         'rgb(75, 192, 192)',
                         'rgb(255, 99, 132)'
@@ -635,4 +837,376 @@
             options: options
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                var name = $(this).attr('name');
+                // Deseleccionar las otras opciones con el mismo nombre
+                $('input[type="radio"][name="' + name + '"]').not(this).prop('checked', false);
+            });
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('monto_cartones_por_dia').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($montoVendido_usuario_por_dia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total Vendido por Día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('monto_cartones_por_dia_obsequio').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($montoVendido_usuario_por_dia_obsequio);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total Obsequio por Día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(127,27,234)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+    <script>
+        var ctx = document.getElementById('monto_cartones_total_por_dia').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($montoVendido_total_dia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total cartones Vendidos y Obsequio por día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(27,234,117)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+    <script>
+        var ctx = document.getElementById('cartones_vendidos_por_dia').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($cartonesVendidosPorDia);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Vendidos y Obsequio por día',
+                data: cantidades,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+
+    <script>
+        var ctx = document.getElementById('cartones_usuario_vendidos_por_dia').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($cartones_usuario_vendidos_por_dia);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Vendidos por día',
+                data: cantidades,
+                backgroundColor: 'rgba(235,226,54,0.2)',
+                borderColor: 'rgb(235,232,54)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+    <script>
+        var ctx = document.getElementById('cartones_usuario_obsequio_por_dia').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($cartones_usuario_obsequio_por_dia);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Obsequio por día',
+                data: cantidades,
+                backgroundColor: 'rgba(54,235,160,0.2)',
+                borderColor: 'rgb(54,235,138)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+
+    <script>
+        $('#grupos_asignados_hasta_el_momento').DataTable({
+            responsive:true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " +
+                    `<select class='custom-select custom-select-sm form-control form-control-sm'>
+                        <option value='10'>10</option>
+                        <option value='25'>25</option>
+                        <option value='50'>50</option>
+                        <option value='100'>100</option>
+                        <option value='-1'>All</option>
+                    </select>`
+                    + "registros por página",
+                "zeroRecords": "No se encontro información - lo sentimos",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "search":"Buscar:",
+                "paginate":{
+                    'next': 'Siguiente',
+                    'previous': 'Anterior',
+                }
+            }
+        });
+    </script>
+    <script>
+        $('#total_grupos_asignados_por_año').DataTable({
+            responsive:true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " +
+                    `<select class='custom-select custom-select-sm form-control form-control-sm'>
+                        <option value='10'>10</option>
+                        <option value='25'>25</option>
+                        <option value='50'>50</option>
+                        <option value='100'>100</option>
+                        <option value='-1'>All</option>
+                    </select>`
+                    + "registros por página",
+                "zeroRecords": "No se encontro información - lo sentimos",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "search":"Buscar:",
+                "paginate":{
+                    'next': 'Siguiente',
+                    'previous': 'Anterior',
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $('#total_grupos_todos_los_años').DataTable({
+            responsive:true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " +
+                    `<select class='custom-select custom-select-sm form-control form-control-sm'>
+                        <option value='10'>10</option>
+                        <option value='25'>25</option>
+                        <option value='50'>50</option>
+                        <option value='100'>100</option>
+                        <option value='-1'>All</option>
+                    </select>`
+                    + "registros por página",
+                "zeroRecords": "No se encontro información - lo sentimos",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "search":"Buscar:",
+                "paginate":{
+                    'next': 'Siguiente',
+                    'previous': 'Anterior',
+                }
+            }
+        });
+    </script>
+    <script>
+        $('#total_catones_vendios_y_obsequi_todos_los_años').DataTable({
+            responsive:true,
+            autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar " +
+                    `<select class='custom-select custom-select-sm form-control form-control-sm'>
+                        <option value='10'>10</option>
+                        <option value='25'>25</option>
+                        <option value='50'>50</option>
+                        <option value='100'>100</option>
+                        <option value='-1'>All</option>
+                    </select>`
+                    + "registros por página",
+                "zeroRecords": "No se encontro información - lo sentimos",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "search":"Buscar:",
+                "paginate":{
+                    'next': 'Siguiente',
+                    'previous': 'Anterior',
+                }
+            }
+        });
+    </script>
+
 @endsection

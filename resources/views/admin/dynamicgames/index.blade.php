@@ -31,7 +31,7 @@
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
                                     <form action="{{ route('admin.dynamicgames.index') }}" method="GET">
                                         <div class="input-group input-group-sm buq-menu" >
-                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Dinamica">
+                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar Dinámica">
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
                                                     <i class="fas fa-search"></i>
@@ -49,12 +49,12 @@
                                     <tr class="text-center">
                                         <th scope="col">#</th>
                                         <th scope="col">Logo</th>
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Titulo</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Letra</th>
                                         <th scope="col">Creación</th>
                                         <th scope="col">Edición</th>
-                                        <th scope="col">Accion</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>

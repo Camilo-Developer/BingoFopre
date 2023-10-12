@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Database\QueryException;
 
 class RolesController extends Controller
 {
@@ -80,7 +81,19 @@ class RolesController extends Controller
 
     public function destroy(Role $role)
     {
+        if ($role->id <= 4) {
+            return redirect()->route('admin.roles.index')->with('info', 'Este rol no se puede eliminar ya que es uno de los principales en el sistema');
+        }
+
+        try {
         $role->delete();
         return redirect()->route('admin.roles.index')->with('delete', 'El rol se elimino correctamente.');
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] === 1451) {
+                return redirect()->route('admin.roles.index')->with('info', 'El rol no se puede eliminar, ya que está relacionado con otros registros.');
+            }
+        }
+
     }
+
 }

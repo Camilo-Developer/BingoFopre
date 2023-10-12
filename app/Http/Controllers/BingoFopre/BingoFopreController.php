@@ -145,30 +145,42 @@ class BingoFopreController extends Controller
 
         //dd($carton_document_users_total,$carton_document_users_vendidos,$carton_document_users_obsequio);
 
+        $date_sold_user_requireds = now();
 
+        $date_sold_user_requireds = date('Y-m-d', strtotime($date_sold_user_requireds));
 
         foreach ($card_groups as $group) {
             $totalCartones = Cardboard::where('group_id', $group->id)
+                ->whereNull('user_id')
                 ->count();
 
             $totalCartonesVen = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
+                ->where('user_id', $userId)
+                ->where('sold_date', $date_sold_user_requireds)
                 ->count();
 
             $totalCartonesObse = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
+                ->where('user_id', $userId)
+                ->where('sold_date', $date_sold_user_requireds)
                 ->count();
 
 
             $montoVendido = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
+                ->where('user_id', $userId)
+                ->where('sold_date', $date_sold_user_requireds)
                 ->sum('price');
 
             $montoGrupo = Cardboard::where('group_id', $group->id)
+                ->whereNull('user_id')
                 ->sum('price');
 
             $montoObsequio = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
+                ->where('user_id', $userId)
+                ->where('sold_date', $date_sold_user_requireds)
                 ->sum('price');
 
             $totalCartonesAsignados += $totalCartones;

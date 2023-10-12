@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                                 <div class="back back-background">
-                                     {{-- 
+                                     {{--
                                         style="background-image: url({{asset('storage/'.$templateconfig->img_carton)}}); background-size: cover;"
                                         --}}
                                     <div class="card-body pt-7 text-center">
@@ -40,13 +40,13 @@
                                  style="background-image: url({{asset('storage/'.$templateconfig->img_live)}}); background-size: cover; width: 100%; height: 305px;">
                                 <div class="card-body py-7 text-center">
                                     <i class="material-icons withe-special-lckm text-4xl my-3">touch_app</i>
-                                    <h3 class="withe-special-lckm">Trasmición en <br /> Vivo</h3>
+                                    <h3 class="withe-special-lckm">Trasmisión en <br /> Vivo</h3>
                                 </div>
                             </div>
                             <div class="back back-background">
                                 {{--style="background-image: url({{asset('storage/'.$templateconfig->img_live)}}); background-size: cover; height: 305px;"--}}
                                 <div class="card-body pt-7 text-center">
-                                    <h3 class="withe-special-lckm">Trasmición en Vivo</h3>
+                                    <h3 class="withe-special-lckm">Trasmisión en Vivo</h3>
                                     <p class="withe-special-lckm opacity-8"> {{$templateconfig->description_live}}</p>
                                     <a href="{{$templateconfig->url_live}}" target="_blank"
                                        class="btn btn-white btn-sm w-50 mx-auto mt-3" style="width: 150px!important;"><i class="material-icons opacity-6 me-2 text-md">cast_connected</i> Conectarse</a>
@@ -80,7 +80,7 @@
                                 <div class="p-special-lckm">
                                     {!! $cardmain->description !!}
                                 </div>
-                                
+
                                 @if ($cardmain->mas_info)
                                     <p>
                                         <a href="{{$cardmain->mas_info}}" target="_blank" class="url-special-lckm icon-move-right text-sm">

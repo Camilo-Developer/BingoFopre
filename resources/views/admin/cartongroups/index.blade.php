@@ -50,7 +50,7 @@
                                                 <th scope="col">Estado</th>
                                                 <th scope="col">Creación</th>
                                                 <th scope="col">Edición</th>
-                                                <th scope="col">Accion</th>
+                                                <th scope="col">Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -210,9 +210,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="userSelect">Correo del Usuario:</label>
+                                        <label for="userSelect_{{$loop->iteration}}">Correo del Usuario:</label>
                                         <div class="form-group">
-                                            <select id="userSelect" name="user_id" class="form-control" style="width: 100%">
+                                            <select id="userSelect_{{$loop->iteration}}" name="user_id" class="form-control" style="width: 100%">
                                                 <option value=""></option>
                                                 @foreach ($users as $user)
                                                     <option value="{{$user->id}}" {{ $user->id == $cartongroup->user_id ? 'selected' : '' }} {{ old('user_id') == $user->id ? 'selected' : '' }}>{{$user->email}}</option>
@@ -260,4 +260,15 @@
             });
         });
     </script>
+    @foreach($cartongroups as $cartongroup)
+        <script>
+            $(document).ready(function() {
+                $('#userSelect_{{$loop->iteration}}').select2({
+                    minimumInputLength: 1,
+                    placeholder: "Buscar usuario..."
+                });
+            });
+        </script>
+    @endforeach
+
 @endsection

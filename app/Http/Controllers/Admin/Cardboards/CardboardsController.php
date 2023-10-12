@@ -42,11 +42,18 @@ class CardboardsController extends Controller
             ->paginate(10);
         $states = State::all();
         $carton_groups = CartonGroup::all();
+
+        $date_sold_user_requireds = now();
+
+        $date_sold_user_requireds = date('Y-m-d', strtotime($date_sold_user_requireds));
+
+        //dd($date_sold_user_requireds);
         return view('admin.cartones.create',compact(
             'cardboards',
             'search',
             'states',
             'carton_groups',
+            'date_sold_user_requireds'
         ));
     }
     public function create(Request $request)
@@ -101,22 +108,27 @@ class CardboardsController extends Controller
                     return redirect()->route('dashboard')->with('delete', 'No tienes permiso para agregar este cartón al carrito.');
                 }
             } else {
-                return redirect()->route('dashboard')->with('delete', 'Este cartón no puede ser agregado al carrito porque su estado no es 3.');
+                return redirect()->route('dashboard')->with('delete', 'El cartón ya ha sido vendido, por lo tanto, no es posible agregarlo al carrito de compras.');
             }
         } else {
-            return redirect()->route('login')->with('delete', 'Debes iniciar sesión para agregar cartones al carrito.');
+            return redirect()->route('login')->with('info', 'Debes iniciar sesión para agregar cartones al carrito.');
         }
     }
 
+
     public function showCart(Request $request)
     {
-        $salesforceController = new SalesforceController();
-        $data = $salesforceController->index($document_number = $request->input('document_number'));
-
-        $userData = json_decode($data->getContent());
         $cart = Session::get('cart', []);
-        return view('user.cart.index', compact('cart','userData'));
+        return view('user.cart.index', compact('cart'));
     }
+    public function prueba(Request $request)
+    {
+        $salesforceController = new SalesforceController();
+        $data = $salesforceController->index($search2 = $request->input('search2'));
+        $userData = json_decode($data->getContent());
+        return response()->json($userData);
+    }
+
     public function finishPurchase(Request $request)
     {
         $user_id_required = Auth::user()->id;
@@ -124,6 +136,10 @@ class CardboardsController extends Controller
         $sold_date = now();
 
         $cart = Session::get('cart', []);
+        //dd($cart);
+        if (empty($cart)) {
+            return redirect()->back()->with('delete', 'No se puede finalizar la compra sin haber agregado un cartón al carrito y  haber buscado un usuario comprador.');
+        }
 
         $cartonData = $request->input('cartons');
         $documentoComprador = $request->input('document_number');
@@ -138,6 +154,10 @@ class CardboardsController extends Controller
         $Tipo_identificaci_n__c = $request->input('Tipo_identificaci_n__c');
         $Tel_fono_celular_1__c = $request->input('Tel_fono_celular_1__c');
 
+        //dd($Email);
+        if (empty($Email)) {
+            return redirect()->back()->with('delete', 'No se puede finalizar la compra sin un usuario comprador. Por favor, busque un usuario válido.');
+        }
         // Buscar al usuario por número de documento
         $user = User::where('email', $Email)->first();
 
@@ -212,15 +232,72 @@ class CardboardsController extends Controller
         return view('admin.cartones.create', compact('cardboard','states'));
     }
 
+
     public function update(Request $request, Cardboard $cardboard)
     {
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'document_number' => 'nullable',
             'state_id' => 'required',
-            'group_id' => 'required',
+            'group_id' => 'nullable',
+            'document_number' => 'nullable',
+            'Categoria_Principal__c' => 'nullable',
+            'Categoria__c' => 'nullable',
+            'Categoria_Administrativo__c' => 'nullable',
+            'FirstName' => 'nullable',
+            'LastName' => 'nullable',
+            'Email' => 'required',
+            'generoEmail__c' => 'nullable',
+            'Tipo_identificaci_n__c' => 'nullable',
+            'Tel_fono_celular_1__c' => 'nullable',
+            'sold_date' => 'nullable',
+            'user_id' => 'nullable',
         ]);
+
+        $documentoComprador = $request->input('document_number');
+
+        $FirstName = $request->input('FirstName');
+        $LastName = $request->input('LastName');
+        $Email = $request->input('Email');
+
+        //dd($Email);
+        if (empty($Email)) {
+            return redirect()->back()->with('info', 'No se puede finalizar la compra sin un usuario comprador. Por favor, busque un usuario válido.');
+        }
+        // Buscar al usuario por número de documento
+        $user = User::where('email', $Email)->first();
+
+        if (!$user) {
+            // Si el usuario no existe, créalo
+            $user = new User();
+            $user->name = $FirstName;
+            $user->lastname = $LastName;
+            $user->document_number = $documentoComprador;
+            $user->email = $Email;
+            $user->password = bcrypt($documentoComprador);
+            $user->external_auth = 'Salesforce';
+            $user->state_id = 1;
+            $userSaved = $user->save();
+
+            if ($userSaved) {
+                // Asigna el rol si el usuario se ha guardado correctamente
+                $user->assignRole('Estudiante');
+            }
+        } else {
+            // Si el usuario existe, actualiza los campos necesarios
+            $user->name = $FirstName;
+            $user->lastname = $LastName;
+            $user->document_number = $documentoComprador;
+            $user->email = $Email;
+            $user->password = bcrypt($documentoComprador);
+            if (empty($user->external_auth)) {
+                $user->external_auth = 'Salesforce';
+            }
+            $user->state_id = 1;
+            $user->save();
+
+        }
+
         $data = $request->all();
         $cardboard->update($data);
         return redirect()->route('admin.cartones.create')->with('edit', 'El Cartón se ha editado correctamente.');

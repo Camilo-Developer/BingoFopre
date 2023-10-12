@@ -25,7 +25,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Información Principal del Sitio</h3>
+                                        <h3 class="card-title">Información principal del sitio</h3>
                                         <div class="card-tools">
                                             @can('admin.templateconfigs.edit')
                                             <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-edit-info-pst" >
@@ -90,11 +90,11 @@
                                                 </a>
                                             </div>
                                             <div class="col-4">
-                                                <label>• Precio del carton</label>
+                                                <label>• Precio del cartón</label>
                                                 <p>$ {{number_format(intval($templateconfig->price_carton))}}</p>
                                             </div>
                                             <div class="col-12">
-                                                <label>• Descripción del carton</label>
+                                                <label>• Descripción del cartón</label>
                                                 <div>
                                                     {!! $templateconfig->description_carton !!}
                                                 </div>
@@ -107,7 +107,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Información de la Trasmición</h3>
+                                        <h3 class="card-title">Información de la trasmisión</h3>
                                         <div class="card-tools">
                                             @can('admin.templateconfigs.edit')
                                             <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-edit-info-live" ><i class="fas fa-edit"></i>
@@ -121,19 +121,19 @@
                                     <div class="card-body" style="display: block;">
                                         <div class="row">
                                             <div class="col-6 mb-3">
-                                                <label >Imagen Live</label>
+                                                <label >Imagen trasmisión</label>
                                                 <br>
                                                 <img width="150px" src="{{asset('storage/'. $templateconfig->img_live)}}" alt="">
                                             </div>
                                             <div class="col-6 mb-3">
-                                                <label>Url de la trasmición</label>
+                                                <label>Url de la trasmisión</label>
                                                 <br>
                                                 <a class="btn btn-success" href="{{$templateconfig->url_live}}"  target="_blank">
                                                     <i class="fa fa-link"></i> Ir al Sitio web
                                                 </a>
                                             </div>
                                             <div class="col-12 mb-3">
-                                                <label>Descripcón de la trasmición</label><br>
+                                                <label>Descripción de la trasmisión</label><br>
                                                 {!! $templateconfig->description_live !!}
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Datos de la Universidad</h3>
+                                    <h3 class="card-title">Datos de la universidad</h3>
                                     <div class="card-tools">
                                         @can('admin.templateconfigs.edit')
                                         <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-edit-info-duni" ><i class="fas fa-edit"></i>
@@ -158,7 +158,7 @@
                                 <div class="card-body" style="display: block;">
                                     <div class="row">
                                         <div class="col-4">
-                                            <label>Area de la universidad</label>
+                                            <label>Área de la universidad</label>
                                             <p>{{$templateconfig->area}}</p>
                                         </div>
                                         <div class="col-4">
@@ -166,7 +166,7 @@
                                             <p>{{$templateconfig->email}}</p>
                                         </div>
                                         <div class="col-4">
-                                            <label>Telefono de la universidad</label>
+                                            <label>Teléfono de la universidad</label>
                                             <p>{{$templateconfig->phone}}</p>
                                         </div>
                                     </div>
@@ -212,7 +212,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Información del Inicio de Sesión</h3>
+                                    <h3 class="card-title">Información del inicio de sesión</h3>
                                     <div class="card-tools">
                                         @can('admin.templateconfigs.edit')
                                         <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-edit-login" ><i class="fas fa-edit"></i>
@@ -227,17 +227,17 @@
                                 <div class="card-body" style="display: block;">
                                     <div class="row">
                                         <div class="col-12">
-                                            <label >Imagen del Login</label>
+                                            <label >Imagen del inicio sesión</label>
                                             <br>
                                             <img width="150px" src="{{asset('storage/'. $templateconfig->img_login)}}" alt="">
                                         </div>
                                         <div class="col-12">
-                                            <label>Color de fondo del button</label>
+                                            <label>Color de fondo del boton</label>
                                             <div style="height: 50px; width: 100%; background: linear-gradient(195deg, {{$templateconfig->color_login_one}}, {{$templateconfig->color_login_two}})">
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <label>Color de fondo del button</label>
+                                            <label>Color de fondo del boton hover</label>
                                             <div style="height: 50px; width: 100%; background: linear-gradient(195deg, {{$templateconfig->color_login_hover_three}}, {{$templateconfig->color_login_hover_four}})">
                                             </div>
                                         </div>
@@ -377,7 +377,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Información de la Trasmición</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Información de la Trasmisión</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>

@@ -41,6 +41,7 @@ Route::middleware([
     Route::get('/dashboard',[RedirectController::class, 'dashboardUser'])->middleware('can:dashboard')->name('dashboard');
     Route::get('/dashboard',[BingoFopreController::class,'dashboardcartsgroup'])->middleware('can:dashboard')->name('dashboard');
     Route::get('/cartones/carrito', [CardboardsController::class,'showCart'])->middleware('can:addToCart')->name('user.cart.index');
+    Route::get('/cartones/prueba', [CardboardsController::class,'prueba'])->middleware('can:addToCart')->name('user.cart.prueba');
 
 
     Route::match(['get', 'post', 'put', 'delete'], '/register', function () {

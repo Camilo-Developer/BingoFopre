@@ -55,7 +55,7 @@
                                         <th scope="col">Rol</th>
                                         <th scope="col">Creación</th>
                                         <th scope="col">Edición</th>
-                                        <th scope="col">Accion</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -85,7 +85,7 @@
                                                         <a href="{{route('admin.users.show',$user)}}" class="btn btn-success" style="margin-left: 5px;"><i class="fa fa-eye"></i></a>
                                                     @endcan
                                                     @can('admin.users.destroy')
-                                                        <a title="Eliminar" onclick="document.getElementById('eliminaruser_{{ $loop->iteration }}').submit()" class="  btn btn-danger btn-company-danger">
+                                                        <a title="Eliminar" onclick="document.getElementById('eliminaruser_{{ $loop->iteration }}').submit()" style="margin-left: 5px;" class="  btn btn-danger btn-company-danger">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     @endcan

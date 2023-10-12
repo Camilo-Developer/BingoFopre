@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     @can('admin.sponsors.create')
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-new-patrocinio">Crear Patrocinio</button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-new-patrocinio"><i class="fa fa-check"></i> Crear Patrocinio</button>
                                     @endcan
                                 </div>
                                 <div class="col-12 col-md-9 d-flex justify-content-end">
@@ -56,7 +56,7 @@
                                         <th scope="col">Estado</th>
                                         <th scope="col">Creación</th>
                                         <th scope="col">Edición</th>
-                                        <th scope="col">Accion</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -129,7 +129,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nuevo Patrocinio</h4>
+                        <h4 class="modal-title"><i class="fa fa-check-circle"></i> Nuevo Patrocinio</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -181,8 +181,8 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Crear</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
                         </div>
                     </form>
                 </div>
@@ -196,7 +196,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar Patrocinio</h4>
+                            <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Patrocinio</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -248,7 +248,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <div>
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>Editar</button>
 

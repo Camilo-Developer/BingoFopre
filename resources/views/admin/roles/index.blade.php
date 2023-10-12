@@ -34,7 +34,7 @@
                                     <th>Nombre del Rol</th>
                                     <th scope="col">Creación</th>
                                     <th scope="col">Edición</th>
-                                    <th>Acciones</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>

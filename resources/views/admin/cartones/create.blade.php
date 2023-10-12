@@ -26,15 +26,15 @@
                                 <div class="col-12 col-md-6">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_crear_cartones"> <i class="fa fa-plus"></i> Crear Cartones</button>
                                     @can('admin.cardboard.generadormasivoQR')
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-plus"></i> Crear QR</button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-qrcode"></i> Crear QR</button>
                                     @endcan
-                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal_cargue_masivo"> <i class="fa fa-plus"></i> Cargue masivo</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal_cargue_masivo"> <i class="fa fa-file-excel"></i> Cargue masivo</button>
 
                                 </div>
                                 <div class="col-12 col-md-6 d-flex justify-content-end">
                                     <form action="{{ route('admin.cartones.createForm') }}" method="GET">
                                         <div class="input-group input-group-sm buq-menu" >
-                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar carton">
+                                            <input value="{{$search}}"   type="search" name="search" class="form-control float-right" placeholder="Buscar cartón">
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
                                                     <i class="fas fa-search"></i>
@@ -51,7 +51,7 @@
                                     <thead>
                                     <tr class="text-center">
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">precio</th>
+                                        <th scope="col">Precio</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Grupo</th>
                                         <th scope="col">Fecha de Creación</th>
@@ -175,7 +175,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><i class="fa fa-check-circle"></i> Creación de qr masivos</h4>
+                    <h4 class="modal-title"><i class="fa fa-qrcode"></i> Creación de QR masivos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -199,7 +199,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12">
-                                        <button type="submit" class="btn btn-success">Generar QRs</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-qrcode"></i> Generar QRs</button>
                                     </div>
                                 </div>
                             </form>
@@ -216,7 +216,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><i class="fa fa-check-circle"></i> Cargue masivo</h4>
+                    <h4 class="modal-title"><i class="fa fa-file-excel"></i> Cargue masivo</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -303,7 +303,7 @@
                                                 </div>
 
                                                 <div class="col-12 col-md-12">
-                                                    <button type="submit" class="btn btn-success">Cargar Cartones Masivos</button>
+                                                    <button type="submit" class="btn btn-success"><i class="fa fa-file-excel"></i>  Cargar Cartones Masivos</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -334,7 +334,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="POST" action="{{ route('admin.cartones.update',$cardboard) }}">
+
+                            <form id="editar_{{ $loop->iteration }}" method="POST" action="{{ route('admin.cartones.update',$cardboard) }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -343,13 +344,22 @@
                                             <label for="name">Nombre:</label>
                                             <input type="number" value="{{$cardboard->name}}" id="name" name="name" class="form-control" required>
                                         </div>
+                                        @error('name')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
+
+
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="price">Precio:</label>
                                             <input type="number" value="{{$cardboard->price}}"  id="price" name="price" class="form-control" required>
                                         </div>
+                                        @error('price')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
+
                                     <style>
                                         .select2-container .select2-selection--single{
                                             height: 35px!important;
@@ -365,8 +375,12 @@
                                                             <option value="{{$carton_group->id}}" {{ $carton_group->id == $cardboard->group_id ? 'selected' : '' }} {{ old('group_id') == $carton_group->id ? 'selected' : '' }}>{{$carton_group->id}}</option>
                                                         @endforeach
                                                     </select>
+
                                             </div>
                                         </div>
+                                        @error('group_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
@@ -376,12 +390,22 @@
                                                     <option value="{{$state->id}}" {{ $state->id == $cardboard->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
                                                 @endforeach
                                             </select>
+
+                                        </div>
+                                        @error('state_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="name_vendedor">Correo del usuario asignado grupo:</label>
+                                            <input disabled value="{{ optional($cardboard->cartongroup)->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <div class="form-group">
-                                            <label for="name_vendedor">Correo del Vendedor:</label>
-                                            <input disabled value="{{ optional($cardboard->cartongroup)->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
+                                            <label for="name_vendedor">Correo Vendedor del cartón:</label>
+                                            <input disabled value="{{ $cardboard->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
                                         </div>
                                     </div>
 
@@ -389,83 +413,126 @@
                                         <label for="document_number">Datos del comprador</label>
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="FirstName">Nombre:</label>
-                                                    <input disabled value="{{$cardboard->FirstName}}" type="text" id="FirstName" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="LastName">Apellido:</label>
-                                                    <input disabled value="{{$cardboard->LastName}}" type="text" id="LastName" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Tipo_identificaci_n__c">Tipo Documento:</label>
-                                                    <input disabled value="{{$cardboard->Tipo_identificaci_n__c}}" type="text" id="Tipo_identificaci_n__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="document_number">Numero Documento:</label>
-                                                    <input disabled value="{{$cardboard->document_number}}" type="text" id="document_number" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Categoria_Principal__c">Categoria principal:</label>
-                                                    <input disabled value="{{$cardboard->Categoria_Principal__c}}" type="text" id="Categoria_Principal__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Categoria__c">Categoria C:</label>
-                                                    <input disabled value="{{$cardboard->Categoria__c}}" type="text" id="Categoria__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Categoria_Administrativo__c">Categoria Administrativa C:</label>
-                                                    <input disabled value="{{$cardboard->Categoria_Administrativo__c}}" type="text" id="Categoria_Administrativo__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Email">Correo:</label>
-                                                    <input disabled value="{{$cardboard->Email}}" type="text" id="Email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="generoEmail__c">Genero:</label>
-                                                    <input disabled value="{{$cardboard->generoEmail__c}}" type="text" id="generoEmail__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Tel_fono_celular_1__c">Telefono:</label>
-                                                    <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" id="Tel_fono_celular_1__c" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="Tel_fono_celular_1__c">Fecha vendido:</label>
-                                                    <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" id="Tel_fono_celular_1__c" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <input  name="Categoria_Principal__c"  type="hidden" >
+                                    <input   name="Categoria__c"   type="hidden" >
+                                    <input   name="Categoria_Administrativo__c"  type="hidden" >
+                                    <input type="hidden"  name="FirstName" >
+                                    <input type="hidden"  name="LastName" >
+                                    <input   name="generoEmail__c"  type="hidden" >
+                                    <input   name="Tipo_identificaci_n__c"  type="hidden" >
+                                    <input   name="document_number"  type="hidden" >
+                                    <input  name="Tel_fono_celular_1__c"   type="hidden" >
+                                    <input  name="Email"   type="hidden" >
+                                    <input type="hidden" name="sold_date" value="{{$cardboard->sold_date ?? $date_sold_user_requireds}}">
+                                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+
+
+
+                                </div>
+                            </form>
+
+                            <form id="search-form_{{ $loop->iteration }}">
+                                @csrf
+                                <label for="search2">Documento o correo del comprador:</label>
+                                <div class="row">
+                                    <div class="col-8 col-lg-10">
+                                        <input class="form-control" type="text" name="search2"  id="search2" required>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-warning"> <i class="fa fa-edit"></i> Editar Cartón</button>
-                                        </div>
+                                    <div class="col-4 col-lg-2">
+                                        <button type="button" id="search-button_{{ $loop->iteration }}" class="btn btn-success">Buscar</button>
                                     </div>
                                 </div>
                             </form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="loading-alert_{{ $loop->iteration }}" class="alert alert-info" style="display: none;">
+                                        Buscando usuario comprador...
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Nombre:</label>
+                                                <input disabled value="{{$cardboard->FirstName}}" type="text" name="FirstName" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Apellido:</label>
+                                                <input disabled value="{{$cardboard->LastName}}" type="text"  name="LastName" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Tipo Documento:</label>
+                                                <input disabled value="{{$cardboard->Tipo_identificaci_n__c}}" type="text" name="Tipo_identificaci_n__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Número Documento:</label>
+                                                <input disabled value="{{$cardboard->document_number}}" type="text" name="document_number" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Categoría principal:</label>
+                                                <input disabled value="{{$cardboard->Categoria_Principal__c}}" type="text" name="Categoria_Principal__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Categoría C:</label>
+                                                <input disabled value="{{$cardboard->Categoria__c}}" type="text" name="Categoria__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Categoría Administrativa C:</label>
+                                                <input disabled value="{{$cardboard->Categoria_Administrativo__c}}" type="text" name="Categoria_Administrativo__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Correo:</label>
+                                                <input disabled value="{{$cardboard->Email}}" type="text" name="Email"  class="form-control">
+                                            </div>
+                                            @error('Email')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Género:</label>
+                                                <input disabled value="{{$cardboard->generoEmail__c}}" type="text" name="generoEmail__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Teléfono:</label>
+                                                <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" name="Tel_fono_celular_1__c" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="sold_date">Fecha vendido:</label>
+                                                <input disabled value="{{$cardboard->sold_date ?? $date_sold_user_requireds}}" type="text" id="sold_date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <a onclick="document.getElementById('editar_{{ $loop->iteration }}').submit()" class="btn btn-warning"> <i class="fa fa-edit"></i> Editar Cartón</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -510,17 +577,95 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="n_carton">Nombre del Vendedor:</label>
+                                                <label for="price_carton">Estado:</label>
+                                                <input disabled value="{{$cardboard->state->name}}" type="text" id="price_carton" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="n_carton">Correo del usuario asignado grupo:</label>
                                                 <input disabled value="{{ optional($cardboard->cartongroup)->user->name ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="n_carton">Correo Vendedor del cartón:</label>
+                                                <input disabled value="{{$cardboard->user->name ?? 'N/A'}}" type="text" id="name_vendedor" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label>Datos del Comprador</label>
                                         </div>
+                                    </div>
+                                    <div class="row mt-1">
                                         <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="price_carton">Documento de Identidad:</label>
-                                                <input disabled value="{{$cardboard->document_number}}" type="number" id="price_carton" class="form-control">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Nombre:</label>
+                                                        <input disabled value="{{$cardboard->FirstName}}" type="text" name="FirstName" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Apellido:</label>
+                                                        <input disabled value="{{$cardboard->LastName}}" type="text"  name="LastName" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tipo Documento:</label>
+                                                        <input disabled value="{{$cardboard->Tipo_identificaci_n__c}}" type="text" name="Tipo_identificaci_n__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Número Documento:</label>
+                                                        <input disabled value="{{$cardboard->document_number}}" type="text" name="document_number" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Categoría principal:</label>
+                                                        <input disabled value="{{$cardboard->Categoria_Principal__c}}" type="text" name="Categoria_Principal__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Categoría C:</label>
+                                                        <input disabled value="{{$cardboard->Categoria__c}}" type="text" name="Categoria__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Categoría Administrativa C:</label>
+                                                        <input disabled value="{{$cardboard->Categoria_Administrativo__c}}" type="text" name="Categoria_Administrativo__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Correo:</label>
+                                                        <input disabled value="{{$cardboard->Email}}" type="text" name="Email"  class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Género:</label>
+                                                        <input disabled value="{{$cardboard->generoEmail__c}}" type="text" name="generoEmail__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Teléfono:</label>
+                                                        <input disabled value="{{$cardboard->Tel_fono_celular_1__c}}" type="text" name="Tel_fono_celular_1__c" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="sold_date">Fecha vendido:</label>
+                                                        <input disabled value="{{$cardboard->sold_date}}" type="text" id="sold_date" class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -545,5 +690,48 @@
             });
         });
     </script>
+        <script>
+            $(document).ready(function() {
+                function performAjaxRequest() {
+                    // Muestra la alerta de "Buscando usuario comprador"
+                    $("#loading-alert_{{$loop->iteration}}").show();
+
+                    $.ajax({
+                        url: "{{ route('user.cart.prueba') }}",
+                        method: "GET",
+                        data: $("#search-form_{{$loop->iteration}}").serialize(),
+                        success: function(response) {
+                            const userData = JSON.parse(response);
+
+                            // Rellenar los campos del formulario con los datos de Salesforce
+                            $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
+                            $("input[name='Categoria__c']").val(userData.Categoria__c);
+                            $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
+                            $("input[name='FirstName']").val(userData.FirstName);
+                            $("input[name='LastName']").val(userData.LastName);
+                            $("input[name='Email']").val(userData.Email);
+                            $("input[name='generoEmail__c']").val(userData.generoEmail__c);
+                            $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
+                            $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
+                            $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
+
+                            // Oculta la alerta una vez que se encuentre el usuario
+                            $("#loading-alert_{{$loop->iteration}}").hide();
+                        }
+                    });
+                }
+
+                $("#search-button_{{$loop->iteration}}").on("click", function() {
+                    performAjaxRequest();
+                });
+
+                $("#search-form_{{$loop->iteration}}").submit(function(e) {
+                    e.preventDefault();
+                });
+            });
+        </script>
+
     @endforeach
+
+
 @endsection

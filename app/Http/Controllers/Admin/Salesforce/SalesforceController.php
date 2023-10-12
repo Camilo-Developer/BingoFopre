@@ -19,8 +19,12 @@ class SalesforceController extends Controller
 
         $contact = $this->gatData($accessToken, $id);
 
+        if (!$contact) {
+            return response()->json(['error' => 'No se encontraron datos para el ID proporcionado'], 404);
+        }
+
         //dd($contact);
-        return response()->json($contact);
+        return response()->json(json_encode($contact));
     }
 
     protected function getAccessToken()

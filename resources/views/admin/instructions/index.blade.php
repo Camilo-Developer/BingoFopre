@@ -25,7 +25,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-end">
                                     @can('admin.instructions.edit')
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">Editar</button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button>
                                     @endcan
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar Instrucciones</h4>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Instrucciones</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -83,8 +83,8 @@
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-warning">Editar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
                         </div>
                     </form>
                 </div>

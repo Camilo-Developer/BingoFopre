@@ -84,22 +84,124 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="col-12">
-                                        <label>Filtro por fecha de Total de cartones Vendidos</label>
+                                        <label>Filtro por fecha de total de cartones vendidos</label>
                                     </div>
                                     <div class="row">
                                         <div class="col-5">
+                                            <label for="">Fecha inicio</label>
                                             <input type="date" id="startDate" class="form-control" placeholder="Fecha de inicio">
                                         </div>
                                         <div class="col-5">
+                                            <label for="">Fecha fin</label>
                                             <input type="date" id="endDate" class="form-control" placeholder="Fecha de fin">
                                         </div>
                                         <div class="col-2">
+                                            <br>
                                             <button id="filterButton" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="chart-container">
                                             <canvas id="graficaBarra"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Monto total de cartones por Día: Vendidos + Obsequio</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="monto_cartones_total_por_dias"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Total de cartones por Día: Vendidos + Obsequio</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="total_cartones_vendido_obsequio"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Monto total de cartones por Día: Vendidos</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="monto_Vendido_total_dia"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Total de cartones por Día: Vendidos</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="total_cartones_vendidos_users"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Monto total de cartones por Día: Obsequio</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="monto_Obsequio_total_dia"></canvas>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="card card-outline card-primary">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Total de cartones por Día: Obsequio</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="display: block;">
+                                            <canvas id="total_cartones_obsequio_users"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -222,6 +324,258 @@
             window.location.href = '/admin/dashboard?startDate=' + startDate + '&endDate=' + endDate;
         });
     </script>
+
+
+
+    <script>
+        var ctx = document.getElementById('total_cartones_vendido_obsequio').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($total_cartones_obsequio_y_vendidos);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Obsequio por día',
+                data: cantidades,
+                backgroundColor: 'rgba(54,235,160,0.2)',
+                borderColor: 'rgb(54,235,138)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('total_cartones_vendidos_users').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($total_cartones_vendidos_users);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Obsequio por día',
+                data: cantidades,
+                backgroundColor: 'rgba(54,235,160,0.2)',
+                borderColor: 'rgb(54,235,138)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('total_cartones_obsequio_users').getContext('2d');
+
+        // Obtén los datos de cartones vendidos por día desde PHP
+        var cartonesPorDiaData = @json($total_cartones_obsequio_users);
+
+        // Separa las fechas y los totales en dos arreglos
+        var fechas = cartonesPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+
+        var cantidades = cartonesPorDiaData.map(function (item) {
+            return item.total_cartones_vendidos;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Total cartones Obsequio por día',
+                data: cantidades,
+                backgroundColor: 'rgba(54,235,160,0.2)',
+                borderColor: 'rgb(54,235,138)',
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+
+    <script>
+        var ctx = document.getElementById('monto_cartones_total_por_dias').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($montoVendido_total_dia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total cartones Vendidos y Obsequio por día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(27,234,117)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+
+
+    <script>
+        var ctx = document.getElementById('monto_Vendido_total_dia').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($monto_Vendido_total_dia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total cartones Vendidos y Obsequio por día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(27,234,117)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('monto_Obsequio_total_dia').getContext('2d');
+
+        // Obtén los datos de montos vendidos por día desde PHP
+        var montoPorDiaData = @json($monto_Obsequio_total_dia);
+
+        // Separa las fechas y los montos en dos arreglos
+        var fechas = montoPorDiaData.map(function (item) {
+            return item.sold_date;
+        });
+        //console.log(montoPorDiaData);
+
+        var montos = montoPorDiaData.map(function (item) {
+            return item.total_monto;
+        });
+
+        var data = {
+            labels: fechas,
+            datasets: [{
+                label: 'Monto total cartones Vendidos y Obsequio por día',
+                data: montos,
+                fill: false,
+                borderColor: 'rgb(27,234,117)',
+                tension: 0.4
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+
 
 
 @endsection

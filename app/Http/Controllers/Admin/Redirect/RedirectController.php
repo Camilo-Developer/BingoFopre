@@ -35,13 +35,16 @@ class RedirectController extends Controller
         $user = Socialite::driver('azure')->user();
         $userExists = User::where('external_id', $user->id)
             ->where('external_auth', 'azure')
+            ->orWhere('email',  $user->email)
             ->first();
+        //dd( $user->email);
 
         if ($userExists) {
             Auth::login($userExists);
         } else {
             $userNew = User::create([
-                'name' => $user->name,
+                'name' => $user->user['givenName'] ?? $user->user['displayName'],
+                'lastname' => $user->user['surname'],
                 'email' => $user->email,
                 'external_id' => $user->id,
                 'external_auth' => 'azure',
@@ -49,8 +52,6 @@ class RedirectController extends Controller
                 'state_id' => '1',
             ])->assignRole('Estudiante');
             Auth::login($userNew);
-
-
         }
 
         return redirect('/redirect');

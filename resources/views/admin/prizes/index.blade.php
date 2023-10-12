@@ -41,7 +41,7 @@
                                         <th scope="col">Estado</th>
                                         <th scope="col">Creación</th>
                                         <th scope="col">Edición</th>
-                                        <th scope="col">Accion</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody>
