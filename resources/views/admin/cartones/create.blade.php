@@ -413,18 +413,18 @@
                                         <label for="document_number">Datos del comprador</label>
                                     </div>
 
-                                    <input  name="Categoria_Principal__c"  type="hidden" >
-                                    <input   name="Categoria__c"   type="hidden" >
-                                    <input   name="Categoria_Administrativo__c"  type="hidden" >
-                                    <input type="hidden"  name="FirstName" >
-                                    <input type="hidden"  name="LastName" >
-                                    <input   name="generoEmail__c"  type="hidden" >
-                                    <input   name="Tipo_identificaci_n__c"  type="hidden" >
-                                    <input   name="document_number"  type="hidden" >
-                                    <input  name="Tel_fono_celular_1__c"   type="hidden" >
-                                    <input  name="Email"   type="hidden" >
-                                    <input type="hidden" name="sold_date" value="{{$cardboard->sold_date ?? $date_sold_user_requireds}}">
-                                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                                    <input  value="{{$cardboard->Categoria_Principal__c}}" name="Categoria_Principal__c"  type="hidden" >
+                                    <input  value="{{$cardboard->Categoria__c}}"  name="Categoria__c"   type="hidden" >
+                                    <input  value="{{$cardboard->Categoria_Administrativo__c}}"  name="Categoria_Administrativo__c"  type="hidden" >
+                                    <input value="{{$cardboard->FirstName}}" type="hidden"  name="FirstName" >
+                                    <input value="{{$cardboard->LastName}}" type="hidden"  name="LastName" >
+                                    <input  value="{{$cardboard->generoEmail__c}}"  name="generoEmail__c"  type="hidden" >
+                                    <input  value="{{$cardboard->Tipo_identificaci_n__c}}"  name="Tipo_identificaci_n__c"  type="hidden" >
+                                    <input  value="{{$cardboard->document_number}}"  name="document_number"  type="hidden" >
+                                    <input  value="{{$cardboard->Tel_fono_celular_1__c}}" name="Tel_fono_celular_1__c"   type="hidden" >
+                                    <input  value="{{$cardboard->Email}}" name="Email"   type="hidden" >
+                                    <input  type="hidden" name="sold_date" value="{{$cardboard->sold_date ?? $date_sold_user_requireds}}">
+                                    <input  type="hidden" name="user_id" value="{{auth()->user()->id}}">
 
 
 
@@ -447,6 +447,9 @@
                                 <div class="col-12">
                                     <div id="loading-alert_{{ $loop->iteration }}" class="alert alert-info" style="display: none;">
                                         Buscando usuario comprador...
+                                    </div>
+                                    <div id="not-found-alert_{{ $loop->iteration }}" class="alert alert-danger" style="display: none;">
+                                       No se encontró al usuario. Por favor, vuelve a intentarlo.
                                     </div>
                                 </div>
                             </div>
@@ -693,6 +696,11 @@
         <script>
             $(document).ready(function() {
                 function performAjaxRequest() {
+
+                    // Oculta las alertas existentes
+                    $("#loading-alert_{{$loop->iteration}}").hide();
+                    $("#not-found-alert_{{$loop->iteration}}").hide();
+
                     // Muestra la alerta de "Buscando usuario comprador"
                     $("#loading-alert_{{$loop->iteration}}").show();
 
@@ -701,21 +709,35 @@
                         method: "GET",
                         data: $("#search-form_{{$loop->iteration}}").serialize(),
                         success: function(response) {
-                            const userData = JSON.parse(response);
+                            try {
+                                const userData = JSON.parse(response);
 
-                            // Rellenar los campos del formulario con los datos de Salesforce
-                            $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
-                            $("input[name='Categoria__c']").val(userData.Categoria__c);
-                            $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
-                            $("input[name='FirstName']").val(userData.FirstName);
-                            $("input[name='LastName']").val(userData.LastName);
-                            $("input[name='Email']").val(userData.Email);
-                            $("input[name='generoEmail__c']").val(userData.generoEmail__c);
-                            $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
-                            $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
-                            $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
+                                // Rellenar los campos del formulario con los datos de Salesforce
+                                $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
+                                $("input[name='Categoria__c']").val(userData.Categoria__c);
+                                $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
+                                $("input[name='FirstName']").val(userData.FirstName);
+                                $("input[name='LastName']").val(userData.LastName);
+                                $("input[name='Email']").val(userData.Email);
+                                $("input[name='generoEmail__c']").val(userData.generoEmail__c);
+                                $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
+                                $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
+                                $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
 
-                            // Oculta la alerta una vez que se encuentre el usuario
+                                // Oculta la alerta una vez que se encuentre el usuario
+                                $("#loading-alert_{{$loop->iteration}}").hide();
+                            }catch (error) {
+                                // Oculta la alerta de "Buscando usuario comprador"
+                                $("#loading-alert_{{$loop->iteration}}").hide();
+                                // Muestra la alerta de "Usuario no encontrado"
+                                $("#not-found-alert_{{$loop->iteration}}").show();
+                            }
+                        },
+                        error: function(xhr, textStatus, error) {
+                            // Manejar errores de la solicitud AJAX aquí si es necesario
+                            console.error("Error en la solicitud AJAX:", error);
+
+                            // Oculta la alerta de "Buscando usuario comprador"
                             $("#loading-alert_{{$loop->iteration}}").hide();
                         }
                     });

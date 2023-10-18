@@ -59,7 +59,6 @@ class StatesController extends Controller
 
     public function destroy(State $state)
     {
-        // Verifica si el estado es uno de los primeros 6 registros (id del 1 al 6)
         if ($state->id <= 6) {
             return redirect()->route('admin.states.index')->with('info', 'Este estado no se puede eliminar ya que es uno de los principales en el sistema');
         }

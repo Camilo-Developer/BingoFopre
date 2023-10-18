@@ -47,7 +47,9 @@
                                 {{--style="background-image: url({{asset('storage/'.$templateconfig->img_live)}}); background-size: cover; height: 305px;"--}}
                                 <div class="card-body pt-7 text-center">
                                     <h3 class="withe-special-lckm">Trasmisión en Vivo</h3>
-                                    <p class="withe-special-lckm opacity-8"> {{$templateconfig->description_live}}</p>
+                                    <div class="withe-special-lckm opacity-8">
+                                        {!! $templateconfig->description_live !!}
+                                    </div>
                                     <a href="{{$templateconfig->url_live}}" target="_blank"
                                        class="btn btn-white btn-sm w-50 mx-auto mt-3" style="width: 150px!important;"><i class="material-icons opacity-6 me-2 text-md">cast_connected</i> Conectarse</a>
                                 </div>
@@ -100,7 +102,7 @@
     <section class="py-sm-7" id="pricing-soft-ui">
         <div class="mt-lg-n8 mt-n6">
             <div class="container">
-                <h3 class="title-special-lckm mb-0 text-center">Con el partocinio de:</h3>
+                <h3 class="title-special-lckm mb-0 text-center">Con el patrocinio de:</h3>
                 <hr class="horizontal dark my-5">
                 <div class="row">
                     @foreach($sponsors as $sponsor)

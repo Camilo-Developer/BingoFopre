@@ -189,7 +189,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title"> <i class="fa fa-user"></i> Editar el grupo de carton</h4>
+                        <h4 class="modal-title"> <i class="fa fa-edit"></i> Editar el grupo de carton</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -230,6 +230,7 @@
                                                 @foreach($states as $state)
                                                     <option value="{{$state->id}}" {{ $state->id == $cartongroup->state_id ? 'selected' : '' }} {{ old('state_id') == $state->id ? 'selected' : '' }}>{{$state->name}}</option>
                                                 @endforeach
+                                                    <option value="dev">Devolución</option>
                                             </select>
                                         </div>
                                         @error('state_id')
@@ -241,7 +242,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Crear</button>
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
                         </div>
                     </form>
                 </div>

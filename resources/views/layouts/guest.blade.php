@@ -142,10 +142,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                    @foreach($templateconfigs as $templateconfig)
+                                    <a href="{{$templateconfig->url_carton}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
                                         <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
                                         Compra Online
                                     </a>
+                                    @endforeach
                                 </li>
                                 <li class="nav-item dropdown dropdown-hover mx-2">
 
@@ -294,10 +296,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a href="https://evento.uniandes.edu.co/es/bingo-fopre-2022/Compra-de-cartones" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                                        <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
-                                        Compra Online
-                                    </a>
+                                    @foreach($templateconfigs as $templateconfig)
+                                        <a href="{{$templateconfig->url_carton}}" role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                                            <i class="material-icons opacity-6 me-2 text-md">add_shopping_cart</i>
+                                            Compra Online
+                                        </a>
+                                    @endforeach
                                 </li>
                             </ul>
                         <ul class="navbar-nav d-lg-block d-none">

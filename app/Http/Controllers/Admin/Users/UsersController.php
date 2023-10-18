@@ -347,6 +347,10 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->id === 1) {
+            return redirect()->route('admin.users.index')->with('info', 'Este usuario no se puede eliminar ya que es uno de los principales en el sistema');
+        }
+
         try {
             $user->delete();
             return redirect()->route('admin.users.index')->with('delete', 'El Usuario se ha eliminado correctamente.');

@@ -60,6 +60,8 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
+                    @foreach($instructions as $instruction)
+
                     <form action="{{route('admin.instructions.update', $instruction)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -87,6 +89,8 @@
                             <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</button>
                         </div>
                     </form>
+                    @endforeach
+
                 </div>
             </div>
         </div>

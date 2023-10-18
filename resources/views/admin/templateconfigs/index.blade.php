@@ -358,7 +358,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="description"><span class="text-danger">*</span> Descripción 1</label>
+                                        <label for="description"><span class="text-danger">*</span> Descripción del cartón</label>
                                         <textarea id="compose-textarea" name="description_carton" required class="form-control" style="height: 500px!important;">
                                             {{$templateconfig->description_carton}}
                                         </textarea>
@@ -394,19 +394,19 @@
                                                 <img  style="width: 80px; height: 80px;" src="{{asset('storage/'. $templateconfig->img_live)}}" id="imagenSeleccionadaImgLive" class="card-img-top img-fluid">
                                             </div>
                                             <div class="form-group">
-                                                <label for="img_live">Imagén del Live:</label>
+                                                <label for="img_live">Imagén del transmisión:</label>
                                                 <input type="file" name="img_live" value="{{$templateconfig->img_live}}" class="form-control form-control-border" id="img_live" placeholder="Escriba la URL">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
-                                                <label for="url_live">Url live:</label>
+                                                <label for="url_live">Url transmisión:</label>
                                                 <input type="url" name="url_live" value="{{$templateconfig->url_live}}" class="form-control form-control-border" id="url_live" placeholder="Escriba la URL">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="description"><span class="text-danger">*</span> Descripción 2</label>
+                                                <label for="description"><span class="text-danger">*</span> Descripción de la transmisión</label>
                                                 <textarea id="compose-textarea-2" name="description_live" required class="form-control" style="height: 500px!important;">
                                                     {{$templateconfig->description_live}}
                                                 </textarea>
@@ -441,19 +441,19 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="area">Area:</label>
+                                                <label for="area">Área:</label>
                                                 <input type="text" name="area" value="{{$templateconfig->area}}" class="form-control form-control-border" id="area" placeholder="Escriba el precio">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="area">email:</label>
+                                                <label for="area">Correo:</label>
                                                 <input type="text" name="email" value="{{$templateconfig->email}}" class="form-control form-control-border" id="email" placeholder="el email">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label for="phone">Phone:</label>
+                                                <label for="phone">Teléfono:</label>
                                                 <input type="text" name="phone" value="{{$templateconfig->phone}}" class="form-control form-control-border" id="phone" placeholder="el email">
                                             </div>
                                         </div>
@@ -541,7 +541,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="img_login">Imagen Login:</label>
+                                                <label for="img_login">Imagén inicio de sesión:</label>
                                                 <input type="file" name="img_login" value="{{$templateconfig->img_login}}" class="form-control form-control-border" id="img_login" placeholder="el email">
                                             </div>
                                         </div>
@@ -553,7 +553,7 @@
                                         <div class="col-12 col-md-6">
 
                                             <div class="form-group">
-                                                <label for="color_login_one">Color Login 1:</label>
+                                                <label for="color_login_one">Color inicio de sesión 1:</label>
                                                 <input type="color" name="color_login_one" value="{{$templateconfig->color_login_one}}" class="form-control form-control-border" id="color_login_one" placeholder="Escriba la URL">
                                             </div>
                                         </div>
@@ -561,7 +561,7 @@
                                         <div class="col-12 col-md-6">
 
                                             <div class="form-group">
-                                                <label for="color_login_two">Color Login 2:</label>
+                                                <label for="color_login_two">Color inicio de sesión 2:</label>
                                                 <input type="color" name="color_login_two" value="{{$templateconfig->color_login_two}}" class="form-control form-control-border" id="color_login_two" placeholder="Escriba la URL">
                                             </div>
                                         </div>
@@ -574,7 +574,7 @@
                                         <div class="col-12 col-md-6">
 
                                             <div class="form-group">
-                                                <label for="color_login_hover_three">Color Login Hover 1:</label>
+                                                <label for="color_login_hover_three">Color inicio de sesión hover 1:</label>
                                                 <input type="color" name="color_login_hover_three" value="{{$templateconfig->color_login_hover_three}}" class="form-control form-control-border" id="color_login_hover_three" placeholder="Escriba la URL">
                                             </div>
                                         </div>
@@ -582,7 +582,7 @@
                                         <div class="col-12 col-md-6">
 
                                             <div class="form-group">
-                                                <label for="color_login_hover_four">Color Login Hover 2:</label>
+                                                <label for="color_login_hover_four">Color inicio de sesión hover 2:</label>
                                                 <input type="color" name="color_login_hover_four" value="{{$templateconfig->color_login_hover_four}}" class="form-control form-control-border" id="color_login_hover_four" placeholder="Escriba la URL">
                                             </div>
                                         </div>

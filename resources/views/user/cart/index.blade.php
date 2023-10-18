@@ -57,8 +57,14 @@
                     </div>
                 </div>
             </div>
+
+
             <div id="loading-alert" class="alert alert-info" style="display: none;">
-                Buscando usuario comprador...
+                <span class="text-white">Buscando usuario comprador...</span>
+            </div>
+
+            <div id="not-found-alert" class="alert alert-danger" style="display: none;">
+                <span class="text-white">No se encontró al usuario. Por favor, vuelve a intentarlo.</span>
             </div>
 
 
@@ -114,6 +120,7 @@
 
 
     </div>
+
     <script src="{{url('recursos/admin/plugins/jquery/jquery.min.js')}}"></script>
     <script>
         $(document).ready(function() {
@@ -138,9 +145,14 @@
             $('input[type="radio"]').on('change', calcularTotal);
         });
     </script>
+
     <script>
         $(document).ready(function() {
             function performAjaxRequest() {
+                // Oculta las alertas existentes
+                $("#loading-alert").hide();
+                $("#not-found-alert").hide();
+
                 // Muestra la alerta de "Buscando usuario comprador"
                 $("#loading-alert").show();
 
@@ -149,25 +161,40 @@
                     method: "GET",
                     data: $("#search-form").serialize(),
                     success: function(response) {
-                        const userData = JSON.parse(response);
+                        try {
+                            const userData = JSON.parse(response);
 
-                        // Rellenar los campos del formulario con los datos de Salesforce
-                        $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
-                        $("input[name='Categoria__c']").val(userData.Categoria__c);
-                        $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
-                        $("input[name='FirstName']").val(userData.FirstName);
-                        $("input[name='LastName']").val(userData.LastName);
-                        $("input[name='Email']").val(userData.Email);
-                        $("input[name='generoEmail__c']").val(userData.generoEmail__c);
-                        $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
-                        $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
-                        $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
+                            // Rellenar los campos del formulario con los datos de Salesforce
+                            $("input[name='Categoria_Principal__c']").val(userData.Categoria_Principal__c);
+                            $("input[name='Categoria__c']").val(userData.Categoria__c);
+                            $("input[name='Categoria_Administrativo__c']").val(userData.Categoria_Administrativo__c);
+                            $("input[name='FirstName']").val(userData.FirstName);
+                            $("input[name='LastName']").val(userData.LastName);
+                            $("input[name='Email']").val(userData.Email);
+                            $("input[name='generoEmail__c']").val(userData.generoEmail__c);
+                            $("input[name='Tipo_identificaci_n__c']").val(userData.Tipo_identificaci_n__c);
+                            $("input[name='Tel_fono_celular_1__c']").val(userData.Tel_fono_celular_1__c);
+                            $("input[name='document_number']").val(userData.N_mero_de_Identificaci_n__c);
 
-                        // Oculta la alerta una vez que se encuentre el usuario
+                            // Oculta la alerta una vez que se encuentre el usuario
+                            $("#loading-alert").hide();
+                        } catch (error) {
+                            // Oculta la alerta de "Buscando usuario comprador"
+                            $("#loading-alert").hide();
+                            // Muestra la alerta de "Usuario no encontrado"
+                            $("#not-found-alert").show();
+                        }
+                    },
+                    error: function(xhr, textStatus, error) {
+                        // Manejar errores de la solicitud AJAX aquí si es necesario
+                        console.error("Error en la solicitud AJAX:", error);
+
+                        // Oculta la alerta de "Buscando usuario comprador"
                         $("#loading-alert").hide();
                     }
                 });
             }
+
 
             $("#search-button").on("click", function() {
                 performAjaxRequest();

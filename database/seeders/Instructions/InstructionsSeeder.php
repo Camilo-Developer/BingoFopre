@@ -14,8 +14,8 @@ class InstructionsSeeder extends Seeder
     public function run(): void
     {
         Instruction::create([
-            'description_one'=> 'addddddddd',
-            'description_two'=> 'sasadasddasffv',
+            'description_one'=> 'Lorem ipsum dolor sit amet consectetur adipiscing elit molestie dictumst, class torquent cras sodales metus faucibus mattis magna phasellus',
+            'description_two'=> 'Lorem ipsum dolor sit amet consectetur adipiscing elit molestie dictumst, class torquent cras sodales metus faucibus mattis magna phasellus',
         ]);
     }
 }

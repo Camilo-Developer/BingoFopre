@@ -85,7 +85,7 @@
                                                     </td>
                                                     <td>$ {{number_format(intval($carton_document_user->price))}}</td>
                                                     <td>{{$carton_document_user->state->name}}</td>
-                                                    <td>{{$carton_document_user->updated_at}}</td>
+                                                    <td>{{$carton_document_user->updated_at->format('d , M Y')}}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -193,7 +193,7 @@
                                                             <th scope="col">Tol. Cart</th>
                                                             <th scope="col">Pend. Cart</th>
                                                             <th scope="col">Estado</th>
-                                                            <th scope="col">Accion</th>
+                                                            <th scope="col">Acción</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -245,7 +245,7 @@
                                                 <th scope="col">Tol. Cart</th>
                                                 <th scope="col">Pend. Cart</th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Accion</th>
+                                                <th scope="col">Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -315,7 +315,7 @@
                                                     </td>
                                                     <td>$ {{number_format(intval($carton_document_user->price))}}</td>
                                                     <td>{{$carton_document_user->state->name}}</td>
-                                                    <td>{{$carton_document_user->updated_at}}</td>
+                                                    <td>{{$carton_document_user->updated_at->format('d , M Y')}}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -424,7 +424,7 @@
                                                             <th scope="col">Tol. Cart</th>
                                                             <th scope="col">Pend. Cart</th>
                                                             <th scope="col">Estado</th>
-                                                            <th scope="col">Accion</th>
+                                                            <th scope="col">Acción</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -480,7 +480,7 @@
                                                 <th scope="col">Tol. Cart</th>
                                                 <th scope="col">Pend. Cart</th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Accion</th>
+                                                <th scope="col">Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>

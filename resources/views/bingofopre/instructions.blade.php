@@ -12,16 +12,7 @@
     </style>
 
     <section class="testimonial-2 mt-2 pt-2">
-        <div class="row flex-lg-row-reverse">
-            <div class="col-2">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('bingofopre.index')}}">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Instrucciones</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+
         <div class="container">
             <div class="row mt-2">
                 <div class="gliderrr">
@@ -102,12 +93,6 @@
                                     </div>
                                 </li>
                             @endforeach
-
-
-
-
-
-
                         </ul>
                     </div>
                 </div>
@@ -147,9 +132,11 @@
                                 </button>
                             </h5>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
-                                <div class="accordion-body text-sm opacity-8">
-                                    {!! $instruction->description_two !!}
-                                </div>
+                                @foreach($instructions as $instruction)
+                                    <div class="accordion-body text-sm opacity-8">
+                                        {!! $instruction->description_two !!}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

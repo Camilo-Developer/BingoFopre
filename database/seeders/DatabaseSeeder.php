@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         //User::factory(5)->create()->each(function ($user) {
         //    $user->assignRole('Vendedor');
         //});
-        //$this->call(TemplateConfigsSeeder::class);
+        $this->call(TemplateConfigsSeeder::class);
         //$this->call(CardmainsSeeder::class);
-        //$this->call(InstructionsSeeder::class);
+        $this->call(InstructionsSeeder::class);
 
     }
 }

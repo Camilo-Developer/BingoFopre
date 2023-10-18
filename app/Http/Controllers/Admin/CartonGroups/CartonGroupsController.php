@@ -72,8 +72,14 @@ class CartonGroupsController extends Controller
             'state_id' => 'nullable',
         ]);
         $data = $request->all();
-        $cartongroup->user_id = $data['user_id'];
-        $cartongroup->state_id = $data['state_id'];
+        if ($data['state_id'] === 'dev') {
+            $cartongroup->user_id = null;
+            $cartongroup->state_id = 3;
+        } else {
+            $cartongroup->user_id = $data['user_id'];
+            $cartongroup->state_id = $data['state_id'];
+        }
+
         $cartongroup->save();
         return redirect()->route('admin.cartongroups.index')->with('edit', 'El grupo de cartones se ha actualizado correctamente.');
     }

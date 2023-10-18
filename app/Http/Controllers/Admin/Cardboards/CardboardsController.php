@@ -246,11 +246,12 @@ class CardboardsController extends Controller
             'Categoria_Administrativo__c' => 'nullable',
             'FirstName' => 'nullable',
             'LastName' => 'nullable',
-            'Email' => 'required',
+            'Email' => 'nullable',
             'generoEmail__c' => 'nullable',
             'Tipo_identificaci_n__c' => 'nullable',
             'Tel_fono_celular_1__c' => 'nullable',
             'sold_date' => 'nullable',
+            'mode_sale' => 'nullable',
             'user_id' => 'nullable',
         ]);
 
@@ -262,9 +263,12 @@ class CardboardsController extends Controller
 
         //dd($Email);
         if (empty($Email)) {
-            return redirect()->back()->with('info', 'No se puede finalizar la compra sin un usuario comprador. Por favor, busque un usuario válido.');
+            // No se proporcionó un correo electrónico, simplemente actualiza el cartón
+            $data = $request->all();
+            $cardboard->update($data);
+            return redirect()->route('admin.cartones.create')->with('edit', 'El Cartón se ha editado correctamente.');
         }
-        // Buscar al usuario por número de documento
+
         $user = User::where('email', $Email)->first();
 
         if (!$user) {

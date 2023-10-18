@@ -40,6 +40,7 @@ class RolesController extends Controller
             'name' => 'required',
             'permissions' => 'required'
         ]);
+
         $role = Role::create($request->all());
 
         $role->permissions()->sync($request->permissions);
