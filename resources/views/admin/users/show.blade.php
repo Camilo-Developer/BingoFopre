@@ -126,6 +126,39 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-3 border-right">
+                                                        <div class="description-block">
+                                                            <h5 class="description-header">{{$totalCartonesVendidos2}}</h5>
+                                                            <span class="description-text">Total de Cartones Vendidos</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 border-right">
+                                                        <div class="description-block">
+                                                            <h5 class="description-header">{{$totalCartonesObsequios2}}</h5>
+                                                            <span class="description-text">Total de Cartones Obsequio</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 border-right">
+                                                        <div class="description-block">
+                                                            <h5 class="description-header">$ {{number_format(intval($totalMontoVendido2))}}</h5>
+                                                            <span class="description-text">Monto total Vendido</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="description-block">
+                                                            <h5 class="description-header">$ {{number_format(intval($totalMontoObsequio2))}}</h5>
+                                                            <span class="description-text">Monto total Obsequio</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -235,6 +235,46 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-12">
+                                    <div  id="count-stats">
+                                        <div class="row">
+                                            <div class="col-lg-9 z-index-2 border-radius-xl mx-auto py-3">
+                                                <div class="row">
+                                                    <div class="col-md-3 position-relative">
+                                                        <div class="p-3 text-center">
+                                                            <h1 class="text-gradient text-primary"><span id="state10" countto="{{ $totalCartonesVendidos2 }}">{{ $totalCartonesVendidos2 }}</span></h1>
+                                                            <h5 class="mt-3">Total cartones vendidos</h5>
+                                                        </div>
+                                                        <hr class="vertical dark">
+                                                    </div>
+                                                    <div class="col-md-3 position-relative">
+                                                        <div class="p-3 text-center">
+                                                            <h1 class="text-gradient text-primary"> <span id="state40" countto="{{ $totalCartonesObsequios2 }}">{{$totalCartonesObsequios2 }}</span></h1>
+                                                            <h5 class="mt-3">Total cartones obsequio</h5>
+                                                        </div>
+                                                        <hr class="vertical dark">
+                                                    </div>
+
+                                                    <div class="col-md-3 position-relative">
+                                                        <div class="p-3 text-center">
+                                                            <h1 class="text-gradient text-primary"> <span id="state20" countto="{{ $totalMontoVendido2 }}">{{$totalMontoVendido2 }}</span></h1>
+                                                            <h5 class="mt-3">Monto total vendidos</h5>
+                                                        </div>
+                                                        <hr class="vertical dark">
+                                                    </div>
+                                                    <div class="col-md-3 position-relative">
+                                                        <div class="p-3 text-center">
+                                                            <h1 class="text-gradient text-primary" id="state30" countto="{{$totalMontoObsequio2 }}">{{ $totalMontoObsequio2}}</h1>
+                                                            <h5 class="mt-3">Monto total obsequio</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-12 mt-3">
                                     <h5 class="font-weight-bolder ">Historial de grupos de cartones Año {{$currentYear}}</h5>
                                     <div class="table-responsive">

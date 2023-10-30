@@ -47,13 +47,17 @@ class CardboardsController extends Controller
 
         $date_sold_user_requireds = date('Y-m-d', strtotime($date_sold_user_requireds));
 
+        $users = User::all();
+
+
         //dd($date_sold_user_requireds);
         return view('admin.cartones.create',compact(
             'cardboards',
             'search',
             'states',
             'carton_groups',
-            'date_sold_user_requireds'
+            'date_sold_user_requireds',
+            'users'
         ));
     }
     public function create(Request $request)
@@ -229,7 +233,8 @@ class CardboardsController extends Controller
     public function edit(Cardboard $cardboard)
     {
         $states = State::all();
-        return view('admin.cartones.create', compact('cardboard','states'));
+        $users = User::all();
+        return view('admin.cartones.create', compact('cardboard','states','users'));
     }
 
 

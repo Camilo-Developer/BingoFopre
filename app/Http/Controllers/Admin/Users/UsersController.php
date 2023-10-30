@@ -102,6 +102,8 @@ class UsersController extends Controller
             }])
             ->get();
 
+        //dd($card_groups);
+
         $currentYear = date('Y');
         $card_groups_shows = CartonGroup::where('user_id', $user->id)
             ->whereYear('created_at', $currentYear)
@@ -143,10 +145,14 @@ class UsersController extends Controller
         $totalCartonesAsignados = 0;
         $totalCartonesAsignados_sin_filtro = 0;
         $totalCartonesVendidos = 0;
+        $totalCartonesVendidos2 = 0;
         $totalCartonesObsequios = 0;
+        $totalCartonesObsequios2 = 0;
         $totalMontoVendido = 0;
+        $totalMontoVendido2 = 0;
         $totalMontoGrupo = 0;
         $totalMontoObsequio = 0;
+        $totalMontoObsequio2 = 0;
 
 
         $date_sold_user_requireds = now();
@@ -156,7 +162,6 @@ class UsersController extends Controller
 
         // Iterar a través de los grupos de cartones
         foreach ($card_groups as $group) {
-            // Calcular el total de cartones asignados para el estado 3 (cursante) en cada grupo y para el usuario actual
             $totalCartones = Cardboard::where('group_id', $group->id)
                 ->whereNull('user_id')
                 ->count();
@@ -175,12 +180,28 @@ class UsersController extends Controller
                 ->where('sold_date', $date_sold_user_requireds)
                 ->count();
 
+            $totalCartonesVen2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 5)
+                ->where('user_id', $user_view_carton)
+                ->count();
+
+            $totalCartonesObse2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 6)
+                ->where('user_id', $user_view_carton)
+                ->count();
+
 
             $montoVendido = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
                 ->where('user_id', $user_view_carton)
                 ->where('sold_date', $date_sold_user_requireds)
                 ->sum('price');
+
+            $montoVendido2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 5)
+                ->where('user_id', $user_view_carton)
+                ->sum('price');
+            //dd($montoVendido);
 
 
 
@@ -198,6 +219,11 @@ class UsersController extends Controller
                 ->where('sold_date', $date_sold_user_requireds)
                 ->sum('price');
 
+            $montoObsequio2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 6)
+                ->where('user_id', $user_view_carton)
+                ->sum('price');
+
             $totalCartonesObse = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 6)
                 ->where('user_id', $user_view_carton)
@@ -208,15 +234,22 @@ class UsersController extends Controller
             $totalCartonesAsignados += $totalCartones;
             $totalCartonesAsignados_sin_filtro += $totalCartones_2;
             $totalCartonesVendidos += $totalCartonesVen;
-            $totalMontoVendido += $montoVendido; // Sumar el monto vendido al total general
-            $totalMontoGrupo += $montoGrupo; // Sumar el monto vendido al total general
-            $totalMontoObsequio += $montoObsequio; // Sumar el monto vendido al total general
+            $totalCartonesVendidos2 += $totalCartonesVen2;
+            $totalMontoVendido += $montoVendido;
+            $totalMontoVendido2 += $montoVendido2;
+            $totalMontoGrupo += $montoGrupo;
+            $totalMontoObsequio += $montoObsequio;
+            $totalMontoObsequio2 += $montoObsequio2;
             $totalCartonesObsequios += $totalCartonesObse;
+            $totalCartonesObsequios2 += $totalCartonesObse2;
+
+            //dd($totalMontoObsequio);
 
 
 
 
         }
+        //dd($totalCartonesVendidos2);
 
         $totalCartonesPendientes = $totalCartonesAsignados - ($totalCartonesVendidos + $totalCartonesObsequios);
 
@@ -284,12 +317,16 @@ class UsersController extends Controller
             'roles',
             'totalCartonesAsignados',
             'totalCartonesVendidos',
+            'totalCartonesVendidos2',
             'totalCartonesPendientes',
             'totalCartonesObsequios',
+            'totalCartonesObsequios2',
             'totalMontoVendido',
+            'totalMontoVendido2',
             'totalGruposAsignados',
             'totalMontoGrupo',
             'totalMontoObsequio',
+            'totalMontoObsequio2',
             'sumademontos',
             'grupo_cartones',
             'states',

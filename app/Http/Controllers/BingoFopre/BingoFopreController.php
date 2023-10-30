@@ -77,6 +77,12 @@ class BingoFopreController extends Controller
         $totalMontoGrupo = 0;
         $totalMontoObsequio = 0;
 
+        $totalCartonesVendidos2 = 0;
+        $totalCartonesObsequios2 = 0;
+        $totalMontoVendido2 = 0;
+        $totalMontoObsequio2 = 0;
+
+
 
         $currentYear = date('Y');
 
@@ -170,6 +176,24 @@ class BingoFopreController extends Controller
                 ->where('sold_date', $date_sold_user_requireds)
                 ->count();
 
+            $totalCartonesVen2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 5)
+                ->where('user_id', $userId)
+                ->count();
+
+            $totalCartonesObse2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 6)
+                ->where('user_id', $userId)
+                ->count();
+
+            $montoVendido2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 5)
+                ->where('user_id', $userId)
+                ->sum('price');
+            $montoObsequio2 = Cardboard::where('group_id', $group->id)
+                ->where('state_id', 6)
+                ->where('user_id', $userId)
+                ->sum('price');
 
             $montoVendido = Cardboard::where('group_id', $group->id)
                 ->where('state_id', 5)
@@ -193,6 +217,11 @@ class BingoFopreController extends Controller
             $totalMontoVendido += $montoVendido; // Sumar el monto vendido al total general
             $totalMontoGrupo += $montoGrupo; // Sumar el monto vendido al total general
             $totalMontoObsequio += $montoObsequio; // Sumar el monto vendido al total general
+            $totalCartonesVendidos2 += $totalCartonesVen2;
+            $totalMontoVendido2 += $montoVendido2;
+            $totalMontoObsequio2 += $montoObsequio2;
+            $totalCartonesObsequios2 += $totalCartonesObse2;
+
         }
         //dd($totalMontoObsequio);
 
@@ -218,6 +247,10 @@ class BingoFopreController extends Controller
             'carton_document_users_vendidos',
             'carton_document_users_obsequio',
             'totalGruposAsignados',
+            'totalCartonesVendidos2',
+            'totalCartonesObsequios2',
+            'totalMontoVendido2',
+            'totalMontoObsequio2',
 
         ));
     }

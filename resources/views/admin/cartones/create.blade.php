@@ -402,11 +402,21 @@
                                             <input disabled value="{{ optional($cardboard->cartongroup)->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
                                         </div>
                                     </div>
+
+
                                     <div class="col-6">
+                                        <label for="userSelect">Correo Vendedor del cartón:</label>
                                         <div class="form-group">
-                                            <label for="name_vendedor">Correo Vendedor del cartón:</label>
-                                            <input disabled value="{{ $cardboard->user->email ?? 'N/A' }}" type="text" id="name_vendedor" class="form-control">
+                                            <select id="userSelect_{{$loop->iteration}}" name="user_id" class="form-control" style="width: 100%">
+                                                <option value=""></option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{$user->id}}" {{ $user->id == $cardboard->user_id ? 'selected' : '' }} {{ old('user_id') == $user->id ? 'selected' : '' }}>{{$user->email}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
+                                        @error('user_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-12">
@@ -424,7 +434,6 @@
                                     <input  value="{{$cardboard->Tel_fono_celular_1__c}}" name="Tel_fono_celular_1__c"   type="hidden" >
                                     <input  value="{{$cardboard->Email}}" name="Email"   type="hidden" >
                                     <input  type="hidden" name="sold_date" value="{{$cardboard->sold_date ?? $date_sold_user_requireds}}">
-                                    <input  type="hidden" name="user_id" value="{{auth()->user()->id}}">
 
 
 
@@ -683,6 +692,7 @@
     @endforeach
 @endsection
 @section('js')
+
     @foreach($cardboards as $cardboard)
         <script>
         $(document).ready(function() {
@@ -749,6 +759,15 @@
 
                 $("#search-form_{{$loop->iteration}}").submit(function(e) {
                     e.preventDefault();
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#userSelect_{{$loop->iteration}}').select2({
+                    minimumInputLength: 1,
+                    placeholder: "Buscar usuario..."
                 });
             });
         </script>

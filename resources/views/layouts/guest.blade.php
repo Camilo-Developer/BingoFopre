@@ -440,8 +440,24 @@
             console.error(countUp.error);
         }
     }
+    if (document.getElementById('state10')) {
+        const countUp = new CountUp('state10', document.getElementById("state10").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
     if (document.getElementById('state2')) {
         const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+        if (!countUp1.error) {
+            countUp1.start();
+        } else {
+            console.error(countUp1.error);
+        }
+    }
+    if (document.getElementById('state20')) {
+        const countUp1 = new CountUp('state20', document.getElementById("state20").getAttribute("countTo"));
         if (!countUp1.error) {
             countUp1.start();
         } else {
@@ -456,8 +472,24 @@
             console.error(countUp2.error);
         };
     }
+    if (document.getElementById('state30')) {
+        const countUp2 = new CountUp('state30', document.getElementById("state30").getAttribute("countTo"));
+        if (!countUp2.error) {
+            countUp2.start();
+        } else {
+            console.error(countUp2.error);
+        };
+    }
     if (document.getElementById('state4')) {
         const countUp2 = new CountUp('state4', document.getElementById("state4").getAttribute("countTo"));
+        if (!countUp2.error) {
+            countUp2.start();
+        } else {
+            console.error(countUp2.error);
+        };
+    }
+    if (document.getElementById('state40')) {
+        const countUp2 = new CountUp('state40', document.getElementById("state40").getAttribute("countTo"));
         if (!countUp2.error) {
             countUp2.start();
         } else {
