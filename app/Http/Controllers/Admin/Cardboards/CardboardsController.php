@@ -28,6 +28,9 @@ use Spatie\Permission\Models\Role;
 
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Exports\SalesCardboardsExport;
+use App\Exports\DetailReportCardboardsExport;
+
 
 
 
@@ -392,4 +395,73 @@ class CardboardsController extends Controller
             return redirect()->back()->with('delete', 'Ocurrió un error durante la importación: ' . $e->getMessage());
         }
     }
+
+    public function showReport()
+    {
+        $sales = Cardboard::all(); // Obtén tus datos de ventas, ajusta la consulta según sea necesario
+
+        return view('admin.cartones.export.sales_report_cardboards', compact('sales'));
+    }
+
+    public function exportToExcel()
+    {
+        $sales = Cardboard::all(); // Obtén tus datos de ventas, ajusta la consulta según sea necesario
+
+        return Excel::download(new SalesCardboardsExport($sales), 'reporte_ventas.xlsx');
+    }
+
+
+    public function showDetailReport()
+    {
+        $totalCartonesCreados = Cardboard::count();
+        $montoCartonesCreados = Cardboard::sum('price');
+        $totalCartonesVendidos = Cardboard::where('state_id', 5)->count();
+        $montoCartonesVendidos = Cardboard::where('state_id', 5)->sum('price');
+        $totalCartonesObsequio = Cardboard::where('state_id', 6)->count();
+        $montoCartonesObsequio = Cardboard::where('state_id', 6)->sum('price');
+
+        $totalCartonesRestantes = $totalCartonesCreados - ($totalCartonesVendidos + $totalCartonesObsequio);
+
+        $montoCartonesRestantes = $montoCartonesCreados - ($montoCartonesVendidos + $montoCartonesObsequio);
+
+
+        return view('admin.cartones.export.sales_detail_report', compact(
+            'totalCartonesCreados',
+            'totalCartonesVendidos',
+            'totalCartonesObsequio',
+            'montoCartonesCreados',
+            'montoCartonesVendidos',
+            'montoCartonesObsequio',
+            'totalCartonesRestantes',
+            'montoCartonesRestantes',
+        ));
+    }
+
+    public function exportDetailReport()
+    {
+        $totalCartonesCreados = Cardboard::count();
+        $montoCartonesCreados = Cardboard::sum('price');
+
+        $totalCartonesVendidos = Cardboard::where('state_id', 5)->count();
+        $montoCartonesVendidos = Cardboard::where('state_id', 5)->sum('price');
+
+        $totalCartonesObsequio = Cardboard::where('state_id', 6)->count();
+        $montoCartonesObsequio = Cardboard::where('state_id', 6)->sum('price');
+
+        $totalCartonesRestantes = $totalCartonesCreados - ($totalCartonesVendidos + $totalCartonesObsequio);
+
+        $montoCartonesRestantes = $montoCartonesCreados - ($montoCartonesVendidos + $montoCartonesObsequio);
+
+        return Excel::download(new DetailReportCardboardsExport(
+            $totalCartonesCreados,
+            $montoCartonesCreados,
+            $totalCartonesVendidos,
+            $montoCartonesVendidos,
+            $totalCartonesObsequio,
+            $montoCartonesObsequio,
+            $totalCartonesRestantes,
+            $montoCartonesRestantes,
+        ), 'detalle_reporte_ventas.xlsx');
+    }
+
 }

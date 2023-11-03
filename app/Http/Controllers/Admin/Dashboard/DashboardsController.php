@@ -80,6 +80,20 @@ class DashboardsController extends Controller
         //dd($monto_Obsequio_total_dia);
 
 
+        $totalCartonesCreados10 = Cardboard::count();
+        $montoCartonesCreados10 = Cardboard::sum('price');
+
+        $totalCartonesVendidos10 = Cardboard::where('state_id', 5)->count();
+        $montoCartonesVendidos10 = Cardboard::where('state_id', 5)->sum('price');
+
+        $totalCartonesObsequio10 = Cardboard::where('state_id', 6)->count();
+        $montoCartonesObsequio10 = Cardboard::where('state_id', 6)->sum('price');
+
+        $totalCartonesRestantes10 = $totalCartonesCreados10 - ($totalCartonesVendidos10 + $totalCartonesObsequio10);
+
+        $montoCartonesRestantes10 = $montoCartonesCreados10 - ($montoCartonesVendidos10 + $montoCartonesObsequio10);
+
+
         return view('admin.dashboard.index', compact(
             'users',
             'query',
@@ -100,6 +114,14 @@ class DashboardsController extends Controller
             'montoVendido_total_dia',
             'monto_Vendido_total_dia',
             'monto_Obsequio_total_dia',
+            'totalCartonesCreados10',
+            'montoCartonesCreados10',
+            'totalCartonesVendidos10',
+            'montoCartonesVendidos10',
+            'totalCartonesObsequio10',
+            'montoCartonesObsequio10',
+            'totalCartonesRestantes10',
+            'montoCartonesRestantes10',
         ));
     }
 }

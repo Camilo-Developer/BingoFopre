@@ -39,3 +39,9 @@ Route::resource('/cartongroups', CartonGroupsController::class)->names('admin.ca
 Route::post('/cardboard/generadormasivoQR', [CardboardsController::class,'generadormasivoQR'])->middleware('can:admin.cardboard.generadormasivoQR')->name('admin.cardboard.generadormasivoQR');
 
 Route::post('/importar-cartones', [CardboardsController::class,'import'])->name('admin.importar.cartones');
+
+Route::get('/sales-report-cardboards', [CardboardsController::class, 'showReport'])->name('admin.sales.showReport');
+Route::get('/export-sales-cardboards', [CardboardsController::class, 'exportToExcel'])->name('admin.export.sales');
+
+Route::get('/sales-detail-report', [CardboardsController::class, 'showDetailReport'])->name('admin.sales.detailReport');
+Route::get('/export-sales-detail-report', [CardboardsController::class, 'exportDetailReport'])->name('admin.export.detailReport');

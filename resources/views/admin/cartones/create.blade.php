@@ -29,6 +29,11 @@
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_crear_qr"> <i class="fa fa-qrcode"></i> Crear QR</button>
                                     @endcan
                                     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal_cargue_masivo"> <i class="fa fa-file-excel"></i> Cargue masivo</button>
+                                    <a href="{{ route('admin.export.sales') }}" class="btn btn-info btn-sm mt-1">
+                                        <i class="fa fa-download"></i> Descargar reporte de ventas
+                                    </a>
+                                    <a href="{{ route('admin.export.detailReport') }}" class="btn btn-dark btn-sm mt-1">
+                                        <i class="fa fa-download"></i> Descargar Detalle del Reporte</a>
 
                                 </div>
                                 <div class="col-12 col-md-6 d-flex justify-content-end">
